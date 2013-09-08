@@ -1,0 +1,22 @@
+.fog-support-feed-item {
+	display: block;
+}
+
+.fog-support-feed-item-date {
+	display: inline-block;
+}
+
+.fog-support-feed-item-title {
+	display: inline-block;
+	margin-left: 10px;
+}
+
+.fog-support-feed-item-author {
+	display: inline-block;
+	margin-left: 10px;
+}
+
+.fog-support-feed-item-count {
+	display: inline-block;
+	margin-left: 10px;
+}

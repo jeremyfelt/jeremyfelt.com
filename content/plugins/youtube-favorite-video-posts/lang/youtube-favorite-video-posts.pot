@@ -1,0 +1,169 @@
+# Copyright (C) 2012 YouTube Favorite Video Posts
+# This file is distributed under the same license as the YouTube Favorite Video Posts package.
+msgid ""
+msgstr ""
+"Project-Id-Version: YouTube Favorite Video Posts 1.0\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/youtube-favorite-video-posts\n"
+"POT-Creation-Date: 2012-05-13 01:14:58+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2012-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#: youtube-favorite-video-posts.php:97
+msgid "Settings"
+msgstr ""
+
+#: youtube-favorite-video-posts.php:116
+msgid "YouTube Favorites"
+msgstr ""
+
+#. #-#-#-#-#  plugin.pot (YouTube Favorite Video Posts 1.0)  #-#-#-#-#
+#. Plugin Name of the plugin/theme
+#: youtube-favorite-video-posts.php:126
+msgid "YouTube Favorite Video Posts"
+msgstr ""
+
+#: youtube-favorite-video-posts.php:127
+msgid "Overview"
+msgstr ""
+
+#: youtube-favorite-video-posts.php:128
+msgid ""
+"The settings below will help determine where to check for your favorite "
+"YouTube videos, how often to look for them, and how they should be stored "
+"once new items are found."
+msgstr ""
+
+#: youtube-favorite-video-posts.php:129
+msgid ""
+"The most important part of this process will be to determine the RSS feed "
+"for your favorite YouTube videos. To do this, your username <strong>must</"
+"strong> be filled out below. This can usually be found in the upper right "
+"hand corner of <a href=\"http://www.youtube.com\">YouTube.com</a>."
+msgstr ""
+
+#: youtube-favorite-video-posts.php:131
+msgid "Username must be filled in below. Email address will not work."
+msgstr ""
+
+#: youtube-favorite-video-posts.php:132
+msgid ""
+"The embed width and height settings will be applied to the iframe in your "
+"post content."
+msgstr ""
+
+#: youtube-favorite-video-posts.php:133
+msgid ""
+"If you would like to change the content or title before the new content is "
+"saved, you may be interested in the <a href=\"http://jeremyfelt.com/"
+"wordpress/2012/05/12/filters-in-youtube-favorite-video-posts/\">available "
+"filters</a>."
+msgstr ""
+
+#: youtube-favorite-video-posts.php:140
+msgid "Save Changes"
+msgstr ""
+
+#: youtube-favorite-video-posts.php:160
+msgid "Default Post Status:"
+msgstr ""
+
+#: youtube-favorite-video-posts.php:175
+msgid ""
+"A new custom post type that adds an 'youtube' slug to new items has been "
+"added and selected by default. You can change this to any other available "
+"post type if you would like."
+msgstr ""
+
+#: youtube-favorite-video-posts.php:193
+msgid ""
+"This plugin currently depends on WP Cron operating fully as expected. In "
+"most cases, you should be able to select one of the intervals below and "
+"things will work. If not, please let <a href=\"http://www.jeremyfelt.com"
+"\">me</a> know. By default, we check for new items on an hourly basis."
+msgstr ""
+
+#: youtube-favorite-video-posts.php:194
+msgid ""
+"Your Youtube favorites feed is scheduled to be loaded next in %1$s, at %2$s."
+msgstr ""
+
+#: youtube-favorite-video-posts.php:199
+msgid ""
+"An interval has not yet been saved. Please select the frequency with which "
+"you would like this plugin to check your favorite video feed. The default of "
+"Once Hourly will be used if you do not change the interval before saving."
+msgstr ""
+
+#: youtube-favorite-video-posts.php:240
+msgid ""
+"It looks like a Youtube username has not yet been entered, even though other "
+"options have been saved. Please note that we are unable to fetch your "
+"favorite videos until a username is provided."
+msgstr ""
+
+#: youtube-favorite-video-posts.php:368
+msgid "YouTube"
+msgstr ""
+
+#: youtube-favorite-video-posts.php:369
+msgid "YouTube Favorite"
+msgstr ""
+
+#: youtube-favorite-video-posts.php:370
+msgid "All YouTube Favorites"
+msgstr ""
+
+#: youtube-favorite-video-posts.php:371
+msgid "Add YouTube Favorite"
+msgstr ""
+
+#: youtube-favorite-video-posts.php:372
+msgid "Edit YouTube Favorite"
+msgstr ""
+
+#: youtube-favorite-video-posts.php:373
+msgid "New YouTube Favorite"
+msgstr ""
+
+#: youtube-favorite-video-posts.php:374
+msgid "View YouTube Favorite"
+msgstr ""
+
+#: youtube-favorite-video-posts.php:375
+msgid "Search YouTube Favorites"
+msgstr ""
+
+#: youtube-favorite-video-posts.php:376
+msgid "No YouTube Favorites found"
+msgstr ""
+
+#: youtube-favorite-video-posts.php:377
+msgid "No YouTube Favorites found in trash"
+msgstr ""
+
+#: youtube-favorite-video-posts.php:379
+msgid "YouTube posts created by the YouTube Favorite Video Posts plugin."
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid ""
+"http://www.jeremyfelt.com/wordpress/plugins/youtube-favorite-video-posts"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"Checks your YouTube favorite videos RSS feed and creates new posts in a "
+"custom post type."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Jeremy Felt"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://www.jeremyfelt.com"
+msgstr ""

@@ -1,0 +1,12 @@
+.idea
+remote-config.php
+content/uploads
+content/images
+.DS_Store
+*.pyc
+.vagrant
+*.sublime*
+/database/data/*
+*.sql
+*.sql.gz
+!/database/init.sql
