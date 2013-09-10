@@ -6,7 +6,12 @@
 add_action( 'wp_head', 'jf_head', 10 );
 function jf_head() {
 	// Add the tag provided by analytics.twitter.com, mostly to find out why.
-	?><meta property="twitter:account_id" content="1741681" /><?php
+	?>
+	<meta property="twitter:account_id" content="1741681" /><?php
+	// Add the tag that connects me to Google+
+	?>
+	<link rel="me" type="text/html" href="http://www.google.com/profiles/jeremy.felt"/>
+	<?php
 }
 
 /**
