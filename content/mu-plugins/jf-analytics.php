@@ -1,5 +1,15 @@
 <?php
 /**
+ * Various tags and things
+ */
+
+add_action( 'wp_head', 'jf_head', 10 );
+function jf_head() {
+	// Add the tag provided by analytics.twitter.com, mostly to find out why.
+	?><meta property="twitter:account_id" content="1741681" /><?php
+}
+
+/**
  * Add tracking code to the footer on every page load.
  */
 
