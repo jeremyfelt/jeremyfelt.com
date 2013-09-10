@@ -8,9 +8,15 @@ function jf_head() {
 	// Add the tag provided by analytics.twitter.com, mostly to find out why.
 	?>
 	<meta property="twitter:account_id" content="1741681" /><?php
+
 	// Add the tag that connects me to Google+
 	?>
 	<link rel="me" type="text/html" href="http://www.google.com/profiles/jeremy.felt"/>
+	<?php
+
+	// Add the tag that validates with Microsoft!
+	?>
+	<meta name="msvalidate.01" content="7F45AEBECE60DA943AD0E712BD3BDBD6" />
 	<?php
 }
 
