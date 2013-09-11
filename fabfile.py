@@ -1,5 +1,6 @@
 from fabric.api import local, settings, abort, run, cd, sudo, env
 from fabric.contrib.console import confirm
+from fabric.contrib.files import comment, uncomment
 
 env.hosts = ['jeremyfelt.com']
 env.path = '/srv/web/jeremyfelt.com'
@@ -39,8 +40,11 @@ def push_config():
 	with settings(warn_only=True):
 		if run("test -d %(path_config)s" % env ).failed:
 			run( "mkdir %(path_config)s" % env )
-	local( "rsync -rv -e ssh config/nginx-config/jeremyfelt.com.conf jeremyfelt@jeremyfelt.com:%(path_config)s/" % env )
+	local( "rsync -rv -e ssh config/nginx-config/*.conf jeremyfelt@jeremyfelt.com:%(path_config)s/" % env )
+	comment( "%(path_config)s/nginx.conf" % env, r'^.*sendfile off;.*$' );
+	uncomment( "%(path_config)s/nginx.conf" % env, r'^.*sendfile on;.*$' );
 	sudo( "cp %(path_config)s/jeremyfelt.com.conf /etc/nginx/conf.d/jeremyfelt.com.conf" % env )
+	sudo( "cp %(path_config)s/nginx.conf /etc/nginx/nginx.conf" % env )
 
 def restart_services():
 	sudo( "service nginx restart" )
