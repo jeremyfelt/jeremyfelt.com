@@ -10,7 +10,7 @@ define( 'DB_COLLATE',  ''           );
 
 // Home URL (http://mydomain.com)
 define( 'WP_HOME',        'http://dev.jeremyfelt.com' );
-// WordPress URL (http://mydomain.com/wordpress);
+// WordPress URL (http://mydomain.com);
 define( 'WP_SITEURL',     'http://dev.jeremyfelt.com' );
 // Content URL (http://content.mydomain.com)
 define( 'WP_CONTENT_URL', 'http://dev.content.jeremyfelt.com' );
