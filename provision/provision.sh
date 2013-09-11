@@ -192,8 +192,7 @@ fi
 printf "\nSetup configuration file links...\n"
 
 ln -sf /vagrant/config/nginx-config/nginx.conf /etc/nginx/nginx.conf
-ln -sf /vagrant/config/nginx-config/nginx-wp-common.conf /etc/nginx/nginx-wp-common.conf
-ln -sf /vagrant/config/nginx-config/jeremyfelt.com.conf /etc/nginx/sites-enabled/jeremyfelt.com.conf
+ln -sf /vagrant/config/nginx-config/jeremyfelt.com.conf /etc/nginx/conf.d/jeremyfelt.com.conf
 ln -sf /vagrant/config/nginx-config/fastcgi_params /etc/nginx/fastcgi_params
 
 ln -sf /vagrant/config/php5-fpm-config/www.conf /etc/php5/fpm/pool.d/www.conf
