@@ -55,6 +55,7 @@ def push_config():
 	comment( "%(path_config)s/jeremyfelt.com.conf" % env, r'^.*fastcgi_read_timeout 3600s;.*$' );
 	uncomment( "%(path_config)s/jeremyfelt.com.conf" % env, r'^.*fastcgi_read_timeout 30s;.*$' );
 	sudo( "cp %(path_config)s/jeremyfelt.com.conf /etc/nginx/conf.d/jeremyfelt.com.conf" % env )
+	sudo( "cp %(path_config)s/stats.foghlaim.com.conf /etc/nginx/conf.d/stats.foghlaim.com.conf" % env )
 	sudo( "cp %(path_config)s/nginx.conf /etc/nginx/nginx.conf" % env )
 
 def restart_services():
