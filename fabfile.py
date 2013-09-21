@@ -5,6 +5,7 @@ from fabric.contrib.files import comment, uncomment
 env.hosts = ['jeremyfelt.com']
 env.path = '/srv/web/jeremyfelt.com'
 env.path_config = '/srv/web/jeremyfelt.com/config'
+env.stats_dir = '/srv/web/stats.foghlaim.com'
 
 def pull_plugins():
 	local( "rsync -rvzh -e ssh --delete --exclude '*.git*' jeremyfelt@jeremyfelt.com:/srv/web/jeremyfelt.com/content/plugins/ content/plugins/" )
@@ -35,6 +36,14 @@ def push_content():
 	sudo( "chown -R jeremyfelt:jeremyfelt /srv/web/jeremyfelt.com/content" )
 	local("rsync -rvzh -e ssh --delete --exclude '*.git*' --include '*/images/' --include '*/uploads/' --exclude 'uploads' --exclude 'images' content/ jeremyfelt@jeremyfelt.com:/srv/web/jeremyfelt.com/content" )
 	sudo( "chown -R www-data:www-data /srv/web/jeremyfelt.com/content" )
+
+def push_stats():
+	with settings(warn_only=True):
+		if run( "test -d %(stats_dir)s" % env ).failed:
+			run( "mkdir %(path_config)s" % env )
+	sudo( "chown -R jeremyfelt:jeremyfelt %(stats_dir)s" % env )
+	local( "rsync -rvzh -e ssh --delete --exclude '*.git*' stats/ jeremyfelt@jeremyfelt.com:%(stats_dir)s/" % env )
+	sudo( "chown -R www-data:www-data %(stats_dir)s" % env)
 
 def push_config():
 	with settings(warn_only=True):
