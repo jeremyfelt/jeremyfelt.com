@@ -7,3 +7,6 @@
 [submodule "content/themes/snap"]
 	path = content/themes/snap
 	url = git@bitbucket.org:jeremyfelt/snap.git
+[submodule "stats"]
+	path = stats
+	url = https://github.com/piwik/piwik.git
