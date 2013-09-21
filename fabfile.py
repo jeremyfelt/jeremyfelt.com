@@ -40,7 +40,7 @@ def push_content():
 def push_stats():
 	with settings(warn_only=True):
 		if run( "test -d %(stats_dir)s" % env ).failed:
-			run( "mkdir %(path_config)s" % env )
+			run( "mkdir %(stats_dir)s" % env )
 	sudo( "chown -R jeremyfelt:jeremyfelt %(stats_dir)s" % env )
 	local( "rsync -rvzh -e ssh --delete --exclude '*.git*' stats/ jeremyfelt@jeremyfelt.com:%(stats_dir)s/" % env )
 	sudo( "chown -R www-data:www-data %(stats_dir)s" % env)
