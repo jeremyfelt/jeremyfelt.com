@@ -1,19 +1,30 @@
-<div class="featured-content-wrapper">
-	<div id="featured-content" class="featured-content clearfix">
+<?php
+/**
+ * The template for displaying featured content
+ *
+ * @todo: Add support for featured content.
+ *
+ * @package WordPress
+ * @subpackage Twenty_Fourteen
+ * @since Twenty Fourteen 1.0
+ */
+?>
 
-		<?php
-			do_action( 'twentyfourteen_featured_posts_before' );
+<div id="featured-content" class="featured-content">
 
-			$featured_posts = twentyfourteen_get_featured_posts();
-			foreach ( (array) $featured_posts as $order => $post ) :
-				setup_postdata( $post );
-				get_template_part( 'content', 'featured-post' );
-			endforeach;
+	<?php
+		do_action( 'twentyfourteen_featured_posts_before' );
 
-			do_action( 'twentyfourteen_featured_posts_after' );
+		$featured_posts = twentyfourteen_get_featured_posts();
+		foreach ( (array) $featured_posts as $order => $post ) :
+			setup_postdata( $post );
 
-			wp_reset_postdata();
-		?>
+			get_template_part( 'content', 'featured-post' );
+		endforeach;
 
-	</div><!-- .featured-content -->
-</div><!-- .featured-content-wrapper -->
+		do_action( 'twentyfourteen_featured_posts_after' );
+
+		wp_reset_postdata();
+	?>
+
+</div><!-- #featured-content .featured-content -->
