@@ -15,3 +15,8 @@
 .sticky-menu #TB_window {
 	z-index: 80102;
 }
+
+/* hotfix! increase `zindex` in `wp-pointer.js` to 80010 */
+.sticky-menu .wp-pointer {
+	z-index: 80010 !important;
+}

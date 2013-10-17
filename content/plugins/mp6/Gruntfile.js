@@ -4,7 +4,8 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     meta: {
-      path: 'components/color-schemes/schemes'
+      colors: 'components/color-schemes',
+      customizer: 'components/customizer'
     },
 
     sass: {
@@ -14,34 +15,53 @@ module.exports = function(grunt) {
           lineNumbers: false
         },
         files : {
-          'components/color-schemes/picker/style.css' : 'components/color-schemes/picker/style.scss',
+          '<%= meta.colors %>/picker/style.css'           : '<%= meta.colors %>/picker/style.scss',
+          '<%= meta.customizer %>/customizer.css' : '<%= meta.customizer %>/scss/customizer.scss',
         }
       },
       colors: {
       	options: {
       	  style: 'compact',
-      	  lineNumbers: false
+      	  lineNumbers: false,
       	},
-        files : {
-          '<%= meta.path %>/blue/colors.css' : '<%= meta.path %>/blue/colors.scss',
-          '<%= meta.path %>/malibu-dreamhouse/colors.css' : '<%= meta.path %>/malibu-dreamhouse/colors.scss',
-          '<%= meta.path %>/seaweed/colors.css' : '<%= meta.path %>/seaweed/colors.scss',
-          '<%= meta.path %>/pixel/colors.css' : '<%= meta.path %>/pixel/colors.scss',
-          '<%= meta.path %>/ectoplasm/colors.css' : '<%= meta.path %>/ectoplasm/colors.scss',
-          '<%= meta.path %>/80s-kid/colors.css' : '<%= meta.path %>/80s-kid/colors.scss',
-          '<%= meta.path %>/lioness/colors.css' : '<%= meta.path %>/lioness/colors.scss',
-          '<%= meta.path %>/mp6-light/colors.css' : '<%= meta.path %>/mp6-light/colors.scss',
-        }
+        files: [{
+          '<%= meta.colors %>/schemes/80s-kid/admin-colors.css': ['<%= meta.colors %>/schemes/80s-kid/colors.scss', '<%= meta.colors %>/schemes/_admin.scss'],
+          '<%= meta.colors %>/schemes/80s-kid/customizer.css': ['<%= meta.colors %>/schemes/80s-kid/colors.scss', '<%= meta.colors %>/schemes/_customizer.scss'],
+
+          '<%= meta.colors %>/schemes/blue/admin-colors.css': ['<%= meta.colors %>/schemes/blue/colors.scss', '<%= meta.colors %>/schemes/_admin.scss'],
+          '<%= meta.colors %>/schemes/blue/customizer.css': ['<%= meta.colors %>/schemes/blue/colors.scss', '<%= meta.colors %>/schemes/_customizer.scss'],
+
+          '<%= meta.colors %>/schemes/ectoplasm/admin-colors.css': ['<%= meta.colors %>/schemes/ectoplasm/colors.scss', '<%= meta.colors %>/schemes/_admin.scss'],
+          '<%= meta.colors %>/schemes/ectoplasm/customizer.css': ['<%= meta.colors %>/schemes/ectoplasm/colors.scss', '<%= meta.colors %>/schemes/_customizer.scss'],
+
+          '<%= meta.colors %>/schemes/lioness/admin-colors.css': ['<%= meta.colors %>/schemes/lioness/colors.scss', '<%= meta.colors %>/schemes/_admin.scss'],
+          '<%= meta.colors %>/schemes/lioness/customizer.css': ['<%= meta.colors %>/schemes/lioness/colors.scss', '<%= meta.colors %>/schemes/_customizer.scss'],
+
+          '<%= meta.colors %>/schemes/malibu-dreamhouse/admin-colors.css': ['<%= meta.colors %>/schemes/malibu-dreamhouse/colors.scss', '<%= meta.colors %>/schemes/_admin.scss'],
+          '<%= meta.colors %>/schemes/malibu-dreamhouse/customizer.css': ['<%= meta.colors %>/schemes/malibu-dreamhouse/colors.scss', '<%= meta.colors %>/schemes/_customizer.scss'],
+
+          '<%= meta.colors %>/schemes/mp6-light/admin-colors.css': ['<%= meta.colors %>/schemes/mp6-light/colors.scss', '<%= meta.colors %>/schemes/_admin.scss', '<%= meta.colors %>/schemes/mp6-light/custom.scss'],
+          '<%= meta.colors %>/schemes/mp6-light/customizer.css': ['<%= meta.colors %>/schemes/mp6-light/colors.scss', '<%= meta.colors %>/schemes/_customizer.scss'],
+
+          '<%= meta.colors %>/schemes/pixel/admin-colors.css': ['<%= meta.colors %>/schemes/pixel/colors.scss', '<%= meta.colors %>/schemes/_admin.scss'],
+          '<%= meta.colors %>/schemes/pixel/customizer.css': ['<%= meta.colors %>/schemes/pixel/colors.scss', '<%= meta.colors %>/schemes/_customizer.scss'],
+
+          '<%= meta.colors %>/schemes/seaweed/admin-colors.css': ['<%= meta.colors %>/schemes/seaweed/colors.scss', '<%= meta.colors %>/schemes/_admin.scss'],
+          '<%= meta.colors %>/schemes/seaweed/customizer.css': ['<%= meta.colors %>/schemes/seaweed/colors.scss', '<%= meta.colors %>/schemes/_customizer.scss'],
+          
+          '<%= meta.colors %>/schemes/midnight/admin-colors.css': ['<%= meta.colors %>/schemes/midnight/colors.scss', '<%= meta.colors %>/schemes/_admin.scss'],
+          '<%= meta.colors %>/schemes/midnight/customizer.css': ['<%= meta.colors %>/schemes/midnight/colors.scss', '<%= meta.colors %>/schemes/_customizer.scss'],
+        }]
       }
     },
 
     watch: {
       sass: {
-        files: ['<%= meta.path %>/**/*.scss', ],
+        files: ['<%= meta.colors %>/**/*.scss', ],
         tasks: ['sass:colors']
       },
       sass: {
-        files: ['components/color-schemes/picker/style.scss', ],
+        files: ['<%= meta.colors %>/picker/style.scss', '<%= meta.customizer %>/scss/*.scss' ],
         tasks: ['sass:admin']
       }
     }

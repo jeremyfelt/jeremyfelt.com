@@ -3,7 +3,7 @@
 Plugin Name: MP6
 Plugin URI: http://wordpress.org/extend/plugins/mp6/
 Description: This is a plugin to break the wp-admin UI, and is not recommended for non-savvy users.
-Version: 2.0
+Version: 2.1
 Author: MP6 Team
 Author URI: http://wordpress.org
 License: GPLv2 or later
@@ -22,6 +22,15 @@ require_once( plugin_dir_path(__FILE__) . 'components/sticky-menu/sticky-menu.ph
 
 // load the color schemes component
 require_once( plugin_dir_path(__FILE__) . 'components/color-schemes/colors.php' );
+
+// load the customizer component
+require_once( plugin_dir_path(__FILE__) . 'components/customizer/customizer.php' );
+
+// load the style guide component
+require_once( plugin_dir_path(__FILE__) . 'components/style-guide/class-mp6-style-guide.php' );
+
+// load the widget component
+require_once( plugin_dir_path(__FILE__) . 'components/widgets/widgets.php' );
 
 
 // register Open Sans stylesheet

@@ -1,11 +1,18 @@
-$base-color: #ddd;
-$icon-color: #666;
-$text-color: #444;
+$base-color: #e5e5e5;
+$icon-color: #999;
+$text-color: #333;
+$highlight-color: #04a4cc;
+$notification-color: #d64e07;
 
-$highlight-color: #0076a2;
+$body-background: #f5f5f5;
+
 $menu-highlight-text: #fff;
-$menu-highlight-icon: #fff;
+$menu-highlight-icon: #ccc;
+$menu-highlight-background: #888;
 
-$notification-color: #cb8686;
+$menu-bubble-text: #fff;
+$menu-avatar-frame: #aaa;
+$menu-submenu-background: #fff;
 
-@import "../_colors.scss";
+$menu-collapse-text: #777;
+$menu-collapse-focus-icon: #555;

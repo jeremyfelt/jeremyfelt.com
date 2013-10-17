@@ -1,0 +1,197 @@
+/**
+ * Styles pulled from wp-admin.css
+ * This should either be merged into wp-admin.css later, or that 
+ * section (23.0) should be removed + moved into customize-controls.scss
+ */
+
+.control-section .accordion-section-title {
+	background: #fff;
+}
+
+.js .control-section:hover .accordion-section-title,
+.js .control-section .accordion-section-title:hover,
+.js .control-section.open .accordion-section-title,
+.js .control-section .accordion-section-title:focus {
+	background: #f5f5f5;
+}
+
+body.full-overlay-active {
+	overflow: hidden;
+}
+
+.wp-full-overlay {
+	background: transparent;
+	z-index: 500000;
+	position: fixed;
+	overflow: visible;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 100%;
+	min-width: 0;
+}
+
+.wp-full-overlay-sidebar {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing:    border-box;
+	box-sizing:         border-box;
+
+	position: fixed;
+	width: 300px;
+	height: 100%;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	padding: 0;
+	margin: 0;
+	z-index: 10;
+	overflow: auto;
+	background: transparent;
+	border-right: none;
+}
+
+.wp-full-overlay.collapsed .wp-full-overlay-sidebar {
+	overflow: visible;
+}
+
+.wp-full-overlay.collapsed,
+.wp-full-overlay.expanded .wp-full-overlay-sidebar {
+	margin-left: 0 !important;
+}
+
+.wp-full-overlay.expanded {
+	margin-left: 300px;
+}
+
+.wp-full-overlay.collapsed .wp-full-overlay-sidebar {
+	margin-left: -300px;
+}
+
+.wp-full-overlay-sidebar:after {
+	content: '';
+	display: block;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	width: 3px;
+	z-index: 1000;
+}
+
+.wp-full-overlay-main {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	height: 100%;
+}
+
+.wp-full-overlay-sidebar .wp-full-overlay-header {
+	position: absolute;
+	left: 0;
+	right: 0;
+	height: 45px;
+	padding: 0 20px;
+	line-height: 45px;
+	z-index: 10;
+	margin: 0;
+	border-top: none;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	
+	a.back {
+		margin-top: 10px;
+	}
+}
+
+.wp-full-overlay-sidebar .wp-full-overlay-footer {
+	bottom: 0;
+	border-bottom: none;
+	border-top: none;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+
+.wp-full-overlay-sidebar .wp-full-overlay-sidebar-content {
+	position: absolute;
+	top: 45px;
+	bottom: 45px;
+	left: 0;
+	right: 0;
+	overflow: auto;
+}
+
+/* Close Link */
+.wp-full-overlay .close-full-overlay {
+	text-decoration: none;
+}
+
+/* Collapse Button */
+.wp-full-overlay a.collapse-sidebar {
+	position: absolute;
+	bottom: 12px;
+	left: 0;
+	z-index: 50;
+	display: block;
+	width: 19px;
+	height: 19px;
+	margin-left: 15px;
+	padding: 0;
+	border-radius: 50%;
+	text-decoration: none;
+}
+
+.wp-full-overlay.collapsed .collapse-sidebar {
+	position: absolute;
+	left: 100%;
+}
+
+.wp-full-overlay .collapse-sidebar-arrow {
+	position: static;
+	margin-top: 0;
+	margin-left: 0;
+	display: block;
+	width: auto;
+	height: auto;
+	background: none;
+}
+
+.wp-full-overlay .collapse-sidebar-arrow:before {
+	float: left;
+	@include dashicons('\f148');
+}
+
+.wp-full-overlay.collapsed .collapse-sidebar-arrow {
+	background-position: -1px -109px;
+}
+
+.wp-full-overlay .collapse-sidebar-label {
+	position: absolute;
+	left: 100%;
+	line-height: 20px;
+	margin-left: 10px;
+}
+
+.wp-full-overlay.collapsed .collapse-sidebar-label {
+	display: none;
+}
+
+/* Animations */
+.wp-full-overlay,
+.wp-full-overlay-sidebar,
+.wp-full-overlay .collapse-sidebar,
+.wp-full-overlay-main {
+	-webkit-transition-property: left, right, top, bottom, width, margin;
+	-moz-transition-property:    left, right, top, bottom, width, margin;
+	-ms-transition-property:     left, right, top, bottom, width, margin;
+	-o-transition-property:      left, right, top, bottom, width, margin;
+	transition-property:         left, right, top, bottom, width, margin;
+
+	-webkit-transition-duration: 0.2s;
+	-moz-transition-duration:    0.2s;
+	-ms-transition-duration:     0.2s;
+	-o-transition-duration:      0.2s;
+	transition-duration:         0.2s;
+}

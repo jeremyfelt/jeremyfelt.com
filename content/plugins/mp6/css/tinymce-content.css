@@ -173,12 +173,16 @@ font[face=mceinline] {
 /* WordPress styles */
 body {
 	font-family: Georgia, "Times New Roman", "Bitstream Charter", Times, serif;
-	font-size: 13px;
-	line-height: 19px;
+	font-size: 14px;
+	line-height: 1.5;
 	color: #333;
 	background-color: #fff;
 	margin: 0;
 	padding: 10px;
+}
+
+p {
+	margin-bottom: 1.3em;
 }
 
 .aligncenter,
@@ -219,7 +223,7 @@ dl.aligncenter {
 
 .wp-caption-dd {
 	font-size: 11px;
-	line-height: 17px;
+	line-height: 1.5;
 	padding: 0 4px 5px;
 	margin: 0;
 }

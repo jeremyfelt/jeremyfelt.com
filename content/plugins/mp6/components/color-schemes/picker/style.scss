@@ -55,7 +55,7 @@
 	background: white;
 	text-align: center;
 	border: 1px solid #dedede;
-	border-left: none;
+	border-left-width: 0;
 	cursor: pointer;
 
 	&:before {
@@ -109,5 +109,22 @@
 		&:after {
 			display: none;
 		}
+	}
+}
+
+.rtl {
+	.color-option,
+	.dropdown.dropdown-current {
+		padding-bottom: 40px;
+	}
+	.picker-dropdown {
+		right: auto;
+		left: -42px;
+		border-left-width: 1px;
+		border-right-width: none;
+	}
+	.color-option input[type=radio] {
+		margin-top: 4px;
+		margin-left: 6px;
 	}
 }

@@ -130,6 +130,10 @@ input[type=password] {
 	direction: ltr;
 }
 
+input[type=checkbox]:checked:before {
+	margin-left: 1px;
+}
+
 input[type="text"].ui-autocomplete-loading {
 	background: transparent url('../images/loading.gif') no-repeat left center;
 }
@@ -320,6 +324,8 @@ form.upgrade .hint {
 
 .contextual-help-tabs {
 	float: right;
+	margin-right: 4px;
+	width: 146px;
 }
 
 .contextual-help-tabs a {
@@ -335,7 +341,7 @@ form.upgrade .hint {
 .contextual-help-tabs .active,
 .contextual-help-tabs-wrap {
 	border-left: 0;
-	border-right-width: 1px;
+	border-right-width: 2px;
 }
 
 .help-tab-content {
@@ -962,6 +968,17 @@ p.submit,
 	margin-left: 4px;
 }
 
+#post-body #visibility:before,
+.curtime #timestamp:before {
+	padding-right: 0;
+	padding-left: 4px;
+}
+
+#misc-publishing-actions label[for="post_status"]:before {
+	padding-right: 0;
+	padding-left: 8px;
+}
+
 #normal-sortables .postbox .submit {
 	float: left;
 }
@@ -1455,6 +1472,10 @@ form.upgrade .hint {
 	margin: 2px 0 5px 3px;
 }
 
+#submitcomment #timestamp:before {
+	left: 1px;
+}
+
 .post-com-count:after {	/* draw bubble connector using CSS! */
 	margin-left: auto;
 	margin-right: 8px;
@@ -1467,6 +1488,12 @@ th .comment-grey-bubble:before {
 	left: auto;
 	right: -4px;
 }
+
+#the-comment-list .unapproved th.check-column input {
+	margin-left: 0;
+	margin-right: 4px;
+}
+
 
 /*------------------------------------------------------------------------------
   16.0 - Themes
@@ -1653,6 +1680,7 @@ h2 .nav-tab {
 #your-profile legend {
 	font-family: Tahoma, Arial, sans-serif;
 }
+
 
 /*------------------------------------------------------------------------------
   19.0 - Tools
@@ -2261,7 +2289,7 @@ a.rsswidget,
 
 /* Recent Comments */
 #the-comment-list .comment-item {
-	padding: 1em 70px 1em 10px;
+	padding: 1em 10px 1em 10px;
 }
 
 #the-comment-list .comment-item .avatar {

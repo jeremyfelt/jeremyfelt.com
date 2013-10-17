@@ -1,0 +1,251 @@
+/* Widgets */
+div.widget-liquid-left {
+	margin-right: -600px;
+}
+	div.widget-liquid-left div#widgets-left {
+		margin: 0 620px 0 0;
+	}
+
+	div.widget-liquid-left div#widgets-left #available-widgets {
+		background: transparent;
+		max-height: 450px;
+		overflow: auto;
+		margin: 0;
+		border-radius: none;
+		box-shadow: none;
+		border-bottom: 1px solid #dedede;
+		box-shadow: inset 0px -1px 2px -1px rgba(0,0,0,.1);
+	}
+
+		div.widget-liquid-left div#widgets-left #available-widgets .sidebar-name {
+			display: none;
+		}
+		div.widget-liquid-left div#widgets-left #available-widgets .widget-holder {
+			background: transparent;
+			border: none;
+			padding: 0;
+		}
+		div.widget-liquid-left div#widgets-left #available-widgets .description {
+			display: none;
+		}
+		div.widget-liquid-left div#widgets-left #available-widgets .widget {
+			box-sizing: border-box;
+			-moz-box-sizing:border-box;
+			-webkit-box-sizing:border-box;
+			width: 50%;
+			margin: 10px 0 0 0;
+			position: relative;
+		}
+		div.widget-liquid-left div#widgets-left #available-widgets .widget.ui-draggable-dragging {
+			max-width: 33%;;
+		}
+		div.widget-liquid-left div#widgets-left #available-widgets .widget-top {
+			margin-right: 10px;
+			padding: 10px 15px 10px 35px;
+			border-radius: 3px;
+		}
+		div.widget-liquid-left div#widgets-left #available-widgets .widget-top:before {
+			/*content: '\f132';*/
+			content: '\f228';
+			color: #ccc;
+			display: inline-block;
+			-webkit-font-smoothing: antialiased;
+			font: normal 20px/1 'dashicons';
+			vertical-align: top;
+			position: absolute;
+			top: 12px;
+			left: 13px;
+		}
+		div.widget-liquid-left div#widgets-left #available-widgets .widget-top:hover {
+			background: #fff;
+			border: 1px solid #bbb;
+			box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+		}
+		div.widget-liquid-left div#widgets-left #available-widgets .widget-description {
+			display: none;
+			position: absolute;
+			left: 0;
+			bottom: 0;
+			right: 0;
+			padding: 10px;
+			text-align: center;
+		}
+
+	div.widget-liquid-left div#widgets-left .inactive-sidebar {
+	}
+		div.widget-liquid-left div#widgets-left .inactive-sidebar .sidebar-name {
+			border: none;
+		}
+		div.widget-liquid-left div#widgets-left .inactive-sidebar p.description {
+			margin: 0 0 5px 0;
+		}
+		div.widget-liquid-left div#widgets-left .inactive-sidebar .widget-holder {
+			background: transparent;
+			border: none;
+			border-radius: 0;
+			padding: 0;
+		}
+		div.widget-liquid-left div#widgets-left .inactive-sidebar .widgets-sortables {
+			min-height: 0;
+			padding: 10px;
+		}
+		div.widget-liquid-left div#widgets-left .inactive-sidebar .widgets-sortables:after {
+			content: ".";
+			display: block;
+			height: 0;
+			clear: both;
+			visibility: hidden;
+		}
+		div.widget-liquid-left div#widgets-left .inactive-sidebar .widget-placeholder {
+			width: 100%;
+			display: block;
+			margin: 0;
+			-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			box-sizing: border-box;
+			float: none;
+		}
+		div.widget-liquid-left div#widgets-left .inactive-sidebar .widget {
+			width: 100%;
+			display: block;
+			margin: 0;
+			-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			box-sizing: border-box;
+			border-bottom: none;
+		}
+		div.widget-liquid-left div#widgets-left .inactive-sidebar .widget:last-child {
+			border-bottom: 1px solid #DEDEDE;
+		}
+
+div.widget-liquid-right {
+	width: 600px;
+}
+	div.widget-liquid-right div#widgets-right {
+		width: 600px;
+	}
+	div.widget-liquid-right div.widgets-holder-wrap {
+		width: 280px;
+		float: left;
+	}
+	div.widget-liquid-right div.widgets-holder-wrap:nth-child(odd) {
+		clear: left;
+		margin-right: 10px;
+	}
+
+div.widget-liquid-right div#widgets-right .widget {
+	margin: 0 auto;
+	width: 260px;
+	box-shadow: none;
+	border-bottom: none;
+}
+	div.widget-liquid-right div#widgets-right .widget:last-child {
+		border-bottom: 1px solid #DEDEDE;
+	}
+	div.widget-liquid-right div#widgets-right .sidebar-name {
+		border-bottom: none;
+		border-radius: none;
+	}
+		div.widget-liquid-right div#widgets-right .sidebar-name h3 {
+			padding: 10px 15px;
+		}
+	.widget .widget-top {
+		background: #f7f7f7;
+		padding: 8px 10px;
+	}
+	.widget .widget-top.open {
+		background: #333;
+		color: #fff;
+	}
+		.widget .widget-top.open .in-widget-title {
+			color: #ccc;
+		}
+		.widget-top a.widget-action:after {
+			content: '\f111';
+		}
+		.widget-top.open a.widget-action:after {
+			color: #fff;
+		}
+	div.widget-liquid-right .widgets-holder-wrap.closed .sidebar-description {
+		display: none;
+	}
+	div.widget-liquid-right .sidebar-description {
+		width: auto;
+		margin: 0 -1px;
+		padding: 10px 16px;
+		border-top: 1px solid #EFEFEF;
+	}
+		div.widget-liquid-right .sidebar-description .description {
+			margin: 0;
+			font-style: normal;
+		}
+	div.widget-liquid-right div#widgets-right .widget .widget-inside {
+		background: #fff;
+		border-top: 1px solid #DEDEDE;
+	}
+div.widget-liquid-right div#widgets-right .widgets-sortables {
+	min-height: 42px !important;
+	padding: 0;
+	margin-bottom: 8px;
+	position: relative;
+}
+div.widget-liquid-right div#widgets-right .widgets-sortables:before {
+	display: block;
+	content: "";
+	text-align: center;
+	position: absolute;
+	left: 8px;
+	right: 8px;
+	bottom: 0px;
+	height: 40px;
+	border: 1px dashed #dedede;
+	border-radius: 3px;
+	line-height: 40px;
+	font-weight: 600;
+	color: #aaa;
+}
+
+
+.widget.ui-sortable-helper {
+	border: 1px solid #DEDEDE;
+	border-radius: 3px;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+	opacity: 0.8;
+	max-width: 260px;
+}
+.widget-placeholder {
+	border: 1px solid #CECECE;
+	margin: 0 auto;
+	height: 40px;
+	width: 260px;
+	background: #f7f7f7;
+}
+
+/* Less than 1090px wide */
+@media only screen and (max-width: 1090px) {
+	div.widget-liquid-left {
+		margin-right: -300px;
+	}
+		div.widget-liquid-left div#widgets-left {
+			margin: 0 320px 0 0;
+		}
+
+
+	div.widget-liquid-right {
+		width: 300px;
+	}
+		div.widget-liquid-right div#widgets-right {
+			width: 300px;
+		}
+	div.widget-liquid-right div.widgets-holder-wrap {
+		width: 300px;
+	}
+	div.widget-liquid-right div#widgets-right .widget {
+		width: 280px !important;
+		margin-left: auto !important;
+	}
+
+	.widget-placeholder {
+		width: 280px;
+	}
+}
