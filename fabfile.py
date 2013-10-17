@@ -22,6 +22,10 @@ def pull_content():
 	pull_themes()
 	pull_uploads()
 
+def sync_themes():
+	local( "rsync -rvzh --delete --exclude '*.git*' www/wordpress/wp-content/themes/twentyfourteen/ content/themes/twentyfourteen/" )
+	local( "rsync -rvzh --delete --exclude '*.git*' www/wordpress/wp-content/themes/twentythirteen/ content/themes/twentythirteen/" )
+
 def push_web():
 	sudo( "chown -R jeremyfelt:jeremyfelt /srv/web/jeremyfelt.com/www" )
 	local("rsync -rvzh -e ssh --delete --exclude '.git' --exclude 'local-config.php' www/ jeremyfelt@jeremyfelt.com:/srv/web/jeremyfelt.com/www" )
