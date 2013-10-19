@@ -118,7 +118,9 @@ smtpd_use_tls = yes
 smtpd_tls_session_cache_database = btree:${data_directory}/smtpd_scache
 smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
 
-# DKIM
+# DKIM (DomainKeys Identified Mail)
+#
+# Directives added when setting up DKIM for Postfix.
 milter_default_action = accept
 milter_protocol = 2
 smtpd_milters = inet:localhost:8891
