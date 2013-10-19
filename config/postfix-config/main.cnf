@@ -77,8 +77,15 @@ alias_maps = hash:/etc/aliases
 # with newaliases. I'm not entirely sure what that means yet.
 alias_database = hash:/etc/aliases
 
-mailbox_size_limit = 0
+# ADDRESS EXTENSIONS
+#
+# The recipient_delimiter parameter specifies the separator between user names
+# and address extensions. This is one of my favorite mail things because I can
+# use things like (jeremy.felt+possiblespam@gmail.com) to filter out things
+# when I sign up for them. Leaving at the default of +
 recipient_delimiter = +
+
+mailbox_size_limit = 0
 
 # DKIM
 milter_default_action = accept
