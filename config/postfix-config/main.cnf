@@ -35,9 +35,15 @@ myhostname = mail.foghlaim.com
 # Used as a default value for other configuration parameters
 mydomain = foghlaim.com
 
+# SENDING MAIL
+#
+# Specifies the domain that locally posted mail appears to come from. In
+# our setup, we'll use the Debian default /etc/mailname to specify the
+# domain. The only line in this file reads 'foghlaim.com'
+myorigin = /etc/mailname
+
 alias_maps = hash:/etc/aliases
 alias_database = hash:/etc/aliases
-myorigin = /etc/mailname
 mydestination = foghlaim.com, FOGHLAIMLinode, localhost.localdomain, localhost
 relayhost =
 mynetworks = 127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128
