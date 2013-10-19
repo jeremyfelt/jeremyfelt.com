@@ -78,17 +78,23 @@ recipient_delimiter = +
 # I've made the decision to drop (Ubuntu) from the end of the default setting.
 smtpd_banner = $myhostname ESMTP $mail_name
 
+# MISC
+#
+# Maximum size of any individual mailbox or maildir file. The documented default is
+# a large value, but for some reason Postfix installed with this default of 0, which
+# means that mailbox size is unlimited.
 mailbox_size_limit = 0
 
+# The local biff service sends new mail notifications to users who have requested them
+# through the biff command. We really have no need for this, but should specify no as
+# the default is yes.
 biff = no
 
-# appending .domain is the MUA's job.
+# If this was enabled, Postfix would determine what to append to an email address that
+# was sent without a domain (e.g. jeremy@foghlaim). In the Ubuntu install of Postfix,
+# we are told that "appending .domain is the MUA's job" and this directive is set to no
+# by default.
 append_dot_mydomain = no
-
-# Uncomment the next line to generate "delayed mail" warnings
-#delay_warning_time = 4h
-
-readme_directory = no
 
 # TLS parameters
 smtpd_tls_cert_file=/etc/ssl/certs/ssl-cert-snakeoil.pem
