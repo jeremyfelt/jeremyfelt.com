@@ -70,11 +70,18 @@ alias_database = hash:/etc/aliases
 # when I sign up for them. Leaving at the default of +
 recipient_delimiter = +
 
+# SMTP BANNER
+#
+# The smtpd_banner parameter specifies the text that follows the 220 code in the
+# server's greeting banner. $myhostname MUST be specified at the beginning.
+#
+# I've made the decision to drop (Ubuntu) from the end of the default setting.
+smtpd_banner = $myhostname ESMTP $mail_name
+
 mailbox_size_limit = 0
 
 # See /usr/share/postfix/main.cf.dist for a commented, more complete version
 
-smtpd_banner = $myhostname ESMTP $mail_name (Ubuntu)
 biff = no
 
 # appending .domain is the MUA's job.
