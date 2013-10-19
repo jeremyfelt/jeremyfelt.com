@@ -11,5 +11,5 @@ License: GPL2
 
 add_action( 'admin_print_styles-toplevel_page_jetpack', 'hijm_admin_style', 999 );
 function hijm_admin_style() {
-	echo '<!-- Hide inactive Jetpack modules --><style>.jetpack-inactive { display: none; }</style>';
+	echo '<!-- Hide inactive Jetpack modules --><style>.jetpack-inactive, #vaultpress { display: none; }</style>';
 }
