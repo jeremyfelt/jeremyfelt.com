@@ -96,15 +96,27 @@ biff = no
 # by default.
 append_dot_mydomain = no
 
-# TLS parameters
-smtpd_tls_cert_file=/etc/ssl/certs/ssl-cert-snakeoil.pem
-smtpd_tls_key_file=/etc/ssl/private/ssl-cert-snakeoil.key
-smtpd_use_tls=yes
+# TLS
+#
+# File with the Postfix SMTP server RSA certificate in PEM format.
+#
+# This file may also contain the Postfix SMTP server private RSA key. See the below
+# directive for smtpd_tls_key_file.
+smtpd_tls_cert_file = /etc/ssl/certs/ssl-cert-snakeoil.pem
+
+# File with the Postfix SMTP server RSA private key in PEM format.
+#
+# This file may be combined with the Postfix SMTP server RSA certificate file specified
+# with the above $smtpd_tls_cert_file directive.
+smtpd_tls_key_file = /etc/ssl/private/ssl-cert-snakeoil.key
+
+# Opportunistic TLS: announce STARTTLS support to remote SMTP clients, but do not require
+# that clients use TLS encryption.
+smtpd_use_tls = yes
+
+# Name of the files containing the optional Postfix SMTP server TLS session cache
 smtpd_tls_session_cache_database = btree:${data_directory}/smtpd_scache
 smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
-
-# See /usr/share/doc/postfix/TLS_README.gz in the postfix-doc package for
-# information on enabling SSL in the smtp client.
 
 # DKIM
 milter_default_action = accept
