@@ -42,14 +42,23 @@ mydomain = foghlaim.com
 # domain. The only line in this file reads 'foghlaim.com'
 myorigin = /etc/mailname
 
+# RECEIVING MAIL
+#
+# Indicates that mail is being received on all network interfaces, which
+# is the default setting
+inet_interfaces = all
+
+# The list of domains that this machine considers itself the final mail
+# destination for.
+mydestination = foghlaim.com, FOGHLAIMLinode, localhost.localdomain, localhost
+
 alias_maps = hash:/etc/aliases
 alias_database = hash:/etc/aliases
-mydestination = foghlaim.com, FOGHLAIMLinode, localhost.localdomain, localhost
+
 relayhost =
 mynetworks = 127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128
 mailbox_size_limit = 0
 recipient_delimiter = +
-inet_interfaces = all
 
 # DKIM
 milter_default_action = accept
