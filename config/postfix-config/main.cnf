@@ -47,7 +47,7 @@ inet_interfaces = all
 # destination for.
 mydestination = foghlaim.com, FOGHLAIMLinode, localhost.localdomain, localhost
 
-# TRUST
+# TRUST AND RELAYS
 #
 # By default, Postfix trusts any machines that are on the same subnet as
 # this machine. This *could* end up weird on a VPS as we're sharing an IP
@@ -58,11 +58,17 @@ mynetworks_style = host
 # overrideing our mynetworks_style directive, but I like being explicit.
 mynetworks = 127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128
 
+# Postfix will relay mail from anybody on this machine to any host. It will
+# relay mail from other machines to only the domains specified in the
+# following directive. This doesn't really do anything, as we aren't allowing
+# relay mail from other machines, but I like being explicit. :)
+relay_domains = $mydestination
+
+# When no relayhost is specified, mail is routed directly to the destination.
+relayhost =
 
 alias_maps = hash:/etc/aliases
 alias_database = hash:/etc/aliases
-
-relayhost =
 
 mailbox_size_limit = 0
 recipient_delimiter = +
