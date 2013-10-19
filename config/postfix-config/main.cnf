@@ -67,7 +67,14 @@ relay_domains = $mydestination
 # When no relayhost is specified, mail is routed directly to the destination.
 relayhost =
 
+# ALIAS DATABASE
+#
+# The alias_maps parameter specifies the list of alias databases used by the
+# local delivery agent. I'm not entirely sure what that means yet.
 alias_maps = hash:/etc/aliases
+
+# The alias_database parameter specifies the alias database(s) that are built
+# with newaliases. I'm not entirely sure what that means yet.
 alias_database = hash:/etc/aliases
 
 mailbox_size_limit = 0
