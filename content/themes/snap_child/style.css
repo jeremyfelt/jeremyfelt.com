@@ -11,4 +11,16 @@
  * Tags: business, portfolio, professional, art, photography, clean, elegant, formal, handcrafted, light, minimal, gray, white, light, one-column, two-columns, three-columns, right-sidebar, responsive-width, custom-background, custom-colors, custom-menu, editor-style, featured-images, full-width-template, sticky-post, theme-options, infinite-scroll, translation-ready
  */
 
+@import url( 'http://fonts.googleapis.com/css?family=News+Cycle:400,700|Oxygen:400,700|Raleway:400,700' );
 @import url( '../snap/style.css' );
+
+body {
+	font-family: "Raleway", "Helvetica Neue", Helvetica, Arial, Verdana, Tahoma, sans-serif;
+}
+
+@media screen and (min-width: 900px) {
+	h1 {
+		font-size: 38px;
+		font-size: 2.11111rem;
+	}
+}
