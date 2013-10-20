@@ -14,9 +14,18 @@ body {
 	font-family: "Raleway", "Helvetica Neue", Helvetica, Arial, Verdana, Tahoma, sans-serif;
 }
 
+h1, blockquote {
+	font-weight: 400;
+}
+
 @media screen and (min-width: 900px) {
 	h1 {
 		font-size: 38px;
 		font-size: 2.11111rem;
+	}
+
+	blockquote p {
+		font-size: 22px;
+		font-size: 1.22222rem;
 	}
 }
