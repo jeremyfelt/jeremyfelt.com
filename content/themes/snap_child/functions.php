@@ -30,6 +30,17 @@ add_action( 'wp_enqueue_scripts', 'jf_enqueue_styles', 9 );
  * stylesheet is loaded.
  */
 function jf_enqueue_styles() {
-	wp_enqueue_style( 'jf-snap-fonts', 'http://fonts.googleapis.com/css?family=News+Cycle:400,700|Oxygen:400,700|Raleway:400,700' );
-	wp_enqueue_style( 'snap-parent-style', get_template_directory_uri() . '/style.css' );
+	wp_enqueue_style( 'jf-snap-fonts', 'http://fonts.googleapis.com/css?family=News+Cycle:400,700|Oxygen:400,700|Raleway:400,700|Merriweather:400,900' );
+	wp_enqueue_style( 'snap-parent-style', get_template_directory_uri() . '/style.css', array(), false, 'all' );
+	wp_enqueue_style( 'snap-child-style',  get_stylesheet_uri(), array( 'snap-parent-style'), false, 'all' );
+	wp_enqueue_style( 'snap-print-style',  get_template_directory_uri() . '/includes/stylesheets/print-styles.css', array( 'snap-child-style' ), false, 'print' );
+}
+
+add_action( 'wp_enqueue_scripts', 'jf_deregister_styles', 11 );
+/**
+ * We'll add Merriweather to our custom Google Fonts link, so we need to dequeue it.
+ */
+function jf_deregister_styles() {
+	wp_dequeue_style( 'snap-fonts' );
+	wp_deregister_style( 'snap-fonts' );
 }
