@@ -189,6 +189,20 @@ html #wpadminbar {
 	display: none;
 }
 
+/* In fact hide all third party items for now */
+#wp-admin-bar-root-default>li {
+	display: none;
+}
+#wp-admin-bar-root-default li#wp-admin-bar-wp-logo,
+#wp-admin-bar-root-default li#wp-admin-bar-my-sites,
+#wp-admin-bar-root-default li#wp-admin-bar-site-name,
+#wp-admin-bar-root-default li#wp-admin-bar-new-content,
+#wp-admin-bar-root-default li#wp-admin-bar-comments,
+#wp-admin-bar-root-default li#wp-admin-bar-new-content
+{
+	display: block;
+}
+
 /* Experimental fix for touch toolbar dropdown positioning */
 #wpadminbar .ab-top-menu,
 #wpadminbar .ab-top-secondary,

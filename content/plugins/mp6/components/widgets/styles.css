@@ -1,23 +1,48 @@
 /* Widgets */
+body.widgets-php #wpbody-content {
+	padding-bottom: 35px;
+}
+
+body.widgets-php #screen-meta,
+body.widgets-php .screen-meta-toggle {
+	z-index: 30000;
+}
+
+body.widgets-php .wrap {
+	width: 60%;
+}
+
 div.widget-liquid-left {
-	margin-right: -600px;
+	margin: 0;
+	width: 34%;
+	float: right;
+	position: fixed;
+	top: 80px;
+	bottom: 20px;
+	right: 0;
+	z-index: 100;
 }
 	div.widget-liquid-left div#widgets-left {
-		margin: 0 620px 0 0;
+		margin: 0 0 0 20px;
+		padding-left: 20px;
+		border-left: 2px solid #ccc;
 	}
 
 	div.widget-liquid-left div#widgets-left #available-widgets {
 		background: transparent;
-		max-height: 450px;
-		overflow: auto;
 		margin: 0;
 		border-radius: none;
 		box-shadow: none;
-		border-bottom: 1px solid #dedede;
-		box-shadow: inset 0px -1px 2px -1px rgba(0,0,0,.1);
+		border-bottom: none;
+		height: 84vh;
+		overflow: auto;
 	}
 
 		div.widget-liquid-left div#widgets-left #available-widgets .sidebar-name {
+			padding-left: 0;
+			border: none;
+		}
+		div.widget-liquid-left div#widgets-left #available-widgets .sidebar-name-arrow {
 			display: none;
 		}
 		div.widget-liquid-left div#widgets-left #available-widgets .widget-holder {
@@ -32,101 +57,109 @@ div.widget-liquid-left {
 			box-sizing: border-box;
 			-moz-box-sizing:border-box;
 			-webkit-box-sizing:border-box;
-			width: 50%;
+			width: 100%;
 			margin: 10px 0 0 0;
 			position: relative;
 		}
 		div.widget-liquid-left div#widgets-left #available-widgets .widget.ui-draggable-dragging {
-			max-width: 33%;;
+			max-width: 260px;
 		}
 		div.widget-liquid-left div#widgets-left #available-widgets .widget-top {
 			margin-right: 10px;
-			padding: 10px 15px 10px 35px;
+			padding: 10px 15px;
 			border-radius: 3px;
+			border-color: #bbb;
 		}
-		div.widget-liquid-left div#widgets-left #available-widgets .widget-top:before {
-			/*content: '\f132';*/
-			content: '\f228';
+		div.widget-liquid-left div#widgets-left #available-widgets .widget-top .more-info {
+			color: #ccc;
+			position: absolute;
+				top: 8px;
+				right: 12px;
+				bottom: 8px;
+			padding: 6px 8px;
+			border-left: 1px dotted #DDD;
+			cursor: help;
+		}
+		div.widget-liquid-left div#widgets-left #available-widgets .widget-top .more-info:before {
+			content: '\f223';
 			color: #ccc;
 			display: inline-block;
 			-webkit-font-smoothing: antialiased;
 			font: normal 20px/1 'dashicons';
 			vertical-align: top;
-			position: absolute;
-			top: 12px;
-			left: 13px;
 		}
 		div.widget-liquid-left div#widgets-left #available-widgets .widget-top:hover {
 			background: #fff;
 			border: 1px solid #bbb;
 			box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 		}
-		div.widget-liquid-left div#widgets-left #available-widgets .widget-description {
+		div.widget-liquid-left div#widgets-left #available-widgets .widget-top .widget-title {
+			padding: 18px 39px 0 20px;
+			position: absolute;
+				top: 0;
+				right: 10px;
+				bottom: 0;
+				left: 0;
+		}
+		div.widget-liquid-left div#widgets-left #available-widgets .widget .widget-description {
 			display: none;
 			position: absolute;
-			left: 0;
-			bottom: 0;
-			right: 0;
-			padding: 10px;
-			text-align: center;
+				top: 40px;
+				right: 15px;
+			width: 140px;
+			padding: 10px 14px;
+			background: rgba(0, 0, 0, 0.7);
+			border-radius: 3px;
+			z-index: 10;
+			color: #fff;
 		}
 
-	div.widget-liquid-left div#widgets-left .inactive-sidebar {
+/* Inactive Sidebars */
+	div.widget-liquid-right div#widgets-right .inactive-sidebar {
+		clear: both;
+		width: 100%;
+		background: #f5f5f5;
 	}
-		div.widget-liquid-left div#widgets-left .inactive-sidebar .sidebar-name {
-			border: none;
-		}
-		div.widget-liquid-left div#widgets-left .inactive-sidebar p.description {
-			margin: 0 0 5px 0;
-		}
-		div.widget-liquid-left div#widgets-left .inactive-sidebar .widget-holder {
-			background: transparent;
-			border: none;
-			border-radius: 0;
-			padding: 0;
-		}
-		div.widget-liquid-left div#widgets-left .inactive-sidebar .widgets-sortables {
-			min-height: 0;
-			padding: 10px;
-		}
-		div.widget-liquid-left div#widgets-left .inactive-sidebar .widgets-sortables:after {
-			content: ".";
-			display: block;
-			height: 0;
-			clear: both;
-			visibility: hidden;
-		}
-		div.widget-liquid-left div#widgets-left .inactive-sidebar .widget-placeholder {
+	div.widget-liquid-right div#widgets-right .inactive-sidebar.first {
+		margin-top: 40px;
+	}
+
+		div.widget-liquid-right div#widgets-right .inactive-sidebar .widget-placeholder {
 			width: 100%;
 			display: block;
 			margin: 0;
-			-webkit-box-sizing: border-box;
-			-moz-box-sizing: border-box;
-			box-sizing: border-box;
 			float: none;
 		}
-		div.widget-liquid-left div#widgets-left .inactive-sidebar .widget {
-			width: 100%;
+		div.widget-liquid-right div#widgets-right .inactive-sidebar .widget {
 			display: block;
 			margin: 0;
-			-webkit-box-sizing: border-box;
-			-moz-box-sizing: border-box;
-			box-sizing: border-box;
-			border-bottom: none;
 		}
-		div.widget-liquid-left div#widgets-left .inactive-sidebar .widget:last-child {
-			border-bottom: 1px solid #DEDEDE;
+		div.widget-liquid-right div#widgets-right .inactive-sidebar .widgets-sortables {
+			background: #f5f5f5;
+			border: none;
 		}
 
+
 div.widget-liquid-right {
-	width: 600px;
+	clear: none;
+	float: none;
+	width: 100%;
 }
 	div.widget-liquid-right div#widgets-right {
-		width: 600px;
+		width: 100%;
+		margin: 0;
+	}
+	div.widget-liquid-right div#widgets-right:after {
+		content: ".";
+		display: block;
+		height: 0;
+		clear: both;
+		visibility: hidden;
 	}
 	div.widget-liquid-right div.widgets-holder-wrap {
-		width: 280px;
+		width: 100%;
 		float: left;
+		margin: 10px 0 0 0;
 	}
 	div.widget-liquid-right div.widgets-holder-wrap:nth-child(odd) {
 		clear: left;
@@ -134,10 +167,17 @@ div.widget-liquid-right {
 	}
 
 div.widget-liquid-right div#widgets-right .widget {
-	margin: 0 auto;
-	width: 260px;
+	margin: 0 auto !important;
+	width: auto !important;
+	min-width: 50%;
 	box-shadow: none;
 	border-bottom: none;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+div.widget-liquid-right div#widgets-right .widget.expanded {
+	left: auto !important;
 }
 	div.widget-liquid-right div#widgets-right .widget:last-child {
 		border-bottom: 1px solid #DEDEDE;
@@ -149,22 +189,22 @@ div.widget-liquid-right div#widgets-right .widget {
 		div.widget-liquid-right div#widgets-right .sidebar-name h3 {
 			padding: 10px 15px;
 		}
-	.widget .widget-top {
+	div.widget-liquid-right div#widgets-right .widget .widget-top {
 		background: #f7f7f7;
-		padding: 8px 10px;
+		padding: 0;
+		height: auto;
 	}
-	.widget .widget-top.open {
-		background: #333;
-		color: #fff;
-	}
-		.widget .widget-top.open .in-widget-title {
-			color: #ccc;
+		div.widget-liquid-right div#widgets-right .widget-top .widget-title-action {
+			position: relative;
+				top: 9px;
+				right: 5px;
 		}
-		.widget-top a.widget-action:after {
+		div.widget-liquid-right div#widgets-right .widget-top a.widget-action:after {
 			content: '\f111';
+			color: #888;
 		}
-		.widget-top.open a.widget-action:after {
-			color: #fff;
+		div.widget-liquid-right div#widgets-right .widget .widget-title {
+			padding: 15px 20px;
 		}
 	div.widget-liquid-right .widgets-holder-wrap.closed .sidebar-description {
 		display: none;
@@ -185,7 +225,7 @@ div.widget-liquid-right div#widgets-right .widget {
 	}
 div.widget-liquid-right div#widgets-right .widgets-sortables {
 	min-height: 42px !important;
-	padding: 0;
+	padding: 0 8px;
 	margin-bottom: 8px;
 	position: relative;
 }
@@ -206,46 +246,114 @@ div.widget-liquid-right div#widgets-right .widgets-sortables:before {
 }
 
 
-.widget.ui-sortable-helper {
+div.widget-liquid-right div#widgets-right .widget.ui-sortable-helper {
 	border: 1px solid #DEDEDE;
 	border-radius: 3px;
 	box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 	opacity: 0.8;
-	max-width: 260px;
+	width: 100% !important;
+	z-index: 2000;
 }
 .widget-placeholder {
-	border: 1px solid #CECECE;
+	border: 1px solid #dedede;
+	border-bottom: none;
 	margin: 0 auto;
-	height: 40px;
-	width: 260px;
-	background: #f7f7f7;
+	height: 43px;
+	width: 100%;
+	background: #eee;
+	box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
 }
 
-/* Less than 1090px wide */
-@media only screen and (max-width: 1090px) {
+/* Accessibility Mode */
+#available-widgets .widget-control-edit .add {
+	display: block;
+	position: absolute;
+		top: 0;
+		right: 50px;
+		bottom: 0;
+		left: 0;
+	z-index: 40;
+	text-align: center;
+	text-indent: -5000px;
+}
+
+#widgets-right .widget-top a.widget-control-edit {
+	margin: -9px -5px 0 0;
+	padding: 14px 15px 14px 15px;
+	background: #EEE;
+	margin: -9px -5px 0 0;
+	padding: 14px 15px 14px 15px;
+	border-left: 1px solid #DDD;
+}
+#widgets-right .widget-top a.widget-control-edit:hover {
+	background: #444;
+}
+#widgets-right .widget-top a.widget-control-edit:before {
+	content: '\f111';
+	display: inline-block;
+	-webkit-font-smoothing: antialiased;
+	font: normal 16px/1 'dashicons';
+	vertical-align: top;
+	position: relative;
+		top: -1px;
+	padding-right: 4px;
+}
+
+
+/* Wide Screens Get More Columns */
+@media only screen and (min-width: 1250px) {
+	div.widget-liquid-left div#widgets-left #available-widgets .widget {
+		width: 50%;
+	}
+
+	div.widget-liquid-right div.widgets-holder-wrap {
+		width: 48.5%;
+	}
+
+	div.widget-liquid-right #widgets-right.single-sidebar div.widgets-holder-wrap {
+		width: 100%;
+	}
+}
+
+@media only screen and (max-width: 900px) {
+	body.widgets-php .wrap {
+		width: 55%;
+	}
 	div.widget-liquid-left {
-		margin-right: -300px;
+		width: 40%;
+	}
+}
+
+@media only screen and (max-width: 700px) {
+	body.widgets-php .wrap {
+		width: 100%;
+	}
+	div.widget-liquid-left {
+		width: auto;
+		float: none;
+		position: relative;
+		top: auto;
+		bottom: auto;
+		right: auto;
 	}
 		div.widget-liquid-left div#widgets-left {
-			margin: 0 320px 0 0;
+			border: none;
+			padding: 0;
+			margin: 0 0 10px 0;
 		}
-
-
-	div.widget-liquid-right {
-		width: 300px;
-	}
-		div.widget-liquid-right div#widgets-right {
-			width: 300px;
+		div.widget-liquid-left div#widgets-left #available-widgets {
+			overflow: auto;
+			height: 160px;
+			padding: 0 10px;
+			border-bottom: 2px solid #ccc;
 		}
-	div.widget-liquid-right div.widgets-holder-wrap {
-		width: 300px;
-	}
-	div.widget-liquid-right div#widgets-right .widget {
-		width: 280px !important;
-		margin-left: auto !important;
-	}
-
-	.widget-placeholder {
-		width: 280px;
-	}
+		div.widget-liquid-left div#widgets-left #available-widgets .sidebar-name {
+			display: none;
+		}
+		div.widget-liquid-left div#widgets-left #available-widgets .widget-top {
+			margin-right: 0;
+		}
 }

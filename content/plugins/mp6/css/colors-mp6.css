@@ -1946,6 +1946,12 @@ h2.nav-tab-wrapper, h3.nav-tab-wrapper {
 	border-color: #ccc;
 }
 
+.about-wrap .feature-section .col-2:before,
+.about-wrap .feature-section .col-2:after,
+.about-wrap .feature-section.two-col p:before {
+	color: #1e8cbe;
+}
+
 .about-wrap .point-releases {
 	border-bottom: 1px solid #dfdfdf;
 }

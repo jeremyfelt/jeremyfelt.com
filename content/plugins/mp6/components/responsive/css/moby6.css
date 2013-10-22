@@ -1049,52 +1049,6 @@ ul.add-menu-item-tabs li.tabs {
  * Widget Management Page (Needs UX work on mobile)
  * ----------------------------------------------------------------------------
  */
-/*div.widget-liquid-left, div.widget-liquid-right,
-div#widgets-left, div#widgets-right {
-	float: none;
-	clear: none;
-	margin: 0;
-	width: auto;
-}*/
-
-/* Less than 640px wide */
-@media only screen and (max-width: 640px) {
-	div.widget-liquid-left div#widgets-left #available-widgets {
-		max-height: none;
-		overflow: visible;
-	}
-	div.widget-liquid-left div#widgets-left #available-widgets .widget {
-		width: 100%;
-		float: none;
-	}
-	div.widget-liquid-left div#widgets-left #available-widgets .widget-top {
-		margin-right: 0;
-	}
-	div.widget-liquid-right {
-		width: 50%;
-	}
-	div.widget-liquid-left div#widgets-left {
-		margin: 0 52% 0 0;
-	}
-	div.widget-liquid-right div.widgets-holder-wrap, div.widget-liquid-right div#widgets-right {
-		width: 100%;
-	}
-	div.widget-liquid-right div#widgets-right .widget {
-		width: auto !important;
-		margin: 0 8px !important;
-	}
-}
-
-
-/* Less than 640px wide */
-@media only screen and (max-width: 640px) {
-	div.widget-liquid-right {
-		width: 100%;
-	}
-	div.widget-liquid-left div#widgets-left {
-		margin: 0;
-	}
-}
 
 
 /**
@@ -1288,6 +1242,42 @@ div#widgets-left, div#widgets-right {
 	height: 30px;
 	width: 30px;
 	margin: 4px 10px 5px 0;
+}
+
+/**
+ * About Page
+ * ----------------------------------------------------------------------------
+ */
+.about-wrap .feature-section.two-col div {
+	width: 100%;
+	margin: 0;
+	float: none;
+}
+
+.about-wrap .three-col.about-updates .col-1,
+/*.about-wrap .three-col.about-updates .col-2,*/
+.about-wrap .three-col.about-updates .col-3 {
+	padding: 0;
+}
+.about-wrap .three-col.about-updates .col-1 {
+	width: 100%;
+	padding-right: 210px;
+}
+
+.about-wrap .three-col.about-updates .col-2 {
+	position: relative;
+	float: right;
+	width: 180px;
+	margin-left: -100%;
+}
+
+.about-wrap .three-col.about-updates .col-3 {
+	width: 100%;
+}
+
+.about-wrap .about-password-meter input,
+.about-wrap .about-password-meter #pass-strength-result {
+	width: 99%;
 }
 
 /**
@@ -1584,6 +1574,50 @@ div#widgets-left, div#widgets-right {
 }
 
 } /* @media block */
+
+@media only screen and (max-width: 500px) {
+
+.about-wrap {
+	margin-right: 20px;
+	margin-left: 10px;
+}
+
+.about-wrap h1,
+.about-text {
+	margin-right: 0;
+}
+
+.about-text {
+	margin-bottom: 0.25em;
+}
+
+.about-wrap .wp-badge {
+	position: relative;
+	margin-bottom: 1.5em;
+	width: 100%;
+}
+
+.about-wrap .feature-section.three-col div {
+	width: 100%;
+	float: none;
+}
+
+.about-wrap .three-col.about-updates .col-1 {
+	padding: 0;
+	float: none;
+}
+
+.about-wrap .three-col.about-updates .col-2 {
+	margin: 0 0 20px;
+	width: 100%;
+	float: none;
+}
+
+.about-wrap .about-passwords {
+	margin: 20px -20px;
+}
+
+}
 
 @media only screen and (max-width: 900px) {
 

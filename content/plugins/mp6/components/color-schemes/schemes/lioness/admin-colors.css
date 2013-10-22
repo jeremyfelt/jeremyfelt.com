@@ -132,6 +132,11 @@ ul#adminmenu a.wp-has-current-submenu:after, ul#adminmenu > li.current > a.curre
 
 #wpadminbar #wp-admin-bar-user-info .display-name { color: white; }
 
+/* Pointer */
+.wp-pointer .wp-pointer-content h3 { background-color: #bfa013; }
+
+.wp-pointer.wp-pointer-top .wp-pointer-arrow, .wp-pointer.wp-pointer-undefined .wp-pointer-arrow { border-bottom-color: #bfa013; }
+
 /* Responsive Component */
 div#moby6-toggle a:before { color: #f5f2e2; }
 

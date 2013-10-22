@@ -6411,7 +6411,7 @@ body.press-this {
 
 .about-wrap {
 	position: relative;
-	margin: 30px 4% 0 1.5%;
+	margin: 25px 40px 0 20px;
 	max-width: 1050px; /* readability */
 
 	font-size: 15px;
@@ -6422,6 +6422,16 @@ body.press-this {
 	display: none !important;
 }
 
+.about-wrap p.about-notice {
+	background-color: #ffffe0;
+	border: 1px solid #e6db55;
+	margin: 5px 0 15px;
+	padding: 0.4em 0.8em;
+	border-radius: 3px;
+	-webkit-border-radius: 3px;
+}
+
+
 /* Typography */
 
 .about-wrap p {
@@ -6431,14 +6441,14 @@ body.press-this {
 .about-wrap h1 {
 	margin: 0.2em 200px 0 0;
 	line-height: 1.2em;
-	font-size: 3em;
-	font-weight: 300;
+	font-size: 2.8em;
+	font-weight: 200;
 }
 
 .about-text,
 .about-description,
 .about-wrap li.wp-person a.web {
-	font-family: "Open Sans", sans-serif;
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", sans-serif;
 	font-weight: normal;
 	line-height: 1.6em;
 	font-size: 20px;
@@ -6449,15 +6459,14 @@ body.press-this {
 }
 
 .about-text {
-	font-size: 24px;
-	font-weight: 300;
 	margin: 1em 200px 1.4em 0;
 	min-height: 60px;
+	font-size: 24px;
 }
 
 .about-wrap h3 {
-	font-size: 24px;
-	margin-bottom: 1em;
+	font-size: 1.5em;
+	line-height: 1.5em;
 	padding-top: 20px;
 }
 
@@ -6473,9 +6482,11 @@ body.press-this {
 	margin-top: 0.6em;
 }
 
-.about-wrap code {
+.about-wrap code,
+.about-wrap ol li p {
 	font-size: 14px;
 }
+
 
 /* Point Releases */
 
@@ -6485,13 +6496,10 @@ body.press-this {
 
 .about-wrap .changelog.point-releases h3 {
 	padding-top: 35px;
-	border-top-width: 1px;
-	border-top-style: solid;
 }
 
 .about-wrap .changelog.point-releases h3:first-child {
 	padding-top: 7px;
-	border: 0;
 }
 
 /* WordPress Version Badge */
@@ -6512,6 +6520,7 @@ body.press-this {
 	text-rendering: optimizeLegibility;
 }
 
+
 .about-wrap .wp-badge {
 	position: absolute;
 	top: 0;
@@ -6520,36 +6529,23 @@ body.press-this {
 
 /* Tabs */
 
-h2.nav-tab-wrapper {
-	margin-left: 0;
-	margin-bottom: 20px;
-}
-
 .about-wrap h2.nav-tab-wrapper {
 	padding-left: 6px;
-	padding-bottom: 1px !important;
-	border-bottom-width: 1px;
-	border-bottom-style: solid;
 }
 
 .about-wrap h2 .nav-tab {
-	font-size: 20px;
-	margin: 0 10px -2px 0;
-	padding: 5px 10px;
+	padding: 4px 15px 6px;
+	margin: 0 3px -1px 0;
+	font-size: 18px;
 	vertical-align: top;
+	border-width: 1px;
 }
 
 .about-wrap h2 .nav-tab-active {
-	font-weight: 600;
+	font-weight: bold;
 }
 
 /* Changelog / Update screen */
-
-.about-wrap .feature-section img {
-	border-width: 1px;
-	border-style: solid;
-	margin: 0 1.94% 10px 0;
-}
 
 .about-wrap .feature-section.three-col img {
 	margin: 0.5em 0 0.5em 5px;
@@ -6557,88 +6553,104 @@ h2.nav-tab-wrapper {
 	float: none;
 }
 
-.ie8 .about-wrap .feature-section.three-col img {
-	margin-left: 0;
-}
-
-.about-wrap .feature-section.images-stagger-right img {
-	float: right;
-	margin: 0 5px 12px 2em;
-}
-
-.about-wrap .feature-section.images-stagger-left img {
-	float: left;
-	margin: 0 2em 12px 5px;
-}
-
-.about-wrap .feature-section img.image-100 {
-	margin: 0 0 2em 0;
-	width: 100%;
-}
-
-.about-wrap .feature-section img.image-66 {
-	width: 65%;
-}
-
-.about-wrap .feature-section img.image-50 {
-	max-width: 50%;
-}
-
-.about-wrap .feature-section img.image-30 {
-	max-width: 31.2381%;
-}
-
-.ie8 .about-wrap .feature-section img {
-	border-width: 1px;
-	border-style: solid;
-}
-
-.about-wrap .images-stagger-right img.image-30:nth-child(2) {
-	margin-left: 1em;
-}
-
 .about-wrap .feature-section.col {
 	margin-bottom: 0;
 }
 
 .about-wrap .feature-section.col h4 {
-	margin:  0 0 0.6em 0;
-}
-
-.about-wrap .feature-section.col .last-feature {
-	margin-right: 0;
+	margin: 0 0 0.6em 0;
 }
 
 .about-wrap .feature-section.two-col div {
+	position: relative;
 	width: 47%;
 	margin-right: 4.999999999%;
 	float: left;
 }
 
 .about-wrap .feature-section.three-col div {
+	position: relative;
 	width: 30%;
 	margin-right: 4.999999999%;
 	float: left;
 }
 
-.about-wrap .three-col-images {
+.about-wrap .three-col.about-updates .col-1,
+.about-wrap .three-col.about-updates .col-3 {
+	width: 50%;
+	margin: 0;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.about-wrap .three-col.about-updates .col-1 {
+	z-index: 1;
+	padding-right: 100px;
+}
+
+.about-wrap .three-col.about-updates .col-2 {
+	position: absolute;
+	width: 100%;
 	text-align: center;
 }
 
-.about-wrap .three-col-images img {
-	margin: 0 0 10px;
+.about-wrap .three-col.about-updates .col-3 {
+	padding-left: 100px;
 }
 
-.about-wrap .three-col-images .last-feature {
-	float: right;
+.about-wrap .feature-section.col .last-feature {
+	margin-right: 0;
 }
 
-.about-wrap .three-col-images .first-feature {
-	float: left;
+.about-wrap .three-col.about-updates img {
+	margin: 0;
 }
 
 .about-wrap .changelog .feature-section {
 	overflow: hidden;
+}
+
+.about-wrap .about-passwords {
+	margin: 20px 0;
+	padding: 1px 20px 10px;
+	background-color: #fff;
+}
+
+.about-wrap .about-auto-update {
+	text-align: center;
+	background-color: #f9f9ef;
+	clear: both;
+	padding: 10px;
+}
+
+.about-wrap .about-auto-update.cool {
+	background-color: #eff9ef;
+}
+
+.about-wrap .about-password-meter input {
+	font-size: 250%;
+	line-height: 1;
+	width: 100%;
+	display: block;
+	padding: 5px;
+}
+
+.about-wrap .about-password-meter #pass-strength-result {
+	display: block !important;
+	font-size: 150%;
+	font-weight: normal !important;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing:    border-box;
+	box-sizing:         border-box;
+	width: 100%;
+	padding: 17px 0;
+	margin-bottom: 15px;
+}
+
+.about-wrap .feature-section div p img {
+	float: right;
+	margin-left: 10px;
+	max-width: 20%;
 }
 
 .about-wrap .changelog li {
@@ -6646,27 +6658,54 @@ h2.nav-tab-wrapper {
 	margin-left: 3em;
 }
 
-@media only screen and (max-width: 900px) {
-	.about-wrap .feature-section.images-stagger-left img,
-	.about-wrap .feature-section.images-stagger-right img {
-		clear: both;
-	}
+/* Icons to replace images. */
+
+.about-wrap .feature-section .col-2 img,
+.about-wrap .feature-section.two-col p img {
+	display: none;
 }
 
-@media only screen and (max-width: 768px) {
-	.about-wrap .feature-section img.image-66 {
-		float: none;
-		width: 98%;
-		max-width: 98%;
-	}
+.about-wrap .feature-section .col-2:before,
+.about-wrap .feature-section .col-2:after,
+.about-wrap .feature-section.two-col p:before {
+	display: inline-block;
+	position: relative;
+	font: normal 50px/125px 'dashicons';
+	speak: none;
+	content: '\f147';
+	-webkit-font-smoothing: antialiased;
+}
 
-	.about-wrap .feature-section.images-stagger-right img.image-66 {
-		margin-left: 3px;
-	}
+.about-wrap .feature-section .col-2:before {
+	width: 100%;
+}
 
-	.about-wrap .feature-section.images-stagger-left img.image-66 {
-		margin-right: 3px;
-	}
+.about-wrap .feature-section .col-2:after {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	font-size: 170px;
+	line-height: 125px;
+	content: '\f113';
+}
+
+.about-wrap .feature-section.two-col p:before {
+	float: right;
+	top: -25px;
+	font-size: 130px;
+	line-height: 1;
+	content: '\f179';
+}
+
+.about-wrap .feature-section.two-col .last-feature p:before {
+	top: -15px;
+	font-size: 110px;
+	content: '\f319';
+}
+
+.about-wrap .about-passwords .feature-section.two-col p:before {
+	content: '';
 }
 
 /* Return to Dashboard Home link */
@@ -6674,7 +6713,7 @@ h2.nav-tab-wrapper {
 .about-wrap .return-to-dashboard {
 	margin: 30px 0 0 -5px;
 	font-size: 14px;
-	font-weight: 600;
+	font-weight: bold;
 }
 
 .about-wrap .return-to-dashboard a {
@@ -6691,7 +6730,7 @@ h2.nav-tab-wrapper {
 
 .about-wrap ul.wp-people-group {
 	overflow: hidden;
-	padding: 5px;
+	padding: 0 5px;
 	margin: 0 -15px 0 -5px;
 }
 
@@ -6753,7 +6792,7 @@ h2.nav-tab-wrapper {
 
 .freedoms-php .about-wrap ol li {
 	list-style-type: decimal;
-	font-weight: 600;
+	font-weight: bold;
 }
 
 .freedoms-php .about-wrap ol p {
@@ -8990,19 +9029,36 @@ h3.tb {
 	margin-right: 0 !important;
 }
 
-.js .sidebar-name:hover .sidebar-name-arrow:before,
-.js .meta-box-sortables .postbox:hover .handlediv:before {
+/* Metabox collapse arrow indicators */
+.js .sidebar-name .sidebar-name-arrow:before,
+.js .meta-box-sortables .postbox .handlediv:before {
 	right: 12px;
-	content: '\f142';
 	font: normal 20px/1 'dashicons';
 	speak: none;
 	display: inline-block;
 	padding: 8px 10px;
-	color: #888;
 	top: 0;
 	position: relative;
 	-webkit-font-smoothing: antialiased;
 	text-decoration: none !important;
+}
+
+/* Make the tiny arrow visible on the widgets page at all times */
+.js .widgets-holder-wrap .sidebar-name .sidebar-name-arrow:before {
+	color: rgba(136,136,136,.4);
+}
+.js .widgets-holder-wrap .sidebar-name .sidebar-name-arrow:before {
+	content: '\f142';
+}
+.js .widgets-holder-wrap.closed .sidebar-name .sidebar-name-arrow:before {
+	content: '\f140';
+}
+
+/* Show the arrow only on hover */
+.js .sidebar-name:hover .sidebar-name-arrow:before,
+.js .meta-box-sortables .postbox:hover .handlediv:before {
+	content: '\f142';
+	color: #888;
 }
 
 .js .widgets-holder-wrap.closed:hover .sidebar-name-arrow:before,
@@ -9558,6 +9614,7 @@ a.widget-action {
 	line-height: 1;
 	overflow: hidden;
 	white-space: nowrap;
+	text-overflow: ellipsis;
 }
 
 .widgets-sortables {

@@ -27,8 +27,6 @@
 				.on( 'activate.moby6', function() { _self.activate(); } )
 				.on( 'deactivate.moby6', function() { _self.deactivate(); } );
 
-			// Remove browser chrome
-			window.scrollTo( 0, 1 );
 
 			// Trigger custom events based on active media query.
 			this.matchMedia();
