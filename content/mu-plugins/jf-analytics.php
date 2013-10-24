@@ -18,6 +18,11 @@ function jf_head() {
 	?>
 	<meta name="msvalidate.01" content="7F45AEBECE60DA943AD0E712BD3BDBD6" />
 	<?php
+
+	// Add the tag that validates with Google Webmaster Tools
+	?>
+	<meta name="google-site-verification" content="rPLtSyhW-8YGAT9US8ogGbuLnSPzOfoXfZar6n6t1zA" />
+	<?php
 }
 
 /**

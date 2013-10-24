@@ -51,49 +51,49 @@ Last merged revision: 24545
 }
 
 /* These are part of TinyMCE, used in TinyMCE Advanced, but not WordPress. These are not MP6-ified.  */
-.wp_themeSkin .mce_sup,
-.wp_themeSkin .mce_sub,
-.wp_themeSkin .mce_media,
-.wp_themeSkin .mce_styleprops,
-.wp_themeSkin .mce_search,
-.wp_themeSkin .mce_emotions,
-.wp_themeSkin .mce_print,
-.wp_themeSkin .mce_attribs,
-.wp_themeSkin .mce_hr,
-.wp_themeSkin .mce_cut,
-.wp_themeSkin .mce_copy,
-.wp_themeSkin .mce_paste,
-.wp_themeSkin .mce_cite,
-.wp_themeSkin .mce_visualchars,
-.wp_themeSkin .mce_advhr,
-.wp_themeSkin .mce_insertdate,
-.wp_themeSkin .mce_anchor,
-.wp_themeSkin .mce_visualaid,
-.wp_themeSkin .mce_cleanup,
-.wp_themeSkin .mce_table,
-.wp_themeSkin .mce_row_props,
-.wp_themeSkin .mce_cell_props,
-.wp_themeSkin .mce_row_before,
-.wp_themeSkin .mce_row_after,
-.wp_themeSkin .mce_delete_row,
-.wp_themeSkin .mce_col_before,
-.wp_themeSkin .mce_col_after,
-.wp_themeSkin .mce_delete_col,
-.wp_themeSkin .mce_split_cells,
-.wp_themeSkin .mce_merge_cells,
-.wp_themeSkin .mce_delete_table,
-.wp_themeSkin .mce_ins,
-.wp_themeSkin .mce_abbr,
-.wp_themeSkin .mce_acronym,
-.wp_themeSkin .mce_del,
-.wp_themeSkin .mce_replace,
-.wp_themeSkin .mce_code,
-.wp_themeSkin .mce_nonbreaking,
-.wp_themeSkin .mce_inserttime,
-.wp_themeSkin .mce_insertlayer,
-.wp_themeSkin .mce_moveforward,
-.wp_themeSkin .mce_movebackward,
-.wp_themeSkin .mce_absolute
+.wp_themeSkin span.mce_sup,
+.wp_themeSkin span.mce_sub,
+.wp_themeSkin span.mce_media,
+.wp_themeSkin span.mce_styleprops,
+.wp_themeSkin span.mce_search,
+.wp_themeSkin span.mce_emotions,
+.wp_themeSkin span.mce_print,
+.wp_themeSkin span.mce_attribs,
+.wp_themeSkin span.mce_hr,
+.wp_themeSkin span.mce_cut,
+.wp_themeSkin span.mce_copy,
+.wp_themeSkin span.mce_paste,
+.wp_themeSkin span.mce_cite,
+.wp_themeSkin span.mce_visualchars,
+.wp_themeSkin span.mce_advhr,
+.wp_themeSkin span.mce_insertdate,
+.wp_themeSkin span.mce_anchor,
+.wp_themeSkin span.mce_visualaid,
+.wp_themeSkin span.mce_cleanup,
+.wp_themeSkin span.mce_table,
+.wp_themeSkin span.mce_row_props,
+.wp_themeSkin span.mce_cell_props,
+.wp_themeSkin span.mce_row_before,
+.wp_themeSkin span.mce_row_after,
+.wp_themeSkin span.mce_delete_row,
+.wp_themeSkin span.mce_col_before,
+.wp_themeSkin span.mce_col_after,
+.wp_themeSkin span.mce_delete_col,
+.wp_themeSkin span.mce_split_cells,
+.wp_themeSkin span.mce_merge_cells,
+.wp_themeSkin span.mce_delete_table,
+.wp_themeSkin span.mce_ins,
+.wp_themeSkin span.mce_abbr,
+.wp_themeSkin span.mce_acronym,
+.wp_themeSkin span.mce_del,
+.wp_themeSkin span.mce_replace,
+.wp_themeSkin span.mce_code,
+.wp_themeSkin span.mce_nonbreaking,
+.wp_themeSkin span.mce_inserttime,
+.wp_themeSkin span.mce_insertlayer,
+.wp_themeSkin span.mce_moveforward,
+.wp_themeSkin span.mce_movebackward,
+.wp_themeSkin span.mce_absolute
 {
 	-moz-transition: none;
 	-webkit-transition: none;
@@ -736,6 +736,9 @@ span.mce_wp_help:before {
 span.mce_image:before {
 	content: '\f104';
 }
+span.mce_ltr:before {
+	content: '\f320';
+}
 
 
 /* Theme */
@@ -1078,6 +1081,17 @@ span.mce_image:before {
 	position: relative;
 }
 
+#wp-content-editor-tools {
+	position: relative;
+	z-index: 1;
+}
+
+#wp-content-editor-container {
+	clear: both;
+	position: relative;
+	top: -1px;
+}
+
 .wp-editor-area {
 	font-family: Consolas, Monaco, monospace;
 	font-size: 13px;
@@ -1160,6 +1174,13 @@ html[dir="rtl"] .wp-switch-editor {
 	margin-bottom: 4px;
 	padding-left: 7px;
 	padding-right: 7px;
+}
+
+.wp-media-buttons .button:active {
+	position: relative;
+	top: 1px;
+	margin-top: -1px;
+	margin-bottom: 1px;
 }
 
 .rtl .wp-media-buttons .button {

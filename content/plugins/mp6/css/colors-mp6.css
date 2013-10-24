@@ -110,6 +110,38 @@ input[type=radio]:checked:before {
 	color: #2ea2cc;
 }
 
+
+/* Helper classes for pulling MP6 colors */
+
+.mp6-primary {
+	color: #fff;
+	background-color: #333;
+}
+.mp6-text-primary {
+	color: #333;
+}
+
+.mp6-highlight {
+	color: white;
+	background-color: #1e8cbe;
+}
+.mp6-text-highlight {
+	color: #1e8cbe;
+}
+
+.mp6-notification {
+	color: #fff;
+	background-color: #D54E21;
+}
+.mp6-text-notification {
+	color: #D54E21;
+}
+
+.mp6-text-icon {
+	color: #999;
+}
+
+
 #adminmenu .wp-has-current-submenu .wp-submenu,
 .no-js li.wp-has-current-submenu:hover .wp-submenu,
 #adminmenu a.wp-has-current-submenu:focus + .wp-submenu,
@@ -126,14 +158,21 @@ input[type=radio]:checked:before {
 	color: #bbb;
 }
 
+#adminmenu .wp-submenu a:hover,
+#adminmenu .wp-submenu a:focus,
 #adminmenu .wp-has-current-submenu .wp-submenu a:hover,
-.no-js li.wp-has-current-submenu:hover .wp-submenu a:hover,
+#adminmenu .wp-has-current-submenu .wp-submenu a:focus,
 #adminmenu a.wp-has-current-submenu:focus + .wp-submenu a:hover,
 #adminmenu .wp-has-current-submenu .wp-submenu.sub-open a:hover,
+#adminmenu .wp-has-current-submenu .wp-submenu.sub-open a:focus,
 #adminmenu .wp-has-current-submenu.opensub .wp-submenu a:hover,
-#adminmenu .wp-submenu a:hover,
+#adminmenu .wp-has-current-submenu.opensub .wp-submenu a:focus,
+.no-js li.wp-has-current-submenu:hover .wp-submenu a:hover,
+.no-js li.wp-has-current-submenu:hover .wp-submenu a:focus,
 .folded #adminmenu a.wp-has-current-submenu:focus + .wp-submenu a:hover,
-.folded #adminmenu .wp-has-current-submenu .wp-submenu a:hover {
+.folded #adminmenu a.wp-has-current-submenu:focus + .wp-submenu a:focus,
+.folded #adminmenu .wp-has-current-submenu .wp-submenu a:hover,
+.folded #adminmenu .wp-has-current-submenu .wp-submenu a:focus {
 	background: none;
 	color: #2ea2cc;
 }
@@ -319,9 +358,15 @@ select:focus {
 	border-color: #aaa;
 }
 
+input:disabled,
 input.disabled,
+textarea:disabled,
 textarea.disabled {
-	background-color: #ccc;
+	-webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.04);
+	box-shadow: inset 0 1px 2px rgba(0,0,0,0.04);
+	border-color: rgba(222, 222, 222, .75);
+	background: rgba(255, 255, 255, .5);
+	color: rgba(51, 51, 51, .5);
 }
 
 #plugin-information .action-button a,
@@ -359,8 +404,8 @@ h3.dashboard-widget-title small,
 .js .control-section .accordion-section-title:hover,
 .js .control-section.open .accordion-section-title,
 .js .control-section .accordion-section-title:focus {
-	background: #0074a2;
-	border-color: #0074a2 !important;
+//	background: #0074a2;
+//	border-color: #0074a2 !important;
 }
 
 .widefat tfoot th {
@@ -725,9 +770,15 @@ a,
 .ui-tabs-nav a,
 .plugins .inactive a {
 	color: #0074a2;
-	-moz-transition: all .1s ease-in-out;
-	-webkit-transition: all .1s ease-in-out;
-	transition: all .1s ease-in-out;
+	-moz-transition-property: border, background, color;
+	-moz-transition-duration: .05s;
+	-moz-transition-timing-function: ease-in-out;
+	-webkit-transition-property: border, background, color;
+	-webkit-transition-duration: .05s;
+	-webkit-transition-timing-function: ease-in-out;
+	transition-property: border, background, color;
+	transition-duration: .05s;
+	transition-timing-function: ease-in-out;
 }
 
 .wp-list-table a,
@@ -929,8 +980,19 @@ a.post-format-icon:hover:before {
 	background-color: #f4f4f4;
 }
 
-#the-comment-list .unapproved {
-	background-color: #ffffe0;
+#the-comment-list .unapproved th,
+#the-comment-list .unapproved td,
+#dashboard_recent_comments #the-comment-list .unapproved {
+	background-color: #fefaf7;
+}
+
+#the-comment-list .unapproved th.check-column,
+#dashboard_recent_comments #the-comment-list .unapproved {
+	border-left: 4px solid #d54e21;
+}
+
+#dashboard_recent_comments #the-comment-list .unapproved .avatar {
+	margin-left: -4px;
 }
 
 #the-comment-list .approve a {
@@ -939,6 +1001,27 @@ a.post-format-icon:hover:before {
 
 #the-comment-list .unapprove a {
 	color: #d98500;
+}
+
+#the-comment-list th,
+#the-comment-list td {
+	-webkit-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+	box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+}
+
+#the-comment-list tr:last-child th,
+#the-comment-list tr:last-child td {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+#the-comment-list tr.unapproved + tr.approved th,
+#the-comment-list tr.unapproved + tr.approved td {
+    border-top: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+.comments #the-comment-list .alt {
+	background-color: transparent;
 }
 
 .welcome-panel p {
@@ -959,7 +1042,6 @@ a.post-format-icon:hover:before {
 
 .widget,
 #available-widgets .widget-top,
-.menu-item-handle,
 .menu-item-settings,
 .postbox,
 #menu-settings-column .accordion-container,
@@ -1006,23 +1088,17 @@ p.popular-tags,
 	background: #fff;
 }
 
-.postbox h3 {
+.postbox h3,
+#namediv h3,
+#submitdiv h3,
+#dashboard_recent_comments .comment {
 	color: #555;
 	border-bottom: 1px solid #eeeeee;
 }
 
 .widget .widget-top,
 .menu-item-handle {
-	background: #0074a2;
-	color: #fff;
-	border: none !important;
-}
-
-#widget-list .widget .widget-top,
-#wp_inactive_widgets .widget .widget-top,
-.menu-item-handle,
-.deleting .widget-top {
-	background: #ddd;
+	background: #e9e9e9;
 	color: #333;
 }
 
@@ -1185,7 +1261,7 @@ table.widefat .spam a:hover,
 
 .widget-inside,
 .menu-item-settings {
-	background: #fcfcfc;
+	background: #eee;
 }
 
 #titlediv #title {
@@ -1274,7 +1350,10 @@ table.widefat .spam a:hover,
 
 #adminmenu .wp-submenu li.current,
 #adminmenu .wp-submenu li.current a,
-#adminmenu .wp-submenu li.current a:hover {
+#adminmenu .opensub .wp-submenu li.current a,
+#adminmenu a.wp-has-current-submenu:focus + .wp-submenu li.current a,
+#adminmenu .wp-submenu li.current a:hover,
+#adminmenu .wp-submenu li.current a:focus {
 	color: #fff;
 	background: transparent;
 }
@@ -1619,17 +1698,13 @@ div.widgets-sortables,
 }
 
 .in-widget-title,
-#widgets-right .widget-top a.widget-control-edit {
-	color: #fff;
-	color: rgba(255,255,255,0.7);
+#widgets-right .widget-top a.widget-control-edit,
+#wp_inactive_widgets .in-widget-title {
+	color: #777;
 }
 
 #widgets-right .widget-top a.widget-control-edit:hover {
 	color: #fff;
-}
-
-#wp_inactive_widgets .in-widget-title {
-	color: #666;
 }
 
 .deleting .widget-title,
@@ -1724,11 +1799,8 @@ div.widgets-sortables,
 	color: #0074a2;
 }
 
-.nav-menus-php .item-edit:after,
-.widget-top a.widget-action:after,
-.control-section .accordion-section-title::after,
-.accordion-section-title::after {
-	color: #fff;
+.widget-top a.widget-action:after {
+	color: #333;
 }
 
 #wp_inactive_widgets .widget .widget-top a.widget-action {
@@ -1745,11 +1817,16 @@ div.widgets-sortables,
 	color: #888;
 }
 
-.control-section.open .accordion-section-title::after,
-.control-section:focus .accordion-section-title::after,
-.control-section:hover .accordion-section-title::after,
-.accordion-section-title::after {
-	color: #fff;
+.nav-menus-php .control-section .accordion-section-title {
+	background: #fff;
+}
+
+.nav-menus-php .control-section:hover .accordion-section-title,
+.nav-menus-php .control-section .accordion-section-title:hover,
+.nav-menus-php .control-section.open .accordion-section-title,
+.nav-menus-php .control-section .accordion-section-title:focus{
+	color: #555;
+	background: #f5f5f5;
 }
 
 /* Menu editing */
@@ -1867,6 +1944,12 @@ h2.nav-tab-wrapper, h3.nav-tab-wrapper {
 .about-wrap .feature-section img {
 	background: #fff;
 	border-color: #ccc;
+}
+
+.about-wrap .feature-section .col-2:before,
+.about-wrap .feature-section .col-2:after,
+.about-wrap .feature-section.two-col p:before {
+	color: #1e8cbe;
 }
 
 .about-wrap .point-releases {
@@ -2089,7 +2172,8 @@ body.login {
 }
 
 /* Flyout Menu Arrow */
-.rtl #adminmenu li.wp-has-submenu.wp-not-current-submenu:hover:after {
+.rtl #adminmenu li.wp-has-submenu.wp-not-current-submenu:hover:after,
+.rtl #adminmenu li.wp-has-submenu.wp-not-current-submenu.opensub:hover:after {
 	border-right-color: transparent;
 	border-left-color: #333;
 }
@@ -2110,10 +2194,22 @@ body.login {
 	border-left: none;
 	border-right: 4px solid #2ea2cc;
 }
+
 .rtl .plugins .update th.check-column,
 .rtl tr.plugin-update-tr .plugin-update {
 	border-left: none;
 	border-right: 4px solid #d54e21;
+}
+
+.rtl #the-comment-list .unapproved th.check-column,
+.rtl #dashboard_recent_comments #the-comment-list .unapproved {
+    border-left: none;
+    border-right: 4px solid #d54e21;
+}
+
+.rtl #dashboard_recent_comments #the-comment-list .unapproved .avatar {
+	margin-left: 10px;
+    margin-right: -4px;
 }
 
 

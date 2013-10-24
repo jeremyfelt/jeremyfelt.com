@@ -19,7 +19,7 @@
 
 		init : function() {
 
-			this.adminMenu = $( '#adminmenu' );
+			this.selector = $( '#adminmenu .wp-menu-image, #wpadminbar .ab-item' );
 
 			this.setColors();
 			this.findElements();
@@ -39,7 +39,7 @@
 
 		findElements : function() {
 
-			this.adminMenu.find( '.wp-menu-image' ).each(function() {
+			this.selector.each(function() {
 
 				var bgimg = $(this).css( 'background-image' );
 
@@ -54,30 +54,29 @@
 		paint : function() {
 
 			// loop through all elements
-			for ( var key in this.elements ) {
+			$.each( this.elements, function( index, $element ) {
 
-				var $element = this.elements[key];
-				var $parent = $element.parent();
+				var $menuitem = $element.parent().parent();
 
-				if ( $parent.hasClass( 'current' ) || $parent.hasClass( 'wp-has-current-submenu' ) ) {
+				if ( $menuitem.hasClass( 'current' ) || $menuitem.hasClass( 'wp-has-current-submenu' ) ) {
 
 					// paint icon in 'current' color
-					this.paintElement( $element, this.colorscheme.icons.current );
+					svgPainter.paintElement( $element, svgPainter.colorscheme.icons.current );
 
 				} else {
 
 					// paint icon in base color
-					this.paintElement( $element, this.colorscheme.icons.base );
+					svgPainter.paintElement( $element, svgPainter.colorscheme.icons.base );
 
 					// set hover callbacks
-					$parent.hover(
+					$menuitem.hover(
 						function() { svgPainter.paintElement( $element, svgPainter.colorscheme.icons.focus ); },
 						function() { svgPainter.paintElement( $element, svgPainter.colorscheme.icons.base ); }
 					);
 
 				}
 
-			}
+			});
 
 		},
 
@@ -91,13 +90,15 @@
 
 			if ( ! xml ) {
 
-				var bgimg = $element.css( 'background-image' );
-				var base64 = bgimg.match( /.+base64,(.+)\)/ )[1];
+				var base64 = $element.css( 'background-image' ).match( /.+data:image\/svg\+xml;base64,(.+)\)/ );
+
+				if ( ! base64 )
+					return;
 
 				try {
-					var xml = window.atob( base64 );
-				} catch (e) {
-					var xml = $.base64.atob( base64 );
+					var xml = window.atob( base64[1] );
+				} catch ( e ) {
+					var xml = $.base64.atob( base64[1] );
 				}
 
 				// replace `fill` attributes
