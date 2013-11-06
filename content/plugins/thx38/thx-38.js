@@ -1,3 +1,6 @@
+/* jshint devel:true */
+/* global Backbone, _, _THX38 */
+
 ( function($) {
 
 	// Set up our namespace...
@@ -7,7 +10,7 @@
 	// Set ups shortcuts to regularly used checks
 	thx.Data = _THX38;
 	// Shortcut for (bool) isBrowsing check
-	thx.browsing = thx.Data.settings['isBrowsing'];
+	thx.browsing = thx.Data.settings.isBrowsing;
 
 	thx.Theme = Backbone.Model.extend({});
 
@@ -52,8 +55,9 @@
 		render: function() {
 			// If this is a browsing view bypass all the rest of the render function
 			// by returning the specific renderBrowsing function
-			if ( thx.browsing )
+			if ( thx.browsing ) {
 				return this.install();
+			}
 
 			// Setups the main theme view
 			// with the current theme collection
@@ -72,8 +76,9 @@
 		// Search input and view
 		// for current theme collection
 		search: function() {
-			var self = this,
-				view;
+			var view,
+				self = this;
+
 			view = new thx.Search({ collection: self.collection });
 
 			// Render and append after screen title
@@ -105,17 +110,19 @@
 			threshold = self.$el.offset().top + self.$el.outerHeight( false ) - self.window.height();
 			threshold = Math.round( threshold * 0.9 );
 
-			if ( bottom > threshold )
+			if ( bottom > threshold ) {
 				this.trigger( 'theme:scroll' );
+			}
 		},
 
+		// Enters edit mode that allows easy access to deleting themes
 		editMode: function() {
 			$( 'body' ).toggleClass( 'edit-mode' );
 			this.$el.find( '.themes-bulk-edit' ).toggleClass( 'mp6-text-highlight' );
 		},
 
 		deleteTheme: function() {
-			return confirm( thx.Data.settings['confirmDelete'] );
+			return confirm( thx.Data.settings.confirmDelete );
 		}
 	});
 
@@ -131,7 +138,6 @@
 		// Controls searching on the current theme collection
 		// and triggers an update event
 		doSearch: function( value ) {
-			var results;
 
 			// Updates terms with the value passed
 			this.terms = value;
@@ -232,8 +238,9 @@
 
 			// Prevent the modal from showing when the user clicks
 			// one of the direct action buttons
-			if ( $( event.target ).is( '.theme-actions a, .delete-theme' ) )
+			if ( $( event.target ).is( '.theme-actions a, .delete-theme' ) ) {
 				return;
+			}
 
 			this.trigger( 'theme:expand', self.model.cid );
 		}
@@ -248,7 +255,9 @@
 
 		events: {
 			'click': 'collapse',
-			'click .delete-theme': 'deleteTheme'
+			'click .delete-theme': 'deleteTheme',
+			'click .left': 'previousTheme',
+			'click .right': 'nextTheme'
 		},
 
 		// The HTML template for the theme overlay
@@ -288,7 +297,7 @@
 			// Detect if the click is inside the overlay
 			// and don't close it unless the target was
 			// the div.back button
-			if ( $( event.target ).is( '.theme-backdrop' ) || $( event.target ).is( 'div.back' ) ) {
+			if ( $( event.target ).is( '.theme-backdrop' ) || $( event.target ).is( 'div.back' ) || event.keyCode === 27 ) {
 
 				// Add a temporary closing class while overlay fades out
 				$( 'body' ).addClass( 'closing-overlay' );
@@ -320,13 +329,18 @@
 			$( 'body' ).on( 'keyup', function( event ) {
 
 				// Pressing the right arrow key fires a theme:next event
-				if ( event.keyCode == 39 ) {
+				if ( event.keyCode === 39 ) {
 					self.trigger( 'theme:next', self.model.cid );
 				}
 
 				// Pressing the left arrow key fires a theme:previous event
-				if ( event.keyCode == 37 ) {
+				if ( event.keyCode === 37 ) {
 					self.trigger( 'theme:previous', self.model.cid );
+				}
+
+				// Pressing the escape key closes the theme details panel
+				if ( event.keyCode === 27 ) {
+					self.collapse();
 				}
 			});
 		},
@@ -342,7 +356,7 @@
 		// Setups an image gallery using the theme screenshots supplied by a theme
 		screenshotGallery: function() {
 			var screenshots = $( '#theme-screenshots' ),
-				img;
+				current, img;
 
 			screenshots.find( 'div.first' ).next().addClass( 'selected' );
 
@@ -360,7 +374,17 @@
 
 		// Confirmation dialoge for deleting a theme
 		deleteTheme: function() {
-			return confirm( thx.Data.settings['confirmDelete'] );
+			return confirm( thx.Data.settings.confirmDelete );
+		},
+
+		nextTheme: function() {
+			var self = this;
+			self.trigger( 'theme:next', self.model.cid );
+		},
+
+		previousTheme: function() {
+			var self = this;
+			self.trigger( 'theme:previous', self.model.cid );
 		}
 	});
 
@@ -402,8 +426,7 @@
 		},
 
 		render: function() {
-			var self = this,
-				view, page;
+			var self = this;
 
 			// Clear the DOM, please
 			self.$el.html( '' );
@@ -423,12 +446,14 @@
 			self.instance = self.collection.paginate( page );
 
 			// If we have no more themes bail
-			if ( self.instance.length == 0 )
+			if ( self.instance.length === 0 ) {
 				return;
+			}
 
 			// Make sure the add-new stays at the end
-			if ( page >= 1 )
+			if ( page >= 1 ) {
 				$( '#add-new' ).remove();
+			}
 
 			// Loop through the themes and setup each theme view
 			self.instance.each( function( theme ) {
@@ -447,7 +472,7 @@
 			});
 
 			// 'Add new theme' element shown at the end of the grid
-			this.$el.append( '<div id="add-new" class="theme add-new"><a href="' + thx.Data.settings['install_uri'] + '"><div class="theme-screenshot"><span></span></div><h3 class="theme-name">' + thx.Data.i18n['add_new'] + '</h3></a></div>' );
+			this.$el.append( '<div id="add-new" class="theme add-new"><a href="' + thx.Data.settings.install_uri + '"><div class="theme-screenshot"><span></span></div><h3 class="theme-name">' + thx.Data.i18n['add_new'] + '</h3></a></div>' );
 
 			this.parent.page++;
 		},
@@ -474,8 +499,7 @@
 		// Renders the overlay with the ThemeDetails view
 		// Uses the current model data
 		expand: function( id ) {
-			var self = this,
-				slug, data, top, indexof, scroll;
+			var self = this;
 
 			// Set the current theme model
 			this.model = self.collection.get( id );
@@ -625,7 +649,7 @@
 
 			// Sets up the theme section titles
 			// using the passed option argument
-			self.$el.append( '<h3 class="theme-section">' + thx.Data.browse['sections'][ self.options.section ] + '</h3><div class="themes"></div>' );
+			self.$el.append( '<h3 class="theme-section">' + thx.Data.browse.sections[ self.options.section ] + '</h3><div class="themes"></div>' );
 
 			// Loop through the themes and setup each theme view
 			self.collection.each( function( theme ) {
@@ -691,8 +715,8 @@
 	thx.Routes = Backbone.Router.extend({
 
 		routes: {
-			"search/:query": "search",
-			"theme/:slug": "theme",
+			'search/:query': 'search',
+			'theme/:slug': 'theme',
 		},
 
 		// Set the search input value based on url
@@ -727,11 +751,11 @@
 
 				// Loop through the different theme sections
 				// and sets up each one of them to be rendered
-				for ( var section in thx.Data.browse['sections'] ) {
+				for ( var section in thx.Data.browse.sections ) {
 
 					// Create a new collection with the proper theme data
 					// for each section
-					self.themes = new thx.Themes( thx.Data.browse['publicThemes'][ section ]['themes'] );
+					self.themes = new thx.Themes( thx.Data.browse.publicThemes[ section ].themes );
 
 					// Set up the view
 					// Passes the 'section' as an option
@@ -749,7 +773,7 @@
 			// Calls the routes functionality
 			self.routes();
 			// Set ups history with pushState and our root
-			Backbone.history.start({ root: thx.Data.settings['root'] });
+			Backbone.history.start({ root: thx.Data.settings.root });
 		},
 
 		routes: function() {

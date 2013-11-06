@@ -3,7 +3,7 @@
 Plugin Name: THX_38
 Plugin URI:
 Description: THX stands for THeme eXperience. A plugin that rebels against their rigidly controlled themes.php in search for hopeful freedom in WordPress 3.8, or beyond. <strong>This is only for development work and the brave of heart, as it totally breaks themes.php</strong>.
-Version: 0.8.3
+Version: 0.9
 Author: THX_38 Team
 */
 
@@ -15,8 +15,8 @@ class THX_38 {
 		add_action( 'admin_print_scripts-themes.php', array( $this, 'enqueue' ) );
 
 		// Browse themes
-		//add_action( 'load-theme-install.php',  array( $this, 'install_themes_screen' ) );
-		//add_action( 'admin_print_scripts-theme-install.php', array( $this, 'enqueue' ) );
+		// add_action( 'load-theme-install.php',  array( $this, 'install_themes_screen' ) );
+		// add_action( 'admin_print_scripts-theme-install.php', array( $this, 'enqueue' ) );
 
 	}
 
@@ -32,16 +32,18 @@ class THX_38 {
 		if ( ! current_user_can( 'switch_themes' ) && ! current_user_can( 'edit_theme_options' ) )
 			wp_die( __( 'Cheatin&#8217; uh?' ) );
 
-		// Actions and messages
+		// Actions
 		self::get_actions();
-		self::update_messages();
 
 		// Admin header
 		require_once( ABSPATH . 'wp-admin/admin-header.php' );
 
+		// Display relevant messages
+		self::update_messages();
+
 		?>
 		<div id="appearance" class="wrap">
-			<h2><?php esc_html_e( 'Themes' ); ?><span id="theme-count" class="theme-count"></span><a href="<?php echo admin_url( 'theme-install.php' ); ?>" class="button button-secondary"><?php echo esc_html( _x( 'Add New', 'Add new theme' ) ); ?></a><span class="themes-bulk-edit"><span class="edit">Edit</span><span class="done">Done</span></span></h2>
+			<h2><?php esc_html_e( 'Themes' ); ?><span id="theme-count" class="theme-count"></span><a href="<?php echo admin_url( 'theme-install.php' ); ?>" class="add-new-h2"><?php echo esc_html( _x( 'Add New', 'Add new theme' ) ); ?></a><span class="add-new-h2 themes-bulk-edit"><span class="edit">Manage</span><span class="done">Done...</span></span></h2>
 		</div>
 		<?php
 
@@ -79,8 +81,8 @@ class THX_38 {
 				'authorURI'    => $theme->get( 'AuthorURI' ),
 				'version'      => $theme->Version,
 				'parent'       => self::display_parent_theme( $theme ),
-				'active'       => ( $slug == self::get_current_theme() ) ? true : NULL,
-				'hasUpdate'    => ( self::theme_update( $theme ) ) ? true : false,
+				'active'       => ( $slug == self::get_current_theme() ) ? true : null,
+				'hasUpdate'    => (bool) self::theme_update( $theme ),
 				'update'       => self::theme_update( $theme ),
 				'actions'      => array(
 					'activate' => wp_nonce_url( 'themes.php?action=activate&amp;template=' . urlencode( $theme->Template ) . '&amp;stylesheet=' . urlencode( $slug ), 'switch-theme_' . $slug ),
@@ -252,28 +254,28 @@ class THX_38 {
 		wp_localize_script( 'thx-38', '_THX38', array(
 			'themes'   => $this->get_themes(),
 			'settings' => array(
-				'isBrowsing' => ( get_current_screen()->id == 'theme-install' ) ? true : false,
-				'install_uri' => admin_url( 'theme-install.php' ),
-				'customizeURI' => ( current_user_can( 'edit_theme_options' ) ) ? wp_customize_url() : NULL,
+				'isBrowsing'    => (bool) ( get_current_screen()->id == 'theme-install' ),
+				'install_uri'   => admin_url( 'theme-install.php' ),
+				'customizeURI'  => ( current_user_can( 'edit_theme_options' ) ) ? wp_customize_url() : null,
 				'confirmDelete' => sprintf( __( "Are you sure you want to delete this theme?\n\nClick 'Cancel' to go back, 'OK' to confirm the delete." ) ),
-				'root' => apply_filters( 'thx_router_root', '/wp-admin/themes.php' ),
+				'root'          => apply_filters( 'thx_router_root', '/wp-admin/themes.php' ),
 			),
 			'i18n' => array(
-				'active' => __( 'Active Theme' ),
-				'add_new' => __( 'Add New Theme' ),
-				'customize' => __( 'Customize' ),
-				'activate' => __( 'Activate' ),
-				'preview' => __( 'Preview' ),
-				'delete' => __( 'Delete Theme' ),
+				'active'          => __( 'Current Theme' ),
+				'add_new'         => __( 'Add New Theme' ),
+				'customize'       => __( 'Customize' ),
+				'activate'        => __( 'Activate' ),
+				'preview'         => __( 'Preview' ),
+				'delete'          => __( 'Delete Theme' ),
 				'updateAvailable' => __( 'Update Available' ),
 			),
 			'browse' => array(
 				'sections' => apply_filters( 'thx_theme_sections', array(
 					'featured' => __( 'Featured Themes' ),
 					'popular'  => __( 'Popular Themes' ),
-					'new'   => __( 'Newest Themes' ),
+					'new'      => __( 'Newest Themes' ),
 				) ),
-				'publicThemes' => ( get_current_screen()->id == 'theme-install' ) ? $this->get_default_public_themes() : NULL,
+				'publicThemes' => ( get_current_screen()->id == 'theme-install' ) ? $this->get_default_public_themes() : null,
 			),
 		) );
 	}
@@ -495,6 +497,8 @@ class THX_38 {
 				<div class="theme-backdrop"></div>
 				<div class="theme-wrap">
 					<div alt="f158" class="back dashicons dashicons-no"></div>
+					<div alt="Show previous theme" class="left dashicons dashicons-no"></div>
+					<div alt="Show next theme" class="right dashicons dashicons-no"></div>
 
 					<div class="theme-screenshots" id="theme-screenshots">
 						<div class="screenshot first"><img src="<%= screenshot[0] %>" alt="" /></div>
