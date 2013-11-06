@@ -34,7 +34,7 @@ function wp_dashboard_activity() {
 
 	do_action( 'dashboard_activity_beginning' );
 
-	$future_posts = dash_show_published_posts( array(
+	$future_posts = dashboard_show_published_posts( array(
 		'display' => 2,
 		'max'     => 5,
 		'status'  => 'future',
@@ -42,7 +42,7 @@ function wp_dashboard_activity() {
 		'title'   => __( 'Publishing Soon' ),
 		'id'      => 'future-posts',
 	) );
-	$recent_posts = dash_show_published_posts( array(
+	$recent_posts = dashboard_show_published_posts( array(
 		'display' => 2,
 		'max'     => 5,
 		'status'  => 'publish',
@@ -53,7 +53,7 @@ function wp_dashboard_activity() {
 	
 	do_action( 'dashboard_activity_middle' );
 	
-	$recent_comments = dash_comments();
+	$recent_comments = dashboard_comments();
 	
 	if ( !$future_posts && !$recent_posts && !$recent_comments ) {
 		echo '<div class="no-activity">';
@@ -75,15 +75,19 @@ function wp_dashboard_activity() {
  * @since 3.8.0
  *
  */
-function dash_show_published_posts( $args ) {
+function dashboard_show_published_posts( $args ) {
 
-	$posts = new WP_Query(array(
+	$query_args = array(
 		'post_type'      => 'post',
 		'post_status'    => $args['status'],
 		'orderby'        => 'date',
 		'order'          => $args['order'],
-		'posts_per_page' => intval( $args['max'] )
-	));
+		'posts_per_page' => intval( $args['max'] ),
+		'no_found_rows'  => true,
+		'cache_results'  => false
+	);
+	$query_args = apply_filters( 'dash_show_published_posts_query_args', $query_args );
+	$posts = new WP_Query( $query_args );
 
 	if ( $posts->have_posts() ) {
 
@@ -103,7 +107,7 @@ function dash_show_published_posts( $args ) {
 			printf(
 				'<li%s><span>%s, %s</span> <a href="%s">%s</a></li>',
 				( $i >= intval ( $args['display'] ) ? ' class="hidden"' : '' ),
-				dash_relative_date( get_the_time( 'U' ) ),
+				dashboard_relative_date( get_the_time( 'U' ) ),
 				get_the_time(),
 				get_edit_post_link(),
 				get_the_title()
@@ -131,7 +135,7 @@ function dash_show_published_posts( $args ) {
  * @since 3.8.0
  *
  */
-function dash_comments( $total_items = 5 ) {
+function dashboard_comments( $total_items = 5 ) {
 	global $wpdb;
 
 	// Select all comment types and filter out spam later for better query performance.
@@ -189,7 +193,7 @@ function dash_comments( $total_items = 5 ) {
  * @since 3.8.0
  *
  */
-function dash_relative_date( $time ) {
+function dashboard_relative_date( $time ) {
 
 	$diff = floor( ( $time - time() ) / DAY_IN_SECONDS );
 

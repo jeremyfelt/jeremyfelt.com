@@ -1,5 +1,5 @@
 === Dashboard ===
-Contributors: lessbloat, joen, helen, dbernar1, kraftbj, ryelle, tillkruess, grapplerulrich
+Contributors: lessbloat, joen, helen, dbernar1, kraftbj, ryelle, tillkruess, grapplerulrich, Mamaduka, danielbachhuber
 Tags: dashboard, right now, dashboard widgets
 Requires at least: 3.7
 Tested up to: 3.7
@@ -19,3 +19,6 @@ Move a few things around.  Make it more actionable and relevant for users.
 
 = 0.2 =
 * Bulk of functionality is in
+
+= 0.3 =
+* Syncs up changes from Github account
