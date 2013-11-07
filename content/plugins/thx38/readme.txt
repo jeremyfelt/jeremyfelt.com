@@ -18,6 +18,9 @@ Discussions will happen at the WordPress make p2s. Check http://make.wordpress.o
 
 == Changelog ==
 
+= 0.9.1 =
+* Code cleanup preparing for merge with core.
+
 = 0.9 =
 * Adds arrow-links navigation to complement the arrow-keys.
 * Escape key closes the overlay.

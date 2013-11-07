@@ -1,25 +1,21 @@
-/* jshint devel:true */
-/* global Backbone, _, _THX38 */
+window.wp = window.wp || {};
 
 ( function($) {
 
 	// Set up our namespace...
-	var thx = thx || {};
+	var themes = wp.themes = wp.themes || {};
 
 	// Store the theme data and settings for organized and quick access
-	// Set ups shortcuts to regularly used checks
-	thx.Data = _THX38;
-	// Shortcut for (bool) isBrowsing check
-	thx.browsing = thx.Data.settings.isBrowsing;
+	// themes.data.settings, themes.data.themes, themes.data.i18n
+	themes.data = _THX38;
 
-	thx.Theme = Backbone.Model.extend({});
+	themes.model = Backbone.Model.extend({});
 
-	// Main view controller for themes.php and theme-install.php
+	// Main view controller for themes.php
 	// Unifies and renders all available views
 	//
 	// Hooks to #appearance and organizes the views to be rendered
-	// based on which screen we are currently viewing
-	thx.Appearance = Backbone.View.extend({
+	themes.Appearance = Backbone.View.extend({
 
 		// Set container
 		el: '#appearance',
@@ -53,15 +49,9 @@
 
 		// Main render control
 		render: function() {
-			// If this is a browsing view bypass all the rest of the render function
-			// by returning the specific renderBrowsing function
-			if ( thx.browsing ) {
-				return this.install();
-			}
-
-			// Setups the main theme view
+			// Setup the main theme view
 			// with the current theme collection
-			this.view = new thx.ThemesView({
+			this.view = new themes.ThemesView({
 				collection: this.collection,
 				parent: this
 			});
@@ -79,25 +69,11 @@
 			var view,
 				self = this;
 
-			view = new thx.Search({ collection: self.collection });
+			view = new themes.Search({ collection: self.collection });
 
 			// Render and append after screen title
 			view.render();
 			self.$el.find( '> h2' ).after( view.el );
-		},
-
-		// Handles all the rendering of the public theme directory
-		install: function() {
-			var self = this;
-
-			// Set ups the view and passes the section argument
-			self.view = new thx.BrowseThemesView({
-				collection: self.collection,
-				section: self.options.section
-			});
-			// Render and append
-			self.view.render();
-			self.$el.append( self.view.el );
 		},
 
 		// Checks when the user gets close to the bottom
@@ -122,15 +98,15 @@
 		},
 
 		deleteTheme: function() {
-			return confirm( thx.Data.settings.confirmDelete );
+			return confirm( themes.data.settings.confirmDelete );
 		}
 	});
 
 	// Set up the Collection for our theme data
 	// @has 'id' 'name' 'screenshot' 'author' 'authorURI' 'version' 'active' ...
-	thx.Themes = Backbone.Collection.extend({
+	themes.Themes = Backbone.Collection.extend({
 
-		model: thx.Theme,
+		model: themes.model,
 
 		// Search terms
 		terms: '',
@@ -150,7 +126,7 @@
 			// If search is blank, show all themes
 			// Useful for resetting the views when you clean the input
 			if ( this.terms === '' ) {
-				this.reset( thx.Data.themes );
+				this.reset( themes.data.themes );
 			}
 
 			// Trigger an 'update' event
@@ -163,7 +139,7 @@
 				match, results;
 
 			// Start with a full collection
-			self.reset( thx.Data.themes );
+			self.reset( themes.data.themes );
 
 			// The RegExp to match
 			match = new RegExp( term, 'i' );
@@ -193,7 +169,7 @@
 
 	// This is the view that controls each theme item
 	// that will be displayed on the screen
-	thx.ThemeView = Backbone.View.extend({
+	themes.ThemeView = Backbone.View.extend({
 
 		// Wrap theme data on a div.theme element
 		className: 'theme',
@@ -248,7 +224,7 @@
 
 	// Theme Details view
 	// Set ups a modal overlay with the expanded theme data
-	thx.ThemeDetails = Backbone.View.extend({
+	themes.ThemeDetails = Backbone.View.extend({
 
 		// Wrap theme data on a div.theme element
 		id: 'theme-overlay',
@@ -313,7 +289,7 @@
 					scroll = document.body.scrollTop;
 
 					// Clean the url structure
-					thx.router.navigate( '' );
+					themes.router.navigate( '' );
 
 					// Restore scroll position
 					document.body.scrollTop = scroll;
@@ -374,7 +350,7 @@
 
 		// Confirmation dialoge for deleting a theme
 		deleteTheme: function() {
-			return confirm( thx.Data.settings.confirmDelete );
+			return confirm( themes.data.settings.confirmDelete );
 		},
 
 		nextTheme: function() {
@@ -390,7 +366,7 @@
 
 	// Controls the rendering of div#themes,
 	// a wrapper that will hold all the theme elements
-	thx.ThemesView = Backbone.View.extend({
+	themes.ThemesView = Backbone.View.extend({
 
 		id: 'themes',
 
@@ -457,7 +433,7 @@
 
 			// Loop through the themes and setup each theme view
 			self.instance.each( function( theme ) {
-				self.theme = new thx.ThemeView({
+				self.theme = new themes.ThemeView({
 					model: theme
 				});
 
@@ -472,7 +448,7 @@
 			});
 
 			// 'Add new theme' element shown at the end of the grid
-			this.$el.append( '<div id="add-new" class="theme add-new"><a href="' + thx.Data.settings.install_uri + '"><div class="theme-screenshot"><span></span></div><h3 class="theme-name">' + thx.Data.i18n['add_new'] + '</h3></a></div>' );
+			this.$el.append( '<div id="add-new" class="theme add-new"><a href="' + themes.data.settings.install_uri + '"><div class="theme-screenshot"><span></span></div><h3 class="theme-name">' + themes.data.i18n['add_new'] + '</h3></a></div>' );
 
 			this.parent.page++;
 		},
@@ -505,14 +481,14 @@
 			this.model = self.collection.get( id );
 
 			// Trigger a route update for the current model
-			thx.router.navigate( 'theme/' + this.model.id );
+			themes.router.navigate( 'theme/' + this.model.id );
 
 			// Sets this.view to 'detail'
 			this.setView( 'detail' );
 			$( 'body' ).addClass( 'theme-overlay' );
 
 			// Set up the theme details view
-			this.overlay = new thx.ThemeDetails({
+			this.overlay = new themes.ThemeDetails({
 				model: self.model,
 				className: 'theme-' + self.model.id,
 			});
@@ -570,13 +546,13 @@
 				this.overlay.$el.html('');
 
 				// Create the view
-				this.nextTheme = new thx.ThemeDetails({
+				this.nextTheme = new themes.ThemeDetails({
 					model: nextModel,
 					className: 'theme-' + nextModel.id
 				});
 
 				// Trigger a route update for the current model
-				thx.router.navigate( 'theme/' + nextModel.id );
+				themes.router.navigate( 'theme/' + nextModel.id );
 
 				// Render and fill this.overlay with the new html
 				this.nextTheme.render();
@@ -606,13 +582,13 @@
 				this.overlay.$el.html( '' );
 
 				// Create the view
-				this.previousTheme = new thx.ThemeDetails({
+				this.previousTheme = new themes.ThemeDetails({
 					model: previousModel,
 					className: 'theme-' + previousModel.id,
 				});
 
 				// Trigger a route update for the current model
-				thx.router.navigate( 'theme/' + previousModel.id );
+				themes.router.navigate( 'theme/' + previousModel.id );
 
 				// Render and fill this.overlay with the new html
 				this.previousTheme.render();
@@ -625,67 +601,9 @@
 		}
 	});
 
-	// Renders the different Browse Themes sections
-	// Thse are submitted by the Data.browse['sections'] property
-	thx.BrowseThemesView = Backbone.View.extend({
-
-		className: 'theme-linear-grid',
-
-		initialize: function() {
-			var self = this;
-
-			// When the collection is updated by user input...
-			this.listenTo( self.collection, 'update', function() {
-				self.render( this );
-			});
-		},
-
-		render: function() {
-			var self = this,
-				view;
-
-			// Clear the DOM, please
-			self.$el.html( '' );
-
-			// Sets up the theme section titles
-			// using the passed option argument
-			self.$el.append( '<h3 class="theme-section">' + thx.Data.browse.sections[ self.options.section ] + '</h3><div class="themes"></div>' );
-
-			// Loop through the themes and setup each theme view
-			self.collection.each( function( theme ) {
-				view = new thx.ThemeView({
-					model: theme
-				});
-
-				// Render the views...
-				view.render();
-				// and append them to div#themes
-				self.$el.find( '.themes' ).append( view.el );
-			});
-
-			// 'Show more themes' element at the end of the stripe
-			self.$el.append( '<div class="show-more-themes"><span class="dashicons dashicons-arr-right"></span></div>' );
-			self.showMore();
-		},
-
-		// The show more button slides new themes into view
-		// It will trigger the Ajax calls to themes_api...
-		showMore: function() {
-			var self = this,
-				height;
-
-			// Adjusts the size of the 'show more' button based on screenshot size
-			// $( window ).on( 'load resize', function(){
-			// 	height = self.$el.height();
-			// 	$( '.show-more-themes' ).height( height );
-			// });
-		}
-
-	});
-
 	// Search input view controller
 	// renders #search-form
-	thx.Search = Backbone.View.extend({
+	themes.Search = Backbone.View.extend({
 
 		className: 'search-form',
 
@@ -712,7 +630,7 @@
 
 	// Sets up the routes events for relevant url queries
 	// Listens to [theme] and [search] params
-	thx.Routes = Backbone.Router.extend({
+	themes.Routes = Backbone.Router.extend({
 
 		routes: {
 			'search/:query': 'search',
@@ -726,69 +644,41 @@
 	});
 
 	// Execute and setup the application
-	thx.Run = {
+	themes.Run = {
 		init: function() {
 			var self = this;
 
 			// Initializes the blog's theme library view
-			//
-			// If it's the 'browsing themes' screen, render the directory instead
+			// Create a new collection with data
+			self.themes = new themes.Themes( themes.data.themes );
 
-			if ( ! thx.browsing ) {
+			// Set up the view
+			self.view = new themes.Appearance({
+				collection: self.themes
+			});
 
-				// Create a new collection with data
-				self.themes = new thx.Themes( thx.Data.themes );
-
-				// Set up the view
-				self.view = new thx.Appearance({
-					collection: self.themes
-				});
-
-				// Render results
-				self.view.render();
-
-			} else {
-
-				// Loop through the different theme sections
-				// and sets up each one of them to be rendered
-				for ( var section in thx.Data.browse.sections ) {
-
-					// Create a new collection with the proper theme data
-					// for each section
-					self.themes = new thx.Themes( thx.Data.browse.publicThemes[ section ].themes );
-
-					// Set up the view
-					// Passes the 'section' as an option
-					self.view = new thx.Appearance({
-						collection: self.themes,
-						section: section
-					});
-
-					// Render results
-					self.view.render();
-				}
-
-			}
+			// Render results
+			self.view.render();
 
 			// Calls the routes functionality
 			self.routes();
 			// Set ups history with pushState and our root
-			Backbone.history.start({ root: thx.Data.settings.root });
+			Backbone.history.start({ root: themes.data.settings.root });
 		},
 
 		routes: function() {
 			var self = this;
 			// Bind to our global thx object
 			// so that the object is available to sub-views
-			thx.router = new thx.Routes;
+			themes.router = new themes.Routes;
 
 			// Handles theme details route event
-			thx.router.on( 'route:theme', function( slug ) {
+			themes.router.on( 'route:theme', function( slug ) {
 				self.view.view.expand( slug );
 			});
 
 			// Handles search route event
-			thx.router.on( 'route:search', function( query ) {
+			themes.router.on( 'route:search', function( query ) {
 				self.themes.doSearch( query );
 			});
 		}
@@ -798,7 +688,7 @@
 	jQuery( document ).ready( function() {
 
 		// Bring on the themes
-		thx.Run.init();
+		themes.Run.init();
 
 	});
 

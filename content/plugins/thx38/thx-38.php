@@ -2,8 +2,8 @@
 /*
 Plugin Name: THX_38
 Plugin URI:
-Description: THX stands for THeme eXperience. A plugin that rebels against their rigidly controlled themes.php in search for hopeful freedom in WordPress 3.8, or beyond. <strong>This is only for development work and the brave of heart, as it totally breaks themes.php</strong>.
-Version: 0.9
+Description: THX stands for THeme eXperience. A plugin that rebels against their rigidly controlled themes.php in search for hopeful freedom in WordPress 3.8, or beyond.
+Version: 0.9.1
 Author: THX_38 Team
 */
 
@@ -13,10 +13,6 @@ class THX_38 {
 
 		add_action( 'load-themes.php',  array( $this, 'themes_screen' ) );
 		add_action( 'admin_print_scripts-themes.php', array( $this, 'enqueue' ) );
-
-		// Browse themes
-		// add_action( 'load-theme-install.php',  array( $this, 'install_themes_screen' ) );
-		// add_action( 'admin_print_scripts-theme-install.php', array( $this, 'enqueue' ) );
 
 	}
 
@@ -102,8 +98,7 @@ class THX_38 {
 	 * @return string theme slug
 	 */
 	protected function get_current_theme() {
-		$theme = wp_get_theme();
-		return $theme->stylesheet;
+		return get_stylesheet();
 	}
 
 	/**
@@ -115,7 +110,7 @@ class THX_38 {
 		if ( ! $theme->parent() )
 			return false;
 
-		$parent = sprintf( __( 'This is a Child Theme of <strong>%s</strong>.' ), $theme->parent()->Name );
+		$parent = sprintf( __( 'This is a Child Theme of <strong>%s</strong>.' ), $theme->parent()->display( 'Name' ) );
 		return $parent;
 	}
 
@@ -246,7 +241,7 @@ class THX_38 {
 	public function enqueue() {
 
 		// Relies on Backbone.js
-		wp_enqueue_script( 'thx-38', plugins_url( 'thx-38.js', __FILE__ ), array( 'backbone' ), '20130817', true );
+		wp_enqueue_script( 'thx-38', plugins_url( 'thx-38.js', __FILE__ ), array( 'wp-backbone' ), '20130817', true );
 		wp_enqueue_style( 'thx-38', plugins_url( 'thx-38.css', __FILE__ ), array(), '20130817', 'screen' );
 
 		// Passes the theme data and settings
@@ -254,7 +249,6 @@ class THX_38 {
 		wp_localize_script( 'thx-38', '_THX38', array(
 			'themes'   => $this->get_themes(),
 			'settings' => array(
-				'isBrowsing'    => (bool) ( get_current_screen()->id == 'theme-install' ),
 				'install_uri'   => admin_url( 'theme-install.php' ),
 				'customizeURI'  => ( current_user_can( 'edit_theme_options' ) ) ? wp_customize_url() : null,
 				'confirmDelete' => sprintf( __( "Are you sure you want to delete this theme?\n\nClick 'Cancel' to go back, 'OK' to confirm the delete." ) ),
@@ -268,14 +262,6 @@ class THX_38 {
 				'preview'         => __( 'Preview' ),
 				'delete'          => __( 'Delete Theme' ),
 				'updateAvailable' => __( 'Update Available' ),
-			),
-			'browse' => array(
-				'sections' => apply_filters( 'thx_theme_sections', array(
-					'featured' => __( 'Featured Themes' ),
-					'popular'  => __( 'Popular Themes' ),
-					'new'      => __( 'Newest Themes' ),
-				) ),
-				'publicThemes' => ( get_current_screen()->id == 'theme-install' ) ? $this->get_default_public_themes() : null,
 			),
 		) );
 	}
@@ -341,111 +327,17 @@ class THX_38 {
 		return apply_filters( 'thx_default_screenshot_uri', plugins_url( 'default.png', __FILE__ ) );
 	}
 
-	/**
-	 * The main template file for the theme-install.php screen
-	 *
-	 * Replaces entire contents of theme-install.php
-	 * @require admin-header.php and admin-footer.php
-	 */
-	function install_themes_screen() {
-
-		// Admin header
-		require_once( ABSPATH . 'wp-admin/admin-header.php' );
-		?>
-		<div id="appearance" class="wrap">
-			<h2><?php esc_html_e( 'Themes' ); ?><a href="<?php echo admin_url( 'themes.php' ); ?>" class="button button-secondary"><?php esc_html_e( 'Back to your themes' ); ?></a></h2>
-			<div class="theme-categories"><span><?php esc_html_e( 'Categories:' ); ?></span> <a href="" class="current">All</a> <a href="">Photography</a> <a href="">Magazine</a> <a href="">Blogging</a>
-		</div>
-		<?php
-
-		// Get the templates
-		self::public_theme_template();
-		self::search_template();
-		self::public_theme_single_template();
-
-		// Admin footer
-		require( ABSPATH . 'wp-admin/admin-footer.php');
-		exit;
-	}
-
-	/**
-	 * Array containing the supported directory sections
-	 *
-	 * @return array
-	 */
-	protected function themes_directory_sections() {
-		$sections = array(
-			'featured' => __( 'Featured Themes' ),
-			'popular'  => __( 'Popular Themes' ),
-			'new'      => __( 'Newest Themes' ),
-		);
-		return $sections;
-	}
-
-	/**
-	 * Gets public themes from the themes directory
-	 * Used to populate the initial views
-	 *
-	 * @uses themes_api themes_directory_sections
-	 * @return array with $theme objects
-	 */
-	protected function get_default_public_themes( $themes = array() ) {
-		$sections = self::themes_directory_sections();
-		$sections = array_keys( $sections );
-
-		$args = array(
-			'page' => 1,
-			'per_page' => 4,
-		);
-
-		foreach ( $sections as $section ) {
-			$args['browse'] = $section;
-			$themes[ $section ] = themes_api( 'query_themes', $args );
-		}
-
-		return $themes;
-	}
-
-	/**
-	 * Ajax request handler for public themes
-	 *
-	 * @uses get_public_themes
-	 */
-	public function ajax_puclic_themes() {
-		$colors = self::get_public_themes( $_REQUEST );
-		header( 'Content-Type: text/javascript' );
-		echo json_encode( $response );
-		die;
-	}
-
-	/**
-	 * Gets public themes from the themes directory
-	 *
-	 * @uses get_public_themes
-	 */
-	public function get_public_themes( $args = array() ) {
-		$defaults = array(
-			'page' => 1,
-			'per_page' => 4,
-			'browse' => 'new',
-		);
-
-		$args = wp_parse_args( $args, $defaults );
-		$themes = themes_api( 'query_themes', $args );
-		return $themes;
-	}
-
 
 	/**
 	 * These are the templates that will be used to render the final HTML
 	 *
 	 * ------------------------
-	 * Underscores.js Templates
+	 * Underscore.js Templates
 	 * ------------------------
 	 */
 
 	/**
-	 * Underscores template for rendering the Theme views
+	 * Underscore.js template for rendering the Theme views
 	 */
 	public function theme_template() {
 		?>
@@ -476,7 +368,7 @@ class THX_38 {
 	}
 
 	/**
-	 * Underscores template for search form
+	 * Underscore.js template for search form
 	 */
 	public function search_template() {
 		?>
@@ -487,7 +379,7 @@ class THX_38 {
 	}
 
 	/**
-	 * Underscores template for single Theme views
+	 * Underscore.js template for single Theme views
 	 * Displays full theme information, including description,
 	 * author, version, larger screenshots.
 	 */
@@ -541,47 +433,6 @@ class THX_38 {
 						<a href="<%= actions['delete'] %>" class="delete-theme"><%= _THX38.i18n['delete'] %></a>
 					<% } %>
 				</div>
-		</script>
-	<?php
-	}
-
-	/**
-	 * Underscores template for rendering the Theme views
-	 * on the browse directory
-	 */
-	public function public_theme_template() {
-		?>
-		<script id="public-theme-template" type="text/template">
-			<div class="theme-screenshot">
-				<img src="<%= screenshot_url %>" alt="" />
-			</div>
-			<h3 class="theme-name"><%= name %></h3>
-			<a class="button button-secondary preview"><?php esc_html_e( 'Install' ); ?></a>
-		</script>
-		<?php
-	}
-
-	/**
-	 * Underscores template for single Theme views from the public directory
-	 * Displays full theme information, including description,
-	 * author, version, larger screenshots.
-	 */
-	public function public_theme_single_template() {
-		?>
-		<script id="public-theme-single-template" type="text/template">
-			<div id="theme-overlay">
-				<h2 class="back button"><?php esc_html_e( 'Back to Themes' ); ?></h2>
-				<div class="theme-wrap">
-					<h3 class="theme-name"><%= name %><span class="theme-version"><%= version %></span></h3>
-					<h4 class="theme-author">By <%= author %></h4>
-
-					<div class="theme-screenshots" id="theme-screenshots">
-						<div class="screenshot first"><img src="<%= screenshot_url %>" alt="" /></div>
-					</div>
-
-					<p class="theme-description"><%= description %></p>
-				</div>
-			</div>
 		</script>
 	<?php
 	}
