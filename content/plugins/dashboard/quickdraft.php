@@ -30,6 +30,18 @@ add_action( 'wp_dashboard_setup', 'add_quickdraft_dashboard_widget' );
  *
  */
 function dashboard_plugin_quickdraft_admin_post() {
+	// Check nonce and capabilities
+	$nonce = $_REQUEST['_wpnonce'];
+	$error_msg = false;
+	if ( ! wp_verify_nonce( $nonce, 'add-post' ) )
+		$error_msg = 'Unable to submit this form, please refresh and try again.';
+		
+	if ( ! current_user_can( 'edit_posts' ) )
+		$error_msg = "Oops, you don't have access to add new drafts.";
+		
+	if ( $error_msg )
+		return wp_dashboard_quick_draft( $error_msg );
+		
 	$post = get_post( $_REQUEST['post_ID'] );
 	check_admin_referer( 'add-' . $post->post_type );
 	edit_post();
@@ -45,7 +57,7 @@ add_action( 'admin_post_new-quickdraft-post', 'dashboard_plugin_quickdraft_admin
  * @since 3.8.0
  *
  */
-function wp_dashboard_quick_draft() {
+function wp_dashboard_quick_draft( $error_msg=false ) {
 	global $post_ID;
 
 	/* Check if a new auto-draft (= no new post_ID) is needed or if the old can be used */
@@ -72,6 +84,11 @@ function wp_dashboard_quick_draft() {
 ?>
 
 	<form name="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="post" id="quick-press" class="initial-form">
+		
+		<?php if ($error_msg) : ?>
+		<div class="error"><?php _e( $error_msg ); ?></div>
+		<?php endif; ?>
+		
 		<div class="input-text-wrap" id="title-wrap">
 			<label class="screen-reader-text prompt" for="title" id="title-prompt-text"><?php _e( "What's on your mind?" ); ?></label>
 			<input type="text" name="post_title" id="title" autocomplete="off" />
@@ -107,18 +124,20 @@ function wp_dashboard_quick_draft() {
  * @since 3.8.0
  *
  */
-function wp_dashboard_recent_quickdrafts( $drafts = false ) {
-	if ( !$drafts ) {
-		$drafts_query = new WP_Query( array(
-			'post_type'      => 'post',
-			'post_status'    => 'draft',
-			'author'         => $GLOBALS['current_user']->ID,
-			'posts_per_page' => 4,
-			'orderby'        => 'modified',
-			'order'          => 'DESC'
-		) );
-		$drafts =& $drafts_query->posts;
-	}
+function wp_dashboard_recent_quickdrafts() {
+
+	$query_args = array(
+		'post_type'      => 'post',
+		'post_status'    => 'draft',
+		'author'         => $GLOBALS['current_user']->ID,
+		'posts_per_page' => 4,
+		'orderby'        => 'modified',
+		'order'          => 'DESC'
+	);
+	$query_args = apply_filters( 'dash_recent_quickdrafts_query_args', $query_args );
+	$drafts_query = new WP_Query( $query_args );
+	$drafts =& $drafts_query->posts;
+
 
 	if ( $drafts && is_array( $drafts ) ) {
 		$list = array();

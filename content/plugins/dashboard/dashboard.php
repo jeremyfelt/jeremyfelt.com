@@ -3,7 +3,7 @@
  * Description: Refresh WordPress dashboard screen
  * Author: Core Volunteers
  * Author URI: http://make.wordpress.org/ui/tag/dash/
- * Version: 0.2
+ * Version: 0.3
  * License: GPLv2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  */
@@ -12,7 +12,7 @@
 if ( !class_exists( 'Plugin_Dashboard' ) ) {
 	class Plugin_Dashboard {
 
-		const version = '0.2';
+		const version = '0.3';
 		static $instance;
 		private $screen;
 
