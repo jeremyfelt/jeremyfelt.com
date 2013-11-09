@@ -18,6 +18,20 @@ Discussions will happen at the WordPress make p2s. Check http://make.wordpress.o
 
 == Changelog ==
 
+= 0.9.1 =
+* Code cleanup preparing for merge with core.
+
+= 0.9 =
+* Adds arrow-links navigation to complement the arrow-keys.
+* Escape key closes the overlay.
+* Cleanup styling for current theme notice.
+* New dashicon for theme:hover.
+
+= 0.8.4 =
+* Updated styles for add-new and edit buttons.
+* Delete link on overlay is now red by default.
+* Simplify php logic with booleans.
+
 = 0.8.3 =
 * Fix incorrect display of template instead of child theme when a theme has a parent theme.
 * Adds a parent theme notice to the details views, and updates some styles.

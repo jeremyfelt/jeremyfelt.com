@@ -16,6 +16,7 @@
 	color: #999;
 	font-weight: 300;
 	margin-left: 10px;
+	margin-right: 20px;
 }
 /* Position admin messages */
 #appearance div.updated {
@@ -24,12 +25,35 @@
 #appearance div.updated a {
 	text-decoration: underline;
 }
+/* Add new theme */
+.add-new-h2 {
+	background: #e0e0e0;
+	color: #555;
+	margin-left: 20px;
+}
+.add-new-icon:hover {
+	background: #2ea2cc;
+}
+.add-new-h2:before {
+	content: '\f132';
+	display: inline-block;
+	font: normal 20px/1 'dashicons';
+	margin: 0 4px 0 -2px;
+	opacity: 0.8;
+	position: relative;
+		top: 6px;
+	speak: none;
+	-webkit-font-smoothing: antialiased;
+}
 /* Edit mode toggle */
 .themes-bulk-edit {
 	color: #555;
 	cursor: pointer;
-	font-size: 15px;
+	font-size: 14px;
 	margin-left: 20px;
+	padding: 4px 8px;
+	border: 1px solid #ddd;
+	display: none;
 }
 .themes-bulk-edit:before {
 	content: '\f111';
@@ -43,7 +67,12 @@
 	-webkit-font-smoothing: antialiased;
 }
 .themes-bulk-edit:hover {
-	color: #111;
+	border-color: #2ea2cc;
+	color: #2ea2cc;
+}
+.edit-mode .themes-bulk-edit {
+	background: #555;
+	color: #fff;
 }
 .edit-mode .themes-bulk-edit .edit,
 .themes-bulk-edit .done {
@@ -107,7 +136,7 @@
 	padding: 9px 10px 0 10px;
 	background: rgba(244, 244, 244, 0.7);
 	border-left: 1px solid rgba(0,0,0,0.05);
-	z-index: 20;
+	z-index: 10;
 }
 .theme:hover .theme-actions {
 	opacity: 1;
@@ -191,7 +220,7 @@ body.edit-mode .theme.add-new {
 .theme:after {
 	display: block;
 	opacity: 0;
-	content: '\f115';
+	content: '\f348';
 	-webkit-font-smoothing: antialiased;
 	font: normal 64px/1 'dashicons';
 	vertical-align: middle;
@@ -224,8 +253,8 @@ body.edit-mode .theme.add-new {
 	background: rgba(213, 78, 33, 0.95);
 	color: #fff;
 	display: block;
-	font-size: 14px;
-	font-weight: 300;
+	font-size: 13px;
+	font-weight: 400;
 	height: 48px;
 	line-height: 48px;
 	padding: 0 10px;
@@ -266,7 +295,7 @@ body.edit-mode .theme.add-new {
 .theme.active .theme-actions {
 	top: 0;
 	left: 0;
-	background: rgba(0,0,0,0.7);
+	background: #2f2f2f;
 	height: 48px;
 	opacity: 1;
 	line-height: 48px;
@@ -281,14 +310,16 @@ body.edit-mode .theme.add-new {
 	margin-top: 10px;
 }
 .theme.active .current-label {
-	font-size: 14px;
-	font-weight: 300;
-	color: #fff;
+	font-size: 13px;
+	font-weight: 400;
+	color: #ccc;
+	margin-left: 5px;
 }
 .theme.active .current-label:before {
 	color: #7ad03a;
 	content: '\f147';
 	display: inline-block;
+	display: none;
 	font: normal 24px/1 'dashicons';
 	margin: 0 4px 0 0;
 	position: relative;
@@ -444,8 +475,48 @@ body.theme-overlay {
 	font: normal 30px/48px 'dashicons' !important;
 	color: #bbb;
 	display: inline-block;
-	content:'\f158';
+	content: '\f335';
 	font-weight: 300;
+}
+/* Left and right navigation */
+#theme-overlay .right,
+#theme-overlay .left {
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	user-select: none;
+}
+#theme-overlay .left:before {
+	font: normal 16px/50px 'dashicons' !important;
+	color: #ccc;
+	display: inline-block;
+	content: '\f341';
+	font-weight: 300;
+}
+#theme-overlay .right:before {
+	font: normal 16px/50px 'dashicons' !important;
+	color: #ccc;
+	display: inline-block;
+	content: '\f345';
+	font-weight: 300;
+}
+#theme-overlay .right:hover:before,
+#theme-overlay .left:hover:before {
+	color: #444;
+}
+#theme-overlay .right:before,
+#theme-overlay .left:before {
+	cursor: pointer;
+	height: 48px;
+	position: absolute;
+		right: 70px;
+		top: 2px;
+	border-radius: 1px;
+	text-align: center;
+	width: 50px;
+}
+#theme-overlay .left:before {
+	right: 120px;
 }
 
 #theme-overlay .theme-wrap {
@@ -480,6 +551,9 @@ body.theme-overlay {
 	border-top: 1px solid rgba(0,0,0,0.1);
 	z-index: 30;
 }
+#theme-overlay.active .theme-actions {
+
+}
 #theme-overlay .theme-actions a {
 	margin-right: 5px;
 	font-size: 16px;
@@ -488,7 +562,8 @@ body.theme-overlay {
 	padding: 0 20px 1px 20px;
 }
 #theme-overlay .theme-actions .delete-theme {
-	color: #888;
+	border-radius: 2px;
+	color: #a00;
 	font-size: 14px;
 	padding: 0 10px;
 	position: absolute;
