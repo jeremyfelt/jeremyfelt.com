@@ -1,7 +1,7 @@
 === MP6 ===
 Contributors: matt, EmpireOfLight, melchoyce, isaackeyet, drw158, azaozz, helen, Joen, lessbloat, iammattthomas, saracannon, Viper007Bond, nickmomrik, apeatling, koopersmith, apeatling, tillkruess, mitchoyoshitaka
 Tags: iteration
-Requires at least: 3.6
+Requires at least: 3.7
 Tested up to: 6.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html

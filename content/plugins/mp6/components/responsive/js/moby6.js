@@ -3,6 +3,7 @@
 	'use strict';
 
 	window.moby6 = {
+
 		init: function() {
 			var _self = this;
 
@@ -24,9 +25,8 @@
 
 			// Modify functionality based on custom activate/deactivate event
 			this.$html
-				.on( 'activate.moby6', function() { _self.activate(); } )
-				.on( 'deactivate.moby6', function() { _self.deactivate(); } );
-
+				.on( 'activate.moby6', function() { moby6.activate(); } )
+				.on( 'deactivate.moby6', function() { moby6.deactivate(); } );
 
 			// Trigger custom events based on active media query.
 			this.matchMedia();
@@ -38,12 +38,12 @@
 			window.stickymenu && stickymenu.disable();
 
 			if ( ! moby6.$body.hasClass( 'auto-fold' ) )
-				this.$body.addClass( 'auto-fold' );
+				moby6.$body.addClass( 'auto-fold' );
 
 			$( document ).on( 'swiperight.moby6', function() {
-				this.$wpwrap.addClass( 'moby6-open' );
+				moby6.$wpwrap.addClass( 'moby6-open' );
 			}).on( 'swipeleft.moby6', function() {
-				this.$wpwrap.removeClass( 'moby6-open' );
+				moby6.$wpwrap.removeClass( 'moby6-open' );
 			});
 
 			this.modifySidebarEvents();
@@ -110,8 +110,6 @@
 			this.$toolbarPopups.off( 'click.moby6' );
 			this.$overlay.hide();
 		},
-
-
 
 		modifySidebarEvents: function() {
 			this.$body.off( '.wp-mobile-hover' );
@@ -181,10 +179,21 @@
 
 	}
 
+	// fire moby6.ini on when document is ready
 	$( document ).ready( $.proxy( moby6.init, moby6 ) );
+
+	// make Windows 8 devices playing along nicely
+	if ( '-ms-user-select' in document.documentElement.style && navigator.userAgent.match(/IEMobile\/10\.0/) ) {
+		var msViewportStyle = document.createElement( 'style' );
+		msViewportStyle.appendChild(
+			document.createTextNode( '@-ms-viewport{width:auto!important}' )
+		);
+		document.getElementsByTagName( 'head' )[0].appendChild( msViewportStyle );
+	}
 
 	/* Hamburger button view */
 	var Moby6HamburgerButton = Backbone.View.extend({
+
 		events: {
 			'click': 'toggleSidebar'
 		},
@@ -210,6 +219,7 @@
 			this.remove();
 			Backbone.View.prototype.remove.call( this );
 		}
+
 	});
 
 })( jQuery, window, document );

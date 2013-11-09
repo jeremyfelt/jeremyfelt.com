@@ -1,6 +1,10 @@
 /* Variables */
-$blue-bg: #0074a2;
-$blue-text: #2ea2cc;
+$bg: #EEE;
+$section-bg: #FFF;
+$text: #555;
+$alt-text: #666;
+$blue-bg: #2ea2cc;
+$blue-text: #0074a2;
 
 /* Mixins */
 @import "../../color-schemes/schemes/mixins";
@@ -25,7 +29,7 @@ body {
 	}
 
 	.description {
-		color: #dedede;
+		color: $alt-text;
 	}
 }
 
@@ -47,25 +51,28 @@ body {
 
 #customize-info {
 	border: none;
+	border-top: 1px solid #ddd;
 
 	.accordion-section-title {
-		color: #dedede;
-		border: none;
+		background-color: #fff;
+		color: $alt-text;
+		border-left: none;
+		border-right: none;
+		border-bottom: 1px solid $bg;
 	}
 
 	&.open .accordion-section-title,
 	.accordion-section-title:hover,
 	.accordion-section-title:focus {
-		color: #fff;
-		background: $blue-bg;
+		color: $text;
 
 		&:after {
-			color: #fff;
+			color: $text;
 		}
 	}
 
-	.accordion-section-content {
-		background: transparent;
+	&.open .accordion-section-title {
+		border-color: transparent;
 	}
 
 	.preview-notice {
@@ -86,39 +93,57 @@ body {
 
 	.theme-description {
 		margin-top: 1em;
-		color: #d4d4d4;
+		color: $alt-text;
 		line-height: 20px;
 	}
 }
 
 #customize-theme-controls {
+	-webkit-box-shadow: 0px 1px 1px -1px rgba(0, 0, 0, 0.1);
+	box-shadow: 0px 1px 1px -1px rgba(0, 0, 0, 0.1);
+
 	.control-section {
 		border: none;
 	}
 	
 	.accordion-section-title {
-		font-weight: normal;
-		color: #fff;
-		background: transparent;
-		border: none;
+		color: $text;
+		background-color: #fff;
+		border-bottom: 1px solid $bg;
 	}
 
 	.accordion-section-content {
-		color: #fff;
-		background: #333;
+		color: $text;
+		background: $section-bg;
 	}
 
 	.control-section:hover .accordion-section-title,
 	.control-section .accordion-section-title:hover,
 	.control-section.open .accordion-section-title,
 	.control-section .accordion-section-title:focus {
-		color: #fff;
-		background: $blue-bg;
+		color: $text;
+		background: #f5f5f5;
 		
 		&::after {
-			color: #fff;
+			color: $text;
 		}
 	}
+	
+	.control-section.open {
+		border-bottom: 1px solid $bg;
+
+		.accordion-section-title {
+			border-bottom-color: $bg !important;
+		}
+	}
+
+	.control-section:last-of-type {
+		&.open,
+		.accordion-section-title {
+			border-bottom-color: #ddd;
+		}
+	}
+
 }
 
 #customize-theme-controls > ul,
@@ -138,7 +163,6 @@ body {
 	input[type="radio"],
 	input[type="checkbox"] {
 		line-height: 28px;
-		border-color: white !important;
 	}
 
 	input[type="text"] {
@@ -196,7 +220,7 @@ body {
 }
 
 .wp-full-overlay-sidebar {
-	background: #222;
+	background: $bg;
 	border: none;
 }
 
@@ -253,7 +277,7 @@ body {
 	margin-right: 16px;
 	padding: 4px 5px;
 
-	border: 2px solid #dedede;
+	border: 2px solid $bg;
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	user-select: none;
@@ -265,7 +289,7 @@ body {
 	bottom: 0;
 	right: 0;
 	width: 20px;
-	background: #dedede;
+	background: $bg;
 }
 
 .customize-control .dropdown-arrow:after {
@@ -275,7 +299,7 @@ body {
 
 .customize-control .dropdown-status {
 	color: #333;
-	background: #dedede;
+	background: $bg;
 	display: none;
 	max-width: 112px;
 }
@@ -298,7 +322,7 @@ body {
 	}
 
 	.dropdown .dropdown-content {
-		background-color: #fff;
+		background-color: $text;
 		border: 1px solid rgba( 0, 0, 0, 0.15 );
 	}
 
@@ -369,15 +393,14 @@ body {
 
 	.library {
 		ul {
-			border-bottom: 1px solid #737373;
-			border-bottom: 1px solid rgba(255,255,255,.25);
+			border-bottom: 1px solid #ddd;
 			float: left;
 			width: 100%;
 			margin: 10px 0 0;
 		}
 
 		li {
-			color: #d0d0d0;
+			color: #ccc;
 			float: left;
 			padding: 3px 15px;
 			margin: 0;
@@ -388,10 +411,9 @@ body {
 			margin-bottom: -1px;
 			padding-bottom: 4px;
 		
-			color: #dedede;
-			border-color: #737373;
-			border-color: rgba(255,255,255,.25);
-			border-bottom-color: #333;
+			color: $alt-text;
+			border-color: #ddd;
+			border-bottom-color: #fff;
 		}
 
 		.thumbnail {
@@ -405,7 +427,7 @@ body {
 			max-height: 80px;
 			margin: 5px auto;
 			padding: 2px;
-			background: #fff;
+			background: $alt-text;
 		}
 
 		.thumbnail:hover img {
@@ -491,7 +513,7 @@ body.cheatin p {
 	margin: 0 auto;
 	padding: 2em;
 	font-size: 14px;
-	background: #fff;
+	background: $text;
 	border: 1px solid #dfdfdf;
 	-webkit-border-radius: 3px;
 	border-radius:         3px;

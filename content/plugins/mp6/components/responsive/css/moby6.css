@@ -1,3 +1,9 @@
+@-ms-viewport {
+	width: device-width;
+	zoom: 1;
+	user-zoom: fixed;
+}
+
 @media screen and ( max-width: 782px ) {
 
 /**
@@ -22,6 +28,7 @@ body * {
 }
 .wrap {
 	margin-right: 10px;
+	margin-left: 0;
 }
 .col-wrap {
 	padding: 0;
@@ -290,8 +297,8 @@ a.preview {
  */
 #moby6-toggle {
 	position: fixed;
-	top: 7px;
-	left: 5px;
+	top: 5px;
+	left: 4px;
 	padding-right: 10px;
 	z-index: 99999;
 	border: none;
@@ -321,14 +328,15 @@ a.preview {
 	content: '\f228';
 	display: inline-block;
 	float: left;
-	font: normal 25px/1 'Dashicons';
+	font: normal 40px/45px 'Dashicons';
 	vertical-align: middle;
 	outline: none;
-	margin: 0;
+	margin: -5px 0 0 0px;
 	-webkit-font-smoothing: antialiased;
-	height: 32px;
-	width: 39px;
-	padding: 3px;
+	-moz-osx-font-smoothing: grayscale;
+	height: 40px;
+	width: 40px;
+	padding: 0;
 	border: none;
 	text-decoration: none;
 	box-sizing: border-box;

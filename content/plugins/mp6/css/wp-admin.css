@@ -54,6 +54,7 @@ TABLE OF CONTENTS:
 	min-height: 100%;
 	width: 100%;
 	position: relative;
+	-webkit-font-smoothing: subpixel-antialiased;
 }
 
 #wpcontent {
@@ -238,6 +239,7 @@ TABLE OF CONTENTS:
 }
 
 /* include margin and padding in the width calculation of input and textarea */
+input,
 input[type="text"],
 input[type="password"],
 input[type="number"],
@@ -307,6 +309,7 @@ input[type=radio]:checked:before {
 	font: normal 21px/1 'dashicons';
 	speak: none;
 	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 input[type=checkbox]:checked:before {
@@ -884,8 +887,8 @@ input[type="search"]:focus,
 input[type="tel"]:focus,
 input[type="url"]:focus,
 select:focus {
-	-webkit-box-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-	box-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+	box-shadow: 0 1px 2px rgba(0,0,0,0.1);
 }
 
 input[readonly] {
@@ -974,6 +977,7 @@ h2 .nav-tab,
 	width: 20px;
 	display: inline-block;
 	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 	-moz-transition: all .1s ease-in-out;
 	-webkit-transition: all .1s ease-in-out;
 	transition: all .1s ease-in-out;
@@ -1104,15 +1108,19 @@ p.install-help {
 	white-space: nowrap;
 }
 
+
 /*------------------------------------------------------------------------------
   2.0 - Forms
 ------------------------------------------------------------------------------*/
-
 
 .wp-admin select {
 	padding: 2px;
 	line-height: 28px;
 	height: 28px;
+}
+
+.meta-box-sortables select {
+	max-width: 100%;
 }
 
 .wp-admin select[multiple] {
@@ -1195,7 +1203,7 @@ input.small-text {
 }
 
 input[type="number"].small-text {
-	width: 60px;
+	width: 65px;
 }
 
 #doaction,
@@ -1256,6 +1264,7 @@ fieldset label,
 	vertical-align: top;
 
 	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 #pass-strength-result {
@@ -1519,10 +1528,12 @@ form.upgrade .hint {
 	margin: 0 20px 0 0;
 }
 
+#screen-meta-links a {
+	padding: 3px 6px 3px 16px;
+}
+
 #screen-meta-links a:focus {
 	outline: none;
-	-webkit-box-shadow: 1px 1px 1px rgba(0,0,0,0.4);
-	box-shadow: 1px 1px 1px rgba(0,0,0,0.4);
 }
 
 /* screen options and help tabs revert */
@@ -1536,8 +1547,7 @@ form.upgrade .hint {
 #screen-options-link-wrap,
 #contextual-help-link-wrap {
 	float: right;
-	height: 23px;
-	padding: 3px 6px;
+	height: 28px;
 	margin: 0 0 0 6px;
 	font-family: "Open Sans", sans-serif;
 }
@@ -1552,7 +1562,6 @@ form.upgrade .hint {
 	font-size: 13px;
 	height: 22px;
 	line-height: 22px;
-	padding: 1px 0 0 10px;
 	text-decoration: none;
 	z-index: 1;
 }
@@ -1568,6 +1577,7 @@ form.upgrade .hint {
 	position: relative;
 	vertical-align: bottom;
 	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 	text-decoration: none !important;
 }
 
@@ -1892,6 +1902,7 @@ div.wp-menu-image:before {
 	width: 20px;
 	display: inline-block;
 	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 	-moz-transition: all .1s ease-in-out;
 	-webkit-transition: all .1s ease-in-out;
 	transition: all .1s ease-in-out;
@@ -2088,6 +2099,7 @@ ul#adminmenu > li.current > a.current:after {
 	transition: all .1s ease-in-out;
 
 	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 .folded #collapse-button div:after {
@@ -2286,6 +2298,7 @@ th .comment-grey-bubble:before {
 	position: relative;
 	vertical-align: top;
 	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 	text-decoration: none !important;
 }
 
@@ -2767,6 +2780,7 @@ html.wp-toolbar {
 	top: -1px;
 	position: relative;
 	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 	text-decoration: none !important;
 	vertical-align: top;
 }
@@ -2969,6 +2983,7 @@ table.fixed {
 	position: relative;
 	vertical-align: top;
 	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 	text-decoration: none !important;
 }
 
@@ -3171,6 +3186,7 @@ th.asc:hover span.sorting-indicator {
 	vertical-align: middle;
 	margin-left: 0;
 	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 .view-switch>a+a:before {
@@ -3853,7 +3869,8 @@ td.plugin-title p {
 }
 
 #post-body #visibility:before,
-.curtime #timestamp:before {
+.curtime #timestamp:before,
+#post-body .misc-pub-revisions:before {
 	font: normal 20px/1 'dashicons';
 	speak: none;
 	display: inline-block;
@@ -3863,6 +3880,7 @@ td.plugin-title p {
 	position: relative;
 	vertical-align: top;
 	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 	text-decoration: none !important;
 }
 
@@ -3887,6 +3905,10 @@ td.plugin-title p {
 #timestampdiv input {
 	border-width: 1px;
 	border-style: solid;
+}
+
+#post-body .misc-pub-revisions:before {
+	content: '\f321';
 }
 
 .notification-dialog {
@@ -4476,7 +4498,8 @@ div.revisions-controls > .wp-slider > .ui-slider-handle {
 	content: "\f229";
 	font: normal 18px/1 'dashicons';
 	speak: none;
-	-webkit-font-smoothing:antialiased;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 .wp-slider .ui-slider-handle.from-handle:before,
@@ -4582,6 +4605,7 @@ div.revisions-controls > .wp-slider > .ui-slider-handle {
 	font: normal 20px/1 'dashicons' !important;
 	speak: none;
 	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 #post-formats-select {
@@ -4608,6 +4632,7 @@ label.post-format-icon {
 	font: normal 20px/1 'dashicons';
 	speak: none;
 	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 .post-state-format.post-format-standard:before,
@@ -5434,6 +5459,7 @@ td.imgedit-settings input {
 	margin: 0 8px 0 0;
 	height: 32px;
 	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 	text-align: center;
 	line-height: 28px;
 }
@@ -5569,7 +5595,6 @@ span.imgedit-scale-warn {
 	font-size: 14px;
 	margin-top: 0.5em;
 	width: 100%;
-	margin-bottom: -8px;
 	clear: both;
 }
 
@@ -6241,6 +6266,7 @@ h2 .nav-tab {
 	speak: none;
 	margin: 0 8px 0 -2px;
 	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 	vertical-align: top;
 }
 
@@ -6442,13 +6468,12 @@ body.press-this {
 	margin: 0.2em 200px 0 0;
 	line-height: 1.2em;
 	font-size: 2.8em;
-	font-weight: 200;
+	font-weight: 400;
 }
 
 .about-text,
 .about-description,
 .about-wrap li.wp-person a.web {
-	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", sans-serif;
 	font-weight: normal;
 	line-height: 1.6em;
 	font-size: 20px;
@@ -6674,6 +6699,7 @@ body.press-this {
 	speak: none;
 	content: '\f147';
 	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 .about-wrap .feature-section .col-2:before {
@@ -7504,6 +7530,7 @@ h3:hover .edit-box {
 	color: #727272;
 	content: '\f120';
 	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 .no-js #dashboard_quick_press {
 	display: none;
@@ -7863,7 +7890,6 @@ a.rsswidget {
 .login form .input,
 .login input[type="text"] {
 	color: #555;
-	font-weight: 200;
 	font-size: 24px;
 	line-height: 1;
 	width: 100%;
@@ -8934,7 +8960,7 @@ img {
 
 .press-this .wp-media-buttons {
 	cursor: default;
-	padding: 8px 8px 0;
+	padding: 8px 8px 6px;
 }
 
 .press-this .howto {
@@ -8943,6 +8969,18 @@ img {
 	font-size: 12px;
 	font-style: italic;
 	display: block;
+}
+
+.press-this #wp-content-editor-container {
+	clear: none;
+}
+
+.press-this #poststuff .inside {
+	margin-top: 18px;
+}
+
+.press-this .category-tabs {
+	margin-bottom: 3px;
 }
 
 /* Editor/Main Column */
@@ -9040,6 +9078,7 @@ h3.tb {
 	top: 0;
 	position: relative;
 	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 	text-decoration: none !important;
 }
 
@@ -9561,6 +9600,7 @@ a.widget-action {
 	text-align: center;
 	position: relative;
 	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 	text-decoration: none !important;
 }
 
@@ -10068,6 +10108,7 @@ a.widget-control-edit {
 	speak: none;
 	vertical-align: middle;
 	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 .tb-close-icon:hover:before {

@@ -136,6 +136,7 @@
 	speak: none;
 	vertical-align: middle;
 	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 	color: #666;
 }
 
@@ -156,6 +157,7 @@
 	overflow: auto;
 	min-height: 300px;
 	background: #fff;
+	-webkit-font-smoothing: subpixel-antialiased;
 }
 
 .media-modal-icon {
@@ -224,7 +226,6 @@
 }
 
 .media-sidebar .sidebar-title {
-	font-weight: 200;
 	font-size: 20px;
 	margin: 0;
 	padding: 12px 10px 10px;
@@ -247,7 +248,6 @@
 	text-transform: uppercase;
 	font-size: 12px;
 	color: #777;
-	text-shadow: 0 1px 0 #fff;
 	margin: 24px 0 8px;
 }
 
@@ -293,7 +293,6 @@
 	text-align: right;
 	font-weight: normal;
 	color: #999;
-	text-shadow: 0 1px 0 #fff;
 }
 
 .media-sidebar .setting input,
@@ -437,7 +436,6 @@
 	height: 18px;
 	line-height: 18px;
 	font-size: 14px;
-	text-shadow: 0 1px 0 #fff;
 	text-decoration: none;
 }
 
@@ -567,7 +565,6 @@
 .media-frame-title h1 {
 	padding: 0 16px;
 	font-size: 22px;
-	font-weight: 200;
 	line-height: 60px;
 	margin: 0;
 }
@@ -929,7 +926,6 @@
 	display: none;
 	font-size: 12px;
 	color: #666;
-	text-shadow: 0 1px 0 #fff;
 }
 
 .uploading.media-uploader-status .upload-details {
@@ -1035,7 +1031,6 @@
 	transform:         translateY( -50% );
 
 	font-size: 40px;
-	font-weight: 200;
 	color: #fff;
 	padding: 0;
 }
@@ -1083,8 +1078,8 @@
 
 .uploader-inline h3 {
 	font-size: 20px;
+	font-weight: 400;
 	line-height: 28px;
-	font-weight: 200;
 	margin-bottom: 1.6em;
 }
 
@@ -1399,7 +1394,6 @@
 	z-index: 250;
 	background: #fff;
 	font-size: 18px;
-	font-weight: 200;
 }
 
 .media-frame .embed-url input {
@@ -1469,7 +1463,6 @@
 	font-size: 13px;
 	line-height: 24px;
 	color: #999;
-	text-shadow: 0 1px 0 #fff;
 }
 
 .media-embed .setting .button-group {

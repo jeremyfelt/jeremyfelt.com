@@ -228,6 +228,7 @@ a .mceIcon, .mceAction {
 	font: normal 20px/1 'dashicons' !important;
 	speak: none;
 	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 .mceAction {
@@ -685,6 +686,7 @@ span.mce_spellchecker {
 span.mce_spellchecker:before {
 	content:'\f210';
 }
+span.mce_fullscreen:before,
 span.mce_wp_fullscreen:before {
 	content:'\f211';
 }
@@ -1227,6 +1229,7 @@ html[dir="rtl"] .wp-switch-editor {
 	font: normal 18px/1 'dashicons';
 	speak: none;
 	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 .wp-media-buttons .add_media span.wp-media-buttons-icon:before {
@@ -1893,6 +1896,7 @@ html[dir="rtl"] .wp-switch-editor {
 	font: normal 20px/1 'dashicons';
 	speak: none;
 	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 	color: #666;
 	padding-left: 12px;
 }

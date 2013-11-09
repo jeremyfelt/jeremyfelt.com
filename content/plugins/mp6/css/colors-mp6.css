@@ -1110,6 +1110,7 @@ p.popular-tags,
 #misc-publishing-actions label[for="post_status"]:before,
 #post-body #visibility:before,
 .curtime #timestamp:before,
+#post-body .misc-pub-revisions:before,
 span.wp-media-buttons-icon:before,
 span.jetpack-contact-form-icon:before {
 	color: #888;
@@ -1177,26 +1178,14 @@ span.jetpack-contact-form-icon:before {
 }
 
 /* screen options and help tabs */
-#screen-options-link-wrap,
-#contextual-help-link-wrap {
-	/*background: rgb(255,255,255);
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(100%,rgba(241,241,241,1)));
-	background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(241,241,241,1) 100%);
-	background: linear-gradient(to bottom, rgba(255,255,255,1) 0%,rgba(241,241,241,1) 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f1f1f1',GradientType=0 );
 
-	-webkit-box-shadow: 0 2px 2px rgba(0,0,0,0.1);
-	box-shadow: 0 2px 2px rgba(0,0,0,0.1); */
-
+#screen-meta-links a {
+	color: #777;
 	border: 1px solid #dedede;
 	border-top: none;
 	background: #fff;
 	-webkit-box-shadow: 0px 1px 1px -1px rgba(0,0,0,0.1);
 	box-shadow: 0px 1px 1px -1px rgba(0,0,0,0.1);
-}
-
-#screen-meta-links a {
-	color: #777;
 }
 
 #screen-meta-links a:after {
@@ -1206,8 +1195,15 @@ span.jetpack-contact-form-icon:before {
 #screen-meta-links a:hover,
 #screen-meta-links a:active {
 	color: #333;
-	background-color: transparent;
 }
+
+#screen-meta-links a:focus {
+	border-color: #aaa;
+	color: #333;
+	-webkit-box-shadow: 0 2px 3px rgba(0,0,0,0.15);
+	box-shadow: 0 2px 3px rgba(0,0,0,0.15);
+}
+
 /* end screen options and help tabs */
 
 #wphead {
@@ -1363,8 +1359,8 @@ table.widefat .spam a:hover,
 .folded #adminmenu .wp-has-current-submenu .wp-submenu {
 	background-color: #333;
 
-	-webkit-box-shadow: 0 3px 6px rgba(0,0,0,0.3);
-	box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+	-webkit-box-shadow: 0 3px 5px rgba(0,0,0,0.2);
+	box-shadow: 0 3px 5px rgba(0,0,0,0.2);
 }
 
 #adminmenu .wp-submenu a,
@@ -1514,9 +1510,9 @@ table.diff .diff-addedline ins {
 }
 
 #sidemenu a.current {
-	background-color: #fff;
-	border-color: #dfdfdf #dfdfdf #fff;
-	color: #2ea2cc;
+	background-color: #eee;
+	border-color: #dfdfdf #dfdfdf #eee;
+	color: #000;
 }
 
 #replyerror {

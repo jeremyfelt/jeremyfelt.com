@@ -110,7 +110,11 @@
 				// replace `fill` properties in `<style>` tags
 				xml = xml.replace( /fill:.*?;/g, 'fill: ' + color + ';');
 
-				xml = window.btoa( xml );
+				try {
+					xml = window.btoa( xml );
+				} catch ( e ) {
+					xml = $.base64.btoa( xml );
+				}
 
 				$element.data( 'mp6-svg-' + color, xml );
 

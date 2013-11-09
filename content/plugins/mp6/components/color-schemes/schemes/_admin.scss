@@ -350,6 +350,10 @@ ul#adminmenu > li.current > a.current:after {
 	color: $menu-text;
 }
 
+#wpadminbar #wp-admin-bar-user-info .username {
+	color: $menu-submenu-text;
+}
+
 
 /* Pointers */
 

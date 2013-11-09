@@ -86,7 +86,6 @@
 	min-width: 600px; /* match the min-width of the body in wp-admin.css */
 	z-index: 99999;
 	background: #222;
-	-webkit-font-smoothing: subpixel-antialiased;
 }
 
 #wpadminbar .ab-sub-wrapper,
@@ -139,8 +138,8 @@
 	display: none;
 	position: absolute;
 	float: none;
-	-webkit-box-shadow: 1px 2px 2px rgba(0,0,0,0.2);
-	box-shadow: 1px 2px 2px rgba(0,0,0,0.2);
+	-webkit-box-shadow: 0 3px 5px rgba(0,0,0,0.2);
+	box-shadow: 0 3px 5px rgba(0,0,0,0.2);
 }
 
 #wpadminbar.ie7 .menupop .ab-sub-wrapper,
@@ -224,6 +223,7 @@
 	speak: none;
 	padding: 4px 0;
 	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 	background-image: none !important;
 	color: #999;
 	margin-right: 6px;
@@ -270,6 +270,7 @@
 	font: normal 17px/1 'dashicons';
 	speak: none;
 	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 #wpadminbar .menupop .menupop > .ab-item {
@@ -386,13 +387,17 @@
 	height: 18px;
 }
 
+#wpadminbar #wp-admin-bar-user-info a:hover span {
+	color: #1e8cbe;
+}
+
 #wpadminbar #wp-admin-bar-user-info .display-name,
 #wpadminbar #wp-admin-bar-user-info .username {
 	display: block;
 }
 
 #wpadminbar #wp-admin-bar-user-info .display-name {
-	color: #999;
+	color: #fff;
 }
 
 #wpadminbar #wp-admin-bar-user-info .username {
@@ -439,6 +444,7 @@
 	font: normal 16px/1 'dashicons' !important;
 	speak: none;
 	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 	color: #eee;
 }
 
@@ -526,6 +532,7 @@
 	color: #999;
 	speak: none;
 	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 #wpadminbar>#wp-toolbar>#wp-admin-bar-top-secondary>#wp-admin-bar-search #adminbarsearch input.adminbar-input {
