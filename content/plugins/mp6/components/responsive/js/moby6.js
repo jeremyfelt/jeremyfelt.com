@@ -1,13 +1,14 @@
-;( function( $, window, document, undefined ) {
+;( function( $, window, document, Backbone, _, moby6Data, undefined ) {
 
 	'use strict';
+	
+	var $document = $( document );
 
-	window.moby6 = {
+	var moby6 = {
 
 		init: function() {
-			var _self = this;
-
 			// cached selectors
+			this.$window = $( window );
 			this.$html = $( document.documentElement );
 			this.$body = $( document.body );
 			this.$wpwrap = $( '#wpwrap' );
@@ -28,9 +29,12 @@
 				.on( 'activate.moby6', function() { moby6.activate(); } )
 				.on( 'deactivate.moby6', function() { moby6.deactivate(); } );
 
+			// Maybe activate the menu
+			this.toggleMenu();
+
 			// Trigger custom events based on active media query.
-			this.matchMedia();
-			$( window ).on( 'resize', $.proxy( this.matchMedia, this ) );
+			var lazyResize = _.debounce( this.toggleMenu, 200 )
+			$( window ).on( 'resize', lazyResize );
 		},
 
 		activate: function() {
@@ -40,7 +44,7 @@
 			if ( ! moby6.$body.hasClass( 'auto-fold' ) )
 				moby6.$body.addClass( 'auto-fold' );
 
-			$( document ).on( 'swiperight.moby6', function() {
+			$document.on( 'swiperight.moby6', function() {
 				moby6.$wpwrap.addClass( 'moby6-open' );
 			}).on( 'swipeleft.moby6', function() {
 				moby6.$wpwrap.removeClass( 'moby6-open' );
@@ -57,7 +61,7 @@
 
 			window.stickymenu && stickymenu.enable();
 
-			$( document ).off( 'swiperight.moby6 swipeleft.moby6' );
+			$document.off( 'swiperight.moby6 swipeleft.moby6' );
 
 			this.enableDraggables();
 			this.removeHamburgerButton();
@@ -65,30 +69,30 @@
 
 		},
 
-		matchMedia: function() {
-			clearTimeout( this.resizeTimeout );
-			this.resizeTimeout = setTimeout( function() {
+		toggleMenu: function() {
+			if ( ! window.matchMedia ) {
+				return;
+			}
 
-				if ( ! window.matchMedia )
+			if ( window.matchMedia( '(max-width: 782px)' ).matches ) {
+				if ( this.$html.hasClass( 'touch' ) ) {
 					return;
-
-				if ( window.matchMedia( '(max-width: 782px)' ).matches ) {
-					if ( moby6.$html.hasClass( 'touch' ) )
-						return;
-					moby6.$html.addClass( 'touch' ).trigger( 'activate.moby6' );
-				} else {
-					if ( ! moby6.$html.hasClass( 'touch' ) )
-						return;
-					moby6.$html.removeClass( 'touch' ).trigger( 'deactivate.moby6' );
 				}
 
-				if ( window.matchMedia( '(max-width: 480px)' ).matches ) {
-					moby6.enableOverlay();
-				} else {
-					moby6.disableOverlay();
+				this.$html.addClass( 'touch' ).trigger( 'activate.moby6' );
+			} else {
+				if ( ! this.$html.hasClass( 'touch' ) ) {
+					return;
 				}
 
-			}, 150 );
+				this.$html.removeClass( 'touch' ).trigger( 'deactivate.moby6' );
+			}
+
+			if ( window.matchMedia( '(max-width: 480px)' ).matches ) {
+				this.enableOverlay();
+			} else {
+				this.disableOverlay();
+			}
 		},
 
 		enableOverlay: function() {
@@ -117,17 +121,18 @@
 
 			var scrollStart = 0;
 			this.$adminmenu.on( 'touchstart.moby6', 'li.wp-has-submenu > a', function() {
-				scrollStart = $( window ).scrollTop();
+				scrollStart = moby6.$window.scrollTop();
 			});
 
 			this.$adminmenu.on( 'touchend.moby6', 'li.wp-has-submenu > a', function( e ) {
 				e.preventDefault();
 
-				if ( $( window ).scrollTop() !== scrollStart )
-					return false;
+				if ( moby6.$window.scrollTop() !== scrollStart )
+					return;
 
-				$( this ).find( 'li.wp-has-submenu' ).removeClass( 'selected' );
-				$( this ).parent( 'li' ).addClass( 'selected' );
+				var $this = $( this );
+				$this.find( 'li.wp-has-submenu' ).removeClass( 'selected' );
+				$this.parent( 'li' ).addClass( 'selected' );
 			});
 		},
 
@@ -146,16 +151,15 @@
 		},
 
 		insertHamburgerButton: function() {
-			this.$wpbody
-				.find( '.wrap' )
-				.prepend( '<div id="moby6-toggle"></div>' );
-
-			this.hamburgerButtonView = new Moby6HamburgerButton( { el: $( '#moby6-toggle' ) } );
+			if ( null == this.hamburgerButtonView ) {
+				this.hamburgerButtonView = new Moby6HamburgerButton();
+			} else {
+				this.hamburgerButtonView.show();
+			}
 		},
 
 		removeHamburgerButton: function() {
-			if ( this.hamburgerButtonView !== undefined )
-				this.hamburgerButtonView.destroy();
+			this.hamburgerButtonView.hide();
 		},
 
 		movePostSearch: function() {
@@ -177,10 +181,7 @@
 			}
 		}
 
-	}
-
-	// fire moby6.ini on when document is ready
-	$( document ).ready( $.proxy( moby6.init, moby6 ) );
+	};
 
 	// make Windows 8 devices playing along nicely
 	if ( '-ms-user-select' in document.documentElement.style && navigator.userAgent.match(/IEMobile\/10\.0/) ) {
@@ -194,32 +195,41 @@
 	/* Hamburger button view */
 	var Moby6HamburgerButton = Backbone.View.extend({
 
+		id: 'moby6-toggle',
+
+		tmpl: _.template( '<a href="#" title="<%- menuLabel %>"></a>' ),
+
 		events: {
-			'click': 'toggleSidebar'
+			'click a': 'toggleSidebar'
 		},
 
 		initialize: function() {
+			this.$wpwrap = $( '#wpwrap' );
 			this.render();
 		},
 
 		render: function() {
-			// Needs to be in a translatable template.
-			this.$el.html( '<a href="#" title="Menu"></a>' );
+			this.$el.html( this.tmpl( moby6Data ) );
+			$( '.wrap', '#wpbody' ).prepend( this.el );
 			return this;
 		},
 
 		toggleSidebar: function(e) {
 			e.preventDefault();
-			moby6.$wpwrap.toggleClass( 'moby6-open' );
+			this.$wpwrap.toggleClass( 'moby6-open' );
 		},
 
-		destroy: function() {
-			this.undelegateEvents();
-			this.$el.removeData().unbind();
-			this.remove();
-			Backbone.View.prototype.remove.call( this );
+		show: function() {
+			this.$el.show();
+		},
+
+		hide: function() {
+			this.$el.hide();
 		}
 
 	});
 
-})( jQuery, window, document );
+	// Init moby6 immediately
+	moby6.init();
+
+})( jQuery, window, document, Backbone, _, moby6Data );

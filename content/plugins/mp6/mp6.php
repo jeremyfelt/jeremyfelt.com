@@ -3,7 +3,7 @@
 Plugin Name: MP6
 Plugin URI: http://wordpress.org/extend/plugins/mp6/
 Description: This is a plugin to break the wp-admin UI, and is not recommended for non-savvy users.
-Version: 2.2
+Version: 2.2.1
 Author: MP6 Team
 Author URI: http://wordpress.org
 License: GPLv2 or later
@@ -35,8 +35,8 @@ add_action( 'init', 'mp6_register_open_sans' );
 function mp6_register_open_sans() {
 	wp_register_style(
 		'open-sans',
-//		'//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,300,400,600&subset=latin-ext,latin',
-		plugins_url( 'css/opensans.css', __FILE__ ),
+		'//fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600&subset=latin-ext,latin',
+//		plugins_url( 'css/opensans.css', __FILE__ ),
 		false,
 		'20130605'
 	);

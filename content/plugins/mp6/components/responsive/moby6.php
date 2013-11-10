@@ -25,7 +25,8 @@ function moby6_enqueue_styles() {
 
 function moby6_enqueue_scripts() {
 	$modtime = filemtime( plugin_dir_path( __FILE__ ) . 'js/moby6.js' );
-	wp_enqueue_script( 'moby6', plugins_url( 'js/moby6.js', __FILE__ ), array( 'jquery', 'backbone' ), $modtime );
+	wp_enqueue_script( 'moby6', plugins_url( 'js/moby6.js', __FILE__ ), array( 'jquery', 'backbone' ), $modtime, true );
+	wp_localize_script( 'moby6', 'moby6Data', array( 'menuLabel' => __( 'Menu' ) ) );
 	wp_enqueue_script( 'moby6-jq-mobile', plugins_url( 'js/jquery.mobile.custom.min.js', __FILE__ ), array( 'jquery' ), '1.3.1' );
 }
 
