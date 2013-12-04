@@ -13,6 +13,9 @@ if ( '10.10.12.13' === $_SERVER['SERVER_ADDR'] ) {
 	define( 'WP_LOCAL_DEV', false );
 }
 
+// Update minor and major releases automatically.
+define( 'WP_AUTO_UPDATE_CORE', true );
+
 $table_prefix  = 'wp_';
 
 define('WPLANG', '');
