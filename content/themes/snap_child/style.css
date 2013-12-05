@@ -18,6 +18,10 @@ h1, blockquote {
 	font-weight: 400;
 }
 
+pre {
+    font-size: 0.7rem;
+}
+
 @media screen and (min-width: 900px) {
 	h1 {
 		font-size: 38px;
