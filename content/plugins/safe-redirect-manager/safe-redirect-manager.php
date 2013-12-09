@@ -4,7 +4,7 @@ Plugin Name: Safe Redirect Manager
 Plugin URI: http://www.10up.com
 Description: Easily and safely manage HTTP redirects.
 Author: Taylor Lovett (10up LLC), VentureBeat
-Version: 1.7
+Version: 1.7.1
 Author URI: http://www.10up.com
 
 GNU General Public License, Free Software Foundation <http://creativecommons.org/licenses/GPL/2.0/>
@@ -41,7 +41,16 @@ class SRM_Safe_Redirect_Manager {
 
 	public $cache_key_redirects = '_srm_redirects';
 
-	public $valid_status_codes = array( 301, 302, 303, 403, 404 );
+	public $valid_status_codes = array( 301, 302, 303, 307, 403, 404 );
+	
+	public $status_code_labels = array(
+		301 => 'Moved Permanently',
+		302 => 'Found',
+		303 => 'See Other',
+		307 => 'Temporary Redirect',
+		403 => 'Forbidden',
+		404 => 'Not Found',		
+	);
 
 	private $whitelist_hosts = array();
 
@@ -55,6 +64,7 @@ class SRM_Safe_Redirect_Manager {
 	 * @return object
 	 */
 	public function __construct() {
+		add_action( 'init', array( $this, 'action_init_load_textdomain' ), 9 );
 		add_action( 'init', array( $this, 'action_init' ) );
 		add_action( 'init', array( $this, 'action_register_post_types' ) );
 		add_action( 'parse_request', array( $this, 'action_parse_request' ), 0 );
@@ -70,7 +80,6 @@ class SRM_Safe_Redirect_Manager {
 		add_action( 'admin_print_styles-post.php', array( $this, 'action_print_logo_css' ), 10, 1 );
 		add_action( 'admin_print_styles-post-new.php', array( $this, 'action_print_logo_css' ), 10, 1 );
 		add_filter( 'post_type_link', array( $this, 'filter_post_type_link' ), 10, 2  );
-		add_action( 'plugins_loaded', array( $this, 'action_plugins_loaded' ) );
 
 		// Search filters
 		add_filter( 'posts_join', array( $this, 'filter_search_join' ) );
@@ -85,7 +94,7 @@ class SRM_Safe_Redirect_Manager {
 	* @uses load_plugin_textdomain
 	* @return void
 	*/
-	public function action_plugins_loaded() {
+	public function action_init_load_textdomain() {
 		load_plugin_textdomain( 'safe-redirect-manager', false, basename( dirname( __FILE__ ) ) . '/languages' );
 	}
 
@@ -644,7 +653,7 @@ class SRM_Safe_Redirect_Manager {
 			<label for="srm<?php echo $this->meta_key_redirect_status_code; ?>"><?php _e( 'HTTP Status Code:', 'safe-redirect-manager' ); ?></label>
 			<select name="srm<?php echo $this->meta_key_redirect_status_code; ?>" id="srm<?php echo $this->meta_key_redirect_status_code; ?>">
 				<?php foreach ( $this->valid_status_codes as $code ) : ?>
-					<option <?php selected( $status_code, $code ); ?>><?php echo $code; ?></option>
+					<option value="<?php echo esc_attr( $code ); ?>" <?php selected( $status_code, $code ); ?>><?php echo esc_html( $code . ' ' . $this->status_code_labels[$code] ); ?></option>
 				<?php endforeach; ?>
 			</select>
 			<em><?php _e( "If you don't know what this is, leave it as is.", 'safe-redirect-manager' ); ?></em>
