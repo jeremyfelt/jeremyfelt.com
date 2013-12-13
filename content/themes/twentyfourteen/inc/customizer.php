@@ -15,23 +15,61 @@
  * @param WP_Customize_Manager $wp_customize Theme Customizer object.
  */
 function twentyfourteen_customize_register( $wp_customize ) {
-	// Add postMessage support for site title and description.
-	$wp_customize->get_setting( 'blogname' )->transport        = 'postMessage';
-	$wp_customize->get_setting( 'blogdescription' )->transport = 'postMessage';
+	// Add custom description to Colors and Background sections.
+	$wp_customize->get_section( 'colors' )->description           = __( 'Background may only be visible on wide screens.', 'twentyfourteen' );
+	$wp_customize->get_section( 'background_image' )->description = __( 'Background may only be visible on wide screens.', 'twentyfourteen' );
 
-	// Add the custom accent color setting and control.
-	$wp_customize->add_setting( 'accent_color', array(
-		'default'           => '#24890d',
-		'sanitize_callback' => 'twentyfourteen_generate_accent_colors',
+	// Add postMessage support for site title and description.
+	$wp_customize->get_setting( 'blogname' )->transport         = 'postMessage';
+	$wp_customize->get_setting( 'blogdescription' )->transport  = 'postMessage';
+	$wp_customize->get_setting( 'header_textcolor' )->transport = 'postMessage';
+
+	// Rename the label to "Site Title Color" because this only affects the site title in this theme.
+	$wp_customize->get_control( 'header_textcolor' )->label = __( 'Site Title Color', 'twentyfourteen' );
+
+	// Rename the label to "Display Site Title & Tagline" in order to make this option extra clear.
+	$wp_customize->get_control( 'display_header_text' )->label = __( 'Display Site Title &amp; Tagline', 'twentyfourteen' );
+
+	// Add the featured content section in case it's not already there.
+	$wp_customize->add_section( 'featured_content', array(
+		'title'       => __( 'Featured Content', 'twentyfourteen' ),
+		'description' => sprintf( __( 'Use a <a href="%1$s">tag</a> to feature your posts. If no posts match the tag, <a href="%2$s">sticky posts</a> will be displayed instead.', 'twentyfourteen' ), admin_url( '/edit.php?tag=featured' ), admin_url( '/edit.php?show_sticky=1' ) ),
+		'priority'    => 130,
 	) );
 
-	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'accent_color', array(
-		'label'    => __( 'Accent Color', 'twentyfourteen' ),
-		'section'  => 'colors',
-		'settings' => 'accent_color',
-	) ) );
+	// Add the featured content layout setting and control.
+	$wp_customize->add_setting( 'featured_content_layout', array(
+		'default'           => 'grid',
+		'sanitize_callback' => 'twentyfourteen_sanitize_layout',
+	) );
+
+	$wp_customize->add_control( 'featured_content_layout', array(
+		'label'   => __( 'Layout', 'twentyfourteen' ),
+		'section' => 'featured_content',
+		'type'    => 'select',
+		'choices' => array(
+			'grid'   => __( 'Grid',   'twentyfourteen' ),
+			'slider' => __( 'Slider', 'twentyfourteen' ),
+		),
+	) );
 }
 add_action( 'customize_register', 'twentyfourteen_customize_register' );
+
+/**
+ * Sanitize the Featured Content layout value.
+ *
+ * @since Twenty Fourteen 1.0
+ *
+ * @param string $layout Layout type.
+ * @return string Filtered layout type (grid|slider).
+ */
+function twentyfourteen_sanitize_layout( $layout ) {
+	if ( ! in_array( $layout, array( 'grid', 'slider' ) ) ) {
+		$layout = 'grid';
+	}
+
+	return $layout;
+}
 
 /**
  * Bind JS handlers to make Theme Customizer preview reload changes asynchronously.
@@ -39,168 +77,32 @@ add_action( 'customize_register', 'twentyfourteen_customize_register' );
  * @since Twenty Fourteen 1.0
  */
 function twentyfourteen_customize_preview_js() {
-	wp_enqueue_script( 'twentyfourteen_customizer', get_template_directory_uri() . '/js/customizer.js', array( 'customize-preview' ), '20120827', true );
+	wp_enqueue_script( 'twentyfourteen_customizer', get_template_directory_uri() . '/js/customizer.js', array( 'customize-preview' ), '20131205', true );
 }
 add_action( 'customize_preview_init', 'twentyfourteen_customize_preview_js' );
 
 /**
- * Generate two variants of the accent color, return the original, and
- * save the others as theme mods.
- *
- * @since Twenty Fourteen 1.0
- *
- * @param string $color The original color.
- * @return string $color The original color, sanitized.
- */
-function twentyfourteen_generate_accent_colors( $color ) {
-	$color = sanitize_hex_color( $color );
-
-	set_theme_mod( 'accent_lighter', twentyfourteen_adjust_color( $color, 14 ) );
-	set_theme_mod( 'accent_much_lighter', twentyfourteen_adjust_color( $color, 71 ) );
-
-	return $color;
-}
-
-/**
- * Tweak the brightness of a color by adjusting the RGB values by the given interval.
- *
- * Use positive values of $steps to brighten the color and negative values to darken the color.
- * All three RGB values are modified by the specified steps, within the range of 0-255. The hue
- * is generally maintained unless the number of steps causes one value to be capped at 0 or 255.
- *
- * @since Twenty Fourteen 1.0
- *
- * @param string $color The original color, in 3- or 6-digit hexadecimal form.
- * @param int $steps The number of steps to adjust the color by, in RGB units.
- * @return string $color The new color, in 6-digit hexadecimal form.
- */
-function twentyfourteen_adjust_color( $color, $steps ) {
-	// Convert shorthand to full hex.
-	if ( strlen( $color ) == 3 ) {
-		$color = str_repeat( substr( $color, 1, 1 ), 2 ) . str_repeat( substr( $color, 2, 1 ), 2 ) . str_repeat( substr( $color, 3, 1), 2 );
-	}
-
-	// Convert hex to rgb.
-	$rgb = array( hexdec( substr( $color, 1, 2 ) ), hexdec( substr( $color, 3, 2 ) ), hexdec( substr( $color, 5, 2 ) ) );
-
-	// Adjust color and switch back to hex.
-	$hex = '#';
-	foreach ( $rgb as $c ) {
-		$c += $steps;
-		if ( $c > 255 )
-			$c = 255;
-		elseif ( $c < 0 )
-			$c = 0;
-		$hex .= str_pad( dechex( $c ), 2, '0', STR_PAD_LEFT);
-	}
-
-	return $hex;
-}
-
-/**
- * Output the CSS for the Theme Customizer options.
+ * Add contextual help to the Themes and Post edit screens.
  *
  * @since Twenty Fourteen 1.0
  *
  * @return void
  */
-function twentyfourteen_customizer_styles() {
-	$accent_color = get_theme_mod( 'accent_color' );
-
-	// Don't do anything if the current color is the default.
-	if ( '#24890d' === $accent_color )
+function twentyfourteen_contextual_help() {
+	if ( 'admin_head-edit.php' === current_filter() && 'post' !== $GLOBALS['typenow'] ) {
 		return;
+	}
 
-	$accent_lighter = get_theme_mod( 'accent_lighter' );
-	$accent_much_lighter = get_theme_mod( 'accent_much_lighter' );
-
-	$css = '/* Custom accent color. */
-		h1 a:hover,
-		h2 a:hover,
-		h3 a:hover,
-		h4 a:hover,
-		h5 a:hover,
-		h6 a:hover,
-		a,
-		.entry-title a:hover,
-		.cat-links a:hover,
-		.site-content .post-navigation a:hover,
-		.site-content .image-navigation a:hover,
-		.comment-author a:hover,
-		.comment-metadata a:hover,
-		.comment-list .trackback a:hover,
-		.comment-list .pingback a:hover,
-		.paging-navigation .page-numbers.current,
-		.content-sidebar.widget-area a:hover,
-		.content-sidebar .widget_twentyfourteen_ephemera .post-format-archive-link {
-			color: ' . $accent_color . ';
-		}
-
-		button,
-		html input[type="button"],
-		input[type="reset"],
-		input[type="submit"],
-		.hentry .mejs-controls .mejs-time-rail .mejs-time-current,
-		.header-extra,
-		.search-toggle,
-		.primary-navigation ul ul,
-		.primary-navigation li:hover > a,
-		.page-links a:hover,
-		.widget_calendar tbody a {
-			background-color: ' . $accent_color . ';
-		}
-
-		::-moz-selection {
-			background: ' . $accent_color . ';
-		}
-
-		::selection {
-			background: ' . $accent_color . ';
-		}
-
-		.page-links a:hover,
-		.paging-navigation .page-numbers.current {
-			border-color: ' .  $accent_color . ';
-		}
-
-		/* Generated variant of custom accent color: slightly lighter. */
-		.search-toggle:hover,
-		.search-toggle.active,
-		.search-box,
-		button:hover,
-		html input[type="button"]:hover,
-		input[type="reset"]:hover,
-		input[type="submit"]:hover,
-		button:focus,
-		html input[type="button"]:focus,
-		input[type="reset"]:focus,
-		input[type="submit"]:focus,
-		.widget_calendar tbody a:hover {
-			background-color: ' . $accent_lighter . ';
-		}
-
-		/* Generated variant of custom accent color: much lighter. */
-		button:active,
-		html input[type="button"]:active,
-		input[type="reset"]:active,
-		input[type="submit"]:active {
-			background-color: ' . $accent_much_lighter . ';
-		}
-
-		a:hover,
-		a:focus,
-		a:active,
-		.primary-navigation li.current_page_item > a,
-		.primary-navigation li.current-menu-item > a,
-		.secondary-navigation a:hover,
-		#secondary .current_page_item > a,
-		#secondary .current-menu-item > a,
-		.featured-content a:hover,
-		.featured-content .more-link,
-		.widget-area a:hover {
-			color: ' . $accent_much_lighter . ';
-		}';
-
-	wp_add_inline_style( 'twentyfourteen-style', $css );
+	get_current_screen()->add_help_tab( array(
+		'id'      => 'twentyfourteen',
+		'title'   => __( 'Twenty Fourteen', 'twentyfourteen' ),
+		'content' =>
+			'<ul>' .
+				'<li>' . sprintf( __( 'The home page features your choice of up to 6 posts prominently displayed in a grid or slider, controlled by the <a href="%1$s">featured</a> tag; you can change the tag and layout in <a href="%2$s">Appearance &rarr; Customize</a>. If no posts match the tag, <a href="%3$s">sticky posts</a> will be displayed instead.', 'twentyfourteen' ), admin_url( '/edit.php?tag=featured' ), admin_url( 'customize.php' ), admin_url( '/edit.php?show_sticky=1' ) ) . '</li>' .
+				'<li>' . sprintf( __( 'Enhance your site design by using <a href="%s">Featured Images</a> for posts you&rsquo;d like to stand out (also known as post thumbnails). This allows you to associate an image with your post without inserting it. Twenty Fourteen uses featured images for posts and pages&mdash;above the title&mdash;and in the Featured Content area on the home page.', 'twentyfourteen' ), 'http://codex.wordpress.org/Post_Thumbnails#Setting_a_Post_Thumbnail' ) . '</li>' .
+				'<li>' . sprintf( __( 'For an in-depth tutorial, and more tips and tricks, visit the <a href="%s">Twenty Fourteen documentation</a>.', 'twentyfourteen' ), 'http://codex.wordpress.org/Twenty_Fourteen' ) . '</li>' .
+			'</ul>',
+	) );
 }
-add_action( 'wp_enqueue_scripts', 'twentyfourteen_customizer_styles' );
+add_action( 'admin_head-themes.php', 'twentyfourteen_contextual_help' );
+add_action( 'admin_head-edit.php',   'twentyfourteen_contextual_help' );

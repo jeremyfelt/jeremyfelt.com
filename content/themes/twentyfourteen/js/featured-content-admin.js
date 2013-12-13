@@ -1,3 +1,9 @@
+/**
+ * Twenty Fourteen Featured Content admin behavior: add a tag suggestion
+ * when changing the tag.
+ */
+/* global ajaxurl:true */
+
 jQuery( document ).ready( function( $ ) {
-	$( '#featured-content-tag-name' ).suggest( ajaxurl + '?action=ajax-tag-search&tax=post_tag', { delay: 500, minchars: 2 } );
-} );
+	$( '#customize-control-featured-content-tag-name input' ).suggest( ajaxurl + '?action=ajax-tag-search&tax=post_tag', { delay: 500, minchars: 2 } );
+});

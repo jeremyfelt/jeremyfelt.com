@@ -16,7 +16,15 @@
 		<div class="entry-meta">
 			<span class="cat-links"><?php echo get_the_category_list( _x( ', ', 'Used between list items, there is a space after the comma.', 'twentyfourteen' ) ); ?></span>
 		</div><!-- .entry-meta -->
-		<?php endif; ?>
+		<?php
+			endif;
+
+			if ( is_single() ) :
+				the_title( '<h1 class="entry-title">', '</h1>' );
+			else :
+				the_title( '<h1 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h1>' );
+			endif;
+		?>
 
 		<div class="entry-meta">
 			<span class="post-format">
@@ -45,19 +53,5 @@
 		?>
 	</div><!-- .entry-content -->
 
-	<footer class="entry-meta">
-		<div class="entry-meta">
-			<?php
-				if ( is_single() ) :
-					the_title( '<h1 class="entry-title">', '</h1>' );
-				else :
-					the_title( '<h1 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h1>' );
-				endif;
-			?>
-		</div>
-
-		<?php if ( has_tag() ) : ?>
-		<span class="tag-links"><?php echo get_the_tag_list(); ?></span>
-		<?php endif; ?>
-	</footer><!-- .entry-meta -->
+	<?php the_tags( '<footer class="entry-meta"><span class="tag-links">', '', '</span></footer>' ); ?>
 </article><!-- #post-## -->

@@ -6,34 +6,10 @@
  * @subpackage Twenty_Fourteen
  * @since Twenty Fourteen 1.0
  */
-
-if ( has_post_thumbnail() ) :
-	$image = get_post_thumbnail_id();
-else :
-	$images = get_posts( array(
-		'post_parent'    => get_the_ID(),
-		'fields'         => 'ids',
-		'numberposts'    => 1,
-		'post_status'    => 'inherit',
-		'post_type'      => 'attachment',
-		'post_mime_type' => 'image',
-		'order'          => 'ASC',
-		'orderby'        => 'menu_order ID',
-	) );
-	$image = array_shift( $images );
-endif;
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-	<?php if ( is_single() && $image ) : ?>
-	<div class="featured-thumbnail">
-		<?php echo wp_get_attachment_image( $image, 'featured-thumbnail-large' ); ?>
-	</div>
-	<?php elseif ( $image ) : ?>
-	<a class="featured-thumbnail" href="<?php the_permalink(); ?>" rel="<?php the_ID(); ?>">
-		<?php echo wp_get_attachment_image( $image, 'featured-thumbnail-large' ); ?>
-	</a>
-	<?php endif; ?>
+	<?php twentyfourteen_post_thumbnail(); ?>
 
 	<header class="entry-header">
 		<?php if ( in_array( 'category', get_object_taxonomies( get_post_type() ) ) && twentyfourteen_categorized_blog() ) : ?>
@@ -57,7 +33,7 @@ endif;
 
 			<?php twentyfourteen_posted_on(); ?>
 
-			<?php if ( ! post_password_required() && ( comments_open() || '0' != get_comments_number() ) ) : ?>
+			<?php if ( ! post_password_required() && ( comments_open() || get_comments_number() ) ) : ?>
 			<span class="comments-link"><?php comments_popup_link( __( 'Leave a comment', 'twentyfourteen' ), __( '1 Comment', 'twentyfourteen' ), __( '% Comments', 'twentyfourteen' ) ); ?></span>
 			<?php endif; ?>
 
@@ -77,9 +53,5 @@ endif;
 		?>
 	</div><!-- .entry-content -->
 
-	<?php if ( has_tag() ) : ?>
-	<footer class="entry-meta">
-		<span class="tag-links"><?php echo get_the_tag_list(); ?></span>
-	</footer><!-- .entry-meta -->
-	<?php endif; ?>
+	<?php the_tags( '<footer class="entry-meta"><span class="tag-links">', '', '</span></footer>' ); ?>
 </article><!-- #post-## -->

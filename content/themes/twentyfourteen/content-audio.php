@@ -1,6 +1,6 @@
 <?php
 /**
- * The template for displaying posts in the Aside post format
+ * The template for displaying posts in the Audio post format
  *
  * @package WordPress
  * @subpackage Twenty_Fourteen
@@ -28,7 +28,7 @@
 
 		<div class="entry-meta">
 			<span class="post-format">
-				<a class="entry-format" href="<?php echo esc_url( get_post_format_link( 'aside' ) ); ?>"><?php echo get_post_format_string( 'aside' ); ?></a>
+				<a class="entry-format" href="<?php echo esc_url( get_post_format_link( 'audio' ) ); ?>"><?php echo get_post_format_string( 'audio' ); ?></a>
 			</span>
 
 			<?php twentyfourteen_posted_on(); ?>
