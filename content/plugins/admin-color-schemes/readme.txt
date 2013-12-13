@@ -1,0 +1,25 @@
+=== Admin Color Schemes ===
+Contributors: wordpressdotorg, ryelle, melchoyce, drw158, littlethingsstudio
+Requires at least: 3.8
+Tested up to: 3.8
+Stable tag: trunk
+License: GPLv2
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+
+Bring some personality to your WordPress site with extra admin color schemes
+
+== Description ==
+
+8 new color schemes for your admin.
+
+Color schemes in this pack designed by Kate Whitley, Dave Whitley, Mel Choyce, and Kelly Dwan.
+
+== Screenshots ==
+
+1. Aubergine, by Kate Whitley & Kelly Dwan
+
+2. Flat, by Mel Choyce
+
+3. Vineyard, by Kate & Dave Whitley
+
+4. All your awesome color choices
