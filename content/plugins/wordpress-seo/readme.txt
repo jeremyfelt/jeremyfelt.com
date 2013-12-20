@@ -6,7 +6,7 @@ License URI: http://www.gnu.org/licenses/gpl.html
 Tags: seo, SEO, google, meta, meta description, search engine optimization, xml sitemap, xml sitemaps, google sitemap, sitemap, sitemaps, robots meta, rss, rss footer, yahoo, bing, news sitemaps, XML News Sitemaps, WordPress SEO, WordPress SEO by Yoast, yoast, multisite, canonical, nofollow, noindex, keywords, meta keywords, description, webmaster tools, google webmaster tools, seo pack
 Requires at least: 3.5
 Tested up to: 3.8
-Stable tag: 1.4.21
+Stable tag: 1.4.22
 
 Improve your WordPress SEO: Write better content and have a fully optimized WordPress site using the WordPress SEO plugin by Yoast.
 
@@ -106,6 +106,16 @@ You'll find the [FAQ on Yoast.com](http://yoast.com/wordpress/seo/faq/).
 
 == Changelog ==
 
+= 1.4.22 =
+
+* Bugfixes
+	* Reverted change to XML sitemaps stylesheet URL as that was giving issues on multisite installs.
+	* Reverted change to XML sitemap loading as we were no longer exposing some variables that other plugins relied upon.
+	* Fix bug with author sitemap showing for everyone.
+
+* Enhancement
+	* No longer save empty meta post variables, issue [#463](https://github.com/Yoast/wordpress-seo/issues/463). Clean up of DB is coming in future release, if you want to clean your DB now, see that issue for SQL queries.
+
 = 1.4.21 =
 
 * Bugfixes
@@ -135,6 +145,7 @@ You'll find the [FAQ on Yoast.com](http://yoast.com/wordpress/seo/faq/).
 
 * Misc
 	* Switch back to MailChimp for newsletter subscribe.
+    * Default to nofollowing links in RSS feed footers.
 
 * i18n
   * Updated es_ES, pt_BR & ru_RU
@@ -150,7 +161,6 @@ You'll find the [FAQ on Yoast.com](http://yoast.com/wordpress/seo/faq/).
 	* Applied a number of settings form best practices - props [Jrf](http://profiles.wordpress.org/jrf).
 	* File inclusion best practices applied - props [Jrf](http://profiles.wordpress.org/jrf).
     * Breadcrumbs for Custom Post Types now take the CPT->label instead of CPT->labels->menu_name as text parameter, as suggested by [katart17](http://wordpress.org/support/profile/katart17) and [Robbert V](http://wordpress.org/support/profile/robbert-v) - props [Jrf](http://profiles.wordpress.org/jrf).
-  * Default to nofollowing links in RSS feed footers.
 
 * Bugfixes
 	* Move all rewrite flushing to shutdown, so it doesn't break other plugins who add their rewrites late.
