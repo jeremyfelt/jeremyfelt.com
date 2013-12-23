@@ -3,13 +3,13 @@
 Plugin Name: YouTube Favorite Video Posts
 Plugin URI: http://jeremyfelt.com/wordpress/plugins/youtube-favorite-video-posts
 Description: Checks your YouTube favorite videos RSS feed and creates new posts in a custom post type.
-Version: 1.1
+Version: 1.2
 Author: Jeremy Felt
 Author URI: http://jeremyfelt.com
 License: GPL2
 */
 
-/*  Copyright 2011-2012 Jeremy Felt (email: jeremy.felt@gmail.com)
+/*  Copyright 2011-2013 Jeremy Felt (email: jeremy.felt@gmail.com)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License, version 2, as
@@ -28,23 +28,23 @@ License: GPL2
 class Youtube_Favorite_Video_Posts_Foghlaim {
 
 	public function __construct() {
-		/*  Things happen when we activate and deactivate the plugin of course. */
+		//Things happen when we activate and deactivate the plugin of course.
 		register_activation_hook( __FILE__, array( $this, 'activate_plugin' ) );
 		register_deactivation_hook( __FILE__, array( $this, 'deactivate_plugin' ) );
 
-		/*  Make a pretty link for settings under the plugin information. */
+		// Make a pretty link for settings under the plugin information.
 		add_filter( 'plugin_action_links', array( $this, 'add_plugin_action_links' ), 10, 2 );
 
-		/*  Add our custom settings to the admin menu. */
-		add_action( 'admin_head', array( $this, 'edit_admin_icon' ) );
+		// Add our custom settings to the admin menu.
+		add_action( 'admin_head', array( $this, 'dashboard_style' ) );
 		add_action( 'admin_menu', array( $this, 'add_settings' ) );
 		add_action( 'admin_init', array( $this, 'register_settings' ) );
 		add_action( 'admin_init', array( $this, 'add_languages' ) );
 
-		/* Register the jf_yfvp_youtube custom post type */
+		// Register the jf_yfvp_youtube custom post type.
 		add_action( 'init', array( $this, 'create_content_type' ) );
 
-		/* Our hook added when we schedule a WP Cron event */
+		// Our hook added when we schedule a WP Cron event.
 		add_action( 'jf_yfvp_process_feed', array( $this, 'process_feed' ) );
 	}
 
@@ -53,21 +53,27 @@ class Youtube_Favorite_Video_Posts_Foghlaim {
 	 * rules if the option to use our custom post type has been selected.
 	 */
 	public function activate_plugin(){
-		/*  Create the custom post type upon activation. */
+		// Create the custom post type upon activation.
 		$this->create_content_type();
 
 		$current_options = get_option( 'jf_yfvp_options', array() );
 		$valid_fetch_intervals = wp_get_schedules();
 
-		/* If the custom post type provided by this plugin is selected, flush the rewrite
-		 * rules so that the URLs can be pretty */
-		if ( isset( $current_options['post_type'] ) && 'jf_yfvp_youtube' === $current_options['post_type'] )
+		/**
+		 * If the custom post type provided by this plugin is selected, flush the rewrite
+		 * rules so that the URLs can be pretty.
+		 */
+		if ( isset( $current_options['post_type'] ) && 'jf_yfvp_youtube' === $current_options['post_type'] ) {
 			flush_rewrite_rules( false );
+		}
 
-		/* If a fetch interval has previously been selected, use that. Otherwise, we'll not schedule the event until settings save. */
-		if ( isset( $current_options['fetch_interval'] ) && in_array( $current_options['fetch_interval'], $valid_fetch_intervals ) )
+		/**
+		 * If a fetch interval has previously been selected, use that. Otherwise, we'll
+		 * not schedule the event until settings save.
+		 */
+		if ( isset( $current_options['fetch_interval'] ) && in_array( $current_options['fetch_interval'], $valid_fetch_intervals ) ) {
 			wp_schedule_event( ( time() + 120 ) , $current_options['fetch_interval'], 'jf_yfvp_process_feed' );
-
+		}
 	}
 
 	/**
@@ -79,7 +85,7 @@ class Youtube_Favorite_Video_Posts_Foghlaim {
 	}
 
 	/**
-	 * Add the text domain for plugin translation
+	 * Add the text domain for plugin translation.
 	 */
 	public function add_languages() {
 		load_plugin_textdomain( 'youtube-favorite-video-posts', false, basename( dirname( __FILE__ ) ) . '/lang' );
@@ -91,18 +97,20 @@ class Youtube_Favorite_Video_Posts_Foghlaim {
 	 * Function gratefully borrowed from Pippin Williamson's WPMods article:
 	 * http://www.wpmods.com/adding-plugin-action-links/
 	 *
-	 * @param $links array Current array of links to be displayed under the plugin
-	 * @param $file string The current plugin file being processed
-	 * @return array New array of links to be displayed under the plugin
+	 * @param array  $links Current array of links to be displayed under the plugin.
+	 * @param string $file  The current plugin file being processed.
+	 *
+	 * @return array New array of links to be displayed under the plugin.
 	 */
 	public function add_plugin_action_links( $links, $file ){
 		static $this_plugin;
 
-		if ( ! $this_plugin )
+		if ( ! $this_plugin ) {
 			$this_plugin = plugin_basename( __FILE__ );
+		}
 
 		if ( $file == $this_plugin ) {
-			$settings_link = '<a href="' . site_url( '/wp-admin/options-general.php?page=youtube-favorite-video-posts-settings' ) . '">' . __( 'Settings', 'youtube-favorite-video-posts' ) . '</a>';
+			$settings_link = '<a href="' . esc_url( site_url( '/wp-admin/options-general.php?page=youtube-favorite-video-posts-settings' ) ) . '">' . __( 'Settings', 'youtube-favorite-video-posts' ) . '</a>';
 			array_unshift( $links, $settings_link );
 		}
 		return $links;
@@ -111,10 +119,12 @@ class Youtube_Favorite_Video_Posts_Foghlaim {
 	/**
 	 * Add some style to the plugin with a YouTube icon at the top of the page.
 	 */
-	public function edit_admin_icon(){
-		global $post_type;
-		if ( 'jf_yfvp_youtube' === $post_type )
-			echo '<style>#icon-edit { background: url("' . plugins_url( 'images/youtube-icon-32.png', __FILE__ ) . '") no-repeat; background-size: 32px 32px; }</style>';
+	public function dashboard_style(){
+		global $wp_version;
+
+		if ( 1 !== version_compare( '3.8', $wp_version ) ) {
+			?><style>#menu-posts-jf_yfvp_youtube .menu-icon-post div.wp-menu-image:before { content: '\f126'; }</style><?php
+		}
 	}
 
 	/**
@@ -125,12 +135,11 @@ class Youtube_Favorite_Video_Posts_Foghlaim {
 	}
 
 	/**
-	 * Display the main settings view for Youtube Favorite Video Posts
+	 * Display the main settings view for Youtube Favorite Video Posts.
 	 */
 	public function view_settings(){
 		?>
 		<div class="wrap">
-			<div class="icon32" id="icon-options-general"></div>
 			<h2><?php _e( 'YouTube Favorite Video Posts', 'youtube-favorite-video-posts' ); ?></h2>
 			<h3><?php _e( 'Overview', 'youtube-favorite-video-posts' ); ?>:</h3>
 			<p style="margin-left:12px; max-width:640px;"><?php _e( 'The settings below will help determine where to check for your favorite YouTube videos, how often to look for them, and how they should be stored once new items are found.', 'youtube-favorite-video-posts' ); ?></p>
@@ -157,16 +166,20 @@ class Youtube_Favorite_Video_Posts_Foghlaim {
 	 */
 	public function register_settings(){
 		register_setting( 'jf_yfvp_options', 'jf_yfvp_options', array( $this, 'validate_options' ) );
-		add_settings_section( 'jf_yfvp_section_main', '', array( $this, 'main_section_text' ), 'jf_yfvp' );
+
+		add_settings_section( 'jf_yfvp_section_main',      '', array( $this, 'main_section_text'      ), 'jf_yfvp' );
 		add_settings_section( 'jf_yfvp_section_post_type', '', array( $this, 'post_type_section_text' ), 'jf_yfvp' );
-		add_settings_section( 'jf_yfvp_section_interval', '', array( $this, 'interval_section_text' ), 'jf_yfvp' );
-		add_settings_field( 'jf_yfvp_youtube_rss_feed', 'YouTube Username:', array( $this, 'youtube_user_text' ), 'jf_yfvp', 'jf_yfvp_section_main' );
-		add_settings_field( 'jf_yfvp_embed_width', 'Default Embed Width:', array( $this, 'embed_width_text' ), 'jf_yfvp', 'jf_yfvp_section_main' );
-		add_settings_field( 'jf_yfvp_embed_height', 'Default Embed Height:', array( $this, 'embed_height_text' ), 'jf_yfvp', 'jf_yfvp_section_main' );
-		add_settings_field( 'jf_yfvp_max_fetch_items', 'Max Items To Fetch:', array( $this, 'max_fetch_items_text' ), 'jf_yfvp', 'jf_yfvp_section_main' );
-		add_settings_field( 'jf_yfvp_post_type', 'Post Type:', array( $this, 'post_type_selection_text' ), 'jf_yfvp', 'jf_yfvp_section_post_type' );
-		add_settings_field( 'jf_yfvp_post_status', __( 'Default Post Status:', 'youtube-favorite-video-posts' ) , array( $this, 'post_status_selection_text' ), 'jf_yfvp', 'jf_yfvp_section_post_type' );
-		add_settings_field( 'jf_yfvp_fetch_interval', 'Feed Fetch Interval: ', array( $this, 'fetch_interval_selection_text' ), 'jf_yfvp', 'jf_yfvp_section_interval' );
+		add_settings_section( 'jf_yfvp_section_interval',  '', array( $this, 'interval_section_text'  ), 'jf_yfvp' );
+
+		add_settings_field( 'jf_yfvp_youtube_rss_feed', 'YouTube Username:',     array( $this, 'youtube_user_text'        ), 'jf_yfvp', 'jf_yfvp_section_main' );
+		add_settings_field( 'jf_yfvp_embed_width',      'Default Embed Width:',  array( $this, 'embed_width_text'         ), 'jf_yfvp', 'jf_yfvp_section_main' );
+		add_settings_field( 'jf_yfvp_embed_height',     'Default Embed Height:', array( $this, 'embed_height_text'        ), 'jf_yfvp', 'jf_yfvp_section_main' );
+		add_settings_field( 'jf_yfvp_max_fetch_items',  'Max Items To Fetch:',   array( $this, 'max_fetch_items_text'     ), 'jf_yfvp', 'jf_yfvp_section_main' );
+
+		add_settings_field( 'jf_yfvp_post_type',        'Post Type:',            array( $this, 'post_type_selection_text' ), 'jf_yfvp', 'jf_yfvp_section_post_type' );
+		add_settings_field( 'jf_yfvp_post_status',      __( 'Default Post Status:', 'youtube-favorite-video-posts' ) , array( $this, 'post_status_selection_text' ), 'jf_yfvp', 'jf_yfvp_section_post_type' );
+
+		add_settings_field( 'jf_yfvp_fetch_interval',   'Feed Fetch Interval: ', array( $this, 'fetch_interval_selection_text' ), 'jf_yfvp', 'jf_yfvp_section_interval' );
 	}
 
 	/**
@@ -185,7 +198,7 @@ class Youtube_Favorite_Video_Posts_Foghlaim {
 	}
 
 	/**
-	 * Describe the selection of the WP Cron interval we'll use
+	 * Describe the selection of the WP Cron interval we'll use.
 	 */
 	public function interval_section_text() {
 
@@ -210,60 +223,63 @@ class Youtube_Favorite_Video_Posts_Foghlaim {
 	}
 
 	/**
-	 * Provide an input for the embed width
+	 * Provide an input for the embed width.
 	 */
 	public function embed_width_text() {
 		$jf_yfvp_options = get_option( 'jf_yfvp_options', array() );
 
-		if ( ! isset( $jf_yfvp_options['embed_width'] ) )
+		if ( ! isset( $jf_yfvp_options['embed_width'] ) ) {
 			$jf_yfvp_options['embed_width'] = 330;
+		}
 		?>
 		<input style="width: 100px;" type="text" id="jf_yfvp_embed_width" name="jf_yfvp_options[embed_width]" value="<?php echo esc_attr( $jf_yfvp_options['embed_width'] ); ?>" />
 		<?php
 	}
 
 	/**
-	 * Provide in input for the embed height
+	 * Provide in input for the embed height.
 	 */
 	public function embed_height_text() {
 		$jf_yfvp_options = get_option( 'jf_yfvp_options', array() );
 
-		if ( ! isset( $jf_yfvp_options['embed_height'] ) )
+		if ( ! isset( $jf_yfvp_options['embed_height'] ) ) {
 			$jf_yfvp_options['embed_height'] = 270;
-
+		}
 		?>
 		<input style="width: 100px;" type="text" id="jf_yfvp_embed_height" name="jf_yfvp_options[embed_height]" value="<?php echo esc_attr( $jf_yfvp_options['embed_height'] ); ?>" />
 		<?php
 	}
 
 	/**
-	 * Provide an input for the Youtube username
+	 * Provide an input for the YouTube username.
 	 */
 	public function youtube_user_text() {
 		$jf_yfvp_options = get_option( 'jf_yfvp_options', array() );
 
-		/* If options have been saved before, but no name specified, toss up a warning */
+		// If options have been saved before, but no name specified, toss up a warning.
 		if ( ! empty( $jf_yfvp_options ) && empty( $jf_yfvp_options['youtube_rss_feed'] ) ) {
 			?>
 			<div class="error" style="width: 615px;padding: 10px;"><?php _e( 'It looks like a Youtube username has not yet been entered, even though other options have been saved. Please note that we are unable to fetch your favorite videos until a username is provided.', 'youtube-favorite-video-posts' ); ?></div>
 			<?php
 		}
 
-		if ( ! isset( $jf_yfvp_options['youtube_rss_feed'] ) )
+		if ( ! isset( $jf_yfvp_options['youtube_rss_feed'] ) ) {
 			$jf_yfvp_options['youtube_rss_feed'] = '';
+		}
 		?>
 		<input style="width: 200px;" type="text" id="jf_yfvp_youtube_rss_feed" name="jf_yfvp_options[youtube_rss_feed]" value="<?php echo esc_attr( $jf_yfvp_options['youtube_rss_feed'] ); ?>" />
 		<?php
 	}
 
 	/**
-	 * Provide an input for the selection of post types
+	 * Provide an input for the selection of post types.
 	 */
 	public function post_type_selection_text() {
 		$jf_yfvp_options = get_option( 'jf_yfvp_options', array() );
 
-		if ( ! isset( $jf_yfvp_options['post_type'] ) )
+		if ( ! isset( $jf_yfvp_options['post_type'] ) ) {
 			$jf_yfvp_options['post_type'] = 'jf_yfvp_youtube';
+		}
 
 		$post_types = array_merge( get_post_types( array( '_builtin' => false ) ), array( 'post', 'link' ) );
 
@@ -277,13 +293,14 @@ class Youtube_Favorite_Video_Posts_Foghlaim {
 	}
 
 	/**
-	 * Provide an input for the selection of post status
+	 * Provide an input for the selection of post status.
 	 */
 	public function post_status_selection_text() {
 		$jf_yfvp_options = get_option( 'jf_yfvp_options', array() );
 
-		if ( ! isset( $jf_yfvp_options['post_status'] ) )
+		if ( ! isset( $jf_yfvp_options['post_status'] ) ) {
 			$jf_yfvp_options['post_status'] = 'publish';
+		}
 
 		$post_statii = array( 'draft', 'publish', 'private' );
 
@@ -297,15 +314,16 @@ class Youtube_Favorite_Video_Posts_Foghlaim {
 	}
 
 	/**
-	 * Provide an input to select the WP Cron interval to schedule the hook with
+	 * Provide an input to select the WP Cron interval to schedule the hook with.
 	 */
 	public function fetch_interval_selection_text() {
 		$intervals = wp_get_schedules();
 
 		$jf_yfvp_options = get_option( 'jf_yfvp_options', array() );
 
-		if ( ! isset( $jf_yfvp_options['fetch_interval'] ) )
+		if ( ! isset( $jf_yfvp_options['fetch_interval'] ) ) {
 			$jf_yfvp_options['fetch_interval'] = 'hourly';
+		}
 
 		echo '<select id="jf_yfvp_fetch_interval" name="jf_yfvp_options[fetch_interval]">';
 
@@ -317,45 +335,54 @@ class Youtube_Favorite_Video_Posts_Foghlaim {
 	}
 
 	/**
-	 * Provide an input for the max number of items to fetch
+	 * Provide an input for the max number of items to fetch.
 	 */
 	public function max_fetch_items_text() {
 		$jf_yfvp_options = get_option( 'jf_yfvp_options', array() );
 
-		if ( ! isset( $jf_yfvp_options['max_fetch_items'] ) )
+		if ( ! isset( $jf_yfvp_options['max_fetch_items'] ) ) {
 			$jf_yfvp_options['max_fetch_items'] = 5;
+		}
 		?>
 		<input type="text" id="jf_yfvp_max_fetch_items" name="jf_yfvp_options[max_fetch_items]" value="<?php echo esc_attr( $jf_yfvp_options['max_fetch_items'] ); ?>" />
 		<?php
 	}
 
 	/**
-	 * Validate the options being saved for the plugin
+	 * Validate the options being saved for the plugin.
 	 *
-	 * @param $input array New values that the user is attempting to save
-	 * @return array Validated values that we pass on
+	 * @param array $input New values that the user is attempting to save.
+	 *
+	 * @return array Validated values that we pass on.
 	 */
 	public function validate_options( $input ) {
 
 		$valid_post_status_options = array( 'draft', 'publish', 'private' );
 		$valid_fetch_interval_options = wp_get_schedules();
 
-		$valid_post_type_options = array_merge( get_post_types( array( '_builtin' => false ) ), array( 'post', 'link' ) );
+		$valid_post_type_options = array_merge( get_post_types( array( '_builtin' => false ) ), array( 'post' ) );
 
-		if( ! in_array( $input['post_status'], $valid_post_status_options ) )
+		if( ! in_array( $input['post_status'], $valid_post_status_options ) ) {
 			$input['post_status'] = 'publish';
+		}
 
-		if( ! in_array( $input['post_type'], $valid_post_type_options ) )
+		if( ! in_array( $input['post_type'], $valid_post_type_options ) ) {
 			$input['post_type'] = 'jf_yfvp_youtube';
+		}
 
-		if( ! array_key_exists( $input['fetch_interval'], $valid_fetch_interval_options ) )
+		if( ! array_key_exists( $input['fetch_interval'], $valid_fetch_interval_options ) ) {
 			$input['fetch_interval'] = 'hourly';
+		}
 
-		/* It is possible the user just switched back to using our custom post type, so we should flush the rewrite rules */
-		if ( 'jf_yfvp_youtube' === $input['post_type'] )
+		/**
+		 * It is possible the user just switched back to using our custom post type,
+		 * so we should flush the rewrite rules.
+		 */
+		if ( 'jf_yfvp_youtube' === $input['post_type'] ) {
 			flush_rewrite_rules( false );
+		}
 
-		/*  This seems to be the only place we can reset the scheduled Cron if the frequency is changed, so here goes. */
+		// This seems to be the only place we can reset the scheduled Cron if the frequency is changed.
 		wp_clear_scheduled_hook( 'jf_yfvp_process_feed' );
 		wp_schedule_event( ( time() + 30 ) , $input['fetch_interval'], 'jf_yfvp_process_feed' );
 
@@ -367,50 +394,51 @@ class Youtube_Favorite_Video_Posts_Foghlaim {
 	}
 
 	/**
-	 * Register our custom post type - jf_yfvp_youtube - for possible use with the plugin
+	 * Register our custom post type–jf_yfvp_youtube–for possible use with the plugin.
 	 */
 	public function create_content_type() {
-		register_post_type( 'jf_yfvp_youtube',
-			array(
-			     'labels' => array(
-				     'name' => __( 'YouTube', 'youtube-favorite-video-posts' ),
-				     'singular_name' => __( 'YouTube Favorite', 'youtube-favorite-video-posts' ),
-				     'all_items' => __( 'All YouTube Favorites', 'youtube-favorite-video-posts' ),
-				     'add_new_item' => __( 'Add YouTube Favorite', 'youtube-favorite-video-posts' ),
-				     'edit_item' => __( 'Edit YouTube Favorite', 'youtube-favorite-video-posts' ),
-				     'new_item' => __( 'New YouTube Favorite', 'youtube-favorite-video-posts' ),
-				     'view_item' => __( 'View YouTube Favorite', 'youtube-favorite-video-posts' ),
-				     'search_items' => __( 'Search YouTube Favorites', 'youtube-favorite-video-posts' ),
-				     'not_found' => __( 'No YouTube Favorites found', 'youtube-favorite-video-posts' ),
-				     'not_found_in_trash' => __( 'No YouTube Favorites found in trash', 'youtube-favorite-video-posts' ),
-			     ),
-			     'description' => __( 'YouTube posts created by the YouTube Favorite Video Posts plugin.', 'youtube-favorite-video-posts' ),
-			     'public' => true,
-			     'menu_icon' => plugins_url( '/images/youtube-icon-16.png', __FILE__ ),
-			     'menu_position' => 5,
-			     'hierarchical' => false,
-			     'supports' => array (
-				     'title',
-				     'editor',
-				     'author',
-				     'custom-fields',
-				     'comments',
-				     'revisions',
-			     ),
-			     'has_archive' => true,
-			     'rewrite' => array(
-				     'slug' => 'youtube',
-				     'with_front' => false
-			     ),
-			)
+		$labels = array(
+			'name' => __( 'YouTube', 'youtube-favorite-video-posts' ),
+			'singular_name' => __( 'YouTube Favorite', 'youtube-favorite-video-posts' ),
+			'all_items' => __( 'All YouTube Favorites', 'youtube-favorite-video-posts' ),
+			'add_new_item' => __( 'Add YouTube Favorite', 'youtube-favorite-video-posts' ),
+			'edit_item' => __( 'Edit YouTube Favorite', 'youtube-favorite-video-posts' ),
+			'new_item' => __( 'New YouTube Favorite', 'youtube-favorite-video-posts' ),
+			'view_item' => __( 'View YouTube Favorite', 'youtube-favorite-video-posts' ),
+			'search_items' => __( 'Search YouTube Favorites', 'youtube-favorite-video-posts' ),
+			'not_found' => __( 'No YouTube Favorites found', 'youtube-favorite-video-posts' ),
+			'not_found_in_trash' => __( 'No YouTube Favorites found in trash', 'youtube-favorite-video-posts' ),
 		);
+
+		$args = array(
+			'labels' => $labels,
+			'description' => __( 'YouTube posts created by the YouTube Favorite Video Posts plugin.', 'youtube-favorite-video-posts' ),
+			'public' => true,
+			'menu_position' => 5,
+			'hierarchical' => false,
+			'supports' => array (
+				'title',
+				'editor',
+				'author',
+				'custom-fields',
+				'comments',
+				'revisions',
+			),
+			'has_archive' => true,
+			'rewrite' => array(
+				'slug' => 'youtube',
+				'with_front' => false
+			),
+		);
+
+		register_post_type( 'jf_yfvp_youtube', $args );
 	}
 
 	/**
 	 * The default SimplePie cache lifetime is 12 hours. We really do want to update more
 	 * frequently, so we'll make it 30 seconds during our update.
 	 *
-	 * @return int Number of seconds for the SimplePie cache to last
+	 * @return int Number of seconds for the SimplePie cache to last.
 	 */
 	public function modify_simplepie_cache_lifetime() {
 		return 30;
@@ -419,35 +447,38 @@ class Youtube_Favorite_Video_Posts_Foghlaim {
 	/**
 	 * Grab the configured YouTube favorites RSS feed and create new posts based on that.
 	 *
-	 * @return mixed Only returns if leaving the function
+	 * @return mixed Only returns if leaving the function.
 	 */
 	public function process_feed() {
-		/*  Go get some options! */
 		$youtube_options = get_option( 'jf_yfvp_options', array() );
 
-		/* No username, no feed. No feed, no work. */
-		if ( empty( $youtube_options['youtube_rss_feed'] ) )
+		// No username, no feed. No feed, no work.
+		if ( empty( $youtube_options['youtube_rss_feed'] ) ) {
 			return;
+		}
 
-		/*  The feed URL we'll be grabbing. */
+		// The feed URL we'll be grabbing.
 		$youtube_feed_url = 'http://gdata.youtube.com/feeds/base/users/' . esc_attr( $youtube_options['youtube_rss_feed'] ) . '/favorites?alt=rss';
 
-		if ( isset( $youtube_options['post_type'] ) )
+		if ( isset( $youtube_options['post_type'] ) ) {
 			$post_type = $youtube_options['post_type'];
-		else
+		} else {
 			$post_type = 'jf_yfvp_youtube';
+		}
 
-		if ( isset( $youtube_options['post_status'] ) )
+		if ( isset( $youtube_options['post_status'] ) ) {
 			$post_status = $youtube_options['post_status'];
-		else
+		} else {
 			$post_status = 'publish';
+		}
 
-		if ( isset( $youtube_options['max_fetch_items'] ) )
+		if ( isset( $youtube_options['max_fetch_items'] ) ) {
 			$max_fetch_items = absint( $youtube_options['max_fetch_items'] );
-		else
+		} else {
 			$max_fetch_items = 5;
+		}
 
-		/*  Now fetch with the WordPress SimplePie function. */
+		// Now fetch with the WordPress SimplePie function.
 		add_filter( 'wp_feed_cache_transient_lifetime', array( $this, 'modify_simplepie_cache_lifetime' ) );
 		$youtube_feed = fetch_feed( $youtube_feed_url );
 		remove_filter( 'wp_feed_cache_transient_lifetime', array( $this, 'modify_simplepie_cache_lifetime' ) );
@@ -456,7 +487,6 @@ class Youtube_Favorite_Video_Posts_Foghlaim {
 			$max_items = $youtube_feed->get_item_quantity( $max_fetch_items );
 			$youtube_items = $youtube_feed->get_items( 0, $max_items );
 			foreach( $youtube_items as $item ) {
-
 				// Hash the guid element from the RSS feed to determine uniqueness, since yeah... guid.
 				$video_guid = md5( $item->get_id() );
 
@@ -468,12 +498,14 @@ class Youtube_Favorite_Video_Posts_Foghlaim {
 					'\" src=\"http://www.youtube.com/embed/' .
 					esc_attr( $video_token ) . '\" frameborder=\"0\" allowfullscreen></iframe>';
 
-				/* Allow other plugins or themes to alter or replace the post content before storing */
+				// Allow other plugins or themes to alter or replace the post content before storing.
 				$video_embed_code = apply_filters( 'yfvp_new_video_embed_code', $video_embed_code, $video_token );
 
-				/* Allow other plugins or themes to alter or replace the post title before storing.
+				/**
+				 * Allow other plugins or themes to alter or replace the post title before storing.
 				 * Also, we're disabling the kses filters below, so we need to clean up the title as
-				 * YouTube allows " and the like. */
+				 * YouTube allows " and the like.
+				 */
 				$original_item_title = $item->get_title();
 				$item_title = esc_html( apply_filters( 'yfvp_new_video_item_title', $original_item_title ) );
 
@@ -512,16 +544,16 @@ class Youtube_Favorite_Video_Posts_Foghlaim {
 				                                 ));
 				}
 
-				// If we come back empty on our meta query, we should be ok to insert the video as normal
+				// If we come back empty on our meta query, we should be ok to insert the video as normal.
 				if ( empty ( $existing_items ) ) {
 
 					$youtube_post = array(
-						'post_title' => $item_title,
+						'post_title'   => $item_title,
 						'post_content' => $video_embed_code,
-						'post_author' => 1,
-						'post_status' => $post_status,
-						'post_type' => $post_type,
-						'filter' => true,
+						'post_author'  => 1,
+						'post_status'  => $post_status,
+						'post_type'    => $post_type,
+						'filter'       => true,
 					);
 
 					kses_remove_filters();
@@ -532,7 +564,7 @@ class Youtube_Favorite_Video_Posts_Foghlaim {
 					add_post_meta( $item_post_id, 'jf_yfvp_original_title', sanitize_title( $original_item_title ), true );
 				} else {
 					$original_meta_title = get_post_meta( $existing_items[0]->ID, 'jf_yfvp_original_title', true );
-					/*
+					/**
 					 * If the current item's original title does not match the matched post's original title,
 					 * update it with the current filtered version of the new item title. *whew*
 					 */
