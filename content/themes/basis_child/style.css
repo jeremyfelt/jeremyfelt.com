@@ -1,0 +1,12 @@
+/**
+ * Theme Name: Jeremy's Basis
+ * Theme URI: http://jeremyfelt.com/
+ * Author: jeremyfelt
+ * Author URI: http://jeremyfelt.com/
+ * Description: Jeremy's child theme of Theme Foundry's Basis
+ * Version: 1.0
+ * License: GNU General Public License v2 or later
+ * License URI: http://www.gnu.org/licenses/gpl-2.0.html
+ */
+
+@import url( '../basis/style.css' );
