@@ -195,6 +195,7 @@ else
 	echo -e "\nNo network connection available, skipping package installation"
 fi
 
+cp /vagrant/config/init/jeremyfelt-init.conf /etc/init/jeremyfelt-init.conf
 
 cp /vagrant/config/nginx-config/nginx.conf /etc/nginx/nginx.conf
 cp /vagrant/config/nginx-config/jeremyfelt.com.conf /etc/nginx/conf.d/jeremyfelt.com.conf
