@@ -204,7 +204,6 @@ cp /vagrant/config/php5-fpm-config/www.conf /etc/php5/fpm/pool.d/www.conf
 cp /vagrant/config/php5-fpm-config/php-custom.ini /etc/php5/fpm/conf.d/php-custom.ini
 cp /vagrant/config/php5-fpm-config/xdebug.ini /etc/php5/fpm/conf.d/xdebug.ini
 cp /vagrant/config/php5-fpm-config/apc.ini /etc/php5/fpm/conf.d/apc.ini
-cp /vagrant/config/mysql-config/my.cnf /etc/mysql/my.cnf
 cp /vagrant/config/memcached-config/memcached.conf /etc/memcached.conf
 
 cp /vagrant/config/bash_profile /home/vagrant/.bash_profile
@@ -215,7 +214,7 @@ cp /vagrant/config/bash_aliases /home/vagrant/.bash_aliases
 # RESTART SERVICES
 #
 # Make sure the services we expect to be running are running.
-printf "\nRestart services...\n"
+echo -e "\nRestart services..."
 service nginx restart
 service memcached restart
 
@@ -223,37 +222,47 @@ service memcached restart
 php5dismod xdebug
 service php5-fpm restart
 
-# MySQL gives us an error if we restart a non running service, which
-# happens after a `vagrant halt`. Check to see if it's running before
-# deciding whether to start or restart.
-exists_mysql=`service mysql status`
-if [ "mysql stop/waiting" == "$exists_mysql" ]
-then
-	printf "service mysql start"
-	service mysql start
+# If MySQL is installed, go through the various imports and service tasks.
+exists_mysql="$(service mysql status)"
+if [[ "mysql: unrecognized service" != "${exists_mysql}" ]]; then
+	echo -e "\nSetup MySQL configuration file links..."
+
+	# Copy mysql configuration from local
+	cp /vagrant/config/mysql-config/my.cnf /etc/mysql/my.cnf
+
+	# MySQL gives us an error if we restart a non running service, which
+	# happens after a `vagrant halt`. Check to see if it's running before
+	# deciding whether to start or restart.
+	if [[ "mysql stop/waiting" == "${exists_mysql}" ]]; then
+		echo "service mysql start"
+		service mysql start
+	else
+		echo "service mysql restart"
+		service mysql restart
+	fi
+
+	# IMPORT SQL
+	#
+	# Create the databases (unique to system) that will be imported with
+	# the mysqldump files located in database/backups/
+	if [[ -f /srv/database/init-custom.sql ]]; then
+		mysql -u root -proot < /srv/database/init-custom.sql
+		echo -e "\nInitial custom MySQL scripting..."
+	else
+		echo -e "\nNo custom MySQL scripting found in database/init-custom.sql, skipping..."
+	fi
+
+	# Setup MySQL by importing an init file that creates necessary
+	# users and databases that our vagrant setup relies on.
+	mysql -u root -proot < /srv/database/init.sql
+	echo "Initial MySQL prep..."
+
+	# Process each mysqldump SQL file in database/backups to import
+	# an initial data set for MySQL.
+	/srv/database/import-sql.sh
 else
-	printf "service mysql restart"
-	service mysql restart
+	echo -e "\nMySQL is not installed. No databases imported."
 fi
-
-# IMPORT SQL
-#
-# Create the databases (unique to system) that will be imported with
-# the mysqldump files located in database/backups/
-if [ -f /srv/database/init-custom.sql ]
-then
-	mysql -u root -pblank < /srv/database/init-custom.sql | printf "\nInitial custom MySQL scripting...\n"
-else
-	printf "\nNo custom MySQL scripting found in database/init-custom.sql, skipping...\n"
-fi
-
-# Setup MySQL by importing an init file that creates necessary
-# users and databases that our vagrant setup relies on.
-mysql -u root -pblank < /srv/database/init.sql | echo "Initial MySQL prep...."
-
-# Process each mysqldump SQL file in database/backups to import 
-# an initial data set for MySQL.
-/srv/database/import-sql.sh
 
 if [[ $ping_result == *bytes?from* ]]
 then
