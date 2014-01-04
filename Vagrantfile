@@ -26,7 +26,6 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.synced_folder "database/", "/srv/database"
-  config.vm.synced_folder "database/data/", "/var/lib/mysql", :mount_options => [ "dmode=777", "fmode=777" ]
 
   config.vm.synced_folder "www",     "/srv/web/jeremyfelt.com/www",     :owner => "www-data", :mount_options => [ "dmode=775", "fmode=774" ]
   config.vm.synced_folder "content", "/srv/web/jeremyfelt.com/content", :owner => "www-data", :mount_options => [ "dmode=775", "fmode=774" ]
