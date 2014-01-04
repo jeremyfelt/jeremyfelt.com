@@ -264,24 +264,23 @@ else
 	echo -e "\nMySQL is not installed. No databases imported."
 fi
 
-if [[ $ping_result == *bytes?from* ]]
-then
+if [[ $ping_result == *bytes?from* ]]; then
 	# WP-CLI Install
-	if [ ! -d /srv/www/wp-cli ]
-	then
-		printf "\nDownloading wp-cli.....http://wp-cli.org\n"
+	if [[ ! -d /srv/www/wp-cli ]]; then
+		echo -e "\nDownloading wp-cli, see http://wp-cli.org"
 		git clone git://github.com/wp-cli/wp-cli.git /srv/www/wp-cli
 		cd /srv/www/wp-cli
 		composer install
 	else
-		printf "\nUpdating wp-cli....\n"
+		echo -e "\nUpdating wp-cli..."
 		cd /srv/www/wp-cli
 		git pull --rebase origin master
+		composer update
 	fi
 	# Link `wp` to the `/usr/local/bin` directory
 	ln -sf /srv/www/wp-cli/bin/wp /usr/local/bin/wp
 else
-	printf "\nNo network available, skipping network installations"
+	echo -e "\nNo network available, skipping network installations"
 fi
 
 # Add any custom domains to the virtual machine's hosts file so that it
