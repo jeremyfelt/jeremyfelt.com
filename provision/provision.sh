@@ -120,15 +120,14 @@ echo postfix postfix/main_mailer_type select Internet Site | debconf-set-selecti
 echo postfix postfix/mailname string vvv | debconf-set-selections
 
 # Provide our custom apt sources before running `apt-get update`
-ln -sf /srv/config/apt-source-append.list /etc/apt/sources.list.d/vvv-sources.list | echo "Linked custom apt sources"
+ln -sf /srv/config/apt-source-append.list /etc/apt/sources.list.d/vvv-sources.list
+echo "Linked custom apt sources"
 
-if [[ $ping_result == *bytes?from* ]]
-then
+if [[ $ping_result == *bytes?from* ]]; then
 	# If there are any packages to be installed in the apt_package_list array,
 	# then we'll run `apt-get update` and then `apt-get install` to proceed.
-	if [ ${#apt_package_install_list[@]} = 0 ];
-	then 
-		printf "No apt packages to install.\n\n"
+	if [[ ${#apt_package_install_list[@]} = 0 ]]; then
+		echo -e "No apt packages to install.\n"
 	else
 		# Before running `apt-get update`, we should add the public keys for
 		# the packages that we are installing from non standard sources via
@@ -150,46 +149,50 @@ then
 		gpg -q --keyserver keyserver.ubuntu.com --recv-key A1715D88E1DF1F24
 		gpg -q -a --export A1715D88E1DF1F24 | apt-key add -
 
+		# Launchpad nodejs key C7917B12
+		gpg -q --keyserver keyserver.ubuntu.com --recv-key C7917B12
+		gpg -q -a --export  C7917B12  | apt-key add -
+
 		# update all of the package references before installing anything
-		printf "Running apt-get update....\n"
+		echo "Running apt-get update..."
 		apt-get update --assume-yes
 
 		# install required packages
-		printf "Installing apt-get packages...\n"
+		echo "Installing apt-get packages..."
 		apt-get install --assume-yes ${apt_package_install_list[@]}
 
 		# Clean up apt caches
-		apt-get clean			
+		apt-get clean
 	fi
 
 	# ack-grep
 	#
 	# Install ack-rep directory from the version hosted at beyondgrep.com as the
 	# PPAs for Ubuntu Precise are not available yet.
-	if [ -f /usr/bin/ack ]
-	then
+	if [[ -f /usr/bin/ack ]]; then
 		echo "ack-grep already installed"
 	else
 		echo "Installing ack-grep as ack"
 		curl -s http://beyondgrep.com/ack-2.04-single-file > /usr/bin/ack && chmod +x /usr/bin/ack
 	fi
 
-	# COMPOSER
+	# Grunt
 	#
-	# Install or Update Composer based on current state. Updates are direct from
-	# master branch on GitHub repository.
-	if composer --version | grep -q 'Composer version';
-	then
-		printf "Updating Composer...\n"
-		composer self-update
+	# Install or Update Grunt based on gurrent state.  Updates are direct
+	# from NPM
+	if [[ "$(grunt --version)" ]]; then
+		echo "Updating Grunt CLI"
+		npm update -g grunt-cli &>/dev/null
+		npm update -g grunt-sass &>/dev/null
+		npm update -g grunt-cssjanus &>/dev/null
 	else
-		printf "Installing Composer...\n"
-		curl -sS https://getcomposer.org/installer | php
-		chmod +x composer.phar
-		mv composer.phar /usr/local/bin/composer
+		echo "Installing Grunt CLI"
+		npm install -g grunt-cli &>/dev/null
+		npm install -g grunt-sass &>/dev/null
+		npm install -g grunt-cssjanus &>/dev/null
 	fi
 else
-	printf "\nNo network connection available, skipping package installation"
+	echo -e "\nNo network connection available, skipping package installation"
 fi
 
 # SYMLINK HOST FILES
