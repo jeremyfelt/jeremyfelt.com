@@ -195,24 +195,22 @@ else
 	echo -e "\nNo network connection available, skipping package installation"
 fi
 
-# SYMLINK HOST FILES
-printf "\nSetup configuration file links...\n"
 
-ln -sf /vagrant/config/nginx-config/nginx.conf /etc/nginx/nginx.conf
-ln -sf /vagrant/config/nginx-config/jeremyfelt.com.conf /etc/nginx/conf.d/jeremyfelt.com.conf
-ln -sf /vagrant/config/nginx-config/fastcgi_params /etc/nginx/fastcgi_params
+cp /vagrant/config/nginx-config/nginx.conf /etc/nginx/nginx.conf
+cp /vagrant/config/nginx-config/jeremyfelt.com.conf /etc/nginx/conf.d/jeremyfelt.com.conf
+cp /vagrant/config/nginx-config/fastcgi_params /etc/nginx/fastcgi_params
 
-ln -sf /vagrant/config/php5-fpm-config/www.conf /etc/php5/fpm/pool.d/www.conf
-ln -sf /vagrant/config/php5-fpm-config/php-custom.ini /etc/php5/fpm/conf.d/php-custom.ini
-ln -sf /vagrant/config/php5-fpm-config/xdebug.ini /etc/php5/fpm/conf.d/xdebug.ini
-ln -sf /vagrant/config/php5-fpm-config/apc.ini /etc/php5/fpm/conf.d/apc.ini
+cp /vagrant/config/php5-fpm-config/www.conf /etc/php5/fpm/pool.d/www.conf
+cp /vagrant/config/php5-fpm-config/php-custom.ini /etc/php5/fpm/conf.d/php-custom.ini
+cp /vagrant/config/php5-fpm-config/xdebug.ini /etc/php5/fpm/conf.d/xdebug.ini
+cp /vagrant/config/php5-fpm-config/apc.ini /etc/php5/fpm/conf.d/apc.ini
 cp /vagrant/config/mysql-config/my.cnf /etc/mysql/my.cnf
-ln -sf /vagrant/config/memcached-config/memcached.conf /etc/memcached.conf
+cp /vagrant/config/memcached-config/memcached.conf /etc/memcached.conf
 
-ln -sf /vagrant/config/bash_profile /home/vagrant/.bash_profile
+cp /vagrant/config/bash_profile /home/vagrant/.bash_profile
 
 # Custom bash_aliases included by vagrant user's .bashrc
-ln -sf /vagrant/config/bash_aliases /home/vagrant/.bash_aliases
+cp /vagrant/config/bash_aliases /home/vagrant/.bash_aliases
 
 # RESTART SERVICES
 #
