@@ -106,10 +106,18 @@ done
 #
 # Use debconf-set-selections to specify the default password for the root MySQL
 # account. This runs on every provision, even if MySQL has been installed. If
-# MySQL is already installed, it will not affect anything. The password in the
-# following two lines *is* actually set to the word 'blank' for the root user.
-echo mysql-server mysql-server/root_password password blank | debconf-set-selections
-echo mysql-server mysql-server/root_password_again password blank | debconf-set-selections
+# MySQL is already installed, it will not affect anything.
+echo mysql-server mysql-server/root_password password root | debconf-set-selections
+echo mysql-server mysql-server/root_password_again password root | debconf-set-selections
+
+# Postfix
+#
+# Use debconf-set-selections to specify the selections in the postfix setup. Set
+# up as an 'Internet Site' with the host name 'vvv'. Note that if your current
+# Internet connection does not allow communication over port 25, you will not be
+# able to send mail, even with postfix installed.
+echo postfix postfix/main_mailer_type select Internet Site | debconf-set-selections
+echo postfix postfix/mailname string vvv | debconf-set-selections
 
 # Provide our custom apt sources before running `apt-get update`
 ln -sf /srv/config/apt-source-append.list /etc/apt/sources.list.d/vvv-sources.list | echo "Linked custom apt sources"
