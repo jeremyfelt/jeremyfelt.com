@@ -11,3 +11,9 @@
  */
 
 @import url( '../basis/style.css' );
+
+code {
+	color: #666;
+	background: #ededed;
+	border: 1px solid #ddd;
+}
