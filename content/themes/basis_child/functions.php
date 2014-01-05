@@ -23,3 +23,15 @@ add_action( 'after_setup_theme', 'jf_support_post_formats', 99 );
 function jf_support_post_formats() {
 	add_theme_support( 'post-formats', array( 'aside', 'image', 'gallery', 'link', 'quote', 'status', 'video', 'audio', 'chat' ) );
 }
+
+add_filter( 'the_content', 'jf_backtick_code' );
+/**
+ * Filter content and replace backticks with code elements as if this was a markdown document.
+ *
+ * @param string $content
+ *
+ * @return string
+ */
+function jf_backtick_code( $content ) {
+	return preg_replace( '/`(.*?)`/', '<code>$1</code>', $content );
+}
