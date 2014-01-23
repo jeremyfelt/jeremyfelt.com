@@ -28,7 +28,7 @@ def sync_themes():
 
 def push_web():
 	sudo( "chown -R jeremyfelt:jeremyfelt /srv/web/jeremyfelt.com/www" )
-	local("rsync -rvzh -e ssh --delete --exclude '.git' --exclude 'local-config.php' www/ jeremyfelt@jeremyfelt.com:/srv/web/jeremyfelt.com/www" )
+	local("rsync -rvzh -e ssh --delete --exclude '.git' --exclude 'remote-config.php' --exclude 'local-config.php' www/ jeremyfelt@jeremyfelt.com:/srv/web/jeremyfelt.com/www" )
 	sudo( "chown -R www-data:www-data /srv/web/jeremyfelt.com/www" )
 
 def push_tweets():
