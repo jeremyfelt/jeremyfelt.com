@@ -13,8 +13,8 @@ if ( '10.10.12.13' === $_SERVER['SERVER_ADDR'] ) {
 	define( 'WP_LOCAL_DEV', false );
 }
 
-// Update minor and major releases automatically.
-define( 'WP_AUTO_UPDATE_CORE', true );
+// We're on trunk, don't update minor and major releases automatically.
+define( 'WP_AUTO_UPDATE_CORE', false );
 
 $table_prefix  = 'wp_';
 
