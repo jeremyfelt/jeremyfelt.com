@@ -284,7 +284,7 @@ function wpseo_admin_bar_menu() {
 		$calc_score = wpseo_calc( $perc_score, '/', 10, true );
 		$txtscore   = wpseo_translate_score( $calc_score );
 		$title      = wpseo_translate_score( $calc_score, false );
-		$score      = '<div title="' . esc_attr( $title ) . '" class="' . esc_attr( 'wpseo_score_img ' . $txtscore . ' ' . $perc_score ) . '"></div>';
+		$score      = '<div title="' . esc_attr( $title ) . '" class="' . esc_attr( 'wpseo-score-icon ' . $txtscore . ' ' . $perc_score ) . '"></div>';
 
 		$seo_url = get_edit_post_link( $post->ID );
 		if ( $txtscore !== 'na' ) {
@@ -425,7 +425,7 @@ function wpseo_disable_robots_meta() {
 		add_action( 'admin_notices', 'wpseo_deactivate_robots_meta_notice' );
 		
 		// Clean up the referrer url for later use
-		if( isset( $_SERVER['REQUEST_URI'] ) ) {
+		if ( isset( $_SERVER['REQUEST_URI'] ) ) {
 			$_SERVER['REQUEST_URI'] = remove_query_arg( array( 'deactivate_robots_meta' ), $_SERVER['REQUEST_URI'] );
 		}
 	}
@@ -459,7 +459,7 @@ function wpseo_disable_aioseo() {
 		add_action( 'admin_notices', 'wpseo_deactivate_aioseo_notice' );
 		
 		// Clean up the referrer url for later use
-		if( isset( $_SERVER['REQUEST_URI'] ) ) {
+		if ( isset( $_SERVER['REQUEST_URI'] ) ) {
 			$_SERVER['REQUEST_URI'] = remove_query_arg( array( 'deactivate_aioseo' ), $_SERVER['REQUEST_URI'] );
 		}
 	}
@@ -472,7 +472,7 @@ add_action( 'admin_init', 'wpseo_disable_aioseo' );
  * @since 1.4.8
  */
 function wpseo_import_aioseo_setting_notice() {
-	echo '<div class="error"><p>' . sprintf( __( 'The plugin All-In-One-SEO has been detected. Do you want to %simport its settings%s.' ), '<a href="' . esc_url( admin_url( 'admin.php?page=wpseo_import&import=1&importaioseo=1&_wpnonce=' . wp_create_nonce( 'wpseo-import' ) ) ) . '">', '</a>' ) . '</p></div>';
+	echo '<div class="error"><p>' . sprintf( __( 'The plugin All-In-One-SEO has been detected. Do you want to %simport its settings%s.', 'wordpress-seo' ), '<a href="' . esc_url( admin_url( 'admin.php?page=wpseo_import&import=1&importaioseo=1&_wpnonce=' . wp_create_nonce( 'wpseo-import' ) ) ) . '">', '</a>' ) . '</p></div>';
 }
 
 /**
@@ -481,7 +481,7 @@ function wpseo_import_aioseo_setting_notice() {
  * @since 1.4.8
  */
 function wpseo_deactivate_aioseo_notice() {
-	echo '<div class="updated"><p>' . __( 'All-In-One-SEO has been deactivated' ) . '</p></div>';
+	echo '<div class="updated"><p>' . __( 'All-In-One-SEO has been deactivated', 'wordpress-seo' ) . '</p></div>';
 }
 
 /**
@@ -490,7 +490,7 @@ function wpseo_deactivate_aioseo_notice() {
  * @since 1.4.8
  */
 function wpseo_import_robots_meta_notice() {
-	echo '<div class="error"><p>' . sprintf( __( 'The plugin Robots-Meta has been detected. Do you want to %simport its settings%s.' ), '<a href="' . esc_url( admin_url( 'admin.php?page=wpseo_import&import=1&importrobotsmeta=1&_wpnonce=' . wp_create_nonce( 'wpseo-import' ) ) ) . '">', '</a>' ) . '</p></div>';
+	echo '<div class="error"><p>' . sprintf( __( 'The plugin Robots-Meta has been detected. Do you want to %simport its settings%s.', 'wordpress-seo' ), '<a href="' . esc_url( admin_url( 'admin.php?page=wpseo_import&import=1&importrobotsmeta=1&_wpnonce=' . wp_create_nonce( 'wpseo-import' ) ) ) . '">', '</a>' ) . '</p></div>';
 }
 
 /**
@@ -499,7 +499,7 @@ function wpseo_import_robots_meta_notice() {
  * @since 1.4.8
  */
 function wpseo_deactivate_robots_meta_notice() {
-	echo '<div class="updated"><p>' . __( 'Robots-Meta has been deactivated' ) . '</p></div>';
+	echo '<div class="updated"><p>' . __( 'Robots-Meta has been deactivated', 'wordpress-seo' ) . '</p></div>';
 }
 
 /********************** DEPRECATED FUNCTIONS **********************/

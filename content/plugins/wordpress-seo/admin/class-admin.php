@@ -80,7 +80,7 @@ if ( ! class_exists( 'WPSEO_Admin' ) ) {
 		 * @global array $submenu used to change the label on the first item.
 		 */
 		function register_settings_page() {
-			if( WPSEO_Options::grant_access() !== true ) {
+			if ( WPSEO_Options::grant_access() !== true ) {
 				return;
 			}
 
@@ -97,7 +97,7 @@ if ( ! class_exists( 'WPSEO_Admin' ) ) {
 					array( 'wpseo_dashboard', __( 'Yoast WordPress SEO:', 'wordpress-seo' ) . ' ' . __( 'RSS', 'wordpress-seo' ), __( 'RSS', 'wordpress-seo' ), 'manage_options', 'wpseo_rss', array( $this, 'load_page' ), null ),
 					array( 'wpseo_dashboard', __( 'Yoast WordPress SEO:', 'wordpress-seo' ) . ' ' . __( 'Import & Export', 'wordpress-seo' ), __( 'Import & Export', 'wordpress-seo' ), 'manage_options', 'wpseo_import', array( $this, 'load_page' ), null ),
 					array( 'wpseo_dashboard', __( 'Yoast WordPress SEO:', 'wordpress-seo' ) . ' ' . __( 'Bulk Title Editor', 'wordpress-seo' ), __( 'Bulk Title Editor', 'wordpress-seo' ), 'wpseo_bulk_edit', 'wpseo_bulk-title-editor', array( $this, 'load_page' ), array( array( $this, 'bulk_edit_options' ) ) ),
-					array( 'wpseo_dashboard', __( 'Yoast WordPress SEO:', 'wordpress-seo' ) . ' ' . __( 'Bulk Description Editor', 'wordpress-seo' ), __( 'Bulk Description Editor', 'wordpress-seo' ), 'wpseo_bulk_edit', 'wpseo_bulk-description-editor', array( $this, 'load_page' ), array( array( $this, 'bulk_edit_options' ) ) )
+					array( 'wpseo_dashboard', __( 'Yoast WordPress SEO:', 'wordpress-seo' ) . ' ' . __( 'Bulk Description Editor', 'wordpress-seo' ), __( 'Bulk Description Editor', 'wordpress-seo' ), 'wpseo_bulk_edit', 'wpseo_bulk-description-editor', array( $this, 'load_page' ), array( array( $this, 'bulk_edit_options' ) ) ),
 			);
 
 			// Check where to add the edit files page
@@ -111,7 +111,7 @@ if ( ! class_exists( 'WPSEO_Admin' ) ) {
 			}
 
 			// Add Extension submenu page
-			$submenu_pages[] = array( 'wpseo_dashboard', __( 'Yoast WordPress SEO:', 'wordpress-seo' ) . ' ' . __( 'Extensions', 'wordpress-seo'), __('Extensions', 'wordpress-seo' ), 'manage_options', 'wpseo_licenses', array( $this, 'load_page' ), null );
+			$submenu_pages[] = array( 'wpseo_dashboard', __( 'Yoast WordPress SEO:', 'wordpress-seo' ) . ' ' . __( 'Extensions', 'wordpress-seo'), __('<span style="color:#f18500">'.__( 'Extensions', 'wordpress-seo' ) .'</span>', 'wordpress-seo' ), 'manage_options', 'wpseo_licenses', array( $this, 'load_page' ), null );
 
 			// Allow submenu pages manipulation
 			$submenu_pages = apply_filters( 'wpseo_submenu_pages', $submenu_pages );
@@ -325,7 +325,7 @@ if ( ! class_exists( 'WPSEO_Admin' ) ) {
 		 * Register the settings page for the Network settings.
 		 */
 		function register_network_settings_page() {
-			if( WPSEO_Options::grant_access() ) {
+			if ( WPSEO_Options::grant_access() ) {
 				add_menu_page( __( 'Yoast WordPress SEO:', 'wordpress-seo' ) . ' ' . __( 'MultiSite Settings', 'wordpress-seo' ), __( 'SEO', 'wordpress-seo' ), 'delete_users', 'wpseo_dashboard', array( $this, 'network_config_page' ), plugins_url( 'images/yoast-icon.png', WPSEO_FILE ) );
 
 				// Add Extension submenu page
@@ -408,7 +408,7 @@ if ( ! class_exists( 'WPSEO_Admin' ) ) {
 		function bulk_edit_options() {
 			$option = 'per_page';
 			$args   = array(
-					'label'	  => 'Posts',
+					'label'	  => __( 'Posts', 'wordpress-seo' ),
 					'default' => 10,
 					'option'  => 'wpseo_posts_per_page',
 			);
@@ -422,6 +422,7 @@ if ( ! class_exists( 'WPSEO_Admin' ) ) {
 			if ( 'wpseo_posts_per_page' === $option && ( $value > 0 && $value < 1000 ) ) {
 				return $value;
 			}
+			return $status;
 		}
 
 		/**
@@ -501,7 +502,7 @@ if ( ! class_exists( 'WPSEO_Admin' ) ) {
 		 * Enqueues the (tiny) global JS needed for the plugin.
 		 */
 		function config_page_scripts() {
-			if( WPSEO_Options::grant_access() ) {
+			if ( WPSEO_Options::grant_access() ) {
 				wp_enqueue_script( 'wpseo-admin-global-script', plugins_url( 'js/wp-seo-admin-global' . WPSEO_CSSJS_SUFFIX . '.js', WPSEO_FILE ), array( 'jquery' ), WPSEO_VERSION, true );
 			}
 		}
