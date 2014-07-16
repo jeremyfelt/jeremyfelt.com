@@ -1,0 +1,8 @@
+The following third party resources are included in this theme. Each resource uses a GPL compatible license that is
+listed below.
+
+* FontAwesome - MIT license (http://opensource.org/licenses/mit-license.html)
+* Cycle2 - Dual MIT (http://malsup.github.com/mit-license.txt) and GPL (http://malsup.github.com/gpl-license-v2.txt) license
+* Cycle2 Swipe Plugin - Dual MIT (http://malsup.github.com/mit-license.txt) and GPL (http://malsup.github.com/gpl-license-v2.txt) license
+* Cycle2 Center Plugin - Dual MIT (http://malsup.github.com/mit-license.txt) and GPL (http://malsup.github.com/gpl-license-v2.txt) license
+* Fitvids - WTFPL (http://sam.zoy.org/wtfpl/)

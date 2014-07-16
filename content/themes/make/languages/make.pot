@@ -1,0 +1,1591 @@
+# Copyright (C) 2014 The Theme Foundry
+# This file is distributed under the GNU General Public License v2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Make 1.1.1\n"
+"Report-Msgid-Bugs-To: https://thethemefoundry.com/support\n"
+"POT-Creation-Date: 2014-07-09 22:50:54+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2014-MO-DA HO:MI+ZONE\n"
+"Last-Translator: The Theme Foundry\n"
+"Language-Team: The Theme Foundry\n"
+
+#: 404.php:12
+msgid "Oops! That page can&rsquo;t be found."
+msgstr ""
+
+#: 404.php:18
+msgid "Maybe try searching this website:"
+msgstr ""
+
+#: comments.php:24 comments.php:40
+msgid "Comment navigation"
+msgstr ""
+
+#: comments.php:49
+msgid "Comments are closed."
+msgstr ""
+
+#: functions.php:158
+msgid "Primary Menu"
+msgstr ""
+
+#: functions.php:159
+msgid "Social Profile Links"
+msgstr ""
+
+#: functions.php:189
+msgid "Left Sidebar"
+msgstr ""
+
+#: functions.php:198
+msgid "Right Sidebar"
+msgstr ""
+
+#: functions.php:207
+msgid "Footer 1"
+msgstr ""
+
+#: functions.php:216
+msgid "Footer 2"
+msgstr ""
+
+#: functions.php:225
+msgid "Footer 3"
+msgstr ""
+
+#: functions.php:234
+msgid "Footer 4"
+msgstr ""
+
+#: inc/builder/core/base.php:82
+msgid "Page Builder"
+msgstr ""
+
+#: inc/builder/core/base.php:314
+msgid "Set featured image"
+msgstr ""
+
+#: inc/builder/core/base.php:315
+msgid "Remove featured image"
+msgstr ""
+
+#: inc/builder/core/base.php:316
+msgid "Featured Image"
+msgstr ""
+
+#: inc/builder/core/base.php:317
+msgid "Use as Featured Image"
+msgstr ""
+
+#: inc/builder/core/base.php:472
+msgid "Add Media"
+msgstr ""
+
+#: inc/builder/core/base.php:636
+msgid "Duplicate this page with %s."
+msgstr ""
+
+#: inc/builder/core/base.php:911
+msgid "Want some ideas?"
+msgstr ""
+
+#: inc/builder/core/base.php:914
+msgid "%s and get a quick start with pre-made designer builder templates."
+msgstr ""
+
+#: inc/builder/core/base.php:919 inc/builder/core/templates/menu.php:46
+#: inc/builder/core/templates/menu.php:73
+#: inc/builder/sections/builder-templates/text.php:26 inc/edit-page.php:96
+msgid "Upgrade to %s"
+msgstr ""
+
+#: inc/builder/core/templates/menu.php:14
+msgid "Add"
+msgstr ""
+
+#: inc/builder/core/templates/menu.php:36
+msgid "Products"
+msgstr ""
+
+#: inc/builder/core/templates/menu.php:41
+msgid "%s and feature your WooCommerce products in a grid layout."
+msgstr ""
+
+#: inc/builder/core/templates/menu.php:63
+msgid "Downloads"
+msgstr ""
+
+#: inc/builder/core/templates/menu.php:68
+msgid "%s and feature your Easy Digital Downloads products in a grid layout."
+msgstr ""
+
+#: inc/builder/core/templates/menu.php:87
+msgid "Add New Section"
+msgstr ""
+
+#: inc/builder/core/templates/section-footer.php:10
+msgid "Remove this section"
+msgstr ""
+
+#: inc/builder/core/templates/section-header.php:17
+#: inc/builder/sections/builder-templates/banner-slide.php:28
+msgid "Click to toggle"
+msgstr ""
+
+#: inc/builder/sections/builder-templates/banner-slide.php:26
+msgid "Slide"
+msgstr ""
+
+#: inc/builder/sections/builder-templates/banner-slide.php:38
+#: inc/builder/sections/builder-templates/gallery.php:94
+#: inc/builder/sections/builder-templates/gallery.php:102
+msgid "Background image"
+msgstr ""
+
+#: inc/builder/sections/builder-templates/banner-slide.php:43
+#: inc/builder/sections/builder-templates/gallery.php:105
+msgid "Darken to improve readability"
+msgstr ""
+
+#: inc/builder/sections/builder-templates/banner-slide.php:49
+#: inc/builder/sections/builder-templates/gallery.php:108
+msgid "Background color"
+msgstr ""
+
+#: inc/builder/sections/builder-templates/banner-slide.php:56
+msgid "Content position"
+msgstr ""
+
+#: inc/builder/sections/builder-templates/banner-slide.php:59
+#: inc/builder/sections/builder-templates/gallery.php:35
+#: inc/builder/sections/builder-templates/gallery.php:45
+#: inc/customizer/helpers.php:78 inc/customizer/helpers.php:90
+#: inc/customizer/helpers.php:101 inc/customizer/helpers.php:201
+#: inc/gallery-slider/gallery-slider.php:118
+msgid "None"
+msgstr ""
+
+#: inc/builder/sections/builder-templates/banner-slide.php:60
+#: inc/customizer/helpers.php:123 inc/customizer/helpers.php:153
+msgid "Left"
+msgstr ""
+
+#: inc/builder/sections/builder-templates/banner-slide.php:61
+#: inc/customizer/helpers.php:125 inc/customizer/helpers.php:154
+msgid "Right"
+msgstr ""
+
+#: inc/builder/sections/builder-templates/banner-slide.php:73
+msgid "Set slide image"
+msgstr ""
+
+#: inc/builder/sections/builder-templates/banner-slide.php:74
+msgid "Remove slide image"
+msgstr ""
+
+#: inc/builder/sections/builder-templates/banner-slide.php:75
+msgid "Slide image"
+msgstr ""
+
+#: inc/builder/sections/builder-templates/banner-slide.php:76
+msgid "Use as slide image"
+msgstr ""
+
+#: inc/builder/sections/builder-templates/banner-slide.php:85
+msgid "Slide content overlay"
+msgstr ""
+
+#: inc/builder/sections/builder-templates/banner-slide.php:102
+msgid "Remove this slide"
+msgstr ""
+
+#: inc/builder/sections/builder-templates/banner.php:20
+msgid "Add New Slide"
+msgstr ""
+
+#: inc/builder/sections/builder-templates/banner.php:37
+#: inc/builder/sections/builder-templates/gallery.php:77
+msgid "Options"
+msgstr ""
+
+#: inc/builder/sections/builder-templates/banner.php:42
+#: inc/builder/sections/builder-templates/blank.php:14
+#: inc/builder/sections/builder-templates/gallery-item.php:34
+#: inc/builder/sections/builder-templates/gallery.php:82
+#: inc/builder/sections/builder-templates/text.php:49
+#: inc/builder/sections/builder-templates/text.php:77
+msgid "Enter title here"
+msgstr ""
+
+#: inc/builder/sections/builder-templates/banner.php:48
+msgid "Slideshow display"
+msgstr ""
+
+#: inc/builder/sections/builder-templates/banner.php:54
+#: inc/gallery-slider/gallery-slider.php:98
+msgid "Hide navigation arrows"
+msgstr ""
+
+#: inc/builder/sections/builder-templates/banner.php:61
+#: inc/gallery-slider/gallery-slider.php:102
+msgid "Hide navigation dots"
+msgstr ""
+
+#: inc/builder/sections/builder-templates/banner.php:68
+msgid "Autoplay slideshow"
+msgstr ""
+
+#: inc/builder/sections/builder-templates/banner.php:75
+msgid "Time between slides (in ms)"
+msgstr ""
+
+#: inc/builder/sections/builder-templates/banner.php:80
+msgid "Transition effect"
+msgstr ""
+
+#: inc/builder/sections/builder-templates/banner.php:83
+#: inc/gallery-slider/gallery-slider.php:116
+msgid "Slide horizontal"
+msgstr ""
+
+#: inc/builder/sections/builder-templates/banner.php:84
+#: inc/gallery-slider/gallery-slider.php:117
+msgid "Fade"
+msgstr ""
+
+#: inc/builder/sections/builder-templates/banner.php:91
+msgid "Section height"
+msgstr ""
+
+#: inc/builder/sections/builder-templates/gallery-item.php:22
+#: inc/builder/sections/builder-templates/text.php:63
+msgid "Drag-and-drop this column into place"
+msgstr ""
+
+#: inc/builder/sections/builder-templates/gallery-item.php:27
+#: inc/builder/sections/builder-templates/text.php:70
+msgid "Enter link here"
+msgstr ""
+
+#: inc/builder/sections/builder-templates/gallery-item.php:39
+msgid "Enter description here"
+msgstr ""
+
+#: inc/builder/sections/builder-templates/gallery-item.php:43
+msgid "Remove this item"
+msgstr ""
+
+#: inc/builder/sections/builder-templates/gallery.php:23
+msgid "Caption color:"
+msgstr ""
+
+#: inc/builder/sections/builder-templates/gallery.php:25
+#: inc/customizer/sections/stylekit.php:67
+msgid "Light"
+msgstr ""
+
+#: inc/builder/sections/builder-templates/gallery.php:26
+#: inc/customizer/sections/stylekit.php:68
+msgid "Dark"
+msgstr ""
+
+#: inc/builder/sections/builder-templates/gallery.php:31
+msgid "Caption style:"
+msgstr ""
+
+#: inc/builder/sections/builder-templates/gallery.php:33
+msgid "Overlay"
+msgstr ""
+
+#: inc/builder/sections/builder-templates/gallery.php:34
+msgid "Reveal"
+msgstr ""
+
+#: inc/builder/sections/builder-templates/gallery.php:40
+msgid "Aspect ratio:"
+msgstr ""
+
+#: inc/builder/sections/builder-templates/gallery.php:42
+msgid "Landscape"
+msgstr ""
+
+#: inc/builder/sections/builder-templates/gallery.php:43
+msgid "Portrait"
+msgstr ""
+
+#: inc/builder/sections/builder-templates/gallery.php:44
+msgid "Square"
+msgstr ""
+
+#: inc/builder/sections/builder-templates/gallery.php:50
+#: inc/builder/sections/builder-templates/text.php:38
+msgid "Columns:"
+msgstr ""
+
+#: inc/builder/sections/builder-templates/gallery.php:60
+msgid "Add New Item"
+msgstr ""
+
+#: inc/builder/sections/builder-templates/gallery.php:92
+msgid "Set background image"
+msgstr ""
+
+#: inc/builder/sections/builder-templates/gallery.php:93
+msgid "Remove background image"
+msgstr ""
+
+#: inc/builder/sections/builder-templates/gallery.php:95
+msgid "Use as Background Image"
+msgstr ""
+
+#: inc/builder/sections/builder-templates/gallery.php:111
+msgid "Background style:"
+msgstr ""
+
+#: inc/builder/sections/builder-templates/gallery.php:113
+#: inc/customizer/helpers.php:109
+msgid "Tile"
+msgstr ""
+
+#: inc/builder/sections/builder-templates/gallery.php:114
+#: inc/customizer/helpers.php:134
+msgid "Cover"
+msgstr ""
+
+#: inc/builder/sections/builder-templates/text.php:21
+msgid "%s and convert any column into an area for widgets."
+msgstr ""
+
+#: inc/builder/sections/section-definitions.php:72
+msgid "Create rearrangeable columns of content and images."
+msgstr ""
+
+#: inc/builder/sections/section-definitions.php:139
+msgid "A blank canvas for standard content or HTML code."
+msgstr ""
+
+#: inc/builder/sections/section-definitions.php:182
+msgid "Display multiple types of content in a banner or a slider."
+msgstr ""
+
+#: inc/builder/sections/section-definitions.php:263
+msgid "Display your images in various grid combinations."
+msgstr ""
+
+#: inc/customizer/bootstrap.php:62
+msgid "General"
+msgstr ""
+
+#: inc/customizer/bootstrap.php:63
+msgid "Style Kits"
+msgstr ""
+
+#: inc/customizer/bootstrap.php:64
+msgid "Fonts"
+msgstr ""
+
+#: inc/customizer/bootstrap.php:65
+msgid "Colors"
+msgstr ""
+
+#: inc/customizer/bootstrap.php:66
+msgid "Header"
+msgstr ""
+
+#: inc/customizer/bootstrap.php:67
+msgid "Logo"
+msgstr ""
+
+#: inc/customizer/bootstrap.php:68
+msgid "Main"
+msgstr ""
+
+#: inc/customizer/bootstrap.php:69
+msgid "Layout: Blog (Posts Page)"
+msgstr ""
+
+#: inc/customizer/bootstrap.php:70
+msgid "Layout: Archives"
+msgstr ""
+
+#: inc/customizer/bootstrap.php:71
+msgid "Layout: Search Results"
+msgstr ""
+
+#: inc/customizer/bootstrap.php:72
+msgid "Layout: Posts"
+msgstr ""
+
+#: inc/customizer/bootstrap.php:73
+msgid "Layout: Pages"
+msgstr ""
+
+#: inc/customizer/bootstrap.php:74
+msgid "Footer"
+msgstr ""
+
+#: inc/customizer/bootstrap.php:75
+msgid "Social Profiles &amp; RSS"
+msgstr ""
+
+#: inc/customizer/bootstrap.php:207 inc/customizer/sections/stylekit.php:32
+msgid "Upgrade to Make Plus"
+msgstr ""
+
+#: inc/customizer/helpers-defaults.php:22
+msgid "Menu"
+msgstr ""
+
+#: inc/customizer/helpers-defaults.php:26
+msgid "Featured"
+msgstr ""
+
+#: inc/customizer/helpers-fonts.php:457
+msgid "All"
+msgstr ""
+
+#: inc/customizer/helpers-fonts.php:458
+msgid "Cyrillic"
+msgstr ""
+
+#: inc/customizer/helpers-fonts.php:459
+msgid "Cyrillic Extended"
+msgstr ""
+
+#: inc/customizer/helpers-fonts.php:460
+msgid "Devanagari"
+msgstr ""
+
+#: inc/customizer/helpers-fonts.php:461
+msgid "Greek"
+msgstr ""
+
+#: inc/customizer/helpers-fonts.php:462
+msgid "Greek Extended"
+msgstr ""
+
+#: inc/customizer/helpers-fonts.php:463
+msgid "Khmer"
+msgstr ""
+
+#: inc/customizer/helpers-fonts.php:464
+msgid "Latin"
+msgstr ""
+
+#: inc/customizer/helpers-fonts.php:465
+msgid "Latin Extended"
+msgstr ""
+
+#: inc/customizer/helpers-fonts.php:466
+msgid "Vietnamese"
+msgstr ""
+
+#: inc/customizer/helpers-fonts.php:522
+msgid "Standard Fonts"
+msgstr ""
+
+#: inc/customizer/helpers-fonts.php:524
+msgid "Google Fonts"
+msgstr ""
+
+#: inc/customizer/helpers.php:66
+msgid "Full-width"
+msgstr ""
+
+#: inc/customizer/helpers.php:67
+msgid "Boxed"
+msgstr ""
+
+#: inc/customizer/helpers.php:76
+msgid "Post header"
+msgstr ""
+
+#: inc/customizer/helpers.php:77
+msgid "Thumbnail"
+msgstr ""
+
+#: inc/customizer/helpers.php:88
+msgid "Absolute (%s)"
+msgstr ""
+
+#: inc/customizer/helpers.php:89
+msgid "Relative (1 week ago)"
+msgstr ""
+
+#: inc/customizer/helpers.php:99
+msgid "With avatar"
+msgstr ""
+
+#: inc/customizer/helpers.php:100
+msgid "Without avatar"
+msgstr ""
+
+#: inc/customizer/helpers.php:108
+msgid "No Repeat"
+msgstr ""
+
+#: inc/customizer/helpers.php:110
+msgid "Tile Horizontally"
+msgstr ""
+
+#: inc/customizer/helpers.php:111
+msgid "Tile Vertically"
+msgstr ""
+
+#: inc/customizer/helpers.php:124
+msgid "Center"
+msgstr ""
+
+#: inc/customizer/helpers.php:133
+msgid "Auto"
+msgstr ""
+
+#: inc/customizer/helpers.php:135
+msgid "Contain"
+msgstr ""
+
+#: inc/customizer/helpers.php:140
+msgid "Default"
+msgstr ""
+
+#: inc/customizer/helpers.php:141
+msgid "Flipped"
+msgstr ""
+
+#: inc/customizer/helpers.php:146 inc/customizer/helpers.php:168
+msgid "Traditional"
+msgstr ""
+
+#: inc/customizer/helpers.php:147 inc/customizer/helpers.php:169
+msgid "Centered"
+msgstr ""
+
+#: inc/customizer/helpers.php:148
+msgid "Navigation Below"
+msgstr ""
+
+#: inc/customizer/helpers.php:188
+msgid "Top"
+msgstr ""
+
+#: inc/customizer/helpers.php:189
+msgid "Before content"
+msgstr ""
+
+#: inc/customizer/helpers.php:190
+msgid "Post footer"
+msgstr ""
+
+#: inc/customizer/helpers.php:199
+msgid "With icon"
+msgstr ""
+
+#: inc/customizer/helpers.php:200
+msgid "With text"
+msgstr ""
+
+#: inc/customizer/helpers.php:310 inc/customizer/sections/social.php:261
+msgid "Email"
+msgstr ""
+
+#: inc/customizer/helpers.php:314
+msgid "RSS"
+msgstr ""
+
+#: inc/customizer/sections/background.php:22
+msgid "Background"
+msgstr ""
+
+#: inc/customizer/sections/background.php:36
+msgid ""
+"With the Site Layout option (under <em>General</em>) set to \"Full Width\", "
+"the background color and image will not be visible."
+msgstr ""
+
+#: inc/customizer/sections/background.php:64
+#: inc/customizer/sections/footer.php:231
+#: inc/customizer/sections/header.php:335 inc/customizer/sections/main.php:127
+msgid "Background Size"
+msgstr ""
+
+#: inc/customizer/sections/color.php:38
+msgid "Primary Color"
+msgstr ""
+
+#: inc/customizer/sections/color.php:61
+msgid "Secondary Color"
+msgstr ""
+
+#: inc/customizer/sections/color.php:84
+msgid "Text Color"
+msgstr ""
+
+#: inc/customizer/sections/color.php:107
+msgid "Detail Color"
+msgstr ""
+
+#: inc/customizer/sections/font.php:31
+msgid "The list of Google fonts is long! You can %s before making your choices."
+msgstr ""
+
+#: inc/customizer/sections/font.php:35
+msgid "preview"
+msgstr ""
+
+#: inc/customizer/sections/font.php:58
+msgid "Site Title"
+msgstr ""
+
+#: inc/customizer/sections/font.php:80
+msgid "Headers"
+msgstr ""
+
+#: inc/customizer/sections/font.php:102
+msgid "Body"
+msgstr ""
+
+#: inc/customizer/sections/font.php:119
+msgid "Typekit"
+msgstr ""
+
+#: inc/customizer/sections/font.php:134
+msgid "Looking to add premium fonts from Typekit to your website? %s."
+msgstr ""
+
+#: inc/customizer/sections/font.php:139 inc/customizer/sections/footer.php:355
+msgid "Upgrade to %1$s"
+msgstr ""
+
+#: inc/customizer/sections/font.php:179
+msgid "Site Title Font Size (in px)"
+msgstr ""
+
+#: inc/customizer/sections/font.php:200
+msgid "Site Tagline Font Size (in px)"
+msgstr ""
+
+#: inc/customizer/sections/font.php:221
+msgid "Navigation Font Size (in px)"
+msgstr ""
+
+#: inc/customizer/sections/font.php:242
+msgid "Header Font Size (in px)"
+msgstr ""
+
+#: inc/customizer/sections/font.php:263
+msgid "Widget Font Size (in px)"
+msgstr ""
+
+#: inc/customizer/sections/font.php:284
+msgid "Body Font Size (in px)"
+msgstr ""
+
+#: inc/customizer/sections/font.php:319
+msgid "Character Subset"
+msgstr ""
+
+#: inc/customizer/sections/font.php:335
+msgid "Not all fonts provide each of these subsets."
+msgstr ""
+
+#: inc/customizer/sections/footer.php:36
+msgid "Footer Layout"
+msgstr ""
+
+#: inc/customizer/sections/footer.php:73
+msgid "Footer Text"
+msgstr ""
+
+#: inc/customizer/sections/footer.php:96
+msgid "Footer Text Color"
+msgstr ""
+
+#: inc/customizer/sections/footer.php:119
+msgid "Footer Border Color"
+msgstr ""
+
+#: inc/customizer/sections/footer.php:142
+msgid "Footer Background Color"
+msgstr ""
+
+#: inc/customizer/sections/footer.php:165
+msgid "Footer Background Image"
+msgstr ""
+
+#: inc/customizer/sections/footer.php:187
+#: inc/customizer/sections/header.php:291 inc/customizer/sections/main.php:83
+msgid "Background Repeat"
+msgstr ""
+
+#: inc/customizer/sections/footer.php:209
+#: inc/customizer/sections/header.php:313 inc/customizer/sections/main.php:105
+msgid "Background Position"
+msgstr ""
+
+#: inc/customizer/sections/footer.php:267
+msgid "Footer Widget Areas"
+msgstr ""
+
+#: inc/customizer/sections/footer.php:283
+msgid "Footer Options"
+msgstr ""
+
+#: inc/customizer/sections/footer.php:304
+msgid "Show social icons"
+msgstr ""
+
+#: inc/customizer/sections/footer.php:334
+msgid "White Label"
+msgstr ""
+
+#: inc/customizer/sections/footer.php:350
+msgid "Want to remove the theme byline from your website&#8217;s footer? %s."
+msgstr ""
+
+#: inc/customizer/sections/general.php:36
+msgid "Site Layout"
+msgstr ""
+
+#: inc/customizer/sections/general.php:59
+msgid "Sticky Label"
+msgstr ""
+
+#: inc/customizer/sections/header.php:36
+msgid "Header Layout"
+msgstr ""
+
+#: inc/customizer/sections/header.php:58
+msgid "Show Title/Logo On"
+msgstr ""
+
+#: inc/customizer/sections/header.php:94
+msgid "Header Bar Content Layout"
+msgstr ""
+
+#: inc/customizer/sections/header.php:117
+msgid "Header Bar Text"
+msgstr ""
+
+#: inc/customizer/sections/header.php:140
+msgid "Header Bar Text Color"
+msgstr ""
+
+#: inc/customizer/sections/header.php:163
+msgid "Header Bar Border Color"
+msgstr ""
+
+#: inc/customizer/sections/header.php:186
+msgid "Header Bar Background Color"
+msgstr ""
+
+#: inc/customizer/sections/header.php:223
+msgid "Header Text Color"
+msgstr ""
+
+#: inc/customizer/sections/header.php:246
+msgid "Header Background Color"
+msgstr ""
+
+#: inc/customizer/sections/header.php:269
+msgid "Header Background Image"
+msgstr ""
+
+#: inc/customizer/sections/header.php:351
+msgid "Header Options"
+msgstr ""
+
+#: inc/customizer/sections/header.php:372
+msgid "Show social icons in header bar"
+msgstr ""
+
+#: inc/customizer/sections/header.php:393
+msgid "Show search field in header bar"
+msgstr ""
+
+#: inc/customizer/sections/layout-archive.php:30
+#: inc/customizer/sections/layout-blog.php:30
+#: inc/customizer/sections/layout-page.php:30
+#: inc/customizer/sections/layout-post.php:30
+#: inc/customizer/sections/layout-search.php:30
+msgid "Header, Footer, Sidebars"
+msgstr ""
+
+#: inc/customizer/sections/layout-archive.php:51
+#: inc/customizer/sections/layout-blog.php:51
+#: inc/customizer/sections/layout-page.php:51
+#: inc/customizer/sections/layout-post.php:51
+#: inc/customizer/sections/layout-search.php:51
+msgid "Hide site header"
+msgstr ""
+
+#: inc/customizer/sections/layout-archive.php:72
+#: inc/customizer/sections/layout-blog.php:72
+#: inc/customizer/sections/layout-page.php:72
+#: inc/customizer/sections/layout-post.php:72
+#: inc/customizer/sections/layout-search.php:72
+msgid "Hide site footer"
+msgstr ""
+
+#: inc/customizer/sections/layout-archive.php:93
+#: inc/customizer/sections/layout-blog.php:93
+#: inc/customizer/sections/layout-page.php:93
+#: inc/customizer/sections/layout-post.php:93
+#: inc/customizer/sections/layout-search.php:93
+msgid "Show left sidebar"
+msgstr ""
+
+#: inc/customizer/sections/layout-archive.php:114
+#: inc/customizer/sections/layout-blog.php:114
+#: inc/customizer/sections/layout-page.php:114
+#: inc/customizer/sections/layout-post.php:114
+#: inc/customizer/sections/layout-search.php:114
+msgid "Show right sidebar"
+msgstr ""
+
+#: inc/customizer/sections/layout-archive.php:135
+#: inc/customizer/sections/layout-blog.php:135
+#: inc/customizer/sections/layout-page.php:186
+#: inc/customizer/sections/layout-post.php:135
+#: inc/customizer/sections/layout-search.php:135
+msgid "Featured Images"
+msgstr ""
+
+#: inc/customizer/sections/layout-archive.php:157
+#: inc/customizer/sections/layout-blog.php:157
+#: inc/customizer/sections/layout-page.php:208
+#: inc/customizer/sections/layout-post.php:157
+#: inc/customizer/sections/layout-search.php:157
+msgid "Featured Images Alignment"
+msgstr ""
+
+#: inc/customizer/sections/layout-archive.php:179
+#: inc/customizer/sections/layout-blog.php:179
+#: inc/customizer/sections/layout-page.php:230
+#: inc/customizer/sections/layout-post.php:179
+#: inc/customizer/sections/layout-search.php:179
+msgid "Post Date"
+msgstr ""
+
+#: inc/customizer/sections/layout-archive.php:201
+#: inc/customizer/sections/layout-blog.php:201
+#: inc/customizer/sections/layout-page.php:252
+#: inc/customizer/sections/layout-post.php:201
+#: inc/customizer/sections/layout-search.php:201
+msgid "Post Date Location"
+msgstr ""
+
+#: inc/customizer/sections/layout-archive.php:223
+#: inc/customizer/sections/layout-blog.php:223
+#: inc/customizer/sections/layout-page.php:274
+#: inc/customizer/sections/layout-post.php:223
+#: inc/customizer/sections/layout-search.php:223
+msgid "Post Author"
+msgstr ""
+
+#: inc/customizer/sections/layout-archive.php:245
+#: inc/customizer/sections/layout-blog.php:245
+#: inc/customizer/sections/layout-page.php:296
+#: inc/customizer/sections/layout-post.php:245
+#: inc/customizer/sections/layout-search.php:245
+msgid "Post Author Location"
+msgstr ""
+
+#: inc/customizer/sections/layout-archive.php:261
+#: inc/customizer/sections/layout-blog.php:261
+#: inc/customizer/sections/layout-search.php:261
+msgid "Content"
+msgstr ""
+
+#: inc/customizer/sections/layout-archive.php:282
+#: inc/customizer/sections/layout-blog.php:282
+#: inc/customizer/sections/layout-search.php:282
+msgid "Generate excerpts automatically"
+msgstr ""
+
+#: inc/customizer/sections/layout-archive.php:297
+#: inc/customizer/sections/layout-blog.php:297
+#: inc/customizer/sections/layout-post.php:261
+#: inc/customizer/sections/layout-search.php:297
+msgid "Post Meta"
+msgstr ""
+
+#: inc/customizer/sections/layout-archive.php:318
+#: inc/customizer/sections/layout-blog.php:318
+#: inc/customizer/sections/layout-post.php:282
+#: inc/customizer/sections/layout-search.php:318
+msgid "Show categories"
+msgstr ""
+
+#: inc/customizer/sections/layout-archive.php:339
+#: inc/customizer/sections/layout-blog.php:339
+#: inc/customizer/sections/layout-post.php:303
+#: inc/customizer/sections/layout-search.php:339
+msgid "Show tags"
+msgstr ""
+
+#: inc/customizer/sections/layout-archive.php:360
+#: inc/customizer/sections/layout-blog.php:360
+#: inc/customizer/sections/layout-page.php:318
+#: inc/customizer/sections/layout-post.php:324
+#: inc/customizer/sections/layout-search.php:360
+msgid "Comment Count"
+msgstr ""
+
+#: inc/customizer/sections/layout-archive.php:382
+#: inc/customizer/sections/layout-blog.php:382
+#: inc/customizer/sections/layout-page.php:340
+#: inc/customizer/sections/layout-post.php:346
+#: inc/customizer/sections/layout-search.php:382
+msgid "Comment Count Location"
+msgstr ""
+
+#: inc/customizer/sections/layout-page.php:129
+msgid "Sidebars are not available on pages using the Builder Template."
+msgstr ""
+
+#: inc/customizer/sections/layout-page.php:144
+msgid "Page Title"
+msgstr ""
+
+#: inc/customizer/sections/layout-page.php:165
+msgid "Hide title"
+msgstr ""
+
+#: inc/customizer/sections/logo.php:38
+msgid "Regular Logo"
+msgstr ""
+
+#: inc/customizer/sections/logo.php:62
+msgid "Retina Logo (2x)"
+msgstr ""
+
+#: inc/customizer/sections/logo.php:78
+msgid "The Retina Logo should be twice the size of the Regular Logo."
+msgstr ""
+
+#: inc/customizer/sections/logo.php:101
+msgid "Favicon"
+msgstr ""
+
+#: inc/customizer/sections/logo.php:118
+msgid ""
+"File must be <strong>.png</strong> or <strong>.ico</strong> format. Optimal "
+"dimensions: <strong>32px x 32px</strong>."
+msgstr ""
+
+#: inc/customizer/sections/logo.php:141
+msgid "Apple Touch Icon"
+msgstr ""
+
+#: inc/customizer/sections/logo.php:158
+msgid ""
+"File must be <strong>.png</strong> format. Optimal dimensions: "
+"<strong>152px x 152px</strong>."
+msgstr ""
+
+#: inc/customizer/sections/main.php:38
+msgid "Background Color"
+msgstr ""
+
+#: inc/customizer/sections/main.php:61
+msgid "Background Image"
+msgstr ""
+
+#: inc/customizer/sections/main.php:143
+msgid "Content Options"
+msgstr ""
+
+#: inc/customizer/sections/main.php:164
+msgid "Underline links in content"
+msgstr ""
+
+#: inc/customizer/sections/navigation.php:38
+msgid "Mobile Menu Label"
+msgstr ""
+
+#: inc/customizer/sections/navigation.php:53
+msgid "Resize your browser window to preview the mobile menu label."
+msgstr ""
+
+#: inc/customizer/sections/site-title-tagline.php:38
+msgid "Site Title Color"
+msgstr ""
+
+#: inc/customizer/sections/site-title-tagline.php:63
+msgid "Hide Site Title"
+msgstr ""
+
+#: inc/customizer/sections/site-title-tagline.php:88
+msgid "Hide Tagline"
+msgstr ""
+
+#: inc/customizer/sections/social.php:30
+msgid ""
+"Enter the complete URL to your profile for each service below that you "
+"would like to share."
+msgstr ""
+
+#: inc/customizer/sections/social.php:235
+msgid ""
+"If you would like to add a social profile that is not listed above, or "
+"change the order of the icons, use %s."
+msgstr ""
+
+#: inc/customizer/sections/social.php:238
+msgid "this alternate method"
+msgstr ""
+
+#: inc/customizer/sections/social.php:276
+msgid "Default RSS"
+msgstr ""
+
+#: inc/customizer/sections/social.php:297
+msgid "Hide default RSS feed link"
+msgstr ""
+
+#: inc/customizer/sections/social.php:318
+msgid "Custom RSS URL (replaces default)"
+msgstr ""
+
+#: inc/customizer/sections/stylekit.php:28
+msgid ""
+"%s to quickly apply designer-picked style choices (fonts, layout, colors) "
+"to your website."
+msgstr ""
+
+#: inc/customizer/sections/stylekit.php:49
+msgid "Kits"
+msgstr ""
+
+#: inc/customizer/sections/stylekit.php:66
+msgid "Choose a kit"
+msgstr ""
+
+#: inc/customizer/sections/stylekit.php:69
+msgid "Modern"
+msgstr ""
+
+#: inc/customizer/sections/stylekit.php:70
+msgid "Creative"
+msgstr ""
+
+#: inc/customizer/sections/stylekit.php:71
+msgid "Vintage"
+msgstr ""
+
+#: inc/edit-page.php:29
+msgid ""
+"Featured images are not available for this page while using the current "
+"page template."
+msgstr ""
+
+#: inc/edit-page.php:64
+msgid "Layout Settings"
+msgstr ""
+
+#: inc/edit-page.php:86
+msgid "Post"
+msgstr ""
+
+#: inc/edit-page.php:90
+msgid "Looking to configure a unique layout for this %1$s? %2$s."
+msgstr ""
+
+#: inc/extras.php:78
+msgid "Page %s"
+msgstr ""
+
+#: inc/extras.php:304
+msgid ""
+"This widget area is currently disabled. Enable it in the \"Footer\" section "
+"of the Theme Customizer."
+msgstr ""
+
+#: inc/extras.php:315
+msgid ""
+"This widget area is currently disabled. Enable it in the \"Layout\" section "
+"of the Theme Customizer."
+msgstr ""
+
+#: inc/extras.php:320
+msgid ""
+"This widget area is currently enabled for the following views: %s. Change "
+"this in the \"Layout\" section of the Theme Customizer."
+msgstr ""
+
+#: inc/extras.php:343
+msgid "Blog (Post Page)"
+msgstr ""
+
+#: inc/extras.php:344
+msgid "Archives"
+msgstr ""
+
+#: inc/extras.php:345
+msgid "Search Results"
+msgstr ""
+
+#: inc/extras.php:346
+msgid "Posts"
+msgstr ""
+
+#: inc/extras.php:347
+msgid "Pages"
+msgstr ""
+
+#: inc/gallery-slider/gallery-slider.php:91
+msgid "Slider Settings"
+msgstr ""
+
+#: inc/gallery-slider/gallery-slider.php:93
+msgid "Show gallery as slider"
+msgstr ""
+
+#: inc/gallery-slider/gallery-slider.php:106
+msgid "Autoplay"
+msgstr ""
+
+#: inc/gallery-slider/gallery-slider.php:110
+msgid "Time between slides (ms)"
+msgstr ""
+
+#: inc/gallery-slider/gallery-slider.php:114
+msgid "Effect"
+msgstr ""
+
+#: inc/template-tags.php:26
+msgid "Pingback:"
+msgstr ""
+
+#: inc/template-tags.php:26
+msgid "Edit"
+msgstr ""
+
+#: inc/template-tags.php:66
+msgid "Your comment is awaiting moderation."
+msgstr ""
+
+#: inc/template-tags.php:157
+msgid "Read more"
+msgstr ""
+
+#: inc/tinymce-buttons/tinymce-buttons.php:144
+msgid "Add button"
+msgstr ""
+
+#: inc/tinymce-buttons/tinymce-buttons.php:145
+msgid "Insert Button"
+msgstr ""
+
+#: inc/tinymce-buttons/tinymce-buttons.php:146
+msgid "Button text"
+msgstr ""
+
+#: inc/tinymce-buttons/tinymce-buttons.php:147
+msgid "Button URL"
+msgstr ""
+
+#: inc/tinymce-buttons/tinymce-buttons.php:148
+msgid "Normal"
+msgstr ""
+
+#: inc/tinymce-buttons/tinymce-buttons.php:149 inc/tinymce.php:59
+msgid "Alert"
+msgstr ""
+
+#: inc/tinymce-buttons/tinymce-buttons.php:150
+msgid "Download"
+msgstr ""
+
+#: inc/tinymce-buttons/tinymce-buttons.php:151
+msgid "Color"
+msgstr ""
+
+#: inc/tinymce-buttons/tinymce-buttons.php:152
+msgid "Primary"
+msgstr ""
+
+#: inc/tinymce-buttons/tinymce-buttons.php:153
+msgid "Secondary"
+msgstr ""
+
+#: inc/tinymce-buttons/tinymce-buttons.php:154
+msgid "Green"
+msgstr ""
+
+#: inc/tinymce-buttons/tinymce-buttons.php:155
+msgid "Red"
+msgstr ""
+
+#: inc/tinymce-buttons/tinymce-buttons.php:156
+msgid "Orange"
+msgstr ""
+
+#: inc/tinymce-buttons/tinymce-buttons.php:157
+msgid "Style"
+msgstr ""
+
+#: inc/tinymce-buttons/tinymce-buttons.php:158
+msgid "Dotted"
+msgstr ""
+
+#: inc/tinymce-buttons/tinymce-buttons.php:159
+msgid "Double"
+msgstr ""
+
+#: inc/tinymce.php:37
+msgid "Big"
+msgstr ""
+
+#: inc/tinymce.php:42
+msgid "Small"
+msgstr ""
+
+#: inc/tinymce.php:47
+msgid "Citation"
+msgstr ""
+
+#: inc/tinymce.php:52
+msgid "Blockquote: testimonial"
+msgstr ""
+
+#: inc/tinymce.php:63
+msgid "Success (Green)"
+msgstr ""
+
+#: inc/tinymce.php:71
+msgid "Error (Red)"
+msgstr ""
+
+#: inc/tinymce.php:79
+msgid "Important (Orange)"
+msgstr ""
+
+#: inc/tinymce.php:89
+msgid "List"
+msgstr ""
+
+#: inc/tinymce.php:92
+msgid "Checkmark 1"
+msgstr ""
+
+#: inc/tinymce.php:99
+msgid "Checkmark 2"
+msgstr ""
+
+#: inc/tinymce.php:106
+msgid "Star"
+msgstr ""
+
+#: inc/tinymce.php:113
+msgid "Dot"
+msgstr ""
+
+#: partials/content-attachment.php:11
+msgid "Download this file:"
+msgstr ""
+
+#: partials/content-image.php:23
+msgid "Technical Details"
+msgstr ""
+
+#: partials/content-none.php:10
+msgid "Nothing found"
+msgstr ""
+
+#: partials/content-none.php:19
+msgid "Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
+msgstr ""
+
+#: partials/content-none.php:25
+msgid ""
+"Sorry, but nothing matched your search terms. Please try again with some "
+"different keywords."
+msgstr ""
+
+#: partials/content-none.php:27
+msgid ""
+"It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps "
+"searching can help."
+msgstr ""
+
+#: partials/entry-date.php:18
+msgid "%s ago"
+msgstr ""
+
+#: partials/entry-pagination.php:12
+msgid "Pages:"
+msgstr ""
+
+#: partials/entry-taxonomy.php:21
+msgid "<i class=\"fa fa-file\"></i> "
+msgstr ""
+
+#: partials/entry-taxonomy.php:26
+msgid "<i class=\"fa fa-tag\"></i> "
+msgstr ""
+
+#: partials/footer-credit.php:21
+msgid "homepage"
+msgstr ""
+
+#: partials/header-layout-3.php:64 partials/header-layout.php:63
+msgid "Skip to content"
+msgstr ""
+
+#: partials/nav-paging.php:9
+msgid "Posts navigation"
+msgstr ""
+
+#: partials/nav-paging.php:16
+msgid "Newer posts"
+msgstr ""
+
+#: partials/nav-paging.php:22
+msgid "Older posts"
+msgstr ""
+
+#: partials/nav-post.php:18
+msgid "Post navigation"
+msgstr ""
+
+#: partials/section-title.php:12 partials/section-title.php:24
+#: partials/section-title.php:30 partials/section-title.php:36
+msgid "From %s"
+msgstr ""
+
+#: partials/section-title.php:18
+msgid "Tagged %s"
+msgstr ""
+
+#: partials/section-title.php:42
+msgid "By %s"
+msgstr ""
+
+#: partials/section-title.php:47
+msgid "Archive"
+msgstr ""
+
+#: partials/section-title.php:53
+msgid "Search for %s"
+msgstr ""
+
+#: partials/section-title.php:59
+msgid "%s result found"
+msgid_plural "%s results found"
+msgstr[0] ""
+msgstr[1] ""
+
+#: searchform.php:10
+msgid "Press Enter to submit your search"
+msgstr ""
+
+#. Theme Name of the plugin/theme
+msgid "Make"
+msgstr ""
+
+#. Theme URI of the plugin/theme
+msgid "https://thethemefoundry.com/wordpress-themes/make/"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"Create your website without touching a line of code. Make's flexible "
+"customization features and a powerful drag and drop page builder make "
+"designing your site fun and easy. Build almost anything: a simple portfolio "
+"or photography site, an ecommerce business site, a minimalist blog, or even "
+"a professional magazine. You'll start by customizing your background, "
+"layouts, fonts, colors, and logo. Next, add and organize your content using "
+"the drag and drop page builder. Add a photo, a video, a gallery, or even a "
+"slider to any page on your website. Make is responsive, so your website "
+"will naturally look great on phones, tablets, and desktop screens. It's "
+"also fully compatible with popular plugins like WooCommerce, Gravity Forms, "
+"Contact Form 7, Jetpack, and WP PageNavi."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "The Theme Foundry"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://thethemefoundry.com"
+msgstr ""
+
+#. Template Name of the plugin/theme
+msgid "Builder Template"
+msgstr ""
+
+#: comments.php:16
+msgctxt "comments title"
+msgid "One comment"
+msgid_plural "%1$s comments"
+msgstr[0] ""
+msgstr[1] ""
+
+#: inc/builder/sections/builder-templates/banner.php:85
+msgctxt "transition effect"
+msgid "None"
+msgstr ""
+
+#: inc/builder/sections/section-definitions.php:70
+msgctxt "section name"
+msgid "Text"
+msgstr ""
+
+#: inc/builder/sections/section-definitions.php:137
+msgctxt "section name"
+msgid "Blank"
+msgstr ""
+
+#: inc/builder/sections/section-definitions.php:180
+msgctxt "section name"
+msgid "Banner"
+msgstr ""
+
+#: inc/builder/sections/section-definitions.php:261
+msgctxt "section name"
+msgid "Gallery"
+msgstr ""
+
+#: inc/customizer/helpers-fonts.php:541
+msgctxt "font style"
+msgid "Serif"
+msgstr ""
+
+#: inc/customizer/helpers-fonts.php:545
+msgctxt "font style"
+msgid "Sans Serif"
+msgstr ""
+
+#: inc/customizer/helpers-fonts.php:549
+msgctxt "font style"
+msgid "Monospaced"
+msgstr ""
+
+#: inc/customizer/helpers.php:159
+msgctxt "footer widget area number"
+msgid "0"
+msgstr ""
+
+#: inc/customizer/helpers.php:160
+msgctxt "footer widget area number"
+msgid "1"
+msgstr ""
+
+#: inc/customizer/helpers.php:161
+msgctxt "footer widget area number"
+msgid "2"
+msgstr ""
+
+#: inc/customizer/helpers.php:162
+msgctxt "footer widget area number"
+msgid "3"
+msgstr ""
+
+#: inc/customizer/helpers.php:163
+msgctxt "footer widget area number"
+msgid "4"
+msgstr ""
+
+#: inc/extras.php:321
+msgctxt "list item separator"
+msgid ", "
+msgstr ""
+
+#: inc/template-tags.php:44
+msgctxt "1: date, 2: time"
+msgid "%1$s at %2$s"
+msgstr ""
+
+#: inc/template-tags.php:60
+msgctxt "e.g. Bob says hello."
+msgid "says:"
+msgstr ""
+
+#: inc/template-tags.php:463
+msgctxt "time"
+msgid "second"
+msgstr ""
+
+#: inc/template-tags.php:469
+msgctxt "time"
+msgid "seconds"
+msgstr ""
+
+#: inc/template-tags.php:479
+msgctxt "camera f-stop"
+msgid "f/"
+msgstr ""
+
+#: inc/template-tags.php:489
+msgctxt "camera setting"
+msgid "Camera:"
+msgstr ""
+
+#: inc/template-tags.php:495
+msgctxt "camera setting"
+msgid "Taken:"
+msgstr ""
+
+#: inc/template-tags.php:502
+msgctxt "camera setting"
+msgid "Focal length:"
+msgstr ""
+
+#: inc/template-tags.php:508
+msgctxt "camera setting"
+msgid "Aperture:"
+msgstr ""
+
+#: inc/template-tags.php:514
+msgctxt "camera setting"
+msgid "Exposure:"
+msgstr ""
+
+#: inc/template-tags.php:520
+msgctxt "camera setting"
+msgid "ISO:"
+msgstr ""
+
+#: inc/template-tags.php:503
+msgctxt "millimeters"
+msgid "mm"
+msgstr ""
+
+#: partials/entry-author.php:26
+msgctxt "author byline"
+msgid "by %s"
+msgstr ""
+
+#: partials/footer-credit.php:19
+msgctxt "attribution"
+msgid "by"
+msgstr ""
+
+#: partials/section-title.php:31
+msgctxt "monthly archives date format"
+msgid "F Y"
+msgstr ""
+
+#: partials/section-title.php:37
+msgctxt "yearly archives date format"
+msgid "Y"
+msgstr ""
+
+#: searchform.php:9
+msgctxt "label"
+msgid "Search for:"
+msgstr ""
+
+#: searchform.php:10
+msgctxt "placeholder"
+msgid "Search&hellip;"
+msgstr ""
+
+#: searchform.php:12
+msgctxt "submit button"
+msgid "Search"
+msgstr ""

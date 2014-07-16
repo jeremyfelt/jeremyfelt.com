@@ -1,0 +1,860 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Tatebu\n"
+"Report-Msgid-Bugs-To: https://thethemefoundry.com/support\n"
+"POT-Creation-Date: 2014-06-04 23:36:15+00:00\n"
+"PO-Revision-Date: Wed Jun 11 2014 12:04:24 GMT-0800 (AKDT)\n"
+"Last-Translator: Tatebu <take@gpl.jp>\n"
+"Language-Team: Tatebu <take@gpl.jp>\n"
+"Language: ja\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Loco-Source-Locale: en_US\n"
+"X-Generator: Loco - https://localise.biz/\n"
+"X-Poedit-Basepath: .\n"
+"X-Loco-Parser: loco_parse_mo\n"
+"X-Loco-Target-Locale: ja_JP"
+
+msgid "%s ago"
+msgstr "%s 前"
+
+msgid "%s and convert any column into an area for widgets."
+msgstr "%s すると任意のカラムにウィジェットを入れられます。"
+
+msgid "%s result found"
+msgid_plural "%s results found"
+msgstr[0] "%s 件、見つかりました。"
+msgstr[1] ""
+
+msgid ""
+"%s to quickly apply designer-picked style choices (fonts, layout, colors) to "
+"your website."
+msgstr "%s すると、デザイナーが選んだ（フォント、レイアウト、カラー）スタイルセットを適用できます。"
+
+msgctxt "1: date, 2: time"
+msgid "%1$s at %2$s"
+msgstr "%1$s  %2$s"
+
+msgid "Absolute (%s)"
+msgstr "絶対的 (%s)"
+
+msgid "Add"
+msgstr "追加"
+
+msgid "Add Media"
+msgstr "メディアを追加"
+
+msgid "Add New Item"
+msgstr "新規項目を追加"
+
+msgid "Add New Section"
+msgstr "新しいセクションを追加"
+
+msgid "Add New Slide"
+msgstr "新しいスライドを追加"
+
+msgid "Add button"
+msgstr "ボタンの追加"
+
+msgid "Archive"
+msgstr "アーカイブ"
+
+msgid "Archives"
+msgstr "アーカイブ"
+
+msgid "Auto"
+msgstr "自動的"
+
+msgid "Autoplay slideshow"
+msgstr "スライドショウの自動生成"
+
+msgid "Background"
+msgstr "背景"
+
+msgid "Background Color"
+msgstr "背景色"
+
+msgid "Background Image"
+msgstr "背景イメージ"
+
+msgid "Background Position"
+msgstr "背景の位置"
+
+msgid "Background Repeat"
+msgstr "背景リピート"
+
+msgid "Background Size"
+msgstr "背景サイズ"
+
+msgid "Background color"
+msgstr "背景色"
+
+msgid "Background image"
+msgstr "背景イメージ"
+
+msgid "Background style:"
+msgstr "バックグランドスタイル:"
+
+msgid "Blog (Post Page)"
+msgstr "ブログ (記事)"
+
+msgid "Body"
+msgstr "ボディー"
+
+msgid "Body Font Size (in px)"
+msgstr "本文フォントサイズ（px）"
+
+msgid "Boxed"
+msgstr "ボックス"
+
+msgid "Button URL"
+msgstr "ボタンのURL"
+
+msgid "Button text"
+msgstr "ボタンのテキスト"
+
+msgid "By %s"
+msgstr "%s から"
+
+msgid "Caption color:"
+msgstr "キャプションのカラー:"
+
+msgid "Caption style:"
+msgstr "キャプションのスタイル"
+
+msgid "Centered"
+msgstr "中央寄せ"
+
+msgid "Character Subset"
+msgstr "文字のサブセット"
+
+msgid "Checkmark 1"
+msgstr "チェックマーク1"
+
+msgid "Checkmark 2"
+msgstr "チェックマーク2"
+
+msgid "Choose a kit"
+msgstr "キットを選択"
+
+msgid "Click to toggle"
+msgstr "トグルをクリック"
+
+msgid "Color"
+msgstr "カラー"
+
+msgid "Colors"
+msgstr "カラー"
+
+msgid "Columns:"
+msgstr "カラム"
+
+msgid "Comment navigation"
+msgstr "コメントナビゲーション"
+
+msgid "Comments are closed."
+msgstr "コメントは閉じられています。"
+
+msgid "Contain"
+msgstr "収まる最大サイズ"
+
+msgid "Content"
+msgstr "コンテンツ"
+
+msgid "Content Options"
+msgstr "コンテンツオプション"
+
+msgid "Content position"
+msgstr "コンテンツの位置"
+
+msgid "Cover"
+msgstr "完全に覆う最小サイズ"
+
+msgid "Create rearrangeable columns of content and images."
+msgstr "記事や画像のカラムを作成します。"
+
+msgid ""
+"Create your website without touching a line of code. Make's flexible "
+"customization features and a powerful drag and drop page builder make "
+"designing your site fun and easy. Build almost anything: a simple portfolio "
+"or photography site, an ecommerce business site, a minimalist blog, or even "
+"a professional magazine. You'll start by customizing your background, "
+"layouts, fonts, colors, and logo. Next, add and organize your content using "
+"the drag and drop page builder. Add a photo, a video, a gallery, or even a "
+"slider to any page on your website. Make is responsive, so your website will "
+"naturally look great on phones, tablets, and desktop screens. It's also "
+"fully compatible with popular plugins like WooCommerce, Gravity Forms, "
+"Contact Form 7, Jetpack, and WP PageNavi."
+msgstr ""
+"コードに触れず、ウェブサイトを作成できます。Makeテーマの柔軟なカスタマイズ機能と、強力なドラック＆ドロップのページビルダーで、あなたのサイトを楽しく、"
+"簡単にデザインします。シンプルなポートフォリオや写真サイト、e コマースのビジネス "
+"サイト、シンプルなブログ、または専門の雑誌など、ほとんど何でも構築可能です。背景、レイアウト、フォント、色、およびロゴのカスタマイズから始めます。次に、ド"
+"ラッグ＆ドロップなページビルダーを使いコンテンツを追加して整えます。写真、ビデオ、ギャラリー、あるいはスライダーなどをウェブサイト上のどこでも好きなページ"
+"に追加してください。Makeテーマはレスポンシブで、あなたのウェブサイトはスマホ、タブレットやパソコンの画面ですばらしく見えるでしょう。WooCommer"
+"ce, Gravity Forms, Contact Form 7, JetpackやWP "
+"PageNaviなど、人気のある定番プラグインと完全に互換性があります。"
+
+msgid "Creative"
+msgstr "クリエイティブ"
+
+msgid "Custom RSS URL (replaces default)"
+msgstr "カスタムRSS URL(初期値を上書)"
+
+msgid "Dark"
+msgstr "ダーク"
+
+msgid "Default"
+msgstr "初期値"
+
+msgid "Default RSS"
+msgstr "WordPress標準のRSS"
+
+msgid "Detail Color"
+msgstr "詳細カラー"
+
+msgid "Download"
+msgstr "ダウンロード"
+
+msgid "Download this file:"
+msgstr "このファイルをダウンロード"
+
+msgid "Downloads"
+msgstr "ダウンロード"
+
+msgid "Drag-and-drop this column into place"
+msgstr "ドラック＆ドロップしてこの絡むを入れます"
+
+msgid "Duplicate this page with %s."
+msgstr "ページの幅を複製する。%s"
+
+msgid "Edit"
+msgstr "編集"
+
+msgid "Enter link here"
+msgstr "リンクを入力"
+
+msgid ""
+"Enter the complete URL to your profile for each service below that you would "
+"like to share."
+msgstr "あなたのプロフィールのURLを入力し、下記サービスをシェアします。"
+
+msgid "Enter title here"
+msgstr "タイトルをここに"
+
+msgid "Error (Red)"
+msgstr "エラー（赤）"
+
+msgid "Fade"
+msgstr "フェード"
+
+msgid "Favicon"
+msgstr "ファビコン"
+
+msgid "Featured"
+msgstr "オススメ"
+
+msgid "Featured Image"
+msgstr "アイキャッチ画像"
+
+msgid "Featured Images"
+msgstr "アイキャッチ画像"
+
+msgid ""
+"Featured images are not available for this page while using the current page "
+"template."
+msgstr "アイキャッチ画像は、現在のページ・テンプレートには利用不可です。"
+
+msgid ""
+"File must be <strong>.png</strong> format. Optimal dimensions: <strong>152px "
+"x 152px</strong>."
+msgstr ""
+"ファイルは、<strong>.png</strong>形式にする必要があります。最適なサイズは、<strong>152px x "
+"152px</strong>です。"
+
+msgid ""
+"File must be <strong>.png</strong> or <strong>.ico</strong> format. Optimal "
+"dimensions: <strong>32px x 32px</strong>."
+msgstr ""
+"ファイルは、<strong>.png</strong> か <strong>."
+"ico</strong>形式にする必要があります。最適なサイズは<strong>32px x 32px</strong>です。"
+
+msgid "Fonts"
+msgstr "フォント"
+
+msgid "Footer"
+msgstr "フッダー"
+
+msgid "Footer 1"
+msgstr "フッダー1"
+
+msgid "Footer 2"
+msgstr "フッダー2"
+
+msgid "Footer 3"
+msgstr "フッダー3"
+
+msgid "Footer 4"
+msgstr "フッダー4"
+
+msgid "Footer Background Color"
+msgstr "フッダー背景色"
+
+msgid "Footer Background Image"
+msgstr "フッダー背景イメージ"
+
+msgid "Footer Border Color"
+msgstr "フッダーボーダーカラー"
+
+msgid "Footer Layout"
+msgstr "フッダーレイアウト"
+
+msgid "Footer Options"
+msgstr "フッダーオプション"
+
+msgid "Footer Text"
+msgstr "フッダーテキスト"
+
+msgid "Footer Text Color"
+msgstr "フッダーテキストカラー"
+
+msgid "Footer Widget Areas"
+msgstr "フッダーのウィジェット領域"
+
+msgid "From %s"
+msgstr "%s から"
+
+msgid "Full-width"
+msgstr "横幅いっぱい"
+
+msgid "General"
+msgstr "一般"
+
+msgid "Generate excerpts automatically"
+msgstr "自動的に抜粋を生成。"
+
+msgid "Green"
+msgstr "緑"
+
+msgid "Header"
+msgstr "ヘッダー"
+
+msgid "Header Background Color"
+msgstr "ヘッダーの背景色"
+
+msgid "Header Background Image"
+msgstr "ヘッダーの背景イメージ"
+
+msgid "Header Bar Background Color"
+msgstr "ヘッダーバーの背景色"
+
+msgid "Header Bar Border Color"
+msgstr "ヘッダーバーのボーダーカラー"
+
+msgid "Header Bar Content Layout"
+msgstr "ヘッダーバーのレイアウト"
+
+msgid "Header Bar Text"
+msgstr "ヘッダーバーのテキスト"
+
+msgid "Header Bar Text Color"
+msgstr "ヘッダーバーのテキストカラー"
+
+msgid "Header Font Size (in px)"
+msgstr "ヘッダーフォントサイズ（px）"
+
+msgid "Header Layout"
+msgstr "ヘッダーレイアウト"
+
+msgid "Header Options"
+msgstr "ヘッダーオプション"
+
+msgid "Header Text Color"
+msgstr "ヘッダーのテキストカラー"
+
+msgid "Header, Footer, Sidebars"
+msgstr "ヘッダー、フッター、サイドバー"
+
+msgid "Headers"
+msgstr "ヘッダー"
+
+msgid "Hide Site Title"
+msgstr "サイト名を隠す"
+
+msgid "Hide Tagline"
+msgstr "キャッチフレーズを隠す"
+
+msgid "Hide default RSS feed link"
+msgstr "WordPress標準のRSSフィードリンクを隠す"
+
+msgid "Hide navigation arrows"
+msgstr "アンビゲート矢印を隠す"
+
+msgid "Hide navigation dots"
+msgstr "ナビゲーションのドットを隠す"
+
+msgid "Hide site footer"
+msgstr "フッターを隠す"
+
+msgid "Hide site header"
+msgstr "ヘッダーバーを隠す"
+
+msgid "Hide title"
+msgstr "タイトルを隠す"
+
+msgid ""
+"If you would like to add a social profile that is not listed above, or "
+"change the order of the icons, use %s."
+msgstr "この一覧に表示されていないソーシャルリンク、またはアイコンの順序を変更したい場合は、%s を使用してください。"
+
+msgid "Insert Button"
+msgstr "ボタンの挿入"
+
+msgid "Kits"
+msgstr "キット名"
+
+msgid "Landscape"
+msgstr "横"
+
+msgid "Layout Settings"
+msgstr "レイアウト設定"
+
+msgid "Layout: Archives"
+msgstr "レイアウト: アーカイブ"
+
+msgid "Layout: Blog (Posts Page)"
+msgstr "レイアウト: ブログ(ページ)"
+
+msgid "Layout: Pages"
+msgstr "レイアウト:ページ"
+
+msgid "Layout: Posts"
+msgstr "レイアウト: 記事"
+
+msgid "Layout: Search Results"
+msgstr "レイアウト: 検索結果"
+
+msgid "Left"
+msgstr "左"
+
+msgid "Left Sidebar"
+msgstr "左のスライダー"
+
+msgid "Light"
+msgstr "ライト"
+
+msgid "Logo"
+msgstr "ロゴ"
+
+msgid "Looking to add premium fonts from Typekit to your website? %s."
+msgstr "タイプキットのプレミアフォントを追加するには、%s。"
+
+msgid "Looking to configure a unique layout for this %1$s? %2$s."
+msgstr "%1$sのオリジナルレイアウトを構成するには、 %2$s。"
+
+msgid "Main"
+msgstr "メインコンテンツ"
+
+msgid "Make"
+msgstr "Make"
+
+msgid "Maybe try searching this website:"
+msgstr "多分、このサイトをもう一度検索すれば："
+
+msgid "Menu"
+msgstr "メニュー"
+
+msgid "Mobile Menu Label"
+msgstr "モバイル向けメニュー名"
+
+msgid "Modern"
+msgstr "モダン"
+
+msgid "Navigation Font Size (in px)"
+msgstr "ナビゲーションフォントサイズ（px）"
+
+msgid "Newer posts"
+msgstr "新しい記事"
+
+msgid "None"
+msgstr "なし"
+
+msgid "Not all fonts provide each of these subsets."
+msgstr "すべてのフォントは、これらのサブセットのそれぞれを提供するわけではありません。"
+
+msgid "Nothing found"
+msgstr "１件もみつかりません。"
+
+msgid "Older posts"
+msgstr "古い記事"
+
+msgid "Oops! That page can&rsquo;t be found."
+msgstr "おっと！お探しのページは見つかりませんでした。"
+
+msgid "Options"
+msgstr "オプション"
+
+msgid "Page %s"
+msgstr "%s ページ"
+
+msgid "Page Builder"
+msgstr "ページビルダー"
+
+msgid "Page Title"
+msgstr "ページのタイトル"
+
+msgid "Portrait"
+msgstr "縦"
+
+msgid "Post"
+msgstr "記事"
+
+msgid "Post Author"
+msgstr "投稿者"
+
+msgid "Post Date"
+msgstr "投稿日時"
+
+msgid "Post Meta"
+msgstr "記事のメタ属性"
+
+msgid "Post header"
+msgstr "記事の上"
+
+msgid "Post navigation"
+msgstr "記事のナビゲーション"
+
+msgid "Posts"
+msgstr "記事"
+
+msgid "Posts navigation"
+msgstr "記事のナビゲーション"
+
+msgid "Press Enter to submit your search"
+msgstr "エンターキーを押してこのサイトを検索"
+
+msgid "Primary Color"
+msgstr "基本カラー"
+
+msgid "Primary Menu"
+msgstr "プライマリのメニュー"
+
+msgid "Products"
+msgstr "プロダクト"
+
+msgid "Read more"
+msgstr "もっと読む"
+
+msgid "Red"
+msgstr "赤"
+
+msgid "Regular Logo"
+msgstr "標準ロゴ"
+
+msgid "Relative (1 week ago)"
+msgstr "相対的（1週間前）"
+
+msgid "Remove background image"
+msgstr "背景イメージを削除"
+
+msgid "Remove featured image"
+msgstr "アイキャッチ画像を削除"
+
+msgid "Remove slide image"
+msgstr "スライドイメージを削除"
+
+msgid "Remove this item"
+msgstr "このアイテムを削除"
+
+msgid "Remove this section"
+msgstr "このセクションを削除"
+
+msgid "Remove this slide"
+msgstr "このスライドを削除"
+
+msgid "Resize your browser window to preview the mobile menu label."
+msgstr "ブラウザーをリサイズし、モバイル向けのメニューを表示"
+
+msgid "Retina Logo (2x)"
+msgstr "レティーナロゴ (2x)"
+
+msgid "Right"
+msgstr "右"
+
+msgid "Right Sidebar"
+msgstr "右のスライダー"
+
+msgid "Search Results"
+msgstr "検索結果"
+
+msgid "Search for %s"
+msgstr "%sの検索"
+
+msgid "Secondary Color"
+msgstr "第２カラー"
+
+msgid "Section height"
+msgstr "セクションの高さ"
+
+msgid "Set background image"
+msgstr "背景イメージを設定"
+
+msgid "Set featured image"
+msgstr "アイキャッチ画像を設定"
+
+msgid "Set slide image"
+msgstr "スライドイメージを設定"
+
+msgid "Show Title/Logo On"
+msgstr "サイト名とロゴの見え方"
+
+msgid "Show categories"
+msgstr "カテゴリーを表示"
+
+msgid "Show gallery as slider"
+msgstr "ギャラリーをスライダーに表示"
+
+msgid "Show left sidebar"
+msgstr "左側サイドバーを表示"
+
+msgid "Show right sidebar"
+msgstr "右側サイドバーを表示"
+
+msgid "Show search field in header"
+msgstr "サイト検索をヘッダーバーに表示"
+
+msgid "Show social icons"
+msgstr "ソーシャルアイコンを表示"
+
+msgid "Show social icons in header bar"
+msgstr "ソーシャルアイコンをヘッダーバーに表示"
+
+msgid "Show tags"
+msgstr "タグを表示"
+
+msgid "Site Layout"
+msgstr "サイトのレイアウト"
+
+msgid "Site Tagline Font Size (in px)"
+msgstr "サイトタグラインのフォントサイズ (px)"
+
+msgid "Site Title"
+msgstr "サイトのタイトル"
+
+msgid "Site Title Color"
+msgstr "サイトのタイトル色"
+
+msgid "Site Title Font Size (in px)"
+msgstr "サイト名のフォントサイズ (px)"
+
+msgid "Slide"
+msgstr "スライド"
+
+msgid "Slide horizontal"
+msgstr "水平スライド"
+
+msgid "Slide image"
+msgstr "スライドイメージ"
+
+msgid "Slideshow display"
+msgstr "スライドショウを表示"
+
+msgid "Social Profile Links"
+msgstr "ソーシャルリンク"
+
+msgid "Social Profiles &amp; RSS"
+msgstr "ソーシャルリンク &amp; RSS"
+
+msgid ""
+"Sorry, but nothing matched your search terms. Please try again with some "
+"different keywords."
+msgstr "ごめんなさい、検索にマッチするものはありませんでした。もう一度、違う検索ワードで試してみてください。"
+
+msgid "Square"
+msgstr "正方形"
+
+msgid "Standard Fonts"
+msgstr "標準フォント"
+
+msgid "Sticky Label"
+msgstr "先頭固定表示のラベル"
+
+msgid "Style Kits"
+msgstr "スタイルキット"
+
+msgid "Success (Green)"
+msgstr "成功（緑）"
+
+msgid "Tagged %s"
+msgstr "タグ %s"
+
+msgid "Text Color"
+msgstr "テキストカラー"
+
+msgid "The Retina Logo should be twice the size of the Regular Logo."
+msgstr "レティーナロゴは標準ロゴの倍のサイズで。"
+
+msgid "The list of Google fonts is long! You can %s before making your choices."
+msgstr "グーグルフォントのリストは多いです！選択の前にここで%sできます。"
+
+msgid ""
+"This widget area is currently disabled. Enable it in the \"Footer\" section of "
+"the Theme Customizer."
+msgstr "このウィジェットエリアは現在無効になっています。テーマカスタマイザーの \"フッターのウィジェット領域\" セクションを有効にします。"
+
+msgid ""
+"This widget area is currently disabled. Enable it in the \"Layout\" section of "
+"the Theme Customizer."
+msgstr "このウィジェットエリアは現在無効になっています。テーマカスタマイザーの \"レイアウト\" セクションを有効にします。"
+
+msgid ""
+"This widget area is currently enabled for the following views: %s. Change "
+"this in the \"Layout\" section of the Theme Customizer."
+msgstr "このウィジェットエリアは現在、次のビューで有効になっています。%s。テーマカスタマイザーの \"レイアウト\" で変更してください。"
+
+msgid "Thumbnail"
+msgstr "サムネイル"
+
+msgid "Tile"
+msgstr "タイトル"
+
+msgid "Time between slides (in ms)"
+msgstr "スライドの時間間隔（ms秒）"
+
+msgid "Traditional"
+msgstr "伝統的"
+
+msgid "Transition effect"
+msgstr "トランジットの効果"
+
+msgid "Typekit"
+msgstr "タイプキット"
+
+msgid "Underline links in content"
+msgstr "コンテンツ内のリンクに下線を引く"
+
+msgid "Upgrade to %1$s"
+msgstr " %1$s テーマにアップグレード"
+
+msgid "Upgrade to %s"
+msgstr "%s にアップグレード"
+
+msgid "Upgrade to Make Plus"
+msgstr "Make Plusテーマにアップグレード"
+
+msgid "Use as Background Image"
+msgstr "他の背景イメージを使う"
+
+msgid "Use as Featured Image"
+msgstr "他のアイキャッチ画像を使う"
+
+msgid "Use as slide image"
+msgstr "他のスライドイメージを使う"
+
+msgid "Vintage"
+msgstr "ビンテージ"
+
+msgid "Want some ideas?"
+msgstr "アイデアほしい？"
+
+msgid "Want to remove the theme byline from your website&#8217;s footer? %s."
+msgstr "フッターからコピーライトを削除するには、%s。"
+
+msgid "White Label"
+msgstr "OEM供給"
+
+msgid "Widget Font Size (in px)"
+msgstr "ウィジェットフォントサイズ（px）"
+
+msgid "With avatar"
+msgstr "アバターを表示"
+
+msgid ""
+"With the Site Layout option (under <em>General</em>) set to \"Full Width\", "
+"the background color and image will not be visible."
+msgstr "サイトのレイアウト（<em>一般</em>）で \"横幅いっぱい\" を選択していると、背景画像や背景色は表示されません。"
+
+msgid "Without avatar"
+msgstr "アバターを非表示"
+
+msgctxt "attribution"
+msgid "by"
+msgstr "作者"
+
+msgctxt "author byline"
+msgid "by %s"
+msgstr "： %s"
+
+msgctxt "camera setting"
+msgid "ISO:"
+msgstr "ISO:"
+
+msgctxt "comments title"
+msgid "One comment"
+msgid_plural "%1$s comments"
+msgstr[0] "コメント"
+msgstr[1] ""
+
+msgctxt "e.g. Bob says hello."
+msgid "says:"
+msgstr "のコメント"
+
+msgctxt "footer widget area number"
+msgid "1"
+msgstr "1"
+
+msgctxt "footer widget area number"
+msgid "2"
+msgstr "2"
+
+msgctxt "footer widget area number"
+msgid "3"
+msgstr "3"
+
+msgctxt "footer widget area number"
+msgid "4"
+msgstr "4"
+
+msgctxt "label"
+msgid "Search for:"
+msgstr "検索結果："
+
+msgctxt "millimeters"
+msgid "mm"
+msgstr "mm"
+
+msgctxt "monthly archives date format"
+msgid "F Y"
+msgstr "F Y"
+
+msgctxt "placeholder"
+msgid "Search&hellip;"
+msgstr "検索…"
+
+msgid "preview"
+msgstr "プレビュー"
+
+msgctxt "section name"
+msgid "Banner"
+msgstr "バナー"
+
+msgctxt "section name"
+msgid "Gallery"
+msgstr "ギャラリー"
+
+msgctxt "section name"
+msgid "Text"
+msgstr "テキスト"
+
+msgctxt "submit button"
+msgid "Search"
+msgstr "検索"
+
+msgid "this alternate method"
+msgstr "この代替方法"
+
+msgctxt "yearly archives date format"
+msgid "Y"
+msgstr "Y"
