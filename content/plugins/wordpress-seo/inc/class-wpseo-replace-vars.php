@@ -104,7 +104,10 @@ if ( ! class_exists( 'WPSEO_Replace_Vars' ) ) {
 			if ( is_string( $var ) && $var !== '' ) {
 				$var = self::remove_var_delimiter( $var );
 
-				if ( strpos( $var, 'cf_' ) === 0 || strpos( $var, 'ct_' ) === 0 ) {
+				if ( preg_match( '`^[A-Z0-9_-]+$`i', $var ) === false ) {
+					trigger_error( __( 'A replacement variable can only contain alphanumeric characters, an underscore or a dash. Try renaming your variable.', 'wordpress-seo' ), E_USER_WARNING );
+				}
+				elseif ( strpos( $var, 'cf_' ) === 0 || strpos( $var, 'ct_' ) === 0 ) {
 					trigger_error( __( 'A replacement variable can not start with "%%cf_" or "%%ct_" as these are reserved for the WPSEO standard variable variables for custom fields and custom taxonomies. Try making your variable name unique.', 'wordpress-seo' ), E_USER_WARNING );
 				}
 				elseif ( ! method_exists( __CLASS__, 'retrieve_' . $var ) ) {
@@ -141,7 +144,7 @@ if ( ! class_exists( 'WPSEO_Replace_Vars' ) ) {
 
 			// Let's see if we can bail super early.
 			if ( strpos( $string, '%%' ) === false ) {
-				return trim( preg_replace( '`\s+`u', ' ', $string ) );
+				return trim( preg_replace( '`\s+`', ' ', $string ) );
 			}
 
 			$args = (array) $args;
@@ -183,7 +186,7 @@ if ( ! class_exists( 'WPSEO_Replace_Vars' ) ) {
 			 *
 			 * @api bool $final
 			 */
-			if ( apply_filters( 'wpseo_replacements_final', true ) === true ) {
+			if ( apply_filters( 'wpseo_replacements_final', true ) === true && ( isset( $matches[1] ) && is_array( $matches[1] ) ) ) {
 				// Remove non-replaced variables
 				$remove = array_diff( $matches[1], $omit ); // Make sure the $omit variables do not get removed
 				$remove = array_map( array( __CLASS__, 'add_var_delimiter' ), $remove );
@@ -197,7 +200,7 @@ if ( ! class_exists( 'WPSEO_Replace_Vars' ) ) {
 			}
 
 			// Remove superfluous whitespace
-			$string = preg_replace( '`\s+`u', ' ', $string );
+			$string = preg_replace( '`\s+`', ' ', $string );
 			return trim( $string );
 		}
 
@@ -392,14 +395,21 @@ if ( ! class_exists( 'WPSEO_Replace_Vars' ) ) {
 		}
 
 		/**
-		 * Retrieve the separator defined in your theme's <code>wp_title()</code> tag for use as replacement string.
+		 * Retrieve the separator for use as replacement string.
 		 *
 		 * @return string
 		 */
 		private function retrieve_sep() {
-			$replacement = '-';
-			if ( isset( $GLOBALS['sep'] ) && is_string( $GLOBALS['sep'] ) && $GLOBALS['sep'] !== '' ) {
-				$replacement = $GLOBALS['sep'];
+			$replacement = WPSEO_Options::get_default( 'wpseo_titles', 'separator' );
+
+			// Get the titles option and the separator options
+			$titles_options    = get_option( 'wpseo_titles' );
+			$seperator_options = WPSEO_Option_Titles::get_instance()->get_separator_options();
+
+			// This should always be set, but just to be sure
+			if ( isset( $seperator_options[ $titles_options['separator'] ] ) ) {
+				// Set the new replacement
+				$replacement = $seperator_options[ $titles_options['separator'] ];
 			}
 
 			/**
@@ -419,7 +429,7 @@ if ( ! class_exists( 'WPSEO_Replace_Vars' ) ) {
 			static $replacement;
 
 			if ( ! isset( $replacement ) ) {
-				$description = get_bloginfo( 'description' );
+				$description = trim( strip_tags( get_bloginfo( 'description' ) ) );
 				if ( $description !== '' ) {
 					$replacement = $description;
 				}
@@ -438,7 +448,7 @@ if ( ! class_exists( 'WPSEO_Replace_Vars' ) ) {
 			static $replacement;
 
 			if ( ! isset( $replacement ) ) {
-				$sitename = get_bloginfo( 'name' );
+				$sitename = trim( strip_tags( get_bloginfo( 'name' ) ) );
 				if ( $sitename !== '' ) {
 					$replacement = $sitename;
 				}
