@@ -12,25 +12,32 @@ $subheader_class = ( 1 === $show_social || 1 === $show_search ) ? ' right-conten
 $hide_site_title = (int) get_theme_mod( 'hide-site-title', ttfmake_get_default( 'hide-site-title' ) );
 $hide_tagline    = (int) get_theme_mod( 'hide-tagline', ttfmake_get_default( 'hide-tagline' ) );
 $menu_label      = get_theme_mod( 'navigation-mobile-label', ttfmake_get_default( 'navigation-mobile-label' ) );
+$header_bar_menu = wp_nav_menu( array(
+	'theme_location' => 'header-bar',
+	'fallback_cb'    => false,
+	'echo'           => false,
+) );
 ?>
 
 <header id="site-header" class="<?php echo esc_attr( ttfmake_get_site_header_class() ); ?>" role="banner">
 	<?php // Only show Sub Header if it has content
-	if ( ! empty( $header_text ) || 1 === $show_search || ( ! empty ( $social_links ) && 1 === $show_social ) ) : ?>
+	if ( ! empty( $header_text ) || 1 === $show_search || ( ! empty ( $social_links ) && 1 === $show_social ) || ! empty( $header_bar_menu ) ) : ?>
 	<div class="header-bar<?php echo esc_attr( $subheader_class ); ?>">
 		<div class="container">
+			<a class="skip-link screen-reader-text" href="#site-content"><?php _e( 'Skip to content', 'make' ); ?></a>
 			<?php // Search form
 			if ( 1 === $show_search ) :
 				get_search_form();
 			endif; ?>
 			<?php // Social links
 			ttfmake_maybe_show_social_links( 'header' ); ?>
-			<?php // Header text
-			if ( ! empty( $header_text ) ) : ?>
+			<?php // Header text; shown only if there is no header menu
+			if ( ( ! empty( $header_text ) || ttfmake_is_preview() ) && empty( $header_bar_menu ) ) : ?>
 				<span class="header-text">
 				<?php echo ttfmake_sanitize_text( $header_text ); ?>
-			</span>
+				</span>
 			<?php endif; ?>
+			<?php echo $header_bar_menu; ?>
 		</div>
 	</div>
 	<?php endif; ?>

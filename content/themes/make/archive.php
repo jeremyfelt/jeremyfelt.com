@@ -4,6 +4,7 @@
  */
 
 get_header();
+global $post;
 ?>
 
 <?php ttfmake_maybe_show_sidebar( 'left' ); ?>
@@ -17,7 +18,7 @@ get_header();
 	</header>
 
 	<?php while ( have_posts() ) : the_post(); ?>
-		<?php get_template_part( 'partials/content', 'archive' ); ?>
+		<?php get_template_part( 'partials/content', apply_filters( 'ttfmake_template_content_archive', 'archive', $post ) ); ?>
 	<?php endwhile; ?>
 
 	<?php get_template_part( 'partials/nav', 'paging' ); ?>

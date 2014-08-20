@@ -61,7 +61,14 @@
 	// Header Text
 	api( 'header-text', function( value ) {
 		value.bind( function( to ) {
-			var $content = $('.header-text');
+			var $content = $('.header-text'),
+				$headerBarMenu = $('.menu-header-bar-container');
+
+			// Don't add text if the header bar menu exists
+			if ( $headerBarMenu.length > 0 ) {
+				return;
+			}
+
 			if ( ! $content.length ) {
 				// Check for sub header
 				var $container = $('.header-bar');
@@ -74,7 +81,7 @@
 			if ( ! to ) {
 				$content.remove();
 			}
-			$content.text( to );
+			$content.html( to );
 		} );
 	} );
 
@@ -88,7 +95,7 @@
 			if ( ! to ) {
 				$content.remove();
 			}
-			$content.text( to );
+			$content.html( to );
 		} );
 	} );
 } )( jQuery );

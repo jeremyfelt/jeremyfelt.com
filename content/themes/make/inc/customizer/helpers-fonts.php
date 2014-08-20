@@ -279,7 +279,7 @@ function ttfmake_get_font_stack( $font ) {
 		$stack = '"Helvetica Neue",Helvetica,Arial,sans-serif';
 	}
 
-	return $stack;
+	return apply_filters( 'ttfmake_font_stack', $stack, $font );
 }
 endif;
 

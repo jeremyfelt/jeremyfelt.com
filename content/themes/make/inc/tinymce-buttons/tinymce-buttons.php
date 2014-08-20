@@ -141,22 +141,22 @@ class TTFMAKE_TinyMCE_Buttons {
 	 */
 	public function wp_mce_translation( $mce_translation, $mce_locale ) {
 		$additional_items = array(
-			'Add button'    => __( 'Add button', 'ttfmake' ),
-			'Insert Button' => __( 'Insert Button', 'ttfmake' ),
-			'Button text'   => __( 'Button text', 'ttfmake' ),
-			'Button URL'    => __( 'Button URL', 'ttfmake' ),
-			'Normal'        => __( 'Normal', 'ttfmake' ),
-			'Alert'         => __( 'Alert', 'ttfmake' ),
-			'Download'      => __( 'Download', 'ttfmake' ),
-			'Color'         => __( 'Color', 'ttfmake' ),
-			'Primary'       => __( 'Primary', 'ttfmake' ),
-			'Secondary'     => __( 'Secondary', 'ttfmake' ),
-			'Green'         => __( 'Green', 'ttfmake' ),
-			'Red'           => __( 'Red', 'ttfmake' ),
-			'Orange'        => __( 'Orange', 'ttfmake' ),
-			'Style'         => __( 'Style', 'ttfmake' ),
-			'Dotted'        => __( 'Dotted', 'ttfmake' ),
-			'Double'        => __( 'Double', 'ttfmake' ),
+			'Add button'    => __( 'Add button', 'make' ),
+			'Insert Button' => __( 'Insert Button', 'make' ),
+			'Button text'   => __( 'Button text', 'make' ),
+			'Button URL'    => __( 'Button URL', 'make' ),
+			'Normal'        => __( 'Normal', 'make' ),
+			'Alert'         => __( 'Alert', 'make' ),
+			'Download'      => __( 'Download', 'make' ),
+			'Color'         => __( 'Color', 'make' ),
+			'Primary'       => __( 'Primary', 'make' ),
+			'Secondary'     => __( 'Secondary', 'make' ),
+			'Green'         => __( 'Green', 'make' ),
+			'Red'           => __( 'Red', 'make' ),
+			'Orange'        => __( 'Orange', 'make' ),
+			'Style'         => __( 'Style', 'make' ),
+			'Dotted'        => __( 'Dotted', 'make' ),
+			'Double'        => __( 'Double', 'make' ),
 		);
 
 		return array_merge( $mce_translation, $additional_items );

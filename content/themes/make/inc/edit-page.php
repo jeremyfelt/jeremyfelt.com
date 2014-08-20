@@ -83,7 +83,7 @@ add_action( 'add_meta_boxes', 'ttfmake_add_plus_metabox' );
 function ttfmake_render_plus_metabox( $post ) {
 	// Get the post type label
 	$post_type = get_post_type_object( $post->post_type );
-	$label = ( isset( $post_type->labels->singular_name ) ) ? $post_type->labels->singular_name : __( 'Post' );
+	$label = ( isset( $post_type->labels->singular_name ) ) ? $post_type->labels->singular_name : __( 'Post', 'make' );
 
 	echo '<p class="howto">';
 	printf(

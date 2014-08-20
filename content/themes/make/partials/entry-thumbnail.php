@@ -8,6 +8,7 @@ if ( is_attachment() ) :
 	$thumb_option   = 'post-header';
 	$thumbnail_id   = get_post()->ID;
 	$thumbnail_size = 'full';
+	$thumbnail_html = '<a href="' . wp_get_attachment_url() . '">' . wp_get_attachment_image( $thumbnail_id, $thumbnail_size ) . '</a>';
 else:
 	$thumb_key    = 'layout-' . ttfmake_get_view() . '-featured-images';
 	$thumb_option = ttfmake_sanitize_choice( get_theme_mod( $thumb_key, ttfmake_get_default( $thumb_key ) ), $thumb_key );
@@ -18,13 +19,15 @@ else:
 	else :
 		$thumbnail_size = ( is_singular() ) ? 'medium' : 'thumbnail';
 	endif;
+
+	$thumbnail_html = get_the_post_thumbnail( get_the_ID(), $thumbnail_size );
 endif;
 ?>
 
-<?php if ( 'none' !== $thumb_option && ! empty( $thumbnail_id ) ) : ?>
+<?php if ( 'none' !== $thumb_option && ! empty( $thumbnail_html ) ) : ?>
 <figure class="entry-thumbnail <?php if ( ! is_attachment() ) echo esc_attr( $thumb_option ); ?>">
 	<?php if ( ! is_singular() ) : ?><a href="<?php the_permalink(); ?>" rel="bookmark"><?php endif; ?>
-		<?php echo wp_get_attachment_image( $thumbnail_id, $thumbnail_size ); ?>
+		<?php echo $thumbnail_html; ?>
 	<?php if ( ! is_singular() ) : ?></a><?php endif; ?>
 	<?php if ( is_singular() && has_excerpt( $thumbnail_id ) ) : ?>
 	<figcaption class="entry-thumbnail-caption">

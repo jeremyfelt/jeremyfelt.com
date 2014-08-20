@@ -282,8 +282,10 @@ function ttfmake_maybe_show_social_links( $region ) {
 				<ul class="social-customizer social-links <?php echo $region; ?>-social-links">
 				<?php foreach ( $social_links as $key => $link ) : ?>
 					<li class="<?php echo esc_attr( $key ); ?>">
-						<a href="<?php echo esc_url( $link['url'] ); ?>" title="<?php echo esc_attr( $link['title'] ); ?>">
-							<i class="fa fa-fw <?php echo esc_attr( $link['class'] ); ?>"></i>
+						<a href="<?php echo esc_url( $link['url'] ); ?>">
+							<i class="fa fa-fw <?php echo esc_attr( $link['class'] ); ?>">
+								<span><?php echo esc_html( $link['title'] ); ?></span>
+							</i>
 						</a>
 					</li>
 				<?php endforeach; ?>
@@ -385,10 +387,10 @@ function ttfmake_pre_wp_nav_menu_social( $output, $args ) {
 		foreach ( $supported_icons as $pattern => $class ) {
 			if ( false !== strpos( $item->url, $pattern ) ) {
 				$item_output .= '<li class="' . esc_attr( str_replace( 'fa-', '', $class ) ) . '">';
-				$item_output .= '<a href="' . esc_url( $item->url ) . '" title="' . esc_attr( $item->title ) . '">';
-				$item_output .= '<i class="fa fa-fw ' . esc_attr( $class ) . '"></i>';
-				$item_output .= '</a></li>';
-
+				$item_output .= '<a href="' . esc_url( $item->url ) . '">';
+				$item_output .= '<i class="fa fa-fw ' . esc_attr( $class ) . '">';
+				$item_output .= '<span>' . esc_html( $item->title ) . '</span>';
+				$item_output .= '</i></a></li>';
 				break;
 			}
 		}
@@ -396,9 +398,10 @@ function ttfmake_pre_wp_nav_menu_social( $output, $args ) {
 		// No matching icons
 		if ( '' === $item_output ) {
 			$item_output .= '<li class="external-link-square">';
-			$item_output .= '<a href="' . esc_url( $item->url ) . '" title="' . esc_attr( $item->title ) . '">';
-			$item_output .= '<i class="fa fa-fw fa-external-link-square"></i>';
-			$item_output .= '</a></li>';
+			$item_output .= '<a href="' . esc_url( $item->url ) . '">';
+			$item_output .= '<i class="fa fa-fw fa-external-link-square">';
+			$item_output .= '<span>' . esc_html( $item->title ) . '</span>';
+			$item_output .= '</i></a></li>';
 		}
 
 		// Add item to list
@@ -517,7 +520,7 @@ function ttfmake_get_exif_data( $attachment_id = 0 ) {
 
 		// ISO
 		if ( ! empty( $image_meta['iso'] ) ) {
-			$output .= '<li><span>' . _x( 'ISO:', 'camera setting', 'oxford' ) . '</span> ';
+			$output .= '<li><span>' . _x( 'ISO:', 'camera setting', 'make' ) . '</span> ';
 			$output .= absint( $image_meta['iso'] ) . "</li>\n";
 		}
 

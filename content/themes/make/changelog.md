@@ -1,3 +1,32 @@
+## 1.2.2
+
+* Fixed a bug that caused some style and script assets to not load correctly on some web host configurations
+
+## 1.2.1
+
+* Fixed issue where Page Builder was hidden in certain situations when adding a new page
+* Updated theme screenshot with CC0-compatible image
+* Added missing text domain strings
+* Removed query string parameters from Make Plus links
+
+## 1.2.0
+
+* Added ability to override some auxiliary stylesheets and scripts in child theme
+* Added ability for CPTs to use the builder
+* Added a "Maintain aspect ratio" option for banner sections for better responsive control
+* Added IDs for individual text columns
+* Added menu in the header bar
+* Added filters to control font size
+* Added notice for users trying to install Make Plus as a theme
+* Fixed issue where captions on non-linked gallery items would not reveal on iOS
+* Fixed issue where HTML added to Header/Footer text fields appeared as plain text in the Customizer
+* Fixed alignment issues with submenus
+* Fixed issue that caused submenus to fall below some content
+* Fixed JS errors that occurred when rich text editor was turned off
+* Fixed issue with broken default background color
+* Improved the responsiveness of banner sections
+* Improved consistency of textdomain handling
+
 ## 1.1.1
 
 * Added Japanese translations

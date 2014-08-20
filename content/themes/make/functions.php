@@ -6,25 +6,12 @@
 /**
  * The current version of the theme.
  */
-define( 'TTFMAKE_VERSION', '1.1.1' );
-
-if ( ! function_exists( 'ttfmake_is_wpcom' ) ) :
-/**
- * Whether or not the current environment is WordPress.com.
- *
- * @since  1.0.0.
- *
- * @return bool    Whether or not the current environment is WordPress.com.
- */
-function ttfmake_is_wpcom() {
-	return ( defined( 'IS_WPCOM' ) && true === IS_WPCOM );
-}
-endif;
+define( 'TTFMAKE_VERSION', '1.2.2' );
 
 /**
  * The suffix to use for scripts.
  */
-if ( ( defined( 'SCRIPT_DEBUG' ) && true === SCRIPT_DEBUG ) || ttfmake_is_wpcom() ) {
+if ( ( defined( 'SCRIPT_DEBUG' ) && true === SCRIPT_DEBUG ) ) {
 	define( 'TTFMAKE_SUFFIX', '' );
 } else {
 	define( 'TTFMAKE_SUFFIX', '.min' );
@@ -155,8 +142,9 @@ function ttfmake_setup() {
 
 	// Menu locations
 	register_nav_menus( array(
-		'primary' => __( 'Primary Menu', 'make' ),
-		'social'  => __( 'Social Profile Links', 'make' )
+		'primary'    => __( 'Primary Menu', 'make' ),
+		'social'     => __( 'Social Profile Links', 'make' ),
+		'header-bar' => __( 'Header Bar Menu', 'make' ),
 	) );
 
 	// Editor styles
@@ -447,6 +435,20 @@ function ttfmake_head_late() { ?>
 endif;
 
 add_action( 'wp_head', 'ttfmake_head_late', 99 );
+
+if ( ! function_exists( 'ttfmake_is_preview' ) ) :
+/**
+ * Check if the current view is rendering in the Customizer preview pane.
+ *
+ * @since 1.2.0.
+ *
+ * @return bool    True if in the preview pane.
+ */
+function ttfmake_is_preview() {
+	global $wp_customize;
+	return ( isset( $wp_customize ) && $wp_customize->is_preview() );
+}
+endif;
 
 /**
  * Determine if the companion plugin is installed.

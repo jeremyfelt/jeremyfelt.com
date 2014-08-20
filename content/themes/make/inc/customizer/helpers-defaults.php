@@ -32,7 +32,7 @@ function ttfmake_option_defaults() {
 		'logo-apple-touch'                         => '',
 
 		// Background
-		'background_color'                         => '#b9bcbf',
+		'background_color'                         => 'b9bcbf',
 		'background_image'                         => '',
 		'background_repeat'                        => 'repeat',
 		'background_position_x'                    => 'left',

@@ -292,7 +292,7 @@ class TTFMAKE_Gallery_Slider {
 }
 endif;
 
-if ( ! function_exists( 'ttfmake_get_logo' ) ) :
+if ( ! function_exists( 'ttfmake_get_gallery_slider' ) ) :
 /**
  * Return the one TTFMAKE_Gallery_Slider object.
  *

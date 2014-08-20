@@ -198,7 +198,7 @@ function ttfmake_get_choices( $setting ) {
 			$choices = array(
 				'icon' => __( 'With icon', 'make' ),
 				'text' => __( 'With text', 'make' ),
-				'none' => __( 'None' ),
+				'none' => __( 'None', 'make' ),
 			);
 			break;
 	}
