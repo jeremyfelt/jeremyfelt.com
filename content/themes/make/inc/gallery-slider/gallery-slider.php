@@ -249,6 +249,7 @@ class TTFMAKE_Gallery_Slider {
 			if ( 0 === $delay ) {
 				$delay = 6000;
 			}
+
 			if ( 4000 !== $delay ) {
 				$data_attributes .= ' data-cycle-timeout="' . esc_attr( $delay ) . '"';
 			}
@@ -258,6 +259,7 @@ class TTFMAKE_Gallery_Slider {
 			if ( ! in_array( $effect, array( 'fade', 'scrollHorz', 'none' ) ) ) {
 				$effect = 'scrollHorz';
 			}
+
 			if ( 'fade' !== $effect ) {
 				$data_attributes .= ' data-cycle-fx="' . esc_attr( $effect ) . '"';
 			}

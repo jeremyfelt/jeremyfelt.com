@@ -40,7 +40,15 @@ function ttfmake_sanitize_choice( $value, $setting ) {
 		$value = ttfmake_get_default( $setting );
 	}
 
-	return $value;
+	/**
+	 * Filter the sanitized value.
+	 *
+	 * @since 1.2.3.
+	 *
+	 * @param mixed     $value      The sanitized value.
+	 * @param string    $setting    The key for the setting.
+	 */
+	return apply_filters( 'make_sanitize_choice', $value, $setting );
 }
 endif;
 
@@ -203,7 +211,15 @@ function ttfmake_get_choices( $setting ) {
 			break;
 	}
 
-	return apply_filters( 'ttfmake_setting_choices', $choices, $setting );
+	/**
+	 * Filter the setting choices.
+	 *
+	 * @since 1.2.3.
+	 *
+	 * @param array     $choices    The choices for the setting.
+	 * @param string    $setting    The setting name.
+	 */
+	return apply_filters( 'make_setting_choices', $choices, $setting );
 }
 endif;
 
@@ -349,6 +365,13 @@ function ttfmake_get_social_links() {
 		$services_with_links['email']['url'] = esc_url( 'mailto:' . $services_with_links['email']['url'] );
 	}
 
-	return apply_filters( 'ttfmake_social_links', $services_with_links );
+	/**
+	 * Filter the social links added to the site.
+	 *
+	 * @since 1.2.3.
+	 *
+	 * @param array    $services_with_links    The social services and links.
+	 */
+	return apply_filters( 'make_social_links', $services_with_links );
 }
 endif;

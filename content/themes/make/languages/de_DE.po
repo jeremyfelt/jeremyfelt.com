@@ -8,7 +8,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2014-05-31 10:48-0800\n"
+"PO-Revision-Date: 2014-08-26 09:16-0800\n"
 "Last-Translator: \n"
 "Language-Team: The Theme Foundry <timm@dertimm.de>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
@@ -881,7 +881,7 @@ msgstr "Inhaltsoptionen"
 
 #: inc/customizer/sections/main.php:164
 msgid "Underline links in content"
-msgstr "Verkn&uuml;pfungen im Text unterstreichen"
+msgstr "Verkn&uuml;Pfunden im Text unterstreichen"
 
 #: inc/customizer/sections/navigation.php:38
 msgid "Mobile Menu Label"
@@ -1248,7 +1248,7 @@ msgstr "Dr&uuml;cke Eingabe, um Deine Suche zu beginnen."
 
 #. Theme Name of the plugin/theme
 msgid "Make"
-msgstr "Los"
+msgstr "Make"
 
 #. Theme URI of the plugin/theme
 msgid "https://thethemefoundry.com/wordpress-themes/make/"

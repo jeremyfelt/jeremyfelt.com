@@ -2,78 +2,63 @@
 
 if ( ! function_exists( 'ttfmake_customizer_stylekit' ) ) :
 /**
- * Configure settings and controls for the Kits section.
+ * Filter to add a new Customizer section
  *
- * @since  1.0.3.
+ * This function takes the main array of Customizer sections and adds a new one
+ * right before the first panel.
  *
- * @param  object    $wp_customize    The global customizer object.
- * @param  string    $section         The section name.
- * @return void
+ * @since  1.3.0.
+ *
+ * @param  array    $sections    The array of sections to add to the Customizer.
+ * @return array                 The modified array of sections.
  */
-function ttfmake_customizer_stylekit( $wp_customize, $section ) {
-	$priority       = new TTFMAKE_Prioritizer();
-	$control_prefix = 'ttfmake_';
-	$setting_prefix = str_replace( $control_prefix, '', $section );
+function ttfmake_customizer_stylekit( $sections ) {
+	global $wp_customize;
+	$theme_prefix = 'ttfmake_';
 
-	// Style Kits info
-	$setting_id = $setting_prefix . '-info';
-	$wp_customize->add_control(
-		new TTFMAKE_Customize_Misc_Control(
-			$wp_customize,
-			$control_prefix . $setting_id,
-			array(
-				'section'     => $section,
-				'type'        => 'text',
-				'description' => sprintf(
-					__( '%s to quickly apply designer-picked style choices (fonts, layout, colors) to your website.', 'make' ),
-					sprintf(
-						'<a href="%1$s" target="_blank">%2$s</a>',
-						esc_url( ttfmake_get_plus_link( 'style-kits' ) ),
-						__( 'Upgrade to Make Plus', 'make' )
-					)
+	// Get priority of General panel
+	$general_priority = $wp_customize->get_panel( $theme_prefix . 'general' )->priority;
+
+	$sections['stylekit'] = array(
+		'title' => __( 'Style Kits', 'make' ),
+		'description' => sprintf(
+			__( '%s to quickly apply designer-picked style choices (fonts, layout, colors) to your website.', 'make' ),
+			sprintf(
+				'<a href="%1$s" target="_blank">%2$s</a>',
+				esc_url( ttfmake_get_plus_link( 'style-kits' ) ),
+				__( 'Upgrade to Make Plus', 'make' )
+			)
+		),
+		'priority' => $general_priority - 10,
+		'options' => array(
+			'stylekit-heading' => array(
+				'control' => array(
+					'control_type'		=> 'TTFMAKE_Customize_Misc_Control',
+					'label'				=> __( 'Kits', 'make-plus' ),
+					'type'				=> 'heading',
 				),
-				'priority'    => $priority->add()
-			)
-		)
+			),
+			'stylekit-dropdown' => array(
+				'control' => array(
+					'control_type'		=> 'TTFMAKE_Customize_Misc_Control',
+					'type'				=> 'text',
+					'description'		=> '
+						<select>
+							<option selected="selected" disabled="disabled">--- ' . __( "Choose a kit", "make" ) . ' ---</option>
+							<option disabled="disabled">' . __( "Light", "make" ) . '</option>
+							<option disabled="disabled">' . __( "Dark", "make" ) . '</option>
+							<option disabled="disabled">' . __( "Modern", "make" ) . '</option>
+							<option disabled="disabled">' . __( "Creative", "make" ) . '</option>
+							<option disabled="disabled">' . __( "Vintage", "make" ) . '</option>
+						</select>
+					',
+				),
+			),
+		),
 	);
 
-	// Style Kits heading
-	$setting_id = $setting_prefix . '-heading';
-	$wp_customize->add_control(
-		new TTFMAKE_Customize_Misc_Control(
-			$wp_customize,
-			$control_prefix . $setting_id,
-			array(
-				'section'     => $section,
-				'type'        => 'heading',
-				'label' => __( 'Kits', 'make' ),
-				'priority'    => $priority->add()
-			)
-		)
-	);
-
-	// Style Kits dropdown
-	$setting_id = $setting_prefix . '-dropdown';
-	$wp_customize->add_control(
-		new TTFMAKE_Customize_Misc_Control(
-			$wp_customize,
-			$control_prefix . $setting_id,
-			array(
-				'section'     => $section,
-				'type'        => 'text',
-				'description' => '
-					<select>
-						<option selected="selected" disabled="disabled">--- ' . __( "Choose a kit", "make" ) . ' ---</option>
-						<option disabled="disabled">' . __( "Light", "make" ) . '</option>
-						<option disabled="disabled">' . __( "Dark", "make" ) . '</option>
-						<option disabled="disabled">' . __( "Modern", "make" ) . '</option>
-						<option disabled="disabled">' . __( "Creative", "make" ) . '</option>
-						<option disabled="disabled">' . __( "Vintage", "make" ) . '</option>
-					</select>
-				',
-				'priority'    => $priority->add()
-			)
-		)
-	);
+	return $sections;
 }
 endif;
+
+add_filter( 'make_customizer_sections', 'ttfmake_customizer_stylekit' );

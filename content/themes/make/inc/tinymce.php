@@ -120,8 +120,14 @@ function ttfmake_mce_before_init( $settings ) {
 		),
 	);
 
-	// Allow styles to be customized
-	$style_formats = apply_filters( 'ttfmake_style_formats', $style_formats );
+	/**
+	 * Filter the styles that are added to the TinyMCE formatting buttons.
+	 *
+	 * @since 1.2.3.
+	 *
+	 * @param array    $style_formats    The formatting buttons being added to TinyMCE.
+	 */
+	$style_formats = apply_filters( 'make_style_formats', $style_formats );
 
 	// Encode
 	$settings['style_formats'] = json_encode( $style_formats );

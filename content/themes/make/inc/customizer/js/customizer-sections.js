@@ -5,7 +5,50 @@
 /* global jQuery, ttfmakeCustomizerL10n */
 ( function( $ ) {
 	var api = wp.customize,
+		fontChoices,
 		upgrade;
+
+	/**
+	 * Font Choices
+	 */
+	fontChoices = {
+		cache: {},
+
+		init: function() {
+			// Cache elements
+			fontChoices.cache.options = {};
+			$.each(ttfmakeCustomizerL10n.fontOptions, function(index, key) {
+				fontChoices.cache.options[key] = $('select', '#customize-control-ttfmake_' + key);
+			});
+
+			// Build
+			fontChoices.buildChoices();
+
+			// Insert
+			fontChoices.insertChoices();
+		},
+
+		// Compile the choices from the JSON object into HTML
+		buildChoices: function() {
+			fontChoices.cache.choices = '';
+			$.each(ttfmakeCustomizerL10n.allFontChoices, function(index, choice) {
+				var value = choice.k,
+					label = choice.l,
+					disabled = (!isNaN(parseFloat(+value)) && isFinite(value)) ? ' disabled="disabled"' : '';
+				fontChoices.cache.choices += '<option value="' + value + '"' + disabled + '>' + label + '</option>';
+			});
+		},
+
+		// Insert the HTML into each font family select
+		insertChoices: function() {
+			$.each(fontChoices.cache.options, function(key, element) {
+				element.html(fontChoices.cache.choices);
+
+			});
+		}
+	};
+
+	fontChoices.init();
 
 	/**
 	 * Visibility toggling for some controls
@@ -129,13 +172,6 @@
 			});
 		});
 	});
-
-	// Set header items as disabled
-	$('#customize-control-ttfmake_font-site-title option, #customize-control-ttfmake_font-header option, #customize-control-ttfmake_font-body option')
-		.filter(function(index) {
-			var val = $(this).val();
-			return !isNaN(parseFloat(+val)) && isFinite(val);
-		}).attr('disabled', 'disabled');
 
 	// Add Make Plus message
 	if ('undefined' !== typeof ttfmakeCustomizerL10n) {

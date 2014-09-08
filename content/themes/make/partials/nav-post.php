@@ -3,13 +3,15 @@
  * @package Make
  */
 
-$next_link = get_next_post_link(
-	'<div class="nav-next">%link</div>',
+// Left arrow
+$previous_link = get_next_post_link(
+	'<div class="nav-previous">%link</div>',
 	'%title'
 );
 
-$previous_link = get_previous_post_link(
-	'<div class="nav-previous">%link</div>',
+// Right arrow
+$next_link = get_previous_post_link(
+	'<div class="nav-next">%link</div>',
 	'%title'
 );
 

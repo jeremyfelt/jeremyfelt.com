@@ -480,7 +480,7 @@ function ttfmake_css_add_rules() {
 }
 endif;
 
-add_action( 'ttfmake_css', 'ttfmake_css_add_rules' );
+add_action( 'make_css', 'ttfmake_css_add_rules' );
 
 if ( ! function_exists( 'ttfmake_maybe_add_with_avatar_class' ) ) :
 /**

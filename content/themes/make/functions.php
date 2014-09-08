@@ -6,7 +6,7 @@
 /**
  * The current version of the theme.
  */
-define( 'TTFMAKE_VERSION', '1.2.2' );
+define( 'TTFMAKE_VERSION', '1.3.0' );
 
 /**
  * The suffix to use for scripts.
@@ -279,9 +279,9 @@ function ttfmake_scripts() {
 	// Font Awesome
 	wp_enqueue_style(
 		'ttfmake-font-awesome',
-		get_template_directory_uri() . '/css/font-awesome.css',
+		get_template_directory_uri() . '/css/font-awesome' . TTFMAKE_SUFFIX . '.css',
 		$style_dependencies,
-		'4.1.0'
+		'4.2.0'
 	);
 	$style_dependencies[] = 'ttfmake-font-awesome';
 
@@ -332,8 +332,14 @@ function ttfmake_scripts() {
 		"iframe[src*='//www.hulu.com']",
 	);
 
-	// Filter selectors
-	$selector_array = apply_filters( 'ttfmake_fitvids_custom_selectors', $selector_array );
+	/**
+	 * Allow for changing of the selectors that are used to apply FitVids.
+	 *
+	 * @since 1.2.3.
+	 *
+	 * @param array    $selector_array    The selectors used by FitVids.
+	 */
+	$selector_array = apply_filters( 'make_fitvids_custom_selectors', $selector_array );
 
 	// Compile selectors
 	$fitvids_custom_selectors = array(
@@ -458,7 +464,14 @@ endif;
  * @return bool    Whether or not the companion plugin is installed.
  */
 function ttfmake_is_plus() {
-	return apply_filters( 'ttfmake_is_plus', class_exists( 'TTFMP_App' ) );
+	/**
+	 * Allow for toggling of the Make Plus status.
+	 *
+	 * @since 1.2.3.
+	 *
+	 * @param bool    $is_plus    Whether or not Make Plus is installed.
+	 */
+	return apply_filters( 'make_is_plus', class_exists( 'TTFMP_App' ) );
 }
 
 /**

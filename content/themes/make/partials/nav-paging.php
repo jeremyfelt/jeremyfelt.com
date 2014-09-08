@@ -11,13 +11,17 @@
 		<?php wp_pagenavi(); ?>
 	<?php else : ?>
 	<div class="nav-links">
-		<?php if ( get_previous_posts_link() ) : ?>
+		<?php
+		// Left arrow
+		if ( get_previous_posts_link() ) : ?>
 		<div class="nav-previous">
 			<?php previous_posts_link( __( 'Newer posts', 'make' ) ); ?>
 		</div>
 		<?php endif; ?>
 
-		<?php if ( get_next_posts_link() ) : ?>
+		<?php
+		// Right arrow
+		if ( get_next_posts_link() ) : ?>
 		<div class="nav-next">
 			<?php next_posts_link( __( 'Older posts', 'make' ) ); ?>
 		</div>

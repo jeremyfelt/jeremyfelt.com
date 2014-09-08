@@ -3,364 +3,175 @@
  * @package Make
  */
 
-if ( ! function_exists( 'ttfmake_customizer_footer' ) ) :
+if ( ! function_exists( 'ttfmake_customizer_define_footer_sections' ) ) :
 /**
- * Configure settings and controls for the Footer section
+ * Define the sections and settings for the Footer panel
  *
- * @since  1.0.0.
+ * @since  1.3.0.
  *
- * @param  object    $wp_customize    The global customizer object.
- * @param  string    $section         The section name.
- * @return void
+ * @param  array    $sections    The master array of Customizer sections
+ * @return array                 The augmented master array
  */
-function ttfmake_customizer_footer( $wp_customize, $section ) {
-	$priority       = new TTFMAKE_Prioritizer();
-	$control_prefix = 'ttfmake_';
-	$setting_prefix = str_replace( $control_prefix, '', $section );
+function ttfmake_customizer_define_footer_sections( $sections ) {
+	$theme_prefix = 'ttfmake_';
+	$panel = 'ttfmake_footer';
+	$footer_sections = array();
 
-	// Footer layout
-	$setting_id = $setting_prefix . '-layout';
-	$wp_customize->add_setting(
-		$setting_id,
-		array(
-			'default'           => ttfmake_get_default( $setting_id ),
-			'type'              => 'theme_mod',
-			'sanitize_callback' => 'ttfmake_sanitize_choice',
-		)
-	);
-	$wp_customize->add_control(
-		$control_prefix . $setting_id,
-		array(
-			'settings' => $setting_id,
-			'section'  => $section,
-			'label'    => __( 'Footer Layout', 'make' ),
-			'type'     => 'select',
-			'choices'  => ttfmake_get_choices( $setting_id ),
-			'priority' => $priority->add()
-		)
-	);
-
-	// Footer layout line
-	$setting_id = $setting_prefix . '-layout-line';
-	$wp_customize->add_control(
-		new TTFMAKE_Customize_Misc_Control(
-			$wp_customize,
-			$control_prefix . $setting_id,
-			array(
-				'section'     => $section,
-				'type'        => 'line',
-				'priority'    => $priority->add()
-			)
-		)
-	);
-
-	// Footer text
-	$setting_id = $setting_prefix . '-text';
-	$wp_customize->add_setting(
-		$setting_id,
-		array(
-			'default'           => ttfmake_get_default( $setting_id ),
-			'type'              => 'theme_mod',
-			'sanitize_callback' => 'ttfmake_sanitize_text',
-			'transport'         => 'postMessage' // Asynchronous preview
-		)
-	);
-	$wp_customize->add_control(
-		$control_prefix . $setting_id,
-		array(
-			'settings' => $setting_id,
-			'section'  => $section,
-			'label'    => __( 'Footer Text', 'make' ),
-			'type'     => 'text',
-			'priority' => $priority->add()
-		)
+	/**
+	 * Background Image
+	 */
+	$footer_sections['footer-background'] = array(
+		'panel'   => $panel,
+		'title'   => __( 'Background Image', 'make' ),
+		'options' => array(
+			'footer-background-image'    => array(
+				'setting' => array(
+					'sanitize_callback' => 'esc_url_raw',
+				),
+				'control' => array(
+					'control_type' => 'TTFMAKE_Customize_Image_Control',
+					'label'        => __( 'Footer Background Image', 'make' ),
+					'context'      => $theme_prefix . 'footer-background-image',
+				),
+			),
+			'footer-background-repeat'   => array(
+				'setting' => array(
+					'sanitize_callback' => 'ttfmake_sanitize_choice',
+				),
+				'control' => array(
+					'label'   => __( 'Footer Background Repeat', 'make' ),
+					'type'    => 'radio',
+					'choices' => ttfmake_get_choices( 'footer-background-repeat' ),
+				),
+			),
+			'footer-background-position' => array(
+				'setting' => array(
+					'sanitize_callback' => 'ttfmake_sanitize_choice',
+				),
+				'control' => array(
+					'label'   => __( 'Footer Background Position', 'make' ),
+					'type'    => 'radio',
+					'choices' => ttfmake_get_choices( 'footer-background-position' ),
+				),
+			),
+			'footer-background-size'     => array(
+				'setting' => array(
+					'sanitize_callback' => 'ttfmake_sanitize_choice',
+				),
+				'control' => array(
+					'label'   => __( 'Footer Background Size', 'make' ),
+					'type'    => 'radio',
+					'choices' => ttfmake_get_choices( 'footer-background-size' ),
+				),
+			),
+		),
 	);
 
-	// Footer text color
-	$setting_id = $setting_prefix . '-text-color';
-	$wp_customize->add_setting(
-		$setting_id,
-		array(
-			'default'           => ttfmake_get_default( $setting_id ),
-			'type'              => 'theme_mod',
-			'sanitize_callback' => 'maybe_hash_hex_color',
-		)
-	);
-	$wp_customize->add_control(
-		new WP_Customize_Color_Control(
-			$wp_customize,
-			$control_prefix . $setting_id,
-			array(
-				'settings' => $setting_id,
-				'section'  => $section,
-				'label'    => __( 'Footer Text Color', 'make' ),
-				'priority' => $priority->add()
-			)
-		)
+	/**
+	 * Widget Areas
+	 */
+	$footer_sections['footer-widget'] = array(
+		'panel' => $panel,
+		'title' => __( 'Widget Areas', 'make' ),
+		'options' => array(
+			'footer-widget-areas' => array(
+				'setting' => array(
+					'sanitize_callback'	=> 'ttfmake_sanitize_choice',
+				),
+				'control' => array(
+					'label'				=> __( 'Number of Widget Areas', 'make' ),
+					'type'				=> 'select',
+					'choices'			=> ttfmake_get_choices( 'footer-widget-areas' ),
+				),
+			),
+		),
 	);
 
-	// Footer border color
-	$setting_id = $setting_prefix . '-border-color';
-	$wp_customize->add_setting(
-		$setting_id,
-		array(
-			'default'           => ttfmake_get_default( $setting_id ),
-			'type'              => 'theme_mod',
-			'sanitize_callback' => 'maybe_hash_hex_color',
-		)
-	);
-	$wp_customize->add_control(
-		new WP_Customize_Color_Control(
-			$wp_customize,
-			$control_prefix . $setting_id,
-			array(
-				'settings' => $setting_id,
-				'section'  => $section,
-				'label'    => __( 'Footer Border Color', 'make' ),
-				'priority' => $priority->add()
-			)
-		)
-	);
-
-	// Background color
-	$setting_id = $setting_prefix . '-background-color';
-	$wp_customize->add_setting(
-		$setting_id,
-		array(
-			'default'           => ttfmake_get_default( $setting_id ),
-			'type'              => 'theme_mod',
-			'sanitize_callback' => 'maybe_hash_hex_color',
-		)
-	);
-	$wp_customize->add_control(
-		new WP_Customize_Color_Control(
-			$wp_customize,
-			$control_prefix . $setting_id,
-			array(
-				'settings' => $setting_id,
-				'section'  => $section,
-				'label'    => __( 'Footer Background Color', 'make' ),
-				'priority' => $priority->add()
-			)
-		)
-	);
-
-	// Background Image
-	$setting_id = $setting_prefix . '-background-image';
-	$wp_customize->add_setting(
-		$setting_id,
-		array(
-			'default'           => ttfmake_get_default( $setting_id ),
-			'type'              => 'theme_mod',
-			'sanitize_callback' => 'esc_url_raw',
-		)
-	);
-	$wp_customize->add_control(
-		new TTFMAKE_Customize_Image_Control(
-			$wp_customize,
-			$control_prefix . $setting_id,
-			array(
-				'settings' => $setting_id,
-				'section'  => $section,
-				'label'    => __( 'Footer Background Image', 'make' ),
-				'priority' => $priority->add(),
-				'context'  => $control_prefix . $setting_id
-			)
-		)
+	/**
+	 * Layout
+	 */
+	$footer_sections['footer'] = array(
+		'panel' => $panel,
+		'title' => __( 'Layout', 'make' ),
+		'options' => array(
+			'footer-layout' => array(
+				'setting' => array(
+					'sanitize_callback'	=> 'ttfmake_sanitize_choice',
+				),
+				'control' => array(
+					'label'				=> __( 'Footer Layout', 'make' ),
+					'type'				=> 'select',
+					'choices'			=> ttfmake_get_choices( 'footer-layout' ),
+				),
+			),
+			'footer-layout-line' => array(
+				'control' => array(
+					'control_type'		=> 'TTFMAKE_Customize_Misc_Control',
+					'type'				=> 'line',
+				),
+			),
+			'footer-text' => array(
+				'setting' => array(
+					'sanitize_callback'	=> 'ttfmake_sanitize_text',
+					'transport'			=> 'postMessage',
+				),
+				'control' => array(
+					'label'				=> __( 'Footer Text', 'make' ),
+					'type'				=> 'text',
+				),
+			),
+			'footer-options-heading' => array(
+				'control' => array(
+					'control_type'		=> 'TTFMAKE_Customize_Misc_Control',
+					'type'				=> 'heading',
+					'label'				=> __( 'Social Icons', 'make' ),
+				),
+			),
+			'footer-show-social' => array(
+				'setting' => array(
+					'sanitize_callback'	=> 'absint',
+				),
+				'control' => array(
+					'label'				=> __( 'Show social icons in footer', 'make' ),
+					'type'				=> 'checkbox',
+				),
+			),
+		),
 	);
 
-	// Background Repeat
-	$setting_id = $setting_prefix . '-background-repeat';
-	$wp_customize->add_setting(
-		$setting_id,
-		array(
-			'default'           => ttfmake_get_default( $setting_id ),
-			'type'              => 'theme_mod',
-			'sanitize_callback' => 'ttfmake_sanitize_choice',
-		)
-	);
-	$wp_customize->add_control(
-		$control_prefix . $setting_id,
-		array(
-			'settings' => $setting_id,
-			'section'  => $section,
-			'label'    => __( 'Background Repeat', 'make' ),
-			'type'     => 'radio',
-			'choices'  => ttfmake_get_choices( $setting_id ),
-			'priority' => $priority->add()
-		)
-	);
-
-	// Background Position
-	$setting_id = $setting_prefix . '-background-position';
-	$wp_customize->add_setting(
-		$setting_id,
-		array(
-			'default'           => ttfmake_get_default( $setting_id ),
-			'type'              => 'theme_mod',
-			'sanitize_callback' => 'ttfmake_sanitize_choice',
-		)
-	);
-	$wp_customize->add_control(
-		$control_prefix . $setting_id,
-		array(
-			'settings' => $setting_id,
-			'section'  => $section,
-			'label'    => __( 'Background Position', 'make' ),
-			'type'     => 'radio',
-			'choices'  => ttfmake_get_choices( $setting_id ),
-			'priority' => $priority->add()
-		)
-	);
-
-	// Background Size
-	$setting_id = $setting_prefix . '-background-size';
-	$wp_customize->add_setting(
-		$setting_id,
-		array(
-			'default'           => ttfmake_get_default( $setting_id ),
-			'type'              => 'theme_mod',
-			'sanitize_callback' => 'ttfmake_sanitize_choice',
-		)
-	);
-	$wp_customize->add_control(
-		$control_prefix . $setting_id,
-		array(
-			'settings' => $setting_id,
-			'section'  => $section,
-			'label'    => __( 'Background Size', 'make' ),
-			'type'     => 'radio',
-			'choices'  => ttfmake_get_choices( $setting_id ),
-			'priority' => $priority->add()
-		)
-	);
-
-	// Footer background line
-	$setting_id = $setting_prefix . '-background-line';
-	$wp_customize->add_control(
-		new TTFMAKE_Customize_Misc_Control(
-			$wp_customize,
-			$control_prefix . $setting_id,
-			array(
-				'section'     => $section,
-				'type'        => 'line',
-				'priority'    => $priority->add()
-			)
-		)
-	);
-
-	// Footer widget areas
-	$setting_id = $setting_prefix . '-widget-areas';
-	$wp_customize->add_setting(
-		$setting_id,
-		array(
-			'default'           => ttfmake_get_default( $setting_id ),
-			'type'              => 'theme_mod',
-			'sanitize_callback' => 'ttfmake_sanitize_choice',
-		)
-	);
-	$wp_customize->add_control(
-		$control_prefix . $setting_id,
-		array(
-			'settings' => $setting_id,
-			'section'  => $section,
-			'label'    => __( 'Footer Widget Areas', 'make' ),
-			'type'     => 'select',
-			'choices'  => ttfmake_get_choices( $setting_id ),
-			'priority' => $priority->add()
-		)
-	);
-
-	// Footer options heading
-	$setting_id = $setting_prefix . '-options-heading';
-	$wp_customize->add_control(
-		new TTFMAKE_Customize_Misc_Control(
-			$wp_customize,
-			$control_prefix . $setting_id,
-			array(
-				'section'     => $section,
-				'type'        => 'heading',
-				'label' => __( 'Footer Options', 'make' ),
-				'priority'    => $priority->add()
-			)
-		)
-	);
-
-	// Show social icons
-	$setting_id = $setting_prefix . '-show-social';
-	$wp_customize->add_setting(
-		$setting_id,
-		array(
-			'default'           => ttfmake_get_default( $setting_id ),
-			'type'              => 'theme_mod',
-			'sanitize_callback' => 'absint',
-		)
-	);
-	$wp_customize->add_control(
-		$control_prefix . $setting_id,
-		array(
-			'settings' => $setting_id,
-			'section'  => $section,
-			'label'    => __( 'Show social icons', 'make' ),
-			'type'     => 'checkbox',
-			'priority' => $priority->add()
-		)
-	);
-
+	/**
+	 * White Label
+	 */
 	if ( ! ttfmake_is_plus() ) {
-		// White Label line
-		$setting_id = $setting_prefix . '-whitelabel-line';
-		$wp_customize->add_control(
-			new TTFMAKE_Customize_Misc_Control(
-				$wp_customize,
-				$control_prefix . $setting_id,
-				array(
-					'section'     => $section,
-					'type'        => 'line',
-					'priority'    => $priority->add()
-				)
-			)
-		);
-
-		// White Label heading
-		$setting_id = $setting_prefix . '-whitelabel-heading';
-		$wp_customize->add_control(
-			new TTFMAKE_Customize_Misc_Control(
-				$wp_customize,
-				$control_prefix . $setting_id,
-				array(
-					'section'     => $section,
-					'type'        => 'heading',
-					'label' => __( 'White Label', 'make' ),
-					'priority'    => $priority->add()
-				)
-			)
-		);
-
-		// White Label info
-		$setting_id = $setting_prefix . '-whitelabel-make-plus';
-		$wp_customize->add_control(
-			new TTFMAKE_Customize_Misc_Control(
-				$wp_customize,
-				$control_prefix . $setting_id,
-				array(
-					'section'     => $section,
-					'type'        => 'text',
-					'description' => sprintf(
-						__( 'Want to remove the theme byline from your website&#8217;s footer? %s.', 'make' ),
-						sprintf(
+		$footer_sections['footer-white-label'] = array(
+			'panel'       => $panel,
+			'title'       => __( 'White Label', 'make' ),
+			'description' => __( 'Want to remove the theme byline from your website&#8217;s footer?', 'make' ),
+			'options'     => array(
+				'footer-white-label-text' => array(
+					'control' => array(
+						'control_type' => 'TTFMAKE_Customize_Misc_Control',
+						'type'         => 'text',
+						'description'  => sprintf(
 							'<a href="%1$s" target="_blank">%2$s</a>',
 							esc_url( ttfmake_get_plus_link( 'white-label' ) ),
 							sprintf(
 								__( 'Upgrade to %1$s', 'make' ),
 								'Make Plus'
 							)
-						)
+						),
 					),
-					'priority'    => $priority->add()
-				)
-			)
+				),
+			),
 		);
 	}
+
+	// Filter the definitions
+	$footer_sections = apply_filters( 'make_customizer_footer_sections', $footer_sections );
+
+	// Merge with master array
+	return array_merge( $sections, $footer_sections );
 }
 endif;
+
+add_filter( 'make_customizer_sections', 'ttfmake_customizer_define_footer_sections' );

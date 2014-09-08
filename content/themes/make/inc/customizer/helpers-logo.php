@@ -67,7 +67,7 @@ class TTFMAKE_Logo {
 	 * @return TTFMAKE_Logo
 	 */
 	public function __construct() {
-		add_action( 'ttfmake_css', array( $this, 'print_logo_css' ) );
+		add_action( 'make_css', array( $this, 'print_logo_css' ) );
 	}
 
 	/**

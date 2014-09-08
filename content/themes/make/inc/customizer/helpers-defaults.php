@@ -13,51 +13,125 @@ if ( ! function_exists( 'ttfmake_option_defaults' ) ) :
  */
 function ttfmake_option_defaults() {
 	$defaults = array(
+		/**
+		 * General
+		 */
 		// Site Title & Tagline
 		'hide-site-title'                          => 0,
 		'hide-tagline'                             => 0,
-		'color-site-title'                         => '#171717',
-
-		// Navigation
-		'navigation-mobile-label'                  => __( 'Menu', 'make' ),
-
-		// General
-		'general-layout'                           => 'full-width',
-		'general-sticky-label'                     => __( 'Featured', 'make' ),
-
 		// Logo
 		'logo-regular'                             => '',
 		'logo-retina'                              => '',
 		'logo-favicon'                             => '',
 		'logo-apple-touch'                         => '',
-
-		// Background
-		'background_color'                         => 'b9bcbf',
+		// Background Image
 		'background_image'                         => '',
 		'background_repeat'                        => 'repeat',
 		'background_position_x'                    => 'left',
 		'background_attachment'                    => 'scroll',
 		'background_size'                          => 'auto',
+		'main-background-image'                    => '',
+		'main-background-repeat'                   => 'repeat',
+		'main-background-position'                 => 'left',
+		'main-background-size'                     => 'auto',
+		// Social Profiles & RSS
+		'social-facebook'                          => '',
+		'social-twitter'                           => '',
+		'social-google-plus-square'                => '',
+		'social-linkedin'                          => '',
+		'social-instagram'                         => '',
+		'social-flickr'                            => '',
+		'social-youtube'                           => '',
+		'social-vimeo-square'                      => '',
+		'social-pinterest'                         => '',
+		'social-email'                             => '',
+		'social-hide-rss'                          => 0,
+		'social-custom-rss'                        => '',
 
-		// Fonts
-		'font-site-title'                          => 'sans-serif',
-		'font-header'                              => 'sans-serif',
-		'font-body'                                => 'Open Sans',
-		'font-site-title-size'                     => 34,
-		'font-site-tagline-size'                   => 12,
-		'font-nav-size'                            => 14,
-		'font-header-size'                         => 50,
-		'font-widget-size'                         => 13,
-		'font-body-size'                           => 17,
+		/**
+		 * Typography
+		 */
+		// Google Web Fonts
 		'font-subset'                              => 'latin',
+		// Site Title & Tagline
+		'font-family-site-title'                   => 'sans-serif',
+		'font-size-site-title'                     => 34,
+		'font-family-site-tagline'                 => 'Open Sans',
+		'font-size-site-tagline'                   => 12,
+		// Main Menu
+		'font-family-nav'                          => 'Open Sans',
+		'font-size-nav'                            => 14,
+		'font-family-subnav'                       => 'Open Sans',
+		'font-size-subnav'                         => 13,
+		'font-subnav-mobile'                       => 1,
+		// Widgets
+		'font-family-widget'                       => 'Open Sans',
+		'font-size-widget'                         => 13,
+		// Headers & Body
+		'font-family-h1'                           => 'sans-serif',
+		'font-size-h1'                             => 46,
+		'font-family-h2'                           => 'sans-serif',
+		'font-size-h2'                             => 34,
+		'font-family-h3'                           => 'sans-serif',
+		'font-size-h3'                             => 24,
+		'font-family-h4'                           => 'sans-serif',
+		'font-size-h4'                             => 24,
+		'font-family-h5'                           => 'sans-serif',
+		'font-size-h5'                             => 16,
+		'font-family-h6'                           => 'sans-serif',
+		'font-size-h6'                             => 14,
+		'font-family-body'                         => 'Open Sans',
+		'font-size-body'                           => 17,
 
-		// Colors
+		/**
+		 * Color Scheme
+		 */
+		// General
 		'color-primary'                            => '#3070d1',
 		'color-secondary'                          => '#eaecee',
 		'color-text'                               => '#171717',
 		'color-detail'                             => '#b9bcbf',
+		// Background
+		'background_color'                         => 'b9bcbf',
+		'main-background-color'                    => '#ffffff',
+		// Header
+		'header-bar-background-color'              => '#171717',
+		'header-bar-text-color'                    => '#ffffff',
+		'header-bar-border-color'                  => '#171717',
+		'header-background-color'                  => '#ffffff',
+		'header-text-color'                        => '#171717',
+		'color-site-title'                         => '#171717',
+		// Footer
+		'footer-background-color'                  => '#eaecee',
+		'footer-text-color'                        => '#464849',
+		'footer-border-color'                      => '#b9bcbf',
 
-		// Layout - Blog
+		/**
+		 * Header
+		 */
+		// Background Image
+		'header-background-image'                  => '',
+		'header-background-repeat'                 => 'no-repeat',
+		'header-background-position'               => 'center',
+		'header-background-size'                   => 'cover',
+		// Navigation
+		'navigation-mobile-label'                  => __( 'Menu', 'make' ),
+		// Layout
+		'header-layout'                            => 1,
+		'header-branding-position'                 => 'left',
+		'header-bar-content-layout'                => 'default',
+		'header-text'                              => '',
+		'header-show-social'                       => 0,
+		'header-show-search'                       => 1,
+
+		/**
+		 * Content & Layout
+		 */
+		// Global
+		'general-layout'                           => 'full-width',
+		'general-sticky-label'                     => __( 'Featured', 'make' ),
+		'main-content-link-underline'              => 0,
+		// Blog (Posts Page)
 		'layout-blog-hide-header'                  => 0,
 		'layout-blog-hide-footer'                  => 0,
 		'layout-blog-sidebar-left'                 => 0,
@@ -73,8 +147,7 @@ function ttfmake_option_defaults() {
 		'layout-blog-post-author-location'         => 'post-footer',
 		'layout-blog-comment-count'                => 'none',
 		'layout-blog-comment-count-location'       => 'before-content',
-
-		// Layout - Archive
+		// Archives
 		'layout-archive-hide-header'               => 0,
 		'layout-archive-hide-footer'               => 0,
 		'layout-archive-sidebar-left'              => 0,
@@ -90,8 +163,7 @@ function ttfmake_option_defaults() {
 		'layout-archive-post-author-location'      => 'post-footer',
 		'layout-archive-comment-count'             => 'none',
 		'layout-archive-comment-count-location'    => 'before-content',
-
-		// Layout - Search
+		// Search Results
 		'layout-search-hide-header'                => 0,
 		'layout-search-hide-footer'                => 0,
 		'layout-search-sidebar-left'               => 0,
@@ -107,8 +179,7 @@ function ttfmake_option_defaults() {
 		'layout-search-post-author-location'       => 'post-footer',
 		'layout-search-comment-count'              => 'none',
 		'layout-search-comment-count-location'     => 'before-content',
-
-		// Layout - Posts
+		// Posts
 		'layout-post-hide-header'                  => 0,
 		'layout-post-hide-footer'                  => 0,
 		'layout-post-sidebar-left'                 => 0,
@@ -123,8 +194,7 @@ function ttfmake_option_defaults() {
 		'layout-post-post-author-location'         => 'post-footer',
 		'layout-post-comment-count'                => 'none',
 		'layout-post-comment-count-location'       => 'before-content',
-
-		// Layout - Pages
+		// Pages
 		'layout-page-hide-header'                  => 0,
 		'layout-page-hide-footer'                  => 0,
 		'layout-page-sidebar-left'                 => 0,
@@ -139,60 +209,43 @@ function ttfmake_option_defaults() {
 		'layout-page-comment-count'                => 'none',
 		'layout-page-comment-count-location'       => 'before-content',
 
-		// Header
-		'header-text-color'                        => '#171717',
-		'header-background-color'                  => '#ffffff',
-		'header-background-image'                  => '',
-		'header-background-repeat'                 => 'no-repeat',
-		'header-background-position'               => 'center',
-		'header-background-size'                   => 'cover',
-		'header-bar-background-color'              => '#171717',
-		'header-bar-text-color'                    => '#ffffff',
-		'header-bar-border-color'                  => '#171717',
-		'header-text'                              => '',
-		'header-show-social'                       => 0,
-		'header-show-search'                       => 1,
-		'header-bar-content-layout'                => 'default',
-		'header-layout'                            => 1,
-		'header-branding-position'                 => 'left',
-
-		// Main
-		'main-background-color'                    => '#ffffff',
-		'main-background-image'                    => '',
-		'main-background-repeat'                   => 'repeat',
-		'main-background-position'                 => 'left',
-		'main-background-size'                     => 'auto',
-		'main-content-link-underline'              => 0,
-
-		// Footer
-		'footer-text-color'                        => '#464849',
-		'footer-border-color'                      => '#b9bcbf',
-		'footer-background-color'                  => '#eaecee',
+		/**
+		 * Footer
+		 */
+		// Background Image
 		'footer-background-image'                  => '',
 		'footer-background-repeat'                 => 'no-repeat',
 		'footer-background-position'               => 'center',
 		'footer-background-size'                   => 'cover',
+		// Widget Areas
 		'footer-widget-areas'                      => 3,
+		// Layout
+		'footer-layout'                            => 1,
 		'footer-text'                              => '',
 		'footer-show-social'                       => 1,
-		'footer-layout'                            => 1,
 
-		// Social
-		'social-facebook'                          => '',
-		'social-twitter'                           => '',
-		'social-google-plus-square'                => '',
-		'social-linkedin'                          => '',
-		'social-instagram'                         => '',
-		'social-flickr'                            => '',
-		'social-youtube'                           => '',
-		'social-vimeo-square'                      => '',
-		'social-pinterest'                         => '',
-		'social-email'                             => '',
-		'social-hide-rss'                          => 0,
-		'social-custom-rss'                        => '',
+		/**
+		 * Deprecated defaults
+		 */
+		'font-site-title'                          => 'sans-serif',
+		'font-header'                              => 'sans-serif',
+		'font-body'                                => 'Open Sans',
+		'font-site-title-size'                     => 34,
+		'font-site-tagline-size'                   => 12,
+		'font-nav-size'                            => 14,
+		'font-header-size'                         => 46,
+		'font-widget-size'                         => 13,
+		'font-body-size'                           => 17,
 	);
 
-	return apply_filters( 'ttfmake_setting_defaults', $defaults );
+	/**
+	 * Filter the default values for the settings.
+	 *
+	 * @since 1.2.3.
+	 *
+	 * @param array    $defaults    The list of default settings.
+	 */
+	return apply_filters( 'make_setting_defaults', $defaults );
 }
 endif;
 
@@ -207,6 +260,16 @@ if ( ! function_exists( 'ttfmake_get_default' ) ) :
  */
 function ttfmake_get_default( $option ) {
 	$defaults = ttfmake_option_defaults();
-	return ( isset( $defaults[ $option ] ) ) ? $defaults[ $option ] : false;
+	$default  = ( isset( $defaults[ $option ] ) ) ? $defaults[ $option ] : false;
+
+	/**
+	 * Filter the retrieved default value.
+	 *
+	 * @since 1.2.3.
+	 *
+	 * @param mixed     $default    The default value.
+	 * @param string    $option     The name of the default value.
+	 */
+	return apply_filters( 'make_get_default', $default, $option );
 }
 endif;

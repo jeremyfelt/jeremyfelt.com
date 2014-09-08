@@ -92,6 +92,24 @@ class TTFMAKE_Prioritizer {
 	}
 
 	/**
+	 * Change the current priority and/or increment value.
+	 *
+	 * @since  1.3.0.
+	 *
+	 * @param  null|int    $new_priority     The new current priority.
+	 * @param  null|int    $new_increment    The new increment value.
+	 * @return void
+	 */
+	public function set( $new_priority = null, $new_increment = null ) {
+		if ( ! is_null( $new_priority ) ) {
+			$this->current_priority = absint( $new_priority );
+		}
+		if ( ! is_null( $new_increment ) ) {
+			$this->increment = absint( $new_increment );
+		}
+	}
+
+	/**
 	 * Reset the counter.
 	 *
 	 * @since  1.0.0.
