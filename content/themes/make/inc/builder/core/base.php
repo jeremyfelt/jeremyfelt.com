@@ -45,6 +45,9 @@ class TTFMAKE_Builder_Base {
 		// Include the API
 		require get_template_directory() . '/inc/builder/core/api.php';
 
+		// Include the configuration helpers
+		require get_template_directory() . '/inc/builder/core/configuration-helpers.php';
+
 		// Add the core sections
 		require get_template_directory() . '/inc/builder/sections/section-definitions.php';
 
@@ -63,7 +66,6 @@ class TTFMAKE_Builder_Base {
 		add_filter( 'admin_body_class', array( $this, 'admin_body_class' ) );
 		add_action( 'admin_footer', array( $this, 'print_templates' ) );
 		add_action( 'tiny_mce_before_init', array( $this, 'tiny_mce_before_init' ), 15, 2 );
-		add_action( 'after_wp_tiny_mce', array( $this, 'after_wp_tiny_mce' ) );
 		add_action( 'post_submitbox_misc_actions', array( $this, 'builder_toggle' ) );
 
 		if ( false === ttfmake_is_plus() ) {
@@ -154,6 +156,61 @@ class TTFMAKE_Builder_Base {
 
 		// Print the current sections
 		foreach ( $section_data as $section ) {
+			/**
+			 * In Make 1.4.0, the blank section was deprecated. Any existing blank sections are converted to 1 column,
+			 * text sections.
+			 */
+			if ( isset( $section['section-type'] ) && 'blank' === $section['section-type'] && isset( $registered_sections['text'] ) ) {
+				// Convert the data for the section
+				$content = ( ! empty( $section['content'] ) ) ? $section['content'] : '';
+				$title   = ( ! empty( $section['title'] ) ) ? $section['title'] : '';
+				$label   = ( ! empty( $section['label'] ) ) ? $section['label'] : '';
+				$state   = ( ! empty( $section['state'] ) ) ? $section['state'] : 'open';
+				$id      = ( ! empty( $section['id'] ) ) ? $section['id'] : time();
+
+				// Set the data
+				$section = array(
+					'id'             => $id,
+					'state'          => $state,
+					'section-type'   => 'text',
+					'title'          => $title,
+					'label'          => $label,
+					'columns-number' => 1,
+					'columns-order'  => array(
+						0 => 1,
+						1 => 2,
+						2 => 3,
+						3 => 4,
+					),
+					'columns'        => array(
+						1 => array(
+							'title'    => '',
+							'image-id' => 0,
+							'content'  => $content,
+							''
+						),
+						2 => array(
+							'title'    => '',
+							'image-id' => 0,
+							'content'  => '',
+							''
+						),
+						3 => array(
+							'title'    => '',
+							'image-id' => 0,
+							'content'  => '',
+							''
+						),
+						4 => array(
+							'title'    => '',
+							'image-id' => 0,
+							'content'  => '',
+							''
+						),
+					)
+				);
+			}
+
 			if ( isset( $registered_sections[ $section['section-type'] ]['display_template'] ) ) {
 				// Print the saved section
 				$this->load_section( $registered_sections[ $section['section-type'] ], $section );
@@ -203,14 +260,6 @@ class TTFMAKE_Builder_Base {
 		);
 
 		wp_register_script(
-			'ttfmake-builder/js/tinymce.js',
-			get_template_directory_uri() . '/inc/builder/core/js/tinymce.js',
-			array(),
-			TTFMAKE_VERSION,
-			true
-		);
-
-		wp_register_script(
 			'ttfmake-builder/js/models/section.js',
 			get_template_directory_uri() . '/inc/builder/core/js/models/section.js',
 			array(),
@@ -242,8 +291,16 @@ class TTFMAKE_Builder_Base {
 			true
 		);
 
+		wp_register_script(
+			'ttfmake-builder/js/views/overlay.js',
+			get_template_directory_uri() . '/inc/builder/core/js/views/overlay.js',
+			array(),
+			TTFMAKE_VERSION,
+			true
+		);
+
 		/**
-		 * Filter the dependencies for the many builder JS.
+		 * Filter the dependencies for the Make builder JS.
 		 *
 		 * @since 1.2.3.
 		 *
@@ -254,11 +311,11 @@ class TTFMAKE_Builder_Base {
 			array_merge(
 				$dependencies,
 				array(
-					'ttfmake-builder/js/tinymce.js',
 					'ttfmake-builder/js/models/section.js',
 					'ttfmake-builder/js/collections/sections.js',
 					'ttfmake-builder/js/views/menu.js',
 					'ttfmake-builder/js/views/section.js',
+					'ttfmake-builder/js/views/overlay.js',
 				)
 			)
 		);
@@ -273,7 +330,9 @@ class TTFMAKE_Builder_Base {
 
 		// Add data needed for the JS
 		$data = array(
-			'pageID' => get_the_ID(),
+			'pageID'        => get_the_ID(),
+			'postRefresh'   => true,
+			'confirmString' => __( 'Delete the section?', 'make' ),
 		);
 
 		wp_localize_script(
@@ -336,8 +395,22 @@ class TTFMAKE_Builder_Base {
 		if ( ttfmake_post_type_supports_builder( get_post_type() ) ) {
 			if ( 'post-new.php' === $pagenow || ( 'post.php' === $pagenow && ttfmake_is_builder_page() ) ) {
 				$classes .= ' ttfmake-builder-active';
+
+				// Add a class to denote Make Plus
+				if ( ttfmake_is_plus() ) {
+					$classes .= ' make-plus-enabled';
+				} else {
+					$classes .= ' make-plus-disabled';
+				}
 			} else {
 				$classes .= ' ttfmake-default-active';
+			}
+
+			// Add a class to denote Make Plus
+			if ( ttfmake_is_plus() ) {
+				$classes .= ' make-plus-enabled';
+			} else {
+				$classes .= ' make-plus-disabled';
 			}
 		}
 
@@ -351,38 +424,60 @@ class TTFMAKE_Builder_Base {
 	 *
 	 * @param  string    $section_name    Name of the current section.
 	 * @param  int       $image_id        ID of the current image.
-	 * @param  array     $messages        Message to show.
-	 * @return void
+	 * @param  string    $title           Title for the media modal.
+	 * @return string                     Either return the string or echo it.
 	 */
-	public function add_uploader( $section_name, $image_id = 0, $messages = array() ) {
-		$image        = ttfmake_get_image( $image_id, 'large' );
-		$add_state    = ( '' === $image ) ? 'ttfmake-show' : 'ttfmake-hide';
-		$remove_state = ( '' === $image ) ? 'ttfmake-hide' : 'ttfmake-show';
-
-		// Set default messages. Note that the theme textdomain is not used in some cases
-		// because the strings are core i18ns
-		$messages['add']    = ( empty( $messages['add'] ) )    ? __( 'Set featured image', 'make' )    : $messages['add'];
-		$messages['remove'] = ( empty( $messages['remove'] ) ) ? __( 'Remove featured image', 'make' ) : $messages['remove'];
-		$messages['title']  = ( empty( $messages['title'] ) )  ? __( 'Featured Image', 'make' )        : $messages['title'];
-		$messages['button'] = ( empty( $messages['button'] ) ) ? __( 'Use as Featured Image', 'make' ) : $messages['button'];
+	public function add_uploader( $section_name, $image_id = 0, $title = '' ) {
+		$image = ttfmake_get_image_src( $image_id, 'large' );
+		$title = ( ! empty( $title ) ) ? $title : __( 'Set image', 'make' );
+		ob_start();
 		?>
-		<div class="ttfmake-uploader">
-			<div class="ttfmake-media-uploader-placeholder ttfmake-media-uploader-add">
-				<?php if ( '' !== $image ) : ?>
-					<?php echo $image; ?>
-				<?php endif; ?>
-			</div>
-			<div class="ttfmake-media-link-wrap">
-				<a href="#" class="ttfmake-media-uploader-add ttfmake-media-uploader-set-link <?php echo $add_state; ?>" data-title="<?php echo esc_attr( $messages['title'] ); ?>" data-button-text="<?php echo esc_attr( $messages['button'] ); ?>">
-					<?php echo $messages['add']; ?>
-				</a>
-				<a href="#" class="ttfmake-media-uploader-remove <?php echo $remove_state; ?>">
-					<?php echo $messages['remove']; ?>
-				</a>
-			</div>
+		<div class="ttfmake-uploader<?php if ( ! empty( $image[0] ) ) : ?> ttfmake-has-image-set<?php endif; ?>">
+			<div data-title="<?php echo esc_attr( $title ); ?>" class="ttfmake-media-uploader-placeholder ttfmake-media-uploader-add"<?php if ( ! empty( $image[0] ) ) : ?> style="background-image: url(<?php echo addcslashes( esc_url_raw( $image[0] ), '"' ); ?>);"<?php endif; ?>></div>
 			<input type="hidden" name="<?php echo esc_attr( $section_name ); ?>[image-id]" value="<?php echo ttfmake_sanitize_image_id( $image_id ); ?>" class="ttfmake-media-uploader-value" />
 		</div>
 	<?php
+		$output = ob_get_clean();
+		return $output;
+	}
+
+	/**
+	 * Create an iframe preview area that is connected to a TinyMCE modal window.
+	 *
+	 * @since  1.4.0.
+	 *
+	 * @param  string    $id               The unique ID to identify the different areas.
+	 * @param  string    $textarea_name    The name of the textarea.
+	 * @param  string    $content          The content for the text area.
+	 * @param  bool      $iframe           Whether or not to add an iframe to preview content.
+	 * @return void
+	 */
+	public function add_frame( $id, $textarea_name, $content = '', $iframe = true ) {
+		global $ttfmake_is_js_template;
+		$iframe_id   = 'ttfmake-iframe-' . $id;
+		$textarea_id = 'ttfmake-content-' . $id;
+	?>
+		<?php if ( true === $iframe ) : ?>
+		<div class="ttfmake-iframe-wrapper">
+			<div class="ttfmake-iframe-overlay">
+				<a href="#" class="edit-content-link" data-textarea="<?php echo esc_attr( $textarea_id ); ?>" data-iframe="<?php echo esc_attr( $iframe_id ); ?>">
+					<span class="screen-reader-text">
+						<?php _e( 'Edit content', 'make' ); ?>
+					</span>
+				</a>
+			</div>
+			<iframe width="100%" height="300" id="<?php echo esc_attr( $iframe_id ); ?>" scrolling="no"></iframe>
+		</div>
+		<?php endif; ?>
+
+		<textarea id="<?php echo esc_attr( $textarea_id ); ?>" name="<?php echo esc_attr( $textarea_name ); ?>" style="display:none;"><?php echo esc_textarea( $content ); ?></textarea>
+
+		<?php if ( true !== $ttfmake_is_js_template && true === $iframe ) : ?>
+		<script type="text/javascript">
+			var ttfMakeFrames = ttfMakeFrames || [];
+			ttfMakeFrames.push('<?php echo esc_js( $id ); ?>');
+		</script>
+		<?php endif;
 	}
 
 	/**
@@ -408,8 +503,8 @@ class TTFMAKE_Builder_Base {
 
 		// Include the template
 		ttfmake_load_section_template(
-			$section['builder_template'],
-			$section['path']
+			$ttfmake_section_data['section']['builder_template'],
+			$ttfmake_section_data['section']['path']
 		);
 
 		// Destroy the variable as a good citizen does
@@ -433,29 +528,31 @@ class TTFMAKE_Builder_Base {
 		}
 
 		// Print the templates
-		foreach ( ttfmake_get_sections() as $key => $section ) : ?>
+		foreach ( ttfmake_get_sections() as $section ) : ?>
 			<script type="text/html" id="tmpl-ttfmake-<?php echo esc_attr( $section['id'] ); ?>">
 			<?php
 			ob_start();
 			$this->load_section( $section, array() );
 			$html = ob_get_clean();
-
-			$html = str_replace(
-				array(
-					'temp',
-				),
-				array(
-					'{{{ id }}}',
-				),
-				$html
-			);
-
 			echo $html;
 			?>
 		</script>
 		<?php endforeach;
 
 		unset( $GLOBALS['ttfmake_is_js_template'] );
+
+		// Load the overlay for TinyMCE
+		get_template_part( '/inc/builder/core/templates/overlay', 'tinymce' );
+
+		// Print the template for removing images
+		?>
+			<script type="text/html" id="tmpl-ttfmake-remove-image">
+				<h3><?php _e( 'Current image', 'make' ); ?></h3>
+				<a href="#" class="ttfmake-remove-image-from-modal">
+					<?php _e( 'Remove Current Image', 'make' ); ?>
+				</a>
+			</script>
+		<?php
 	}
 
 	/**
@@ -565,26 +662,6 @@ class TTFMAKE_Builder_Base {
 		}
 
 		return $mce_init;
-	}
-
-	/**
-	 * Denote the default editor for the user.
-	 *
-	 * Note that it would usually be ideal to expose this via a JS variable using wp_localize_script; however, it is
-	 * being printed here in order to guarantee that nothing changes this value before it would otherwise be printed.
-	 * The "after_wp_tiny_mce" action appears to be the most reliable place to print this variable.
-	 *
-	 * @since  1.0.0.
-	 *
-	 * @param  array    $settings   TinyMCE settings.
-	 * @return void
-	 */
-	public function after_wp_tiny_mce( $settings ) {
-		?>
-		<script type="text/javascript">
-			var ttfmakeMCE = '<?php echo esc_js( wp_default_editor() ); ?>';
-		</script>
-	<?php
 	}
 
 	/**

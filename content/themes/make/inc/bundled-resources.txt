@@ -6,4 +6,5 @@ listed below.
 * Cycle2 Swipe Plugin  - Dual MIT license (http://malsup.github.com/mit-license.txt) and GPL (http://malsup.github.com/gpl-license-v2.txt)
 * Cycle2 Center Plugin - Dual MIT license (http://malsup.github.com/mit-license.txt) and GPL (http://malsup.github.com/gpl-license-v2.txt)
 * Fitvids              - WTFPL (http://sam.zoy.org/wtfpl/)
+* Noneditable          - LGPL (http://www.tinymce.com/license)
 * Screenshot           - CC0 (http://unsplash.com/cc0)

@@ -11,10 +11,7 @@
 		/**
 		 *
 		 */
-		cache: {
-			$document: $(document),
-			$window: $(window)
-		},
+		cache: {},
 
 		/**
 		 *
@@ -27,7 +24,12 @@
 		/**
 		 *
 		 */
-		cacheElements: function() {},
+		cacheElements: function() {
+			this.cache = {
+				$window: $(window),
+				$document: $(document)
+			};
+		},
 
 		/**
 		 *

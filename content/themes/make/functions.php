@@ -6,7 +6,7 @@
 /**
  * The current version of the theme.
  */
-define( 'TTFMAKE_VERSION', '1.3.0' );
+define( 'TTFMAKE_VERSION', '1.4.2' );
 
 /**
  * The suffix to use for scripts.
@@ -70,16 +70,13 @@ require get_template_directory() . '/inc/customizer/bootstrap.php';
 // Gallery slider
 require get_template_directory() . '/inc/gallery-slider/gallery-slider.php';
 
+// Formatting
+require get_template_directory() . '/inc/formatting/formatting.php';
+
 /**
  * Admin includes.
  */
 if ( is_admin() ) {
-	// TinyMCE customizations
-	require get_template_directory() . '/inc/tinymce.php';
-
-	// TinyMCE buttons
-	require get_template_directory() . '/inc/tinymce-buttons/tinymce-buttons.php';
-
 	// Page customizations
 	require get_template_directory() . '/inc/edit-page.php';
 
@@ -508,6 +505,16 @@ function ttfmake_plus_styles() {
 		text-transform: uppercase;
 		-webkit-font-smoothing: subpixel-antialiased !important;
 	}
+	.ttfmake-plus-info p {
+		margin-top: 0;
+		margin-left: 10px;
+	}
+	.ttfmake-section-text .ttfmake-titlediv {
+		padding-right: 45px;
+	}
+	.edit-text-column-link {
+		right: 0;
+	}
 	a.ttfmake-customize-plus {
 		margin-left: 0;
 	}
@@ -523,8 +530,9 @@ function ttfmake_plus_styles() {
 	}
 	.make-plus-products .ttfmake-menu-list-item-link-icon-wrapper:before {
 		position: relative;
-		top: 38px;
-		left: 17px;
+		top: 32px;
+		margin-left: -2px;
+		text-align: center;
 	}
 	.make-plus-products .section-type-description {
 		color: #777777;

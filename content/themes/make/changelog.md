@@ -1,3 +1,27 @@
+## 1.4.2
+
+* Fixed Column configuration data not saving correctly in the Page Builder
+
+## 1.4.1
+
+* Added the Format Builder tool to the Visual Editor
+* Added the Insert Icon button to the Visual Editor
+* Removed old button, alert, and list formatting options in favor of the Format Builder
+* Fixed minor issues with the Page Builder
+* Updated German translations
+
+## 1.4.0
+
+* Updated Page Builder interface to improve performance, reduce clutter and better match WordPress' flat design
+
+## 1.3.2
+
+* Fixed fatal error in PHP 5.2.
+
+## 1.3.1
+
+* Fixed fatal error in PHP 5.2.
+
 ## 1.3.0
 
 * Added support for WordPress 4.0 and Customizer panels

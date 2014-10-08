@@ -2,9 +2,9 @@
 # This file is distributed under the GNU General Public License v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Make 1.3.0\n"
+"Project-Id-Version: Make 1.4.2\n"
 "Report-Msgid-Bugs-To: https://thethemefoundry.com/support\n"
-"POT-Creation-Date: 2014-09-04 00:17:21+00:00\n"
+"POT-Creation-Date: 2014-10-06 21:28:58+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -29,378 +29,385 @@ msgstr ""
 msgid "Comments are closed."
 msgstr ""
 
-#: functions.php:145
+#: functions.php:142
 msgid "Primary Menu"
 msgstr ""
 
-#: functions.php:146
+#: functions.php:143
 msgid "Social Profile Links"
 msgstr ""
 
-#: functions.php:147
+#: functions.php:144
 msgid "Header Bar Menu"
 msgstr ""
 
-#: functions.php:177
+#: functions.php:174
 msgid "Left Sidebar"
 msgstr ""
 
-#: functions.php:186
+#: functions.php:183
 msgid "Right Sidebar"
 msgstr ""
 
-#: functions.php:195
+#: functions.php:192
 msgid "Footer 1"
 msgstr ""
 
-#: functions.php:204
+#: functions.php:201
 msgid "Footer 2"
 msgstr ""
 
-#: functions.php:213
+#: functions.php:210
 msgid "Footer 3"
 msgstr ""
 
-#: functions.php:222
+#: functions.php:219
 msgid "Footer 4"
 msgstr ""
 
-#: inc/builder/core/base.php:96
+#: inc/builder/core/base.php:98
 msgid "Page Builder"
 msgstr ""
 
-#: inc/builder/core/base.php:127
+#: inc/builder/core/base.php:129
 msgid "Use Page Builder"
 msgstr ""
 
-#: inc/builder/core/base.php:364
-msgid "Set featured image"
+#: inc/builder/core/base.php:335
+msgid "Delete the section?"
 msgstr ""
 
-#: inc/builder/core/base.php:365
-msgid "Remove featured image"
+#: inc/builder/core/base.php:432 inc/builder/core/configuration-helpers.php:96
+#: inc/builder/sections/builder-templates/text.php:131
+msgid "Set image"
 msgstr ""
 
-#: inc/builder/core/base.php:366
-msgid "Featured Image"
+#: inc/builder/core/base.php:465
+#: inc/builder/core/templates/overlay-tinymce.php:4
+#: inc/builder/sections/builder-templates/banner-slide.php:42
+#: inc/builder/sections/builder-templates/banner-slide.php:44
+#: inc/builder/sections/builder-templates/gallery-item.php:40
+#: inc/builder/sections/builder-templates/gallery-item.php:42
+#: inc/builder/sections/builder-templates/text.php:91
+msgid "Edit content"
 msgstr ""
 
-#: inc/builder/core/base.php:367
-msgid "Use as Featured Image"
+#: inc/builder/core/base.php:550
+msgid "Current image"
 msgstr ""
 
-#: inc/builder/core/base.php:522
+#: inc/builder/core/base.php:552
+msgid "Remove Current Image"
+msgstr ""
+
+#: inc/builder/core/base.php:619
 msgid "Add Media"
 msgstr ""
 
-#: inc/builder/core/base.php:635
+#: inc/builder/core/base.php:712
 msgid "Duplicate this page with %s."
 msgstr ""
 
-#: inc/builder/core/base.php:1041
+#: inc/builder/core/base.php:1118
 msgid "Want some ideas?"
 msgstr ""
 
-#: inc/builder/core/base.php:1044
+#: inc/builder/core/base.php:1121
 msgid "%s and get a quick start with pre-made designer builder templates."
 msgstr ""
 
-#: inc/builder/core/base.php:1049 inc/builder/core/templates/menu.php:62
-#: inc/builder/core/templates/menu.php:89
-#: inc/builder/sections/builder-templates/text.php:26 inc/edit-page.php:96
+#: inc/builder/core/base.php:1126
+#: inc/builder/sections/builder-templates/text.php:27 inc/edit-page.php:96
 msgid "Upgrade to %s"
 msgstr ""
 
-#: inc/builder/core/templates/menu.php:22
-msgid "Add"
-msgstr ""
-
-#: inc/builder/core/templates/menu.php:52
+#: inc/builder/core/templates/menu.php:51
 msgid "Products"
 msgstr ""
 
-#: inc/builder/core/templates/menu.php:57
-msgid "%s and feature your WooCommerce products in a grid layout."
-msgstr ""
-
-#: inc/builder/core/templates/menu.php:79
+#: inc/builder/core/templates/menu.php:63
 msgid "Downloads"
 msgstr ""
 
-#: inc/builder/core/templates/menu.php:84
-msgid "%s and feature your Easy Digital Downloads products in a grid layout."
+#: inc/builder/core/templates/overlay-configuration.php:4
+#: inc/builder/core/templates/section-header.php:21
+#: inc/builder/core/templates/section-header.php:22
+msgid "Configure section"
 msgstr ""
 
-#: inc/builder/core/templates/menu.php:103
-msgid "Add New Section"
+#: inc/builder/core/templates/overlay-header.php:6
+msgid "Configuration"
 msgstr ""
 
-#: inc/builder/core/templates/section-footer.php:17
-msgid "Remove this section"
+#: inc/builder/core/templates/overlay-header.php:7
+msgid "Done"
 msgstr ""
 
-#: inc/builder/core/templates/section-header.php:25
-#: inc/builder/sections/builder-templates/banner-slide.php:28
+#: inc/builder/core/templates/section-header.php:12
+#: inc/builder/core/templates/section-header.php:13
+msgid "Delete section"
+msgstr ""
+
+#: inc/builder/core/templates/section-header.php:67
 msgid "Click to toggle"
 msgstr ""
 
-#: inc/builder/sections/builder-templates/banner-slide.php:26
-msgid "Slide"
+#: inc/builder/sections/builder-templates/banner-slide.php:31
+msgid "Drag-and-drop this slide into place"
 msgstr ""
 
-#: inc/builder/sections/builder-templates/banner-slide.php:38
-#: inc/builder/sections/builder-templates/gallery.php:94
-#: inc/builder/sections/builder-templates/gallery.php:102
-msgid "Background image"
+#: inc/builder/sections/builder-templates/banner-slide.php:35
+msgid "Set banner image"
 msgstr ""
 
-#: inc/builder/sections/builder-templates/banner-slide.php:43
-#: inc/builder/sections/builder-templates/gallery.php:105
-msgid "Darken to improve readability"
+#: inc/builder/sections/builder-templates/banner-slide.php:37
+#: inc/builder/sections/builder-templates/banner-slide.php:39
+#: inc/builder/sections/builder-templates/banner-slide.php:59
+msgid "Configure slide"
 msgstr ""
 
+#: inc/builder/sections/builder-templates/banner-slide.php:47
 #: inc/builder/sections/builder-templates/banner-slide.php:49
-#: inc/builder/sections/builder-templates/gallery.php:108
-msgid "Background color"
+msgid "Delete slide"
 msgstr ""
 
-#: inc/builder/sections/builder-templates/banner-slide.php:56
+#: inc/builder/sections/builder-templates/banner-slide.php:67
 msgid "Content position"
 msgstr ""
 
-#: inc/builder/sections/builder-templates/banner-slide.php:59
-#: inc/builder/sections/builder-templates/gallery.php:35
-#: inc/builder/sections/builder-templates/gallery.php:45
+#: inc/builder/sections/builder-templates/banner-slide.php:70
+#: inc/builder/sections/section-definitions.php:208
+#: inc/builder/sections/section-definitions.php:343
+#: inc/builder/sections/section-definitions.php:354
 #: inc/customizer/helpers.php:86 inc/customizer/helpers.php:98
 #: inc/customizer/helpers.php:109 inc/customizer/helpers.php:209
 #: inc/gallery-slider/gallery-slider.php:118
 msgid "None"
 msgstr ""
 
-#: inc/builder/sections/builder-templates/banner-slide.php:60
+#: inc/builder/sections/builder-templates/banner-slide.php:71
 #: inc/customizer/helpers.php:131 inc/customizer/helpers.php:161
 msgid "Left"
 msgstr ""
 
-#: inc/builder/sections/builder-templates/banner-slide.php:61
+#: inc/builder/sections/builder-templates/banner-slide.php:72
 #: inc/customizer/helpers.php:133 inc/customizer/helpers.php:162
 msgid "Right"
 msgstr ""
 
-#: inc/builder/sections/builder-templates/banner-slide.php:73
-msgid "Set slide image"
+#: inc/builder/sections/builder-templates/banner-slide.php:77
+#: inc/builder/sections/section-definitions.php:375
+msgid "Darken background to improve readability"
 msgstr ""
 
-#: inc/builder/sections/builder-templates/banner-slide.php:74
-msgid "Remove slide image"
+#: inc/builder/sections/builder-templates/banner-slide.php:83
+#: inc/builder/sections/section-definitions.php:391
+msgid "Background color"
 msgstr ""
 
-#: inc/builder/sections/builder-templates/banner-slide.php:75
-msgid "Slide image"
+#: inc/builder/sections/builder-templates/banner.php:29
+msgid "Add new slide"
 msgstr ""
 
-#: inc/builder/sections/builder-templates/banner-slide.php:76
-msgid "Use as slide image"
+#: inc/builder/sections/builder-templates/banner.php:32
+#: inc/builder/sections/builder-templates/gallery.php:34
+msgid "Add Item"
 msgstr ""
 
-#: inc/builder/sections/builder-templates/banner-slide.php:85
-msgid "Slide content overlay"
+#: inc/builder/sections/builder-templates/gallery-item.php:29
+msgid "Drag-and-drop this item into place"
 msgstr ""
 
-#: inc/builder/sections/builder-templates/banner-slide.php:102
-msgid "Remove this slide"
+#: inc/builder/sections/builder-templates/gallery-item.php:33
+msgid "Set gallery image"
 msgstr ""
 
-#: inc/builder/sections/builder-templates/banner.php:21
-msgid "Add New Slide"
+#: inc/builder/sections/builder-templates/gallery-item.php:35
+#: inc/builder/sections/builder-templates/gallery-item.php:37
+#: inc/builder/sections/builder-templates/gallery-item.php:57
+msgid "Configure item"
 msgstr ""
 
-#: inc/builder/sections/builder-templates/banner.php:38
-#: inc/builder/sections/builder-templates/gallery.php:77
-msgid "Options"
+#: inc/builder/sections/builder-templates/gallery-item.php:45
+#: inc/builder/sections/builder-templates/gallery-item.php:47
+msgid "Delete item"
 msgstr ""
 
-#: inc/builder/sections/builder-templates/banner.php:43
-#: inc/builder/sections/builder-templates/blank.php:14
-#: inc/builder/sections/builder-templates/gallery-item.php:34
-#: inc/builder/sections/builder-templates/gallery.php:82
-#: inc/builder/sections/builder-templates/text.php:71
-#: inc/builder/sections/builder-templates/text.php:119
-msgid "Enter title here"
+#: inc/builder/sections/builder-templates/gallery-item.php:65
+msgid "Title"
 msgstr ""
 
-#: inc/builder/sections/builder-templates/banner.php:49
-msgid "Slideshow display"
+#: inc/builder/sections/builder-templates/gallery-item.php:72
+msgid "Item link URL"
 msgstr ""
 
-#: inc/builder/sections/builder-templates/banner.php:55
+#: inc/builder/sections/builder-templates/gallery.php:31
+msgid "Add new item"
+msgstr ""
+
+#: inc/builder/sections/builder-templates/text.php:22
+msgid "%s and convert any column into an area for widgets."
+msgstr ""
+
+#: inc/builder/sections/builder-templates/text.php:81
+#: inc/builder/sections/builder-templates/text.php:84
+#: inc/builder/sections/builder-templates/text.php:149
+msgid "Configure column"
+msgstr ""
+
+#: inc/builder/sections/builder-templates/text.php:88
+msgid "Edit text column"
+msgstr ""
+
+#: inc/builder/sections/builder-templates/text.php:108
+msgid "Drag-and-drop this column into place"
+msgstr ""
+
+#: inc/builder/sections/builder-templates/text.php:157
+msgid "Enter column title"
+msgstr ""
+
+#: inc/builder/sections/builder-templates/text.php:164
+msgid "Image link URL"
+msgstr ""
+
+#: inc/builder/sections/section-definitions.php:75
+msgid "Create rearrangeable columns of content and images."
+msgstr ""
+
+#: inc/builder/sections/section-definitions.php:85
+#: inc/builder/sections/section-definitions.php:173
+#: inc/builder/sections/section-definitions.php:318
+msgid "Enter section title"
+msgstr ""
+
+#: inc/builder/sections/section-definitions.php:92
+#: inc/builder/sections/section-definitions.php:324
+msgid "Columns"
+msgstr ""
+
+#: inc/builder/sections/section-definitions.php:163
+msgid "Display multiple types of content in a banner or a slider."
+msgstr ""
+
+#: inc/builder/sections/section-definitions.php:178
 #: inc/gallery-slider/gallery-slider.php:98
 msgid "Hide navigation arrows"
 msgstr ""
 
-#: inc/builder/sections/builder-templates/banner.php:62
+#: inc/builder/sections/section-definitions.php:184
 #: inc/gallery-slider/gallery-slider.php:102
 msgid "Hide navigation dots"
 msgstr ""
 
-#: inc/builder/sections/builder-templates/banner.php:69
+#: inc/builder/sections/section-definitions.php:190
 msgid "Autoplay slideshow"
 msgstr ""
 
-#: inc/builder/sections/builder-templates/banner.php:76
-msgid "Time between slides (in ms)"
+#: inc/builder/sections/section-definitions.php:196
+#: inc/gallery-slider/gallery-slider.php:110
+msgid "Time between slides (ms)"
 msgstr ""
 
-#: inc/builder/sections/builder-templates/banner.php:81
+#: inc/builder/sections/section-definitions.php:202
 msgid "Transition effect"
 msgstr ""
 
-#: inc/builder/sections/builder-templates/banner.php:84
+#: inc/builder/sections/section-definitions.php:206
 #: inc/gallery-slider/gallery-slider.php:116
 msgid "Slide horizontal"
 msgstr ""
 
-#: inc/builder/sections/builder-templates/banner.php:85
+#: inc/builder/sections/section-definitions.php:207
 #: inc/gallery-slider/gallery-slider.php:117
 msgid "Fade"
 msgstr ""
 
-#: inc/builder/sections/builder-templates/banner.php:92
+#: inc/builder/sections/section-definitions.php:213
 msgid "Section height (px)"
 msgstr ""
 
-#: inc/builder/sections/builder-templates/banner.php:97
+#: inc/builder/sections/section-definitions.php:219
 msgid "Responsive behavior"
 msgstr ""
 
-#: inc/builder/sections/builder-templates/banner.php:100
+#: inc/builder/sections/section-definitions.php:222
+msgid "Choose how the banner will respond to varying screen widths."
+msgstr ""
+
+#: inc/builder/sections/section-definitions.php:224
 #: inc/customizer/helpers.php:148
 msgid "Default"
 msgstr ""
 
-#: inc/builder/sections/builder-templates/banner.php:101
-msgid "Maintain slider aspect ratio"
+#: inc/builder/sections/section-definitions.php:225
+msgid "Aspect"
 msgstr ""
 
-#: inc/builder/sections/builder-templates/banner.php:103
-msgid "Choose how the banner will respond to varying screen widths."
+#: inc/builder/sections/section-definitions.php:308
+msgid "Display your images in various grid combinations."
 msgstr ""
 
-#: inc/builder/sections/builder-templates/gallery-item.php:22
-#: inc/builder/sections/builder-templates/text.php:96
-msgid "Drag-and-drop this column into place"
+#: inc/builder/sections/section-definitions.php:337
+msgid "Aspect ratio"
 msgstr ""
 
-#: inc/builder/sections/builder-templates/gallery-item.php:27
-#: inc/builder/sections/builder-templates/text.php:112
-msgid "Enter link here"
+#: inc/builder/sections/section-definitions.php:340
+msgid "Square"
 msgstr ""
 
-#: inc/builder/sections/builder-templates/gallery-item.php:39
-msgid "Enter description here"
+#: inc/builder/sections/section-definitions.php:341
+msgid "Landscape"
 msgstr ""
 
-#: inc/builder/sections/builder-templates/gallery-item.php:43
-msgid "Remove this item"
+#: inc/builder/sections/section-definitions.php:342
+msgid "Portrait"
 msgstr ""
 
-#: inc/builder/sections/builder-templates/gallery.php:23
-msgid "Caption color:"
+#: inc/builder/sections/section-definitions.php:349
+msgid "Caption style"
 msgstr ""
 
-#: inc/builder/sections/builder-templates/gallery.php:25
+#: inc/builder/sections/section-definitions.php:352
+msgid "Reveal"
+msgstr ""
+
+#: inc/builder/sections/section-definitions.php:353
+msgid "Overlay"
+msgstr ""
+
+#: inc/builder/sections/section-definitions.php:360
+msgid "Caption color"
+msgstr ""
+
+#: inc/builder/sections/section-definitions.php:363
 #: inc/customizer/legacy_sections/stylekit.php:67
 #: inc/customizer/sections/stylekit.php:48
 msgid "Light"
 msgstr ""
 
-#: inc/builder/sections/builder-templates/gallery.php:26
+#: inc/builder/sections/section-definitions.php:364
 #: inc/customizer/legacy_sections/stylekit.php:68
 #: inc/customizer/sections/stylekit.php:49
 msgid "Dark"
 msgstr ""
 
-#: inc/builder/sections/builder-templates/gallery.php:31
-msgid "Caption style:"
+#: inc/builder/sections/section-definitions.php:370
+msgid "Background image"
 msgstr ""
 
-#: inc/builder/sections/builder-templates/gallery.php:33
-msgid "Overlay"
+#: inc/builder/sections/section-definitions.php:382
+msgid "Background style"
 msgstr ""
 
-#: inc/builder/sections/builder-templates/gallery.php:34
-msgid "Reveal"
-msgstr ""
-
-#: inc/builder/sections/builder-templates/gallery.php:40
-msgid "Aspect ratio:"
-msgstr ""
-
-#: inc/builder/sections/builder-templates/gallery.php:42
-msgid "Landscape"
-msgstr ""
-
-#: inc/builder/sections/builder-templates/gallery.php:43
-msgid "Portrait"
-msgstr ""
-
-#: inc/builder/sections/builder-templates/gallery.php:44
-msgid "Square"
-msgstr ""
-
-#: inc/builder/sections/builder-templates/gallery.php:50
-#: inc/builder/sections/builder-templates/text.php:49
-msgid "Columns:"
-msgstr ""
-
-#: inc/builder/sections/builder-templates/gallery.php:60
-msgid "Add New Item"
-msgstr ""
-
-#: inc/builder/sections/builder-templates/gallery.php:92
-msgid "Set background image"
-msgstr ""
-
-#: inc/builder/sections/builder-templates/gallery.php:93
-msgid "Remove background image"
-msgstr ""
-
-#: inc/builder/sections/builder-templates/gallery.php:95
-msgid "Use as Background Image"
-msgstr ""
-
-#: inc/builder/sections/builder-templates/gallery.php:111
-msgid "Background style:"
-msgstr ""
-
-#: inc/builder/sections/builder-templates/gallery.php:113
+#: inc/builder/sections/section-definitions.php:385
 #: inc/customizer/helpers.php:117
 msgid "Tile"
 msgstr ""
 
-#: inc/builder/sections/builder-templates/gallery.php:114
+#: inc/builder/sections/section-definitions.php:386
 #: inc/customizer/helpers.php:142
 msgid "Cover"
-msgstr ""
-
-#: inc/builder/sections/builder-templates/text.php:21
-msgid "%s and convert any column into an area for widgets."
-msgstr ""
-
-#: inc/builder/sections/section-definitions.php:72
-msgid "Create rearrangeable columns of content and images."
-msgstr ""
-
-#: inc/builder/sections/section-definitions.php:139
-msgid "A blank canvas for standard content or HTML code."
-msgstr ""
-
-#: inc/builder/sections/section-definitions.php:182
-msgid "Display multiple types of content in a banner or a slider."
-msgstr ""
-
-#: inc/builder/sections/section-definitions.php:267
-msgid "Display your images in various grid combinations."
 msgstr ""
 
 #: inc/customizer/bootstrap.php:67 inc/customizer/bootstrap.php:340
@@ -674,6 +681,7 @@ msgstr ""
 
 #: inc/customizer/legacy_sections/color.php:84
 #: inc/customizer/sections/color-scheme.php:50
+#: inc/formatting/formatting.php:186
 msgid "Text Color"
 msgstr ""
 
@@ -1166,7 +1174,7 @@ msgid ""
 "<strong>152px x 152px</strong>."
 msgstr ""
 
-#: inc/customizer/legacy_sections/main.php:38
+#: inc/customizer/legacy_sections/main.php:38 inc/formatting/formatting.php:185
 msgid "Background Color"
 msgstr ""
 
@@ -1186,12 +1194,12 @@ msgid "Underline links in content"
 msgstr ""
 
 #: inc/customizer/legacy_sections/navigation.php:38
-#: inc/customizer/sections/navigation.php:64
+#: inc/customizer/sections/navigation.php:73
 msgid "Mobile Menu Label"
 msgstr ""
 
 #: inc/customizer/legacy_sections/navigation.php:53
-#: inc/customizer/sections/navigation.php:65
+#: inc/customizer/sections/navigation.php:74
 msgid "Resize your browser window to preview the mobile menu label."
 msgstr ""
 
@@ -1414,13 +1422,13 @@ msgstr ""
 msgid "Show search field in Header Bar"
 msgstr ""
 
-#: inc/customizer/sections/navigation.php:43
+#: inc/customizer/sections/navigation.php:44
 msgid ""
 "After you have created your custom menu for social profile links, select it "
 "here."
 msgstr ""
 
-#: inc/customizer/sections/navigation.php:53
+#: inc/customizer/sections/navigation.php:59
 msgid ""
 "Select which menu appears in each location. You can edit your menu content "
 "on the Menus screen in the Appearance section."
@@ -1586,6 +1594,209 @@ msgstr ""
 msgid "The uploaded package appears to be a plugin. PLEASE INSTALL AS A PLUGIN."
 msgstr ""
 
+#: inc/extras.php:739
+msgid ""
+"Please <a href=\"%1$s\"><em>update to Make Plus 1.4.0 or later</em></a> for "
+"compatibility with your version of Make. <a href=\"#\" data-nonce=\"%2$s\" "
+"class=\"%3$s\">hide</a>"
+msgstr ""
+
+#: inc/formatting/formatting.php:178
+msgid "Format Builder"
+msgstr ""
+
+#: inc/formatting/formatting.php:179
+msgid "Choose a format"
+msgstr ""
+
+#: inc/formatting/formatting.php:180
+msgid "Insert"
+msgstr ""
+
+#: inc/formatting/formatting.php:181
+msgid "Update"
+msgstr ""
+
+#: inc/formatting/formatting.php:182
+msgid "Remove"
+msgstr ""
+
+#: inc/formatting/formatting.php:183
+msgid "Add icon"
+msgstr ""
+
+#: inc/formatting/formatting.php:184
+msgid "Notice"
+msgstr ""
+
+#: inc/formatting/formatting.php:187
+msgid "Font Size (px)"
+msgstr ""
+
+#: inc/formatting/formatting.php:188
+msgid "Icon"
+msgstr ""
+
+#: inc/formatting/formatting.php:189
+msgid "Icon Size (px)"
+msgstr ""
+
+#: inc/formatting/formatting.php:190
+msgid "Icon Color"
+msgstr ""
+
+#: inc/formatting/formatting.php:191
+msgid "Icon Position"
+msgstr ""
+
+#: inc/formatting/formatting.php:192
+msgid "left"
+msgstr ""
+
+#: inc/formatting/formatting.php:193
+msgid "right"
+msgstr ""
+
+#: inc/formatting/formatting.php:194
+msgid "Horizontal Padding (px)"
+msgstr ""
+
+#: inc/formatting/formatting.php:195
+msgid "Vertical Padding (px)"
+msgstr ""
+
+#: inc/formatting/formatting.php:196
+msgid "Border Style"
+msgstr ""
+
+#: inc/formatting/formatting.php:197
+msgid "none"
+msgstr ""
+
+#: inc/formatting/formatting.php:206
+msgid "Border Width (px)"
+msgstr ""
+
+#: inc/formatting/formatting.php:207
+msgid "Border Color"
+msgstr ""
+
+#: inc/formatting/formatting.php:208
+msgid "Button"
+msgstr ""
+
+#: inc/formatting/formatting.php:209
+msgid "URL"
+msgstr ""
+
+#: inc/formatting/formatting.php:210
+msgid "Open link in a new window/tab"
+msgstr ""
+
+#: inc/formatting/formatting.php:211
+msgid "Font Weight"
+msgstr ""
+
+#: inc/formatting/formatting.php:214
+msgid "Background Color (hover)"
+msgstr ""
+
+#: inc/formatting/formatting.php:215
+msgid "Text Color (hover)"
+msgstr ""
+
+#: inc/formatting/formatting.php:216
+msgid "Border Radius (px)"
+msgstr ""
+
+#: inc/formatting/formatting.php:217
+msgid "List"
+msgstr ""
+
+#: inc/formatting/formatting.php:219
+msgid "Insert Icon"
+msgstr ""
+
+#: inc/formatting/formatting.php:220
+msgid "Choose an icon"
+msgstr ""
+
+#: inc/formatting/formatting.php:221
+msgid "Web Application Icons"
+msgstr ""
+
+#: inc/formatting/formatting.php:222
+msgid "Text Editor Icons"
+msgstr ""
+
+#: inc/formatting/formatting.php:223
+msgid "Spinner Icons"
+msgstr ""
+
+#: inc/formatting/formatting.php:224
+msgid "File Type Icons"
+msgstr ""
+
+#: inc/formatting/formatting.php:225
+msgid "Directional Icons"
+msgstr ""
+
+#: inc/formatting/formatting.php:226
+msgid "Video Player Icons"
+msgstr ""
+
+#: inc/formatting/formatting.php:227
+msgid "Form Control Icons"
+msgstr ""
+
+#: inc/formatting/formatting.php:228
+msgid "Chart Icons"
+msgstr ""
+
+#: inc/formatting/formatting.php:229
+msgid "Brand Icons"
+msgstr ""
+
+#: inc/formatting/formatting.php:230
+msgid "Payment Icons"
+msgstr ""
+
+#: inc/formatting/formatting.php:231
+msgid "Currency Icons"
+msgstr ""
+
+#: inc/formatting/formatting.php:232
+msgid "Medical Icons"
+msgstr ""
+
+#: inc/formatting/formatting.php:233
+msgid "Choose"
+msgstr ""
+
+#: inc/formatting/formatting.php:235
+msgid "Insert Horizontal Line"
+msgstr ""
+
+#: inc/formatting/formatting.php:236
+msgid "Choose a line style"
+msgstr ""
+
+#: inc/formatting/formatting.php:388
+msgid "Big"
+msgstr ""
+
+#: inc/formatting/formatting.php:393
+msgid "Small"
+msgstr ""
+
+#: inc/formatting/formatting.php:398
+msgid "Citation"
+msgstr ""
+
+#: inc/formatting/formatting.php:403
+msgid "Testimonial"
+msgstr ""
+
 #: inc/gallery-slider/gallery-slider.php:91
 msgid "Slider Settings"
 msgstr ""
@@ -1596,10 +1807,6 @@ msgstr ""
 
 #: inc/gallery-slider/gallery-slider.php:106
 msgid "Autoplay"
-msgstr ""
-
-#: inc/gallery-slider/gallery-slider.php:110
-msgid "Time between slides (ms)"
 msgstr ""
 
 #: inc/gallery-slider/gallery-slider.php:114
@@ -1620,118 +1827,6 @@ msgstr ""
 
 #: inc/template-tags.php:164
 msgid "Read more"
-msgstr ""
-
-#: inc/tinymce-buttons/tinymce-buttons.php:144
-msgid "Add button"
-msgstr ""
-
-#: inc/tinymce-buttons/tinymce-buttons.php:145
-msgid "Insert Button"
-msgstr ""
-
-#: inc/tinymce-buttons/tinymce-buttons.php:146
-msgid "Button text"
-msgstr ""
-
-#: inc/tinymce-buttons/tinymce-buttons.php:147
-msgid "Button URL"
-msgstr ""
-
-#: inc/tinymce-buttons/tinymce-buttons.php:148
-msgid "Normal"
-msgstr ""
-
-#: inc/tinymce-buttons/tinymce-buttons.php:149 inc/tinymce.php:59
-msgid "Alert"
-msgstr ""
-
-#: inc/tinymce-buttons/tinymce-buttons.php:150
-msgid "Download"
-msgstr ""
-
-#: inc/tinymce-buttons/tinymce-buttons.php:151
-msgid "Color"
-msgstr ""
-
-#: inc/tinymce-buttons/tinymce-buttons.php:152
-msgid "Primary"
-msgstr ""
-
-#: inc/tinymce-buttons/tinymce-buttons.php:153
-msgid "Secondary"
-msgstr ""
-
-#: inc/tinymce-buttons/tinymce-buttons.php:154
-msgid "Green"
-msgstr ""
-
-#: inc/tinymce-buttons/tinymce-buttons.php:155
-msgid "Red"
-msgstr ""
-
-#: inc/tinymce-buttons/tinymce-buttons.php:156
-msgid "Orange"
-msgstr ""
-
-#: inc/tinymce-buttons/tinymce-buttons.php:157
-msgid "Style"
-msgstr ""
-
-#: inc/tinymce-buttons/tinymce-buttons.php:158
-msgid "Dotted"
-msgstr ""
-
-#: inc/tinymce-buttons/tinymce-buttons.php:159
-msgid "Double"
-msgstr ""
-
-#: inc/tinymce.php:37
-msgid "Big"
-msgstr ""
-
-#: inc/tinymce.php:42
-msgid "Small"
-msgstr ""
-
-#: inc/tinymce.php:47
-msgid "Citation"
-msgstr ""
-
-#: inc/tinymce.php:52
-msgid "Blockquote: testimonial"
-msgstr ""
-
-#: inc/tinymce.php:63
-msgid "Success (Green)"
-msgstr ""
-
-#: inc/tinymce.php:71
-msgid "Error (Red)"
-msgstr ""
-
-#: inc/tinymce.php:79
-msgid "Important (Orange)"
-msgstr ""
-
-#: inc/tinymce.php:89
-msgid "List"
-msgstr ""
-
-#: inc/tinymce.php:92
-msgid "Checkmark 1"
-msgstr ""
-
-#: inc/tinymce.php:99
-msgid "Checkmark 2"
-msgstr ""
-
-#: inc/tinymce.php:106
-msgid "Star"
-msgstr ""
-
-#: inc/tinymce.php:113
-msgid "Dot"
 msgstr ""
 
 #: partials/content-attachment.php:11
@@ -1876,27 +1971,17 @@ msgid_plural "%1$s comments"
 msgstr[0] ""
 msgstr[1] ""
 
-#: inc/builder/sections/builder-templates/banner.php:86
-msgctxt "transition effect"
-msgid "None"
-msgstr ""
-
-#: inc/builder/sections/section-definitions.php:70
+#: inc/builder/sections/section-definitions.php:73
 msgctxt "section name"
-msgid "Text"
+msgid "Columns"
 msgstr ""
 
-#: inc/builder/sections/section-definitions.php:137
-msgctxt "section name"
-msgid "Blank"
-msgstr ""
-
-#: inc/builder/sections/section-definitions.php:180
+#: inc/builder/sections/section-definitions.php:161
 msgctxt "section name"
 msgid "Banner"
 msgstr ""
 
-#: inc/builder/sections/section-definitions.php:265
+#: inc/builder/sections/section-definitions.php:306
 msgctxt "section name"
 msgid "Gallery"
 msgstr ""
@@ -1944,6 +2029,56 @@ msgstr ""
 #: inc/extras.php:337
 msgctxt "list item separator"
 msgid ", "
+msgstr ""
+
+#: inc/formatting/formatting.php:198
+msgctxt "border style"
+msgid "solid"
+msgstr ""
+
+#: inc/formatting/formatting.php:199
+msgctxt "border style"
+msgid "dotted"
+msgstr ""
+
+#: inc/formatting/formatting.php:200
+msgctxt "border style"
+msgid "dashed"
+msgstr ""
+
+#: inc/formatting/formatting.php:201
+msgctxt "border style"
+msgid "double"
+msgstr ""
+
+#: inc/formatting/formatting.php:202
+msgctxt "border style"
+msgid "groove"
+msgstr ""
+
+#: inc/formatting/formatting.php:203
+msgctxt "border style"
+msgid "ridge"
+msgstr ""
+
+#: inc/formatting/formatting.php:204
+msgctxt "border style"
+msgid "inset"
+msgstr ""
+
+#: inc/formatting/formatting.php:205
+msgctxt "border style"
+msgid "outset"
+msgstr ""
+
+#: inc/formatting/formatting.php:212
+msgctxt "font weight"
+msgid "normal"
+msgstr ""
+
+#: inc/formatting/formatting.php:213
+msgctxt "font weight"
+msgid "bold"
 msgstr ""
 
 #: inc/template-tags.php:44

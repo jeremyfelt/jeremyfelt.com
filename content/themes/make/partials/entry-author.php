@@ -25,7 +25,7 @@ $author_option = ttfmake_sanitize_choice( get_theme_mod( $author_key, ttfmake_ge
 		printf(
 			_x( 'by %s', 'author byline', 'make' ),
 			sprintf(
-				'<a class="vcard" href="%1$s">%2$s</a>',
+				'<a class="vcard fn" href="%1$s">%2$s</a>',
 				esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ),
 				esc_html( get_the_author_meta( 'display_name' ) )
 			)

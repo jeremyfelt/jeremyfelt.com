@@ -8,7 +8,7 @@ $date_option = ttfmake_sanitize_choice( get_theme_mod( $date_key, ttfmake_get_de
 ?>
 
 <?php if ( 'none' !== $date_option ) : ?>
-<time class="entry-date" datetime="<?php the_time( 'c' ); ?>">
+<time class="entry-date published" datetime="<?php the_time( 'c' ); ?>">
 <?php if ( ! is_singular() ) : ?><a href="<?php the_permalink(); ?>" rel="bookmark"><?php endif; ?>
 	<?php if ( 'absolute' === $date_option ) : ?>
 		<?php echo get_the_date(); ?>

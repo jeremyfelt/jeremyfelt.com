@@ -1,0 +1,207 @@
+/* Toolbar Icons */
+i.mce-i-ttfmake-format-builder,
+i.mce-i-ttfmake-icon-picker {
+	font: normal 20px/1 'dashicons';
+	padding: 0;
+	vertical-align: top;
+	speak: none;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	margin-left: -2px;
+	padding-right: 2px;
+}
+i.mce-i-ttfmake-format-builder:before {
+	content: '\f502';
+}
+i.mce-i-ttfmake-icon-picker:before {
+	content: '\f487';
+}
+
+/* Window */
+#ttfmake-format-builder .mce-container-body.mce-abs-layout,
+#ttfmake-icon-picker .mce-container-body.mce-abs-layout {
+	overflow-y: hidden;
+}
+#ttfmake-format-builder .mce-foot,
+#ttfmake-icon-picker .mce-foot {
+	border-radius: 0;
+}
+#ttfmake-format-builder .mce-i-checkbox,
+#ttfmake-format-builder .mce-btn {
+	background-image: none;
+	filter: none;
+}
+#ttfmake-format-builder .mce-i-checkbox {
+	margin-top: 5px;
+}
+#ttfmake-format-builder .mce-monospace {
+	font-family: Consolas, Monaco, monospace;
+}
+.mce-listbox-placeholder {
+	display: none !important;
+}
+
+/* Icons */
+#ttfmake-format-builder .mce-container .mce-add-icon {
+	cursor: pointer;
+	font-family: "Open Sans", sans-serif;
+	font-size: 13px;
+	line-height: 2;
+	color: #2ea2cc;
+	text-decoration: underline;
+}
+#ttfmake-format-builder .mce-container .mce-icon-choice,
+#ttfmake-format-builder .mce-container .mce-icon-choice *,
+#ttfmake-icon-picker .mce-container .mce-icon-choice,
+#ttfmake-icon-picker .mce-container .mce-icon-choice * {
+	cursor: pointer;
+	font-family: 'FontAwesome';
+	font-size: 24px;
+}
+
+/* Buttons, copied from core */
+#ttfmake-format-builder .mce-button-primary button,
+#ttfmake-format-builder .mce-button-secondary button,
+#ttfmake-icon-picker .mce-button-primary button,
+#ttfmake-icon-picker .mce-button-secondary button,
+#ttfmake-hr-picker .mce-button-primary button {
+	display: inline-block;
+	text-decoration: none;
+	font-size: 13px;
+	line-height: 26px;
+	height: 28px;
+	margin: 0;
+	padding: 0 10px 1px;
+	cursor: pointer;
+	border-width: 1px;
+	border-style: solid;
+	-webkit-appearance: none;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	white-space: nowrap;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+#ttfmake-format-builder .mce-button-primary button,
+#ttfmake-icon-picker .mce-button-primary button,
+#ttfmake-hr-picker .mce-button-primary button {
+	background: #2ea2cc;
+	border-color: #0074a2;
+	-webkit-box-shadow: inset 0 1px 0 rgba( 120, 200, 230, 0.5), 0 1px 0 rgba( 0, 0, 0, 0.15 );
+	box-shadow: inset 0 1px 0 rgba( 120, 200, 230, 0.5 ), 0 1px 0 rgba( 0, 0, 0, 0.15 );
+	color: #fff;
+	text-decoration: none;
+}
+#ttfmake-format-builder .mce-button-primary button:hover,
+#ttfmake-format-builder .mce-button-primary button:focus,
+#ttfmake-icon-picker .mce-button-primary button:hover,
+#ttfmake-icon-picker .mce-button-primary button:focus,
+#ttfmake-hr-picker .mce-button-primary button:hover,
+#ttfmake-hr-picker .mce-button-primary button:focus {
+	background: #1e8cbe;
+	border-color: #0074a2;
+	-webkit-box-shadow: inset 0 1px 0 rgba( 120, 200, 230, 0.6 );
+	box-shadow: inset 0 1px 0 rgba( 120, 200, 230, 0.6 );
+	color: #fff;
+}
+#ttfmake-format-builder .mce-button-primary button:focus,
+#ttfmake-icon-picker .mce-button-primary button:focus,
+#ttfmake-hr-picker .mce-button-primary button:focus {
+	border-color: #0e3950;
+	-webkit-box-shadow:
+		inset 0 1px 0 rgba( 120, 200, 230, 0.6 ),
+		0 0 0 1px #5b9dd9,
+		0 0 2px 1px rgba(30, 140, 190, .8);
+	box-shadow:
+		inset 0 1px 0 rgba( 120, 200, 230, 0.6 ),
+		0 0 0 1px #5b9dd9,
+		0 0 2px 1px rgba(30, 140, 190, .8);
+}
+#ttfmake-format-builder .mce-button-primary button:active,
+#ttfmake-icon-picker .mce-button-primary button:active,
+#ttfmake-hr-picker .mce-button-primary button:active {
+	background: #1b7aa6;
+	border-color: #005684;
+	color: rgba( 255, 255, 255, 0.95 );
+	-webkit-box-shadow: inset 0 1px 0 rgba( 0, 0, 0, 0.1 );
+	box-shadow: inset 0 1px 0 rgba( 0, 0, 0, 0.1 );
+	vertical-align: top;
+}
+#ttfmake-format-builder .mce-button-primary.mce-disabled button,
+#ttfmake-icon-picker .mce-button-primary.mce-disabled button,
+#ttfmake-hr-picker .mce-button-primary.mce-disabled button {
+	color: #94cde7 !important;
+	background: #298cba !important;
+	border-color: #1b607f !important;
+	-webkit-box-shadow: none !important;
+	box-shadow: none !important;
+	text-shadow: 0 -1px 0 rgba( 0, 0, 0, 0.1 ) !important;
+	cursor: default;
+}
+
+#ttfmake-format-builder .mce-button-secondary button,
+#ttfmake-icon-picker .mce-button-secondary button {
+	color: #555;
+	border-color: #cccccc;
+	background: #f7f7f7;
+	-webkit-box-shadow: inset 0 1px 0 #fff, 0 1px 0 rgba( 0, 0, 0, 0.08 );
+	box-shadow: inset 0 1px 0 #fff, 0 1px 0 rgba( 0, 0, 0, 0.08 );
+	vertical-align: top;
+}
+#ttfmake-format-builder .mce-button-secondary button:hover,
+#ttfmake-format-builder .mce-button-secondary button:focus,
+#ttfmake-icon-picker .mce-button-secondary button:hover,
+#ttfmake-icon-picker .mce-button-secondary button:focus {
+	background: #fafafa;
+	border-color: #999;
+	color: #222;
+}
+#ttfmake-format-builder .mce-button-secondary button:focus,
+#ttfmake-icon-picker .mce-button-secondary button:focus {
+	-webkit-box-shadow:
+		0 0 0 1px #5b9dd9,
+		0 0 2px 1px rgba(30, 140, 190, .8);
+	box-shadow:
+		0 0 0 1px #5b9dd9,
+		0 0 2px 1px rgba(30, 140, 190, .8);
+}
+#ttfmake-format-builder .mce-button-secondary button:active,
+#ttfmake-icon-picker .mce-button-secondary button:active {
+	background: #eee;
+	border-color: #999;
+	color: #333;
+	-webkit-box-shadow: inset 0 2px 5px -3px rgba( 0, 0, 0, 0.5 );
+	box-shadow: inset 0 2px 5px -3px rgba( 0, 0, 0, 0.5 );
+}
+#ttfmake-format-builder .mce-button-secondary.mce-disabled button,
+#ttfmake-icon-picker .mce-button-secondary.mce-disabled button {
+	color: #aaa !important;
+	border-color: #ddd !important;
+	background: #f7f7f7 !important;
+	-webkit-box-shadow: none !important;
+	box-shadow: none !important;
+	text-shadow: 0 1px 0 #fff !important;
+	cursor: default;
+}
+
+/* Resetting default button styles */
+#ttfmake-format-builder-picker {
+	-webkit-box-shadow: none !important;
+	box-shadow: none !important;
+}
+
+/* Resetting default input styles */
+#ttfmake-format-builder-body input.mce-textbox {
+	-webkit-box-shadow: none !important;
+	box-shadow: none !important;
+}
+#ttfmake-format-builder-body input.mce-textbox:focus {
+	border: 1px solid #ddd;
+}
+
+/* Resetting default label styles */
+#ttfmake-format-builder-body label.mce-label {
+	font-size: 13px;
+}

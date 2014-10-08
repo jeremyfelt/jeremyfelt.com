@@ -650,7 +650,8 @@ if ( ! function_exists( 'ttfmake_backcompat_filter' ) ) :
  */
 function ttfmake_backcompat_filter() {
 	$filter = 'ttf' . current_filter();
-	return apply_filters_ref_array( $filter, func_get_args() );
+	$args   = func_get_args();
+	return apply_filters_ref_array( $filter, $args );
 }
 endif;
 
@@ -696,6 +697,103 @@ if ( ! function_exists( 'ttfmake_backcompat_action' ) ) :
  */
 function ttfmake_backcompat_action() {
 	$action = 'ttf' . current_action();
-	do_action_ref_array( $action, func_get_args() );
+	$args   = func_get_args();
+	do_action_ref_array( $action, $args );
 }
 endif;
+
+if ( ! function_exists( 'ttfmake_upgrade_notice' ) ) :
+/**
+ * Display a notice to inform the user to update Make Plus if not compatible with this release.
+ *
+ * @since  1.4.0.
+ *
+ * @return void.
+ */
+function ttfmake_upgrade_notice() {
+	// Do not show to users who cannot manage plugins
+	if ( false === current_user_can( 'edit_plugins' ) ) {
+		return;
+	}
+
+	// Do not show if not a Make Plus user
+	if ( ! ttfmake_is_plus() ) {
+		return;
+	}
+
+	// Do not show if Make Plus version is 1.4.0 or greater
+	$make_plus_version = ( function_exists( 'ttfmp_get_app' ) ) ? ttfmp_get_app()->version : 0;
+	if ( true === version_compare( $make_plus_version, '1.4.0', '>=' ) ) {
+		return;
+	}
+
+	// Do not show if upgrade notice is hidden by user
+	if ( 1 === (int) get_theme_mod( 'hide-upgrade-notice' )  ) {
+		return;
+	}
+?>
+	<div id="message" class="error">
+		<p>
+			<?php
+			printf(
+				__(
+					'Please <a href="%1$s"><em>update to Make Plus 1.4.0 or later</em></a> for compatibility with your version of Make. <a href="#" data-nonce="%2$s" class="%3$s">hide</a>',
+					'make'
+				),
+				admin_url( 'update-core.php' ),
+				wp_create_nonce( 'hide-notice' ),
+				'ttfmake-hide-notice'
+			);
+			?>
+		</p>
+	</div>
+	<script type="text/javascript">
+		jQuery(document).ready(function ($) {
+			$('.error').on('click', '.ttfmake-hide-notice', function (evt) {
+				evt.preventDefault();
+
+				var $target = $(evt.target),
+					nonce = $target.attr('data-nonce'),
+					$parent = $target.parents('.error');
+
+				$parent.fadeOut('slow');
+
+				$.post(
+					ajaxurl,
+					{
+						action: 'ttfmake_hide_notice',
+						nonce : nonce
+					}
+				);
+			});
+		});
+	</script>
+<?php
+}
+endif;
+
+add_action( 'admin_notices', 'ttfmake_upgrade_notice' );
+
+if ( ! function_exists( 'ttfmake_hide_upgrade_notice' ) ) :
+/**
+ * Callback for hiding upgrade notice.
+ *
+ * @since  1.4.0.
+ *
+ * @return void.
+ */
+function ttfmake_hide_upgrade_notice() {
+	if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'hide-notice' ) ) {
+		return;
+	}
+
+	// Set flag to no longer show the notice
+	set_theme_mod( 'hide-upgrade-notice', 1 );
+
+	// Return a success response.
+	echo 1;
+	wp_die();
+}
+endif;
+
+add_action( 'wp_ajax_ttfmake_hide_notice', 'ttfmake_hide_upgrade_notice' );

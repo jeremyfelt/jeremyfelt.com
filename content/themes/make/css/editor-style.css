@@ -68,9 +68,12 @@ h5,
 h6 {
     text-transform: uppercase;
 }
+blockquote {
+	margin-left: 0;
+	margin-right: 0;
+}
 blockquote p {
     font-size: 135%; /* 20px */
-    line-height: 1.25;
 }
 blockquote p cite,
 blockquote cite {
@@ -132,9 +135,26 @@ table td {
     font-style: italic;
     text-align: left;
 }
+.shortcode-wrapper{
+	display: block;
+	margin-bottom: 22px;
+	padding: 5px 10px;
+	font-size: 14px;
+	color: #aaa;
+	background-color: #fafafa;
+	border: 1px solid #dfdfdf;
+	text-align: center;
+	word-wrap: break-word;
+}
 /*---------------------------------------------------------
  Rules (editor-style.css)
 -------------------------------------------------------- */
+hr.ttfmake-hr {
+	border-color: #eaecee;
+	border-width: 0;
+	height: 1px;
+}
+/* Deprecated in 1.4.1 */
 hr.ttfmake-line-dashed {
     border-top: 1px dashed #eaecee;
 }
@@ -155,7 +175,11 @@ input[type="submit"] {
     border: 0;
     background: #171717;
     cursor: pointer;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
 }
+/* Deprecated in 1.4.1 */
 .color-primary-background {
     background-color: #0094c5;
 }
@@ -177,8 +201,23 @@ input[type="submit"] {
     font-family: FontAwesome;
 }
 /*---------------------------------------------------------
- Alerts (editor-style.css)
+ Notices / Alerts (editor-style.css)
 -------------------------------------------------------- */
+.ttfmake-notice {
+	background: #e5e5e5;
+	border: 2px solid #808080;
+	color: #808080;
+	margin-bottom: 22px;
+	margin-bottom: 2.2rem;
+	padding: 10px 20px;
+}
+.ttfmake-notice p {
+	margin-top: 0;
+}
+.ttfmake-notice p:last-of-type {
+	margin-bottom: 0; //reset
+}
+/* Deprecated in 1.4.1 */
 .ttfmake-alert {
     margin-bottom: 22px;
     padding: 33px 32px;
@@ -221,6 +260,7 @@ ol.ttfmake-list li:before {
     padding-right: 10px;
     font-family: FontAwesome;
 }
+/* Deprecated in 1.4.1 */
 ul.ttfmake-list-check li:before,
 ol.ttfmake-list-check li:before {
     content: "\f14a";

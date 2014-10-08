@@ -69,7 +69,8 @@ var oneApp = oneApp || {}, $oneApp = $oneApp || jQuery(oneApp);
 				var $item = $(ui.item.get(0)),
 					$stage = $item.parents('.ttfmake-gallery-items-stage');
 
-				$('.sortable-placeholder', $stage).height($item.height());
+				$('.sortable-placeholder', $stage)
+					.height(parseInt($item.height(), 10) - 2); // -2 to account for placeholder border
 			},
 			stop: function (event, ui) {
 				var $item = $(ui.item.get(0)),
@@ -93,7 +94,7 @@ var oneApp = oneApp || {}, $oneApp = $oneApp || jQuery(oneApp);
 		}
 
 		$selector.wpColorPicker({
-			defaultColor: ''
+			hide: false
 		});
 	};
 
