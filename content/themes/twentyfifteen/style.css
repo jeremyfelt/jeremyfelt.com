@@ -1999,8 +1999,8 @@ a.post-thumbnail:focus {
 	width: auto;
 }
 
-.type-attachment .entry-header {
-	clear: right;
+.entry-attachment {
+	margin-bottom: 1.6em;
 }
 
 .type-attachment .entry-title {
@@ -2022,6 +2022,7 @@ a.post-thumbnail:focus {
 	-ms-hyphens: auto;
 	hyphens: auto;
 	line-height: 1.5;
+	padding-top: 0.5em;
 	word-wrap: break-word;
 }
 
@@ -2455,6 +2456,10 @@ span > video {
 
 .gallery-columns-9 .gallery-item {
 	max-width: 11.11%;
+}
+
+.gallery-icon img {
+	margin: 0 auto;
 }
 
 .gallery-caption {
@@ -3157,6 +3162,10 @@ span > video {
 		margin-bottom: 1.5294em;
 	}
 
+	.entry-attachment {
+		margin-bottom: 1.6471em;
+	}
+
 	.format-aside .entry-title,
 	.format-image .entry-title,
 	.format-video .entry-title,
@@ -3687,6 +3696,10 @@ span > video {
 
 	.page-links {
 		margin-bottom: 1.5789em;
+	}
+
+	.entry-attachment {
+		margin-bottom: 1.6842em
 	}
 
 	.format-aside .entry-title,
@@ -4344,6 +4357,10 @@ span > video {
 		margin-bottom: 1.4667em;
 	}
 
+	.entry-attachment {
+		margin-bottom: 1.6em;
+	}
+
 	.format-aside .entry-title,
 	.format-image .entry-title,
 	.format-video .entry-title,
@@ -4862,6 +4879,10 @@ span > video {
 		margin-bottom: 1.5294em;
 	}
 
+	.entry-attachment {
+		margin-bottom: 1.6471em;
+	}
+
 	.format-aside .entry-title,
 	.format-image .entry-title,
 	.format-video .entry-title,
@@ -5374,6 +5395,10 @@ span > video {
 
 	.page-links {
 		margin-bottom: 1.5789em;
+	}
+
+	.entry-attachment {
+		margin-bottom: 1.6842em;
 	}
 
 	.format-aside .entry-title,
