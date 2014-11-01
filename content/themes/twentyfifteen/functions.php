@@ -34,6 +34,13 @@ if ( ! isset( $content_width ) ) {
 	$content_width = 660;
 }
 
+/**
+ * Twenty Fifteen only works in WordPress 4.1 or later.
+ */
+if ( version_compare( $GLOBALS['wp_version'], '4.1-alpha', '<' ) ) {
+	require get_template_directory() . '/inc/back-compat.php';
+}
+
 if ( ! function_exists( 'twentyfifteen_setup' ) ) :
 /**
  * Sets up theme defaults and registers support for various WordPress features.
@@ -56,6 +63,14 @@ function twentyfifteen_setup() {
 
 	// Add default posts and comments RSS feed links to head.
 	add_theme_support( 'automatic-feed-links' );
+
+	/*
+	 * Let WordPress manage the document title.
+	 * By adding theme support, we declare that this theme does not use a
+	 * hard-coded <title> tag in the document head, and expect WordPress to
+	 * provide it for us.
+	 */
+	add_theme_support( 'title-tag' );
 
 	/*
 	 * Enable support for Post Thumbnails on posts and pages.
@@ -119,8 +134,8 @@ function twentyfifteen_widgets_init() {
 		'description'   => __( 'Add widgets here to appear in your sidebar.', 'twentyfifteen' ),
 		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
 		'after_widget'  => '</aside>',
-		'before_title'  => '<h1 class="widget-title">',
-		'after_title'   => '</h1>',
+		'before_title'  => '<h2 class="widget-title">',
+		'after_title'   => '</h2>',
 	) );
 }
 add_action( 'widgets_init', 'twentyfifteen_widgets_init' );
@@ -219,43 +234,11 @@ function twentyfifteen_scripts() {
 
 	wp_enqueue_script( 'twentyfifteen-script', get_template_directory_uri() . '/js/functions.js', array( 'jquery' ), '20141010', true );
 	wp_localize_script( 'twentyfifteen-script', 'screenReaderText', array(
-		'expand'   => '<span class="screen-reader-text">' . esc_html__( 'Expand', 'twentyfifteen' ) . '</span>',
-		'collapse' => '<span class="screen-reader-text">' . esc_html__( 'Collapse', 'twentyfifteen' ) . '</span>',
+		'expand'   => '<span class="screen-reader-text">' . esc_html__( 'expand child menu', 'twentyfifteen' ) . '</span>',
+		'collapse' => '<span class="screen-reader-text">' . esc_html__( 'collapse child menu', 'twentyfifteen' ) . '</span>',
 	) );
 }
 add_action( 'wp_enqueue_scripts', 'twentyfifteen_scripts' );
-
-/**
- * Filters wp_title to print a neat <title> tag based on what is being viewed.
- *
- * @param string $title Default title text for current view.
- * @param string $sep Optional separator.
- * @return string The filtered title.
- */
-function twentyfifteen_wp_title( $title, $sep ) {
-	if ( is_feed() ) {
-		return $title;
-	}
-
-	global $page, $paged;
-
-	// Add the blog name
-	$title .= get_bloginfo( 'name', 'display' );
-
-	// Add the blog description for the home/front page.
-	$site_description = get_bloginfo( 'description', 'display' );
-	if ( $site_description && ( is_home() || is_front_page() ) ) {
-		$title .= " $sep $site_description";
-	}
-
-	// Add a page number if necessary:
-	if ( ( $paged >= 2 || $page >= 2 ) && ! is_404() ) {
-		$title .= " $sep " . sprintf( __( 'Page %s', 'twentyfifteen' ), max( $paged, $page ) );
-	}
-
-	return $title;
-}
-add_filter( 'wp_title', 'twentyfifteen_wp_title', 10, 2 );
 
 /**
  * Add featured image as background image to post navs.
@@ -309,6 +292,20 @@ function twentyfifteen_nav_description( $item_output, $item, $depth, $args ) {
 	return $item_output;
 }
 add_filter( 'walker_nav_menu_start_el', 'twentyfifteen_nav_description', 10, 4 );
+
+/**
+ * Add a `screen-reader-text` class to the search form's submit button
+ *
+ * @since Twenty Fifteen 1.0
+ *
+ * @param string $html Search form HTML
+ *
+ * @return string Modified search form HTML
+ */
+function twentyfifteen_search_form_modify( $html ) {
+	return str_replace( 'class="search-submit"', 'class="search-submit screen-reader-text"', $html );
+}
+add_filter( 'get_search_form', 'twentyfifteen_search_form_modify' );
 
 /**
  * Implement the Custom Header feature.

@@ -6,16 +6,18 @@
  */
 
 ( function( $ ) {
+	var $body, $window, sidebar, toolbarOffset;
+
 	$( 'html' ).removeClass( 'no-js' );
 
 	// Add dropdown toggle that display child menu items.
-	$( '.main-navigation .page_item_has_children > a, .main-navigation .menu-item-has-children > a' ).append( '<button class="dropdown-toggle" aria-expanded="false">' + screenReaderText.expand + '</button>' );
+	$( '.main-navigation .page_item_has_children > a, .main-navigation .menu-item-has-children > a' ).after( '<button class="dropdown-toggle" aria-expanded="false">' + screenReaderText.expand + '</button>' );
 
 	$( '.dropdown-toggle' ).click( function( e ) {
 		var _this = $( this );
 		e.preventDefault();
 		_this.toggleClass( 'toggle-on' );
-		_this.parent().next( '.children, .sub-menu' ).toggleClass( 'toggled-on' );
+		_this.next( '.children, .sub-menu' ).toggleClass( 'toggled-on' );
 		_this.attr( 'aria-expanded', _this.attr( 'aria-expanded' ) === 'false' ? 'true' : 'false' );
 		_this.html( _this.html() === screenReaderText.expand ? screenReaderText.collapse : screenReaderText.expand );
 	} );
@@ -47,4 +49,37 @@
 			$( this ).toggleClass( 'toggled-on' );
 		} );
 	} )();
+
+
+	// Sidebar (un)fixing: fix when short, un-fix when scroll needed
+	$body         = $( 'body' );
+	$window       = $( window );
+	sidebar       = $( '#sidebar' )[0];
+	toolbarOffset = $body.is( '.admin-bar' ) ? $( '#wpadminbar' ).height() : 0;
+
+	function fixedOrScrolledSidebar() {
+		if ( $window.width() >= 955 ) {
+			if ( sidebar.scrollHeight < ( $window.height() - toolbarOffset ) ) {
+				$body.addClass( 'sidebar-fixed' );
+			} else {
+				$body.removeClass( 'sidebar-fixed' );
+			}
+		} else {
+			$body.removeClass( 'sidebar-fixed' );
+		}
+	}
+
+	function debouncedFixedOrScrolledSidebar() {
+		var timeout;
+		return function() {
+			clearTimeout( timeout );
+			timeout = setTimeout( function() {
+				timeout = null;
+				fixedOrScrolledSidebar();
+			}, 150 );
+		};
+	}
+
+	$window.on( 'load.twentyfifteen', fixedOrScrolledSidebar ).on( 'resize.twentyfifteen', debouncedFixedOrScrolledSidebar() );
+
 } )( jQuery );

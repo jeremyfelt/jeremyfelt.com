@@ -596,10 +596,6 @@ textarea {
 	bottom: 0;
 }
 
-.search-form input[type="submit"] {
-	display: none;
-}
-
 
 /**
  * 6.0 Navigations
@@ -692,17 +688,12 @@ a:focus {
 	-moz-box-sizing: content-box;
 	box-sizing: content-box;
 	content: "";
-	display: block;
-	font-size: 15px;
-	font-size: 1.5rem;
 	height: 42px;
 	padding: 0;
 	position: absolute;
-	top: 50%;
+	text-transform: lowercase; /* Stop screen readers to read the text as capital letters */
+	top: 3px;
 	right: 0;
-	-webkit-transform: translateY(-50%);
-	-ms-transform: translateY(-50%);
-	transform: translateY(-50%);
 	width: 42px;
 }
 
@@ -786,6 +777,10 @@ a:focus {
 	content: "\f211";
 }
 
+.social-navigation a[href*="foursquare.com"]:before {
+	content: "\f226";
+}
+
 .social-navigation a[href*="plus.google.com"]:before {
 	content: "\f206";
 }
@@ -816,11 +811,6 @@ a:focus {
 
 .social-navigation a[href*="reddit.com"]:before {
 	content: "\f222";
-}
-
-.social-navigation a[href*="skype.com"]:before,
-.social-navigation a[href*="skype:"]:before:before {
-	content: "\f220";
 }
 
 .social-navigation a[href*="stumbleupon.com"]:before {
@@ -956,7 +946,7 @@ a:focus {
 }
 
 .post-navigation .has-post-thumbnail a:before {
-	background-color: rgba(0, 0, 0, 0.3);
+	background-color: rgba(0, 0, 0, 0.4);
 	content: "";
 	display: block;
 	height: 100%;
@@ -1294,7 +1284,9 @@ img.aligncenter {
 	font-family: "Noto Sans", sans-serif;
 	font-size: 22px;
 	font-size: 2.2rem;
+	font-weight: 700;
 	line-height: 1.3636;
+	margin-bottom: 0;
 }
 
 .site-description {
@@ -1304,7 +1296,7 @@ img.aligncenter {
 	font-size: 1.2rem;
 	font-weight: 400;
 	line-height: 1.5;
-	margin-top: 0.5em;
+	margin: 0.5em 0 0;
 	opacity: 0.7;
 }
 
@@ -1839,7 +1831,10 @@ a.post-thumbnail:focus {
 	text-transform: uppercase;
 }
 
-.updated:not(.published),
+.updated:not(.published) {
+	display: none;
+}
+
 .sticky .posted-on,
 .sticky .posted-on + .byline:before {
 	display: none;
@@ -2554,9 +2549,7 @@ span > video {
 	}
 
 	.main-navigation ul {
-		border-top: 1px solid #eaeaea;
 		border-top: 1px solid rgba(51, 51, 51, 0.1);
-		border-bottom: 1px solid #eaeaea;
 		border-bottom: 1px solid rgba(51, 51, 51, 0.1);
 	}
 
@@ -3803,16 +3796,20 @@ span > video {
 
 
 /**
- * 15.4 Desktop Small 967px
+ * 15.4 Desktop Small 955px
  */
 
 @media screen and (min-width: 59.6875em) {
 	body:before,
-	.site-header,
-	.main-navigation,
-	.social-navigation,
-	.widget {
+	.sidebar-fixed .site-header,
+	.sidebar-fixed .main-navigation,
+	.sidebar-fixed .social-navigation,
+	.sidebar-fixed .widget {
 		-webkit-transform: translateZ(0); /* Fixes flashing bug with scrolling on iOS Safari */
+	}
+
+	.sidebar-fixed .sidebar {
+		position: fixed;
 	}
 
 	body:before {
@@ -3835,18 +3832,10 @@ span > video {
 
 	.sidebar {
 		float: left;
-		height: 100%;
 		margin-right: -100%;
 		max-width: 413px;
-		overflow-y: scroll;
-		-webkit-overflow-scrolling: touch; /* Enable momentum scrolling on iOS Safari */
-		position: fixed;
+		position: relative;
 		width: 29.4118%;
-	}
-
-	.admin-bar .sidebar {
-		height: -webkit-calc(100% - 32px);
-		height: calc(100% - 32px);
 	}
 
 	.secondary {
@@ -5080,6 +5069,7 @@ span > video {
 
 	.dropdown-toggle {
 		height: 32px;
+		top: 4px;
 		width: 32px;
 	}
 
@@ -5607,7 +5597,7 @@ span > video {
 	}
 
 	.entry-header,
-	.entry-footer  {
+	.entry-footer {
 		padding: 0;
 	}
 

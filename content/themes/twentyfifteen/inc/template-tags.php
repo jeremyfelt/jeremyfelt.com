@@ -24,7 +24,7 @@ function twentyfifteen_paging_nav() {
 		return;
 	}
 
- 	// Set up paginated links.
+	// Set up paginated links.
 	$links = paginate_links( array(
 		'prev_text'          => esc_html__( 'Previous', 'twentyfifteen' ),
 		'next_text'          => esc_html__( 'Next', 'twentyfifteen' ),
@@ -34,7 +34,7 @@ function twentyfifteen_paging_nav() {
 	if ( $links ) :
 	?>
 	<nav class="navigation pagination" role="navigation">
-		<h1 class="screen-reader-text"><?php esc_html_e( 'Posts navigation', 'twentyfifteen' ); ?></h1>
+		<h2 class="screen-reader-text"><?php esc_html_e( 'Posts navigation', 'twentyfifteen' ); ?></h2>
 		<div class="nav-links">
 			<?php echo $links; ?>
 		</div><!-- .nav-links -->
@@ -62,16 +62,16 @@ function twentyfifteen_post_nav() {
 	$prev_class = $next_class = '';
 
 	if ( $previous && has_post_thumbnail( $previous->ID ) ) {
-		$prev_class = " has-post-thumbnail";
+		$prev_class = ' has-post-thumbnail';
 	}
 
 	if ( $next && has_post_thumbnail( $next->ID ) ) {
-		$next_class = " has-post-thumbnail";
+		$next_class = ' has-post-thumbnail';
 	}
 
 	?>
 	<nav class="navigation post-navigation" role="navigation">
-		<h1 class="screen-reader-text"><?php esc_html_e( 'Post navigation', 'twentyfifteen' ); ?></h1>
+		<h2 class="screen-reader-text"><?php esc_html_e( 'Post navigation', 'twentyfifteen' ); ?></h2>
 		<div class="nav-links">
 			<?php
 			if ( is_attachment() ) :
@@ -98,7 +98,7 @@ function twentyfifteen_comment_nav() {
 	if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) :
 	?>
 	<nav class="navigation comment-navigation" role="navigation">
-		<h1 class="screen-reader-text"><?php esc_html_e( 'Comment navigation', 'twentyfifteen' ); ?></h1>
+		<h2 class="screen-reader-text"><?php esc_html_e( 'Comment navigation', 'twentyfifteen' ); ?></h2>
 		<div class="nav-links">
 			<?php
 				if ( $prev_link = get_previous_comments_link( esc_html__( 'Older Comments', 'twentyfifteen' ) ) ) :
