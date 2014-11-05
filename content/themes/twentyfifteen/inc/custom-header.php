@@ -79,10 +79,9 @@ if ( ! function_exists( 'twentyfifteen_header_style' ) ) :
  */
 function twentyfifteen_header_style() {
 	$header_image = get_header_image();
-	$text_color   = get_header_textcolor();
 
 	// If no custom options for text are set, let's bail.
-	if ( empty( $header_image ) && $text_color == get_theme_support( 'custom-header', 'default-text-color' ) ) {
+	if ( empty( $header_image ) && display_header_text() ) {
 		return;
 	}
 
@@ -125,16 +124,6 @@ function twentyfifteen_header_style() {
 			clip: rect(1px, 1px, 1px, 1px);
 			position: absolute;
 		}
-	<?php
-		// If the user has set a custom color for the text use that
-		elseif ( $text_color != get_theme_support( 'custom-header', 'default-text-color' ) ) :
-	?>
-		.site-title a,
-		.site-title a:hover,
-		.site-title a:focus,
-		.site-description {
-			color: #<?php echo esc_attr( $text_color ); ?>;
-		}
 	<?php endif; ?>
 	</style>
 	<?php
@@ -167,10 +156,12 @@ endif; // twentyfifteen_admin_header_image
  * @since Twenty Fifteen 1.0
  */
 function twentyfifteen_header_background_color_css() {
+	$color_scheme            = twentyfifteen_get_color_scheme();
+	$default_color           = $color_scheme[1];
 	$header_background_color = get_theme_mod( 'header_background_color', '#ffffff' );
 
 	// Don't do anything if the current color is the default.
-	if ( '#ffffff' === $header_background_color ) {
+	if ( $header_background_color === $default_color ) {
 		return;
 	}
 
@@ -182,7 +173,8 @@ function twentyfifteen_header_background_color_css() {
 		}
 
 		@media screen and (min-width: 59.6875em) {
-			.site-header {
+			.site-header,
+			.secondary {
 				background-color: transparent;
 			}
 
@@ -208,10 +200,12 @@ add_action( 'wp_enqueue_scripts', 'twentyfifteen_header_background_color_css', 1
  * @since Twenty Fifteen 1.0
  */
 function twentyfifteen_sidebar_text_color_css() {
+	$color_scheme       = twentyfifteen_get_color_scheme();
+	$default_color      = $color_scheme[4];
 	$sidebar_link_color = get_theme_mod( 'sidebar_textcolor', '#333333' );
 
 	// Don't do anything if the current color is the default.
-	if ( '#333333' === $sidebar_link_color ) {
+	if ( $sidebar_link_color === $default_color ) {
 		return;
 	}
 
@@ -223,29 +217,41 @@ function twentyfifteen_sidebar_text_color_css() {
 
 	$css = '
 		/* Custom Sidebar Text Color */
+		.site-title a,
+		.site-description,
 		.secondary-toggle:before {
 			color: %1$s;
 		}
 
-		.secondary-toggle:focus {
-			outline-color: %1$s;
+		.site-title a:hover,
+		.site-title a:focus {
+			color: %1$s; /* Fallback for IE7 and IE8 */
+			color: %2$s;
 		}
 
-		.secondary-toggle:hover {
+		.secondary-toggle {
+			border-color: %1$s; /* Fallback for IE7 and IE8 */
+			border-color: %3$s;
+		}
+
+		.secondary-toggle:hover,
+		.secondary-toggle:focus {
+			border-color: %1$s; /* Fallback for IE7 and IE8 */
 			border-color: %4$s;
 		}
 
-		@media screen and (min-width: 59.6875em) {
-			.dropdown-toggle:after,
-			.main-navigation a,
-			.social-navigation a,
-			.widget-title,
-			.widget a {
-				color: %1$s;
-			}
+		.site-title a {
+			outline-color: %1$s; /* Fallback for IE7 and IE8 */
+			outline-color: %4$s;
+		}
 
-			.dropdown-toggle:focus {
-				outline-color: %1$s;
+		@media screen and (min-width: 59.6875em) {
+			.secondary a,
+			.dropdown-toggle:after,
+			.widget-title,
+			.widget blockquote cite,
+			.widget blockquote small {
+				color: %1$s;
 			}
 
 			.widget button,
@@ -256,26 +262,30 @@ function twentyfifteen_sidebar_text_color_css() {
 				background-color: %1$s;
 			}
 
+			.textwidget a {
+				border-color: %1$s;
+			}
+
+			.secondary a:hover,
+			.secondary a:focus,
 			.main-navigation .menu-item-description,
-			.main-navigation a:hover,
-			.main-navigation a:focus,
-			.social-navigation a:hover:before,
-			.social-navigation a:focus:before,
 			.widget,
-			.widget a:hover,
-			.widget a:focus,
 			.widget blockquote,
-			.widget blockquote cite,
-			.widget blockquote small,
 			.widget .wp-caption-text,
 			.widget .gallery-caption {
-				color: %1$s; /* Fallback for IE7 and IE8 */
 				color: %2$s;
 			}
 
+			.widget button:hover,
+			.widget button:focus,
+			.widget input[type="button"]:hover,
+			.widget input[type="button"]:focus,
+			.widget input[type="reset"]:hover,
+			.widget input[type="reset"]:focus,
+			.widget input[type="submit"]:hover,
+			.widget input[type="submit"]:focus,
 			.widget_calendar tbody a:hover,
 			.widget_calendar tbody a:focus {
-				background-color: %1$s; /* Fallback for IE7 and IE8 */
 				background-color: %2$s;
 			}
 
@@ -286,32 +296,34 @@ function twentyfifteen_sidebar_text_color_css() {
 			.main-navigation ul,
 			.main-navigation li,
 			.secondary-toggle,
-			.widget_categories .children,
-			.widget_nav_menu .sub-menu,
-			.widget_pages .children,
+			.widget input,
+			.widget textarea,
 			.widget table,
 			.widget th,
 			.widget td,
-			.widget input,
-			.widget textarea,
 			.widget pre,
 			.widget li,
+			.widget_categories .children,
+			.widget_nav_menu .sub-menu,
+			.widget_pages .children,
 			.widget abbr[title] {
-				border-color: %1$s; /* Fallback for IE7 and IE8 */
 				border-color: %3$s;
 			}
 
 			.dropdown-toggle:hover,
 			.dropdown-toggle:focus,
 			.widget hr {
-				background-color: %1$s; /* Fallback for IE7 and IE8 */
 				background-color: %3$s;
 			}
 
 			.widget input:focus,
 			.widget textarea:focus {
-				border-color: %1$s; /* Fallback for IE7 and IE8 */
 				border-color: %4$s;
+			}
+
+			.sidebar a:focus,
+			.dropdown-toggle:focus {
+				outline-color: %4$s;
 			}
 		}
 	';
