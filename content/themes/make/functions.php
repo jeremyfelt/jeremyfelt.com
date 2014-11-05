@@ -6,7 +6,7 @@
 /**
  * The current version of the theme.
  */
-define( 'TTFMAKE_VERSION', '1.4.2' );
+define( 'TTFMAKE_VERSION', '1.4.3' );
 
 /**
  * The suffix to use for scripts.
@@ -58,6 +58,9 @@ add_action( 'template_redirect', 'ttfmake_content_width' );
 /**
  * Global includes.
  */
+// Compatibility
+require get_template_directory() . '/inc/compatibility.php';
+
 // Custom functions that act independently of the theme templates
 require get_template_directory() . '/inc/extras.php';
 
@@ -553,3 +556,16 @@ function ttfmake_plus_styles() {
 
 add_action( 'admin_head', 'ttfmake_plus_styles', 20 );
 add_action( 'customize_controls_print_styles', 'ttfmake_plus_styles', 20 );
+
+/**
+ * Generate a link to the Make info page.
+ *
+ * @since  1.0.6.
+ *
+ * @param  string    $deprecated    This parameter is no longer used.
+ * @return string                   The link.
+ */
+function ttfmake_get_plus_link( $deprecated ) {
+	$url = 'https://thethemefoundry.com/wordpress-themes/make/#make-table';
+	return esc_url( $url );
+}

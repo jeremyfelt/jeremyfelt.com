@@ -301,7 +301,7 @@ function ttfmake_css_add_rules() {
 	// Header Bar text color
 	if ( $header_bar_text_color !== ttfmake_get_default( 'header-bar-text-color' ) ) {
 		ttfmake_get_css()->add( array(
-			'selectors'    => array( '.header-bar' ),
+			'selectors'    => array( '.header-bar', '.header-bar a', '.header-bar .menu li a' ),
 			'declarations' => array(
 				'color' => $header_bar_text_color
 			)

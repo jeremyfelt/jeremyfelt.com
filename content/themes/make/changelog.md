@@ -1,3 +1,9 @@
+## 1.4.3
+
+* Improved text sanitization in some instances to allow more HTML tags and attributes
+* Fixed incorrect text color being applied to Header Bar menu items
+* Other minor code improvements
+
 ## 1.4.2
 
 * Fixed Column configuration data not saving correctly in the Page Builder

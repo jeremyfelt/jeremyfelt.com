@@ -111,6 +111,46 @@ endif;
 
 add_action( 'wp', 'ttfmake_setup_author' );
 
+if ( ! function_exists( 'ttfmake_sanitize_text' ) ) :
+/**
+ * Allow only certain tags and attributes in a string.
+ *
+ * @since  1.0.0.
+ *
+ * @param  string    $string    The unsanitized string.
+ * @return string               The sanitized string.
+ */
+function ttfmake_sanitize_text( $string ) {
+	global $allowedtags;
+	$expandedtags = $allowedtags;
+
+	// span
+	$expandedtags['span'] = array();
+
+	// Enable id, class, and style attributes for each tag
+	foreach ( $expandedtags as $tag => $attributes ) {
+		$expandedtags[$tag]['id']    = true;
+		$expandedtags[$tag]['class'] = true;
+		$expandedtags[$tag]['style'] = true;
+	}
+
+	// br (doesn't need attributes)
+	$expandedtags['br'] = array();
+
+	/**
+	 * Customize the tags and attributes that are allows during text sanitization.
+	 *
+	 * @since 1.4.3
+	 *
+	 * @param array     $expandedtags    The list of allowed tags and attributes.
+	 * @param string    $string          The text string being sanitized.
+	 */
+	apply_filters( 'make_sanitize_text_allowed_tags', $expandedtags, $string );
+
+	return wp_kses( $string, $expandedtags );
+}
+endif;
+
 if ( ! function_exists( 'sanitize_hex_color' ) ) :
 /**
  * Sanitizes a hex color.
@@ -382,56 +422,6 @@ function ttfmake_sidebar_list_enabled( $location ) {
 }
 endif;
 
-/**
- * Generate a link to the Make info page.
- *
- * @since  1.0.6.
- *
- * @param  string    $component    The component where the link is located.
- * @return string                  The link.
- */
-function ttfmake_get_plus_link( $component ) {
-	$url = 'https://thethemefoundry.com/wordpress-themes/make/#make-table';
-	return esc_url( $url );
-}
-
-/**
- * Add notice if Make Plus is installed as a theme.
- *
- * @since  1.1.2.
- *
- * @param  string         $source           File source location.
- * @param  string         $remote_source    Remove file source location.
- * @param  WP_Upgrader    $upgrader         WP_Upgrader instance.
- * @return WP_Error                         Error or source on success.
- */
-function ttfmake_check_package( $source, $remote_source, $upgrader ) {
-	global $wp_filesystem;
-
-	if ( ! isset( $_GET['action'] ) || 'upload-theme' !== $_GET['action'] ) {
-		return $source;
-	}
-
-	if ( is_wp_error( $source ) ) {
-		return $source;
-	}
-
-	// Check the folder contains a valid theme
-	$working_directory = str_replace( $wp_filesystem->wp_content_dir(), trailingslashit( WP_CONTENT_DIR ), $source );
-	if ( ! is_dir( $working_directory ) ) { // Sanity check, if the above fails, lets not prevent installation.
-		return $source;
-	}
-
-	// A proper archive should have a style.css file in the single subdirectory
-	if ( ! file_exists( $working_directory . 'style.css' ) && strpos( $source, 'make-plus-' ) >= 0 ) {
-		return new WP_Error( 'incompatible_archive_theme_no_style', $upgrader->strings[ 'incompatible_archive' ], __( 'The uploaded package appears to be a plugin. PLEASE INSTALL AS A PLUGIN.', 'make' ) );
-	}
-
-	return $source;
-}
-
-add_filter( 'upgrader_source_selection', 'ttfmake_check_package', 9, 3 );
-
 if ( ! function_exists( 'ttfmake_get_section_data' ) ) :
 /**
  * Retrieve all of the data for the sections.
@@ -574,226 +564,3 @@ function ttfmake_is_builder_page( $post_id = 0 ) {
 	return apply_filters( 'make_is_builder_page', $is_builder_page, $post_id );
 }
 endif;
-
-if ( ! function_exists( 'ttfmake_filter_backcompat' ) ) :
-/**
- * Adds back compat for filters with changed names.
- *
- * In Make 1.2.3, filters were all changed from "ttfmake_" to "make_". In order to maintain back compatibility, the old
- * version of the filter needs to still be called. This function collects all of those changed filters and mirrors the
- * new filter so that the old filter name will still work.
- *
- * @since  1.2.3.
- *
- * @return void
- */
-function ttfmake_filter_backcompat() {
-	// All filters that need a name change
-	$old_filters = array(
-		'template_content_archive'     => 2,
-		'fitvids_custom_selectors'     => 1,
-		'template_content_page'        => 2,
-		'template_content_search'      => 2,
-		'footer_1'                     => 1,
-		'footer_2'                     => 1,
-		'footer_3'                     => 1,
-		'footer_4'                     => 1,
-		'sidebar_left'                 => 1,
-		'sidebar_right'                => 1,
-		'template_content_single'      => 2,
-		'get_view'                     => 2,
-		'has_sidebar'                  => 3,
-		'read_more_text'               => 1,
-		'supported_social_icons'       => 1,
-		'exif_shutter_speed'           => 2,
-		'exif_aperture'                => 2,
-		'style_formats'                => 1,
-		'prepare_data_section'         => 3,
-		'insert_post_data_sections'    => 1,
-		'section_classes'              => 2,
-		'the_builder_content'          => 1,
-		'builder_section_footer_links' => 1,
-		'section_defaults'             => 1,
-		'section_choices'              => 3,
-		'gallery_class'                => 2,
-		'builder_banner_class'         => 2,
-		'customizer_sections'          => 1,
-		'setting_defaults'             => 1,
-		'font_relative_size'           => 1,
-		'font_stack'                   => 2,
-		'font_variants'                => 3,
-		'all_fonts'                    => 1,
-		'get_google_fonts'             => 1,
-		'custom_logo_information'      => 1,
-		'custom_logo_max_width'        => 1,
-		'setting_choices'              => 2,
-		'social_links'                 => 1,
-		'show_footer_credit'           => 1,
-		'is_plus'                      => 1,
-	);
-
-	foreach ( $old_filters as $filter => $args ) {
-		add_filter( 'make_' . $filter, 'ttfmake_backcompat_filter', 10, $args );
-	}
-}
-endif;
-
-add_action( 'after_setup_theme', 'ttfmake_filter_backcompat', 1 );
-
-if ( ! function_exists( 'ttfmake_backcompat_filter' ) ) :
-/**
- * Prepends "ttf" to a filter name and calls that new filter variant.
- *
- * @since  1.2.3.
- *
- * @return mixed    The result of the filter.
- */
-function ttfmake_backcompat_filter() {
-	$filter = 'ttf' . current_filter();
-	$args   = func_get_args();
-	return apply_filters_ref_array( $filter, $args );
-}
-endif;
-
-if ( ! function_exists( 'ttfmake_action_backcompat' ) ) :
-/**
- * Adds back compat for actions with changed names.
- *
- * In Make 1.2.3, actions were all changed from "ttfmake_" to "make_". In order to maintain back compatibility, the old
- * version of the action needs to still be called. This function collects all of those changed actions and mirrors the
- * new filter so that the old filter name will still work.
- *
- * @since  1.2.3.
- *
- * @return void
- */
-function ttfmake_action_backcompat() {
-	// All filters that need a name change
-	$old_actions = array(
-		'section_text_before_columns_select' => 1,
-		'section_text_after_columns_select'  => 1,
-		'section_text_after_title'           => 1,
-		'section_text_before_column'         => 2,
-		'section_text_after_column'          => 2,
-		'section_text_after_columns'         => 1,
-		'css'                                => 1,
-	);
-
-	foreach ( $old_actions as $action => $args ) {
-		add_action( 'make_' . $action, 'ttfmake_backcompat_action', 10, $args );
-	}
-}
-endif;
-
-add_action( 'after_setup_theme', 'ttfmake_action_backcompat', 1 );
-
-if ( ! function_exists( 'ttfmake_backcompat_action' ) ) :
-/**
- * Prepends "ttf" to a filter name and calls that new filter variant.
- *
- * @since  1.2.3.
- *
- * @return mixed    The result of the filter.
- */
-function ttfmake_backcompat_action() {
-	$action = 'ttf' . current_action();
-	$args   = func_get_args();
-	do_action_ref_array( $action, $args );
-}
-endif;
-
-if ( ! function_exists( 'ttfmake_upgrade_notice' ) ) :
-/**
- * Display a notice to inform the user to update Make Plus if not compatible with this release.
- *
- * @since  1.4.0.
- *
- * @return void.
- */
-function ttfmake_upgrade_notice() {
-	// Do not show to users who cannot manage plugins
-	if ( false === current_user_can( 'edit_plugins' ) ) {
-		return;
-	}
-
-	// Do not show if not a Make Plus user
-	if ( ! ttfmake_is_plus() ) {
-		return;
-	}
-
-	// Do not show if Make Plus version is 1.4.0 or greater
-	$make_plus_version = ( function_exists( 'ttfmp_get_app' ) ) ? ttfmp_get_app()->version : 0;
-	if ( true === version_compare( $make_plus_version, '1.4.0', '>=' ) ) {
-		return;
-	}
-
-	// Do not show if upgrade notice is hidden by user
-	if ( 1 === (int) get_theme_mod( 'hide-upgrade-notice' )  ) {
-		return;
-	}
-?>
-	<div id="message" class="error">
-		<p>
-			<?php
-			printf(
-				__(
-					'Please <a href="%1$s"><em>update to Make Plus 1.4.0 or later</em></a> for compatibility with your version of Make. <a href="#" data-nonce="%2$s" class="%3$s">hide</a>',
-					'make'
-				),
-				admin_url( 'update-core.php' ),
-				wp_create_nonce( 'hide-notice' ),
-				'ttfmake-hide-notice'
-			);
-			?>
-		</p>
-	</div>
-	<script type="text/javascript">
-		jQuery(document).ready(function ($) {
-			$('.error').on('click', '.ttfmake-hide-notice', function (evt) {
-				evt.preventDefault();
-
-				var $target = $(evt.target),
-					nonce = $target.attr('data-nonce'),
-					$parent = $target.parents('.error');
-
-				$parent.fadeOut('slow');
-
-				$.post(
-					ajaxurl,
-					{
-						action: 'ttfmake_hide_notice',
-						nonce : nonce
-					}
-				);
-			});
-		});
-	</script>
-<?php
-}
-endif;
-
-add_action( 'admin_notices', 'ttfmake_upgrade_notice' );
-
-if ( ! function_exists( 'ttfmake_hide_upgrade_notice' ) ) :
-/**
- * Callback for hiding upgrade notice.
- *
- * @since  1.4.0.
- *
- * @return void.
- */
-function ttfmake_hide_upgrade_notice() {
-	if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( $_POST['nonce'], 'hide-notice' ) ) {
-		return;
-	}
-
-	// Set flag to no longer show the notice
-	set_theme_mod( 'hide-upgrade-notice', 1 );
-
-	// Return a success response.
-	echo 1;
-	wp_die();
-}
-endif;
-
-add_action( 'wp_ajax_ttfmake_hide_notice', 'ttfmake_hide_upgrade_notice' );

@@ -951,21 +951,6 @@ function ttfmake_get_section_name( $data, $is_js_template ) {
 }
 endif;
 
-if ( ! function_exists( 'ttfmake_sanitize_text' ) ) :
-/**
- * Allow only the allowedtags array in a string.
- *
- * @since  1.0.0.
- *
- * @param  string    $string    The unsanitized string.
- * @return string               The sanitized string.
- */
-function ttfmake_sanitize_text( $string ) {
-	global $allowedtags;
-	return wp_kses( $string, $allowedtags );
-}
-endif;
-
 if ( ! function_exists( 'ttfmake_get_image' ) ) :
 /**
  * Get an image to display in page builder backend or front end template.

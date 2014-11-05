@@ -3,21 +3,6 @@
  * @package Make
  */
 
-if ( ! function_exists( 'ttfmake_sanitize_text' ) ) :
-/**
- * Sanitize a string to allow only tags in the allowedtags array.
- *
- * @since  1.0.0.
- *
- * @param  string    $string    The unsanitized string.
- * @return string               The sanitized string.
- */
-function ttfmake_sanitize_text( $string ) {
-	global $allowedtags;
-	return wp_kses( $string , $allowedtags );
-}
-endif;
-
 if ( ! function_exists( 'ttfmake_sanitize_choice' ) ) :
 /**
  * Sanitize a value from a list of allowed values.

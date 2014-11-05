@@ -2,9 +2,9 @@
 # This file is distributed under the GNU General Public License v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Make 1.4.2\n"
+"Project-Id-Version: Make 1.4.3\n"
 "Report-Msgid-Bugs-To: https://thethemefoundry.com/support\n"
-"POT-Creation-Date: 2014-10-06 21:28:58+00:00\n"
+"POT-Creation-Date: 2014-10-23 22:30:34+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -29,39 +29,39 @@ msgstr ""
 msgid "Comments are closed."
 msgstr ""
 
-#: functions.php:142
+#: functions.php:145
 msgid "Primary Menu"
 msgstr ""
 
-#: functions.php:143
+#: functions.php:146
 msgid "Social Profile Links"
 msgstr ""
 
-#: functions.php:144
+#: functions.php:147
 msgid "Header Bar Menu"
 msgstr ""
 
-#: functions.php:174
+#: functions.php:177
 msgid "Left Sidebar"
 msgstr ""
 
-#: functions.php:183
+#: functions.php:186
 msgid "Right Sidebar"
 msgstr ""
 
-#: functions.php:192
+#: functions.php:195
 msgid "Footer 1"
 msgstr ""
 
-#: functions.php:201
+#: functions.php:204
 msgid "Footer 2"
 msgstr ""
 
-#: functions.php:210
+#: functions.php:213
 msgid "Footer 3"
 msgstr ""
 
-#: functions.php:219
+#: functions.php:222
 msgid "Footer 4"
 msgstr ""
 
@@ -108,15 +108,15 @@ msgstr ""
 msgid "Duplicate this page with %s."
 msgstr ""
 
-#: inc/builder/core/base.php:1118
+#: inc/builder/core/base.php:1103
 msgid "Want some ideas?"
 msgstr ""
 
-#: inc/builder/core/base.php:1121
+#: inc/builder/core/base.php:1106
 msgid "%s and get a quick start with pre-made designer builder templates."
 msgstr ""
 
-#: inc/builder/core/base.php:1126
+#: inc/builder/core/base.php:1111
 #: inc/builder/sections/builder-templates/text.php:27 inc/edit-page.php:96
 msgid "Upgrade to %s"
 msgstr ""
@@ -179,19 +179,19 @@ msgstr ""
 #: inc/builder/sections/section-definitions.php:208
 #: inc/builder/sections/section-definitions.php:343
 #: inc/builder/sections/section-definitions.php:354
-#: inc/customizer/helpers.php:86 inc/customizer/helpers.php:98
-#: inc/customizer/helpers.php:109 inc/customizer/helpers.php:209
+#: inc/customizer/helpers.php:71 inc/customizer/helpers.php:83
+#: inc/customizer/helpers.php:94 inc/customizer/helpers.php:194
 #: inc/gallery-slider/gallery-slider.php:118
 msgid "None"
 msgstr ""
 
 #: inc/builder/sections/builder-templates/banner-slide.php:71
-#: inc/customizer/helpers.php:131 inc/customizer/helpers.php:161
+#: inc/customizer/helpers.php:116 inc/customizer/helpers.php:146
 msgid "Left"
 msgstr ""
 
 #: inc/builder/sections/builder-templates/banner-slide.php:72
-#: inc/customizer/helpers.php:133 inc/customizer/helpers.php:162
+#: inc/customizer/helpers.php:118 inc/customizer/helpers.php:147
 msgid "Right"
 msgstr ""
 
@@ -336,7 +336,7 @@ msgid "Choose how the banner will respond to varying screen widths."
 msgstr ""
 
 #: inc/builder/sections/section-definitions.php:224
-#: inc/customizer/helpers.php:148
+#: inc/customizer/helpers.php:133
 msgid "Default"
 msgstr ""
 
@@ -401,91 +401,102 @@ msgid "Background style"
 msgstr ""
 
 #: inc/builder/sections/section-definitions.php:385
-#: inc/customizer/helpers.php:117
+#: inc/customizer/helpers.php:102
 msgid "Tile"
 msgstr ""
 
 #: inc/builder/sections/section-definitions.php:386
-#: inc/customizer/helpers.php:142
+#: inc/customizer/helpers.php:127
 msgid "Cover"
 msgstr ""
 
-#: inc/customizer/bootstrap.php:67 inc/customizer/bootstrap.php:340
+#: inc/compatibility.php:35
+msgid "The uploaded package appears to be a plugin. PLEASE INSTALL AS A PLUGIN."
+msgstr ""
+
+#: inc/compatibility.php:344
+msgid ""
+"Please <a href=\"%1$s\"><em>update to Make Plus 1.4.0 or later</em></a> for "
+"compatibility with your version of Make. <a href=\"#\" data-nonce=\"%2$s\" "
+"class=\"%3$s\">hide</a>"
+msgstr ""
+
+#: inc/customizer/bootstrap.php:66 inc/customizer/bootstrap.php:359
 #: inc/customizer/sections/color-scheme.php:24
 msgid "General"
 msgstr ""
 
-#: inc/customizer/bootstrap.php:68
+#: inc/customizer/bootstrap.php:67
 msgid "Typography"
 msgstr ""
 
-#: inc/customizer/bootstrap.php:69
+#: inc/customizer/bootstrap.php:68
 msgid "Color Scheme"
 msgstr ""
 
-#: inc/customizer/bootstrap.php:70 inc/customizer/bootstrap.php:344
+#: inc/customizer/bootstrap.php:69 inc/customizer/bootstrap.php:363
 #: inc/customizer/sections/color-scheme.php:89
 msgid "Header"
 msgstr ""
 
-#: inc/customizer/bootstrap.php:71
+#: inc/customizer/bootstrap.php:70
 msgid "Content & Layout"
 msgstr ""
 
-#: inc/customizer/bootstrap.php:72 inc/customizer/bootstrap.php:352
+#: inc/customizer/bootstrap.php:71 inc/customizer/bootstrap.php:371
 #: inc/customizer/sections/color-scheme.php:177
 msgid "Footer"
 msgstr ""
 
-#: inc/customizer/bootstrap.php:113
+#: inc/customizer/bootstrap.php:112
 msgid "Sidebars & Widgets"
 msgstr ""
 
-#: inc/customizer/bootstrap.php:341 inc/customizer/sections/stylekit.php:23
+#: inc/customizer/bootstrap.php:360 inc/customizer/sections/stylekit.php:23
 msgid "Style Kits"
 msgstr ""
 
-#: inc/customizer/bootstrap.php:342
+#: inc/customizer/bootstrap.php:361
 msgid "Fonts"
 msgstr ""
 
-#: inc/customizer/bootstrap.php:343
+#: inc/customizer/bootstrap.php:362
 msgid "Colors"
 msgstr ""
 
-#: inc/customizer/bootstrap.php:345 inc/customizer/sections/general.php:31
+#: inc/customizer/bootstrap.php:364 inc/customizer/sections/general.php:31
 msgid "Logo"
 msgstr ""
 
-#: inc/customizer/bootstrap.php:346
+#: inc/customizer/bootstrap.php:365
 msgid "Main"
 msgstr ""
 
-#: inc/customizer/bootstrap.php:347
+#: inc/customizer/bootstrap.php:366
 msgid "Layout: Blog (Posts Page)"
 msgstr ""
 
-#: inc/customizer/bootstrap.php:348
+#: inc/customizer/bootstrap.php:367
 msgid "Layout: Archives"
 msgstr ""
 
-#: inc/customizer/bootstrap.php:349
+#: inc/customizer/bootstrap.php:368
 msgid "Layout: Search Results"
 msgstr ""
 
-#: inc/customizer/bootstrap.php:350
+#: inc/customizer/bootstrap.php:369
 msgid "Layout: Posts"
 msgstr ""
 
-#: inc/customizer/bootstrap.php:351
+#: inc/customizer/bootstrap.php:370
 msgid "Layout: Pages"
 msgstr ""
 
-#: inc/customizer/bootstrap.php:353 inc/customizer/sections/general.php:92
+#: inc/customizer/bootstrap.php:372 inc/customizer/sections/general.php:92
 msgid "Social Profiles &amp; RSS"
 msgstr ""
 
-#: inc/customizer/bootstrap.php:492
+#: inc/customizer/bootstrap.php:511
 #: inc/customizer/legacy_sections/stylekit.php:32
 #: inc/customizer/sections/stylekit.php:29
 msgid "Upgrade to Make Plus"
@@ -551,103 +562,103 @@ msgstr ""
 msgid "Google Fonts"
 msgstr ""
 
-#: inc/customizer/helpers.php:74
+#: inc/customizer/helpers.php:59
 msgid "Full-width"
 msgstr ""
 
-#: inc/customizer/helpers.php:75
+#: inc/customizer/helpers.php:60
 msgid "Boxed"
 msgstr ""
 
-#: inc/customizer/helpers.php:84
+#: inc/customizer/helpers.php:69
 msgid "Post header"
 msgstr ""
 
-#: inc/customizer/helpers.php:85
+#: inc/customizer/helpers.php:70
 msgid "Thumbnail"
 msgstr ""
 
-#: inc/customizer/helpers.php:96
+#: inc/customizer/helpers.php:81
 msgid "Absolute (%s)"
 msgstr ""
 
-#: inc/customizer/helpers.php:97
+#: inc/customizer/helpers.php:82
 msgid "Relative (1 week ago)"
 msgstr ""
 
-#: inc/customizer/helpers.php:107
+#: inc/customizer/helpers.php:92
 msgid "With avatar"
 msgstr ""
 
-#: inc/customizer/helpers.php:108
+#: inc/customizer/helpers.php:93
 msgid "Without avatar"
 msgstr ""
 
-#: inc/customizer/helpers.php:116
+#: inc/customizer/helpers.php:101
 msgid "No Repeat"
 msgstr ""
 
-#: inc/customizer/helpers.php:118
+#: inc/customizer/helpers.php:103
 msgid "Tile Horizontally"
 msgstr ""
 
-#: inc/customizer/helpers.php:119
+#: inc/customizer/helpers.php:104
 msgid "Tile Vertically"
 msgstr ""
 
-#: inc/customizer/helpers.php:132
+#: inc/customizer/helpers.php:117
 msgid "Center"
 msgstr ""
 
-#: inc/customizer/helpers.php:141
+#: inc/customizer/helpers.php:126
 msgid "Auto"
 msgstr ""
 
-#: inc/customizer/helpers.php:143
+#: inc/customizer/helpers.php:128
 msgid "Contain"
 msgstr ""
 
-#: inc/customizer/helpers.php:149
+#: inc/customizer/helpers.php:134
 msgid "Flipped"
 msgstr ""
 
-#: inc/customizer/helpers.php:154 inc/customizer/helpers.php:176
+#: inc/customizer/helpers.php:139 inc/customizer/helpers.php:161
 msgid "Traditional"
 msgstr ""
 
-#: inc/customizer/helpers.php:155 inc/customizer/helpers.php:177
+#: inc/customizer/helpers.php:140 inc/customizer/helpers.php:162
 msgid "Centered"
 msgstr ""
 
-#: inc/customizer/helpers.php:156
+#: inc/customizer/helpers.php:141
 msgid "Navigation Below"
 msgstr ""
 
-#: inc/customizer/helpers.php:196
+#: inc/customizer/helpers.php:181
 msgid "Top"
 msgstr ""
 
-#: inc/customizer/helpers.php:197
+#: inc/customizer/helpers.php:182
 msgid "Before content"
 msgstr ""
 
-#: inc/customizer/helpers.php:198
+#: inc/customizer/helpers.php:183
 msgid "Post footer"
 msgstr ""
 
-#: inc/customizer/helpers.php:207
+#: inc/customizer/helpers.php:192
 msgid "With icon"
 msgstr ""
 
-#: inc/customizer/helpers.php:208
+#: inc/customizer/helpers.php:193
 msgid "With text"
 msgstr ""
 
-#: inc/customizer/helpers.php:326 inc/customizer/legacy_sections/social.php:261
+#: inc/customizer/helpers.php:311 inc/customizer/legacy_sections/social.php:261
 msgid "Email"
 msgstr ""
 
-#: inc/customizer/helpers.php:330
+#: inc/customizer/helpers.php:315
 msgid "RSS"
 msgstr ""
 
@@ -1334,19 +1345,19 @@ msgstr ""
 msgid "Blog (Posts Page)"
 msgstr ""
 
-#: inc/customizer/sections/content-layout.php:253 inc/extras.php:360
+#: inc/customizer/sections/content-layout.php:253 inc/extras.php:400
 msgid "Archives"
 msgstr ""
 
-#: inc/customizer/sections/content-layout.php:434 inc/extras.php:361
+#: inc/customizer/sections/content-layout.php:434 inc/extras.php:401
 msgid "Search Results"
 msgstr ""
 
-#: inc/customizer/sections/content-layout.php:615 inc/extras.php:362
+#: inc/customizer/sections/content-layout.php:615 inc/extras.php:402
 msgid "Posts"
 msgstr ""
 
-#: inc/customizer/sections/content-layout.php:780 inc/extras.php:363
+#: inc/customizer/sections/content-layout.php:780 inc/extras.php:403
 msgid "Pages"
 msgstr ""
 
@@ -1568,37 +1579,26 @@ msgstr ""
 msgid "Page %s"
 msgstr ""
 
-#: inc/extras.php:320
+#: inc/extras.php:360
 msgid ""
 "This widget area is currently disabled. Enable it in the \"Footer\" panel "
 "of the Customizer."
 msgstr ""
 
-#: inc/extras.php:331
+#: inc/extras.php:371
 msgid ""
 "This widget area is currently disabled. Enable it in the \"Content & "
 "Layout\" panel of the Customizer."
 msgstr ""
 
-#: inc/extras.php:336
+#: inc/extras.php:376
 msgid ""
 "This widget area is currently enabled for the following views: %s. Change "
 "this in the \"Content & Layout\" panel of the Customizer."
 msgstr ""
 
-#: inc/extras.php:359
+#: inc/extras.php:399
 msgid "Blog (Post Page)"
-msgstr ""
-
-#: inc/extras.php:427
-msgid "The uploaded package appears to be a plugin. PLEASE INSTALL AS A PLUGIN."
-msgstr ""
-
-#: inc/extras.php:739
-msgid ""
-"Please <a href=\"%1$s\"><em>update to Make Plus 1.4.0 or later</em></a> for "
-"compatibility with your version of Make. <a href=\"#\" data-nonce=\"%2$s\" "
-"class=\"%3$s\">hide</a>"
 msgstr ""
 
 #: inc/formatting/formatting.php:178
@@ -2001,32 +2001,32 @@ msgctxt "font style"
 msgid "Monospaced"
 msgstr ""
 
-#: inc/customizer/helpers.php:167
+#: inc/customizer/helpers.php:152
 msgctxt "footer widget area number"
 msgid "0"
 msgstr ""
 
-#: inc/customizer/helpers.php:168
+#: inc/customizer/helpers.php:153
 msgctxt "footer widget area number"
 msgid "1"
 msgstr ""
 
-#: inc/customizer/helpers.php:169
+#: inc/customizer/helpers.php:154
 msgctxt "footer widget area number"
 msgid "2"
 msgstr ""
 
-#: inc/customizer/helpers.php:170
+#: inc/customizer/helpers.php:155
 msgctxt "footer widget area number"
 msgid "3"
 msgstr ""
 
-#: inc/customizer/helpers.php:171
+#: inc/customizer/helpers.php:156
 msgctxt "footer widget area number"
 msgid "4"
 msgstr ""
 
-#: inc/extras.php:337
+#: inc/extras.php:377
 msgctxt "list item separator"
 msgid ", "
 msgstr ""
