@@ -454,7 +454,7 @@ jQuery( document ).ready( function( $ ) {
 			}
 
 			// Maybe adjust the bottom bar.
-			if ( ( ! fixedBottom || resize ) &&
+			if ( ( ! fixedBottom || ( resize && advanced ) ) &&
 					// +[n] for the border around the .wp-editor-container.
 					( windowPos + heights.windowHeight ) <= ( editorPos + editorHeight + heights.bottomHeight + heights.statusBarHeight + borderWidth ) ) {
 
@@ -638,6 +638,12 @@ jQuery( document ).ready( function( $ ) {
 				}
 
 				adjust();
+			}).on( 'wp-window-resized.editor-expand', function() {
+				if ( mceEditor && ! mceEditor.isHidden() ) {
+					mceEditor.execCommand( 'wpAutoResize' );
+				} else {
+					textEditorResize();
+				}
 			});
 
 		$textEditor.on( 'focus.editor-expand input.editor-expand propertychange.editor-expand', textEditorResize );
@@ -661,6 +667,8 @@ jQuery( document ).ready( function( $ ) {
 		}
 
 		adjust();
+
+		$document.trigger( 'editor-expand-on' );
 	}
 
 	function off() {
@@ -705,6 +713,8 @@ jQuery( document ).ready( function( $ ) {
 		if ( height ) {
 			$textEditor.height( height );
 		}
+
+		$document.trigger( 'editor-expand-off' );
 	}
 
 	// Start on load
