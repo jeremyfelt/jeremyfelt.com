@@ -140,6 +140,7 @@ var oneApp = oneApp || {}, $oneApp = $oneApp || jQuery(oneApp);
 			// Create the media frame.
 			frame = wp.media.frames.frame = wp.media({
 				title: $this.data('title'),
+				className: 'media-frame ttfmake-builder-uploader',
 				button: {
 					text: $this.data('buttonText')
 				},

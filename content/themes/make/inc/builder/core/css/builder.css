@@ -685,10 +685,17 @@
 /*---------------------------------------------------------
  Media Modal (builder.css)
 -------------------------------------------------------- */
-.media-frame a.ttfmake-remove-image-from-modal {
+.ttfmake-remove-current-image {
+	display: none;
+}
+.ttfmake-builder-uploader .ttfmake-remove-current-image {
+	display: block;
+	float: left;
+}
+.ttfmake-builder-uploader .ttfmake-remove-current-image a.ttfmake-remove-image-from-modal {
 	color: #bc0b0b;
 	text-decoration: none; /*reset*/
 }
-.media-frame a.ttfmake-remove-image-from-modal:hover {
+.ttfmake-builder-uploader .ttfmake-remove-current-image a.ttfmake-remove-image-from-modal:hover {
 	color: red;
 }

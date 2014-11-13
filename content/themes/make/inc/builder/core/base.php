@@ -547,10 +547,12 @@ class TTFMAKE_Builder_Base {
 		// Print the template for removing images
 		?>
 			<script type="text/html" id="tmpl-ttfmake-remove-image">
-				<h3><?php _e( 'Current image', 'make' ); ?></h3>
-				<a href="#" class="ttfmake-remove-image-from-modal">
-					<?php _e( 'Remove Current Image', 'make' ); ?>
-				</a>
+				<div class="ttfmake-remove-current-image">
+					<h3><?php _e( 'Current image', 'make' ); ?></h3>
+					<a href="#" class="ttfmake-remove-image-from-modal">
+						<?php _e( 'Remove Current Image', 'make' ); ?>
+					</a>
+				</div>
 			</script>
 		<?php
 	}

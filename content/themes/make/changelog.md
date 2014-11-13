@@ -1,3 +1,8 @@
+## 1.4.4
+
+* Fixed inaccessible Attachment Display Settings panel when editing pages
+* Added Dutch translation
+
 ## 1.4.3
 
 * Improved text sanitization in some instances to allow more HTML tags and attributes
