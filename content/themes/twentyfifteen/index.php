@@ -24,7 +24,7 @@ get_header(); ?>
 
 			<?php if ( is_home() && ! is_front_page() ) : ?>
 				<header>
-					<h1 class="page-title screen-reader-text"><?php echo esc_html( get_the_title( get_option( 'page_for_posts' ) ) ); ?></h1>
+					<h1 class="page-title screen-reader-text"><?php single_post_title(); ?></h1>
 				</header>
 			<?php endif; ?>
 
@@ -42,7 +42,9 @@ get_header(); ?>
 
 			<?php
 				the_pagination( array(
-					'before_page_number' => '<span class="meta-nav">' . __( 'Page', 'twentyfifteen' ) . '</span>',
+					'prev_text'          => __( 'Previous page', 'twentyfifteen' ),
+					'next_text'          => __( 'Next page', 'twentyfifteen' ),
+					'before_page_number' => '<span class="meta-nav screen-reader-text">' . __( 'Page', 'twentyfifteen' ) . ' </span>',
 				) );
 			?>
 
