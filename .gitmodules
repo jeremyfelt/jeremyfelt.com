@@ -4,9 +4,6 @@
 [submodule "tweets"]
 	path = tweets
 	url = git@github.com:jeremyfelt/tweets.jeremyfelt.com.git
-[submodule "content/themes/snap"]
-	path = content/themes/snap
-	url = git@bitbucket.org:jeremyfelt/snap.git
 [submodule "content/plugins/frequent-auto-update-scheduler"]
 	path = content/plugins/frequent-auto-update-scheduler
 	url = git@github.com:jeremyfelt/Frequent-Auto-Update-Scheduler.git
