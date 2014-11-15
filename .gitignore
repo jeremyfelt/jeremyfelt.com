@@ -10,4 +10,3 @@ content/images
 *.sql
 *.sql.gz
 !/database/init.sql
-content/themes/basis
