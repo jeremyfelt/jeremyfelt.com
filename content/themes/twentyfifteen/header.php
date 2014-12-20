@@ -2,7 +2,7 @@
 /**
  * The template for displaying the header
  *
- * Displays all of the &lt;head&gt; section and everything up until the "site-content" div.
+ * Displays all of the head element and everything up until the "site-content" div.
  *
  * @package WordPress
  * @subpackage Twenty_Fifteen
@@ -24,7 +24,7 @@
 
 <body <?php body_class(); ?>>
 <div id="page" class="hfeed site">
-	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'twentyfifteen' ); ?></a>
+	<a class="skip-link screen-reader-text" href="#content"><?php _e( 'Skip to content', 'twentyfifteen' ); ?></a>
 
 	<div id="sidebar" class="sidebar">
 		<header id="masthead" class="site-header" role="banner">
@@ -37,11 +37,11 @@
 					<?php endif;
 
 					$description = get_bloginfo( 'description', 'display' );
-					if ( ! empty( $description ) || is_customize_preview() ) : ?>
-						<p class="site-description"><?php echo esc_html( $description ); ?></p>
+					if ( $description || is_customize_preview() ) : ?>
+						<p class="site-description"><?php echo $description; ?></p>
 					<?php endif;
 				?>
-				<button class="secondary-toggle"><?php esc_html_e( 'Menu and widgets', 'twentyfifteen' ); ?></button>
+				<button class="secondary-toggle"><?php _e( 'Menu and widgets', 'twentyfifteen' ); ?></button>
 			</div><!-- .site-branding -->
 		</header><!-- .site-header -->
 
