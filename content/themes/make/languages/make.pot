@@ -2,9 +2,9 @@
 # This file is distributed under the GNU General Public License v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Make 1.4.4\n"
-"Report-Msgid-Bugs-To: https://thethemefoundry.com/support\n"
-"POT-Creation-Date: 2014-11-07 21:44:43+00:00\n"
+"Project-Id-Version: Make 1.4.7\n"
+"Report-Msgid-Bugs-To: https://thethemefoundry.com/support/\n"
+"POT-Creation-Date: 2014-12-22 20:35:22+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -78,7 +78,7 @@ msgid "Delete the section?"
 msgstr ""
 
 #: inc/builder/core/base.php:432 inc/builder/core/configuration-helpers.php:96
-#: inc/builder/sections/builder-templates/text.php:131
+#: inc/builder/sections/builder-templates/text.php:142
 msgid "Set image"
 msgstr ""
 
@@ -148,7 +148,7 @@ msgstr ""
 msgid "Delete section"
 msgstr ""
 
-#: inc/builder/core/templates/section-header.php:67
+#: inc/builder/core/templates/section-header.php:84
 msgid "Click to toggle"
 msgstr ""
 
@@ -171,11 +171,11 @@ msgstr ""
 msgid "Delete slide"
 msgstr ""
 
-#: inc/builder/sections/builder-templates/banner-slide.php:67
+#: inc/builder/sections/builder-templates/banner-slide.php:74
 msgid "Content position"
 msgstr ""
 
-#: inc/builder/sections/builder-templates/banner-slide.php:70
+#: inc/builder/sections/builder-templates/banner-slide.php:77
 #: inc/builder/sections/section-definitions.php:208
 #: inc/builder/sections/section-definitions.php:343
 #: inc/builder/sections/section-definitions.php:354
@@ -185,22 +185,22 @@ msgstr ""
 msgid "None"
 msgstr ""
 
-#: inc/builder/sections/builder-templates/banner-slide.php:71
+#: inc/builder/sections/builder-templates/banner-slide.php:78
 #: inc/customizer/helpers.php:116 inc/customizer/helpers.php:146
 msgid "Left"
 msgstr ""
 
-#: inc/builder/sections/builder-templates/banner-slide.php:72
+#: inc/builder/sections/builder-templates/banner-slide.php:79
 #: inc/customizer/helpers.php:118 inc/customizer/helpers.php:147
 msgid "Right"
 msgstr ""
 
-#: inc/builder/sections/builder-templates/banner-slide.php:77
+#: inc/builder/sections/builder-templates/banner-slide.php:84
 #: inc/builder/sections/section-definitions.php:375
 msgid "Darken background to improve readability"
 msgstr ""
 
-#: inc/builder/sections/builder-templates/banner-slide.php:83
+#: inc/builder/sections/builder-templates/banner-slide.php:90
 #: inc/builder/sections/section-definitions.php:391
 msgid "Background color"
 msgstr ""
@@ -233,11 +233,11 @@ msgstr ""
 msgid "Delete item"
 msgstr ""
 
-#: inc/builder/sections/builder-templates/gallery-item.php:65
+#: inc/builder/sections/builder-templates/gallery-item.php:72
 msgid "Title"
 msgstr ""
 
-#: inc/builder/sections/builder-templates/gallery-item.php:72
+#: inc/builder/sections/builder-templates/gallery-item.php:79
 msgid "Item link URL"
 msgstr ""
 
@@ -251,7 +251,7 @@ msgstr ""
 
 #: inc/builder/sections/builder-templates/text.php:81
 #: inc/builder/sections/builder-templates/text.php:84
-#: inc/builder/sections/builder-templates/text.php:149
+#: inc/builder/sections/builder-templates/text.php:160
 msgid "Configure column"
 msgstr ""
 
@@ -259,15 +259,15 @@ msgstr ""
 msgid "Edit text column"
 msgstr ""
 
-#: inc/builder/sections/builder-templates/text.php:108
+#: inc/builder/sections/builder-templates/text.php:119
 msgid "Drag-and-drop this column into place"
 msgstr ""
 
-#: inc/builder/sections/builder-templates/text.php:157
+#: inc/builder/sections/builder-templates/text.php:175
 msgid "Enter column title"
 msgstr ""
 
-#: inc/builder/sections/builder-templates/text.php:164
+#: inc/builder/sections/builder-templates/text.php:182
 msgid "Image link URL"
 msgstr ""
 
@@ -414,89 +414,89 @@ msgstr ""
 msgid "The uploaded package appears to be a plugin. PLEASE INSTALL AS A PLUGIN."
 msgstr ""
 
-#: inc/compatibility.php:344
+#: inc/compatibility.php:350
 msgid ""
 "Please <a href=\"%1$s\"><em>update to Make Plus 1.4.0 or later</em></a> for "
 "compatibility with your version of Make. <a href=\"#\" data-nonce=\"%2$s\" "
 "class=\"%3$s\">hide</a>"
 msgstr ""
 
-#: inc/customizer/bootstrap.php:66 inc/customizer/bootstrap.php:359
+#: inc/customizer/bootstrap.php:67 inc/customizer/bootstrap.php:377
 #: inc/customizer/sections/color-scheme.php:24
 msgid "General"
 msgstr ""
 
-#: inc/customizer/bootstrap.php:67
+#: inc/customizer/bootstrap.php:68
 msgid "Typography"
 msgstr ""
 
-#: inc/customizer/bootstrap.php:68
+#: inc/customizer/bootstrap.php:69
 msgid "Color Scheme"
 msgstr ""
 
-#: inc/customizer/bootstrap.php:69 inc/customizer/bootstrap.php:363
+#: inc/customizer/bootstrap.php:70 inc/customizer/bootstrap.php:381
 #: inc/customizer/sections/color-scheme.php:89
 msgid "Header"
 msgstr ""
 
-#: inc/customizer/bootstrap.php:70
+#: inc/customizer/bootstrap.php:71
 msgid "Content & Layout"
 msgstr ""
 
-#: inc/customizer/bootstrap.php:71 inc/customizer/bootstrap.php:371
+#: inc/customizer/bootstrap.php:72 inc/customizer/bootstrap.php:389
 #: inc/customizer/sections/color-scheme.php:177
 msgid "Footer"
 msgstr ""
 
-#: inc/customizer/bootstrap.php:112
+#: inc/customizer/bootstrap.php:120
 msgid "Sidebars & Widgets"
 msgstr ""
 
-#: inc/customizer/bootstrap.php:360 inc/customizer/sections/stylekit.php:23
+#: inc/customizer/bootstrap.php:378 inc/customizer/sections/stylekit.php:23
 msgid "Style Kits"
 msgstr ""
 
-#: inc/customizer/bootstrap.php:361
+#: inc/customizer/bootstrap.php:379
 msgid "Fonts"
 msgstr ""
 
-#: inc/customizer/bootstrap.php:362
+#: inc/customizer/bootstrap.php:380
 msgid "Colors"
 msgstr ""
 
-#: inc/customizer/bootstrap.php:364 inc/customizer/sections/general.php:31
+#: inc/customizer/bootstrap.php:382 inc/customizer/sections/general.php:31
 msgid "Logo"
 msgstr ""
 
-#: inc/customizer/bootstrap.php:365
+#: inc/customizer/bootstrap.php:383
 msgid "Main"
 msgstr ""
 
-#: inc/customizer/bootstrap.php:366
+#: inc/customizer/bootstrap.php:384
 msgid "Layout: Blog (Posts Page)"
 msgstr ""
 
-#: inc/customizer/bootstrap.php:367
+#: inc/customizer/bootstrap.php:385
 msgid "Layout: Archives"
 msgstr ""
 
-#: inc/customizer/bootstrap.php:368
+#: inc/customizer/bootstrap.php:386
 msgid "Layout: Search Results"
 msgstr ""
 
-#: inc/customizer/bootstrap.php:369
+#: inc/customizer/bootstrap.php:387
 msgid "Layout: Posts"
 msgstr ""
 
-#: inc/customizer/bootstrap.php:370
+#: inc/customizer/bootstrap.php:388
 msgid "Layout: Pages"
 msgstr ""
 
-#: inc/customizer/bootstrap.php:372 inc/customizer/sections/general.php:92
+#: inc/customizer/bootstrap.php:390 inc/customizer/sections/general.php:92
 msgid "Social Profiles &amp; RSS"
 msgstr ""
 
-#: inc/customizer/bootstrap.php:511
+#: inc/customizer/bootstrap.php:529
 #: inc/customizer/legacy_sections/stylekit.php:32
 #: inc/customizer/sections/stylekit.php:29
 msgid "Upgrade to Make Plus"
@@ -510,55 +510,59 @@ msgstr ""
 msgid "Featured"
 msgstr ""
 
-#: inc/customizer/helpers-fonts.php:556
+#: inc/customizer/helpers-fonts.php:573
 msgid "All"
 msgstr ""
 
-#: inc/customizer/helpers-fonts.php:557
+#: inc/customizer/helpers-fonts.php:574
 msgid "Cyrillic"
 msgstr ""
 
-#: inc/customizer/helpers-fonts.php:558
+#: inc/customizer/helpers-fonts.php:575
 msgid "Cyrillic Extended"
 msgstr ""
 
-#: inc/customizer/helpers-fonts.php:559
+#: inc/customizer/helpers-fonts.php:576
 msgid "Devanagari"
 msgstr ""
 
-#: inc/customizer/helpers-fonts.php:560
+#: inc/customizer/helpers-fonts.php:577
 msgid "Greek"
 msgstr ""
 
-#: inc/customizer/helpers-fonts.php:561
+#: inc/customizer/helpers-fonts.php:578
 msgid "Greek Extended"
 msgstr ""
 
-#: inc/customizer/helpers-fonts.php:562
+#: inc/customizer/helpers-fonts.php:579
 msgid "Khmer"
 msgstr ""
 
-#: inc/customizer/helpers-fonts.php:563
+#: inc/customizer/helpers-fonts.php:580
 msgid "Latin"
 msgstr ""
 
-#: inc/customizer/helpers-fonts.php:564
+#: inc/customizer/helpers-fonts.php:581
 msgid "Latin Extended"
 msgstr ""
 
-#: inc/customizer/helpers-fonts.php:565
+#: inc/customizer/helpers-fonts.php:582
+msgid "Telugu"
+msgstr ""
+
+#: inc/customizer/helpers-fonts.php:583
 msgid "Vietnamese"
 msgstr ""
 
-#: inc/customizer/helpers-fonts.php:610
+#: inc/customizer/helpers-fonts.php:628
 msgid "Loading&hellip;"
 msgstr ""
 
-#: inc/customizer/helpers-fonts.php:672
+#: inc/customizer/helpers-fonts.php:690
 msgid "Standard Fonts"
 msgstr ""
 
-#: inc/customizer/helpers-fonts.php:674
+#: inc/customizer/helpers-fonts.php:692
 msgid "Google Fonts"
 msgstr ""
 
@@ -1781,19 +1785,19 @@ msgstr ""
 msgid "Choose a line style"
 msgstr ""
 
-#: inc/formatting/formatting.php:388
+#: inc/formatting/formatting.php:399
 msgid "Big"
 msgstr ""
 
-#: inc/formatting/formatting.php:393
+#: inc/formatting/formatting.php:404
 msgid "Small"
 msgstr ""
 
-#: inc/formatting/formatting.php:398
+#: inc/formatting/formatting.php:409
 msgid "Citation"
 msgstr ""
 
-#: inc/formatting/formatting.php:403
+#: inc/formatting/formatting.php:414
 msgid "Testimonial"
 msgstr ""
 
@@ -1855,10 +1859,6 @@ msgstr ""
 msgid ""
 "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps "
 "searching can help."
-msgstr ""
-
-#: partials/entry-date.php:18
-msgid "%s ago"
 msgstr ""
 
 #: partials/entry-pagination.php:12
@@ -1934,7 +1934,7 @@ msgid "Make"
 msgstr ""
 
 #. Theme URI of the plugin/theme
-msgid "https://thethemefoundry.com/wordpress-themes/make/"
+msgid "https://thethemefoundry.com/make/"
 msgstr ""
 
 #. Description of the plugin/theme
@@ -1986,17 +1986,17 @@ msgctxt "section name"
 msgid "Gallery"
 msgstr ""
 
-#: inc/customizer/helpers-fonts.php:706
+#: inc/customizer/helpers-fonts.php:724
 msgctxt "font style"
 msgid "Serif"
 msgstr ""
 
-#: inc/customizer/helpers-fonts.php:710
+#: inc/customizer/helpers-fonts.php:728
 msgctxt "font style"
 msgid "Sans Serif"
 msgstr ""
 
-#: inc/customizer/helpers-fonts.php:714
+#: inc/customizer/helpers-fonts.php:732
 msgctxt "font style"
 msgid "Monospaced"
 msgstr ""
@@ -2144,6 +2144,11 @@ msgstr ""
 #: partials/entry-author.php:26
 msgctxt "author byline"
 msgid "by %s"
+msgstr ""
+
+#: partials/entry-date.php:13
+msgctxt "time period"
+msgid "%s ago"
 msgstr ""
 
 #: partials/footer-credit.php:27

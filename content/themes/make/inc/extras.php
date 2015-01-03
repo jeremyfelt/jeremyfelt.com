@@ -564,3 +564,83 @@ function ttfmake_is_builder_page( $post_id = 0 ) {
 	return apply_filters( 'make_is_builder_page', $is_builder_page, $post_id );
 }
 endif;
+
+if ( ! function_exists( 'ttfmake_builder_css' ) ) :
+/**
+ * Trigger an action hook for each section on a Builder page for the purpose
+ * of adding section-specific CSS rules to the document head.
+ *
+ * @since 1.4.5
+ *
+ * @return void
+ */
+function ttfmake_builder_css() {
+	if ( ttfmake_is_builder_page() ) {
+		$sections = ttfmake_get_section_data( get_the_ID() );
+
+		if ( ! empty( $sections ) ) {
+			foreach ( $sections as $id => $data ) {
+				if ( isset( $data['section-type'] ) ) {
+					/**
+					 * Allow section-specific CSS rules to be added to the document head of a Builder page.
+					 *
+					 * @since 1.4.5
+					 *
+					 * @param array    $data    The Builder section's data.
+					 * @param int      $id      The ID of the Builder section.
+					 */
+					do_action( 'make_builder_' . $data['section-type'] . '_css', $data, $id );
+				}
+			}
+		}
+	}
+}
+endif;
+
+add_action( 'make_css', 'ttfmake_builder_css' );
+
+if ( ! function_exists( 'ttfmake_builder_banner_css' ) ) :
+/**
+ * Add frontend CSS rules for Banner sections based on certain section options.
+ *
+ * @since 1.4.5
+ *
+ * @param array    $data    The banner's section data.
+ * @param int      $id      The banner's section ID.
+ *
+ * @return void
+ */
+function ttfmake_builder_banner_css( $data, $id ) {
+	$responsive = ( isset( $data['responsive'] ) ) ? $data['responsive'] : 'balanced';
+	$slider_height = absint( $data['height'] );
+	if ( 0 === $slider_height ) {
+		$slider_height = 600;
+	}
+	$slider_ratio = ( $slider_height / 960 ) * 100;
+
+	if ( 'aspect' === $responsive ) {
+		ttfmake_get_css()->add( array(
+			'selectors'    => array( '#builder-section-' . esc_attr( $id ) . ' .builder-banner-slide' ),
+			'declarations' => array(
+				'padding-bottom' => $slider_ratio . '%'
+			),
+		) );
+	} else {
+		ttfmake_get_css()->add( array(
+			'selectors'    => array( '#builder-section-' . esc_attr( $id ) . ' .builder-banner-slide' ),
+			'declarations' => array(
+				'padding-bottom' => $slider_height . 'px'
+			),
+		) );
+		ttfmake_get_css()->add( array(
+			'selectors'    => array( '#builder-section-' . esc_attr( $id ) . ' .builder-banner-slide' ),
+			'declarations' => array(
+				'padding-bottom' => $slider_ratio . '%'
+			),
+			'media'        => 'screen and (min-width: 600px) and (max-width: 960px)'
+		) );
+	}
+}
+endif;
+
+add_action( 'make_builder_banner_css', 'ttfmake_builder_banner_css', 10, 2 );

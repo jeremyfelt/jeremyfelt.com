@@ -206,7 +206,13 @@ function ttfmake_customizer_define_colorscheme_sections( $sections ) {
 		),
 	);
 
-	// Filter the definitions
+	/**
+	 * Filter the definitions for the controls in the Color Scheme panel of the Customizer.
+	 *
+	 * @since 1.3.0.
+	 *
+	 * @param array    $colorscheme_sections    The array of definitions.
+	 */
 	$colorscheme_sections = apply_filters( 'make_customizer_colorscheme_sections', $colorscheme_sections );
 
 	// Merge with master array

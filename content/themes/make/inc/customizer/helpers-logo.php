@@ -86,20 +86,31 @@ class TTFMAKE_Logo {
 		}
 
 		global $wpdb;
+		$attachment_id = 0;
 
-		// First try this
-		if ( preg_match( '#\.[a-zA-Z0-9]+$#', $url ) ) {
-			$id = $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE post_type = 'attachment' " . "AND guid = %s", esc_url_raw( $url ) ) );
-
-			if ( ! empty( $id ) ) {
-				return absint( $id );
+		// Function introduced in 4.0
+		if ( function_exists( 'attachment_url_to_postid' ) ) {
+			$attachment_id = absint( attachment_url_to_postid( $url ) );
+			if ( 0 !== $attachment_id ) {
+				return $attachment_id;
 			}
 		}
 
-		$upload_dir_paths = wp_upload_dir();
-		$attachment_id = 0;
+		// First try this
+		if ( preg_match( '#\.[a-zA-Z0-9]+$#', $url ) ) {
+			$sql = $wpdb->prepare(
+				"SELECT ID FROM $wpdb->posts WHERE post_type = 'attachment' AND guid = %s",
+				esc_url_raw( $url )
+			);
+			$attachment_id = absint( $wpdb->get_var( $sql ) );
+
+			if ( 0 !== $attachment_id ) {
+				return $attachment_id;
+			}
+		}
 
 		// Then try this
+		$upload_dir_paths = wp_upload_dir();
 		if ( false !== strpos( $url, $upload_dir_paths['baseurl'] ) ) {
 			// If this is the URL of an auto-generated thumbnail, get the URL of the original image
 			$url = preg_replace( '/-\d+x\d+(?=\.(jpg|jpeg|png|gif)$)/i', '', $url );
@@ -108,7 +119,11 @@ class TTFMAKE_Logo {
 			$url = str_replace( $upload_dir_paths['baseurl'] . '/', '', $url );
 
 			// Finally, run a custom database query to get the attachment ID from the modified attachment URL
-			$attachment_id = $wpdb->get_var( $wpdb->prepare( "SELECT wposts.ID FROM $wpdb->posts wposts, $wpdb->postmeta wpostmeta WHERE wposts.ID = wpostmeta.post_id AND wpostmeta.meta_key = '_wp_attached_file' AND wpostmeta.meta_value = '%s' AND wposts.post_type = 'attachment'", esc_url_raw( $url ) ) );
+			$sql = $wpdb->prepare(
+				"SELECT wposts.ID FROM $wpdb->posts wposts, $wpdb->postmeta wpostmeta WHERE wposts.ID = wpostmeta.post_id AND wpostmeta.meta_key = '_wp_attached_file' AND wpostmeta.meta_value = '%s' AND wposts.post_type = 'attachment'",
+				esc_url_raw( $url )
+			);
+			$attachment_id = absint( $wpdb->get_var( $sql ) );
 		}
 
 		return $attachment_id;
@@ -297,7 +312,18 @@ class TTFMAKE_Logo {
 			}
 		}
 
-		// Allow logo settings to be overridden via filter
+		/**
+		 * Filter the URL and dimensions of the custom logo.
+		 *
+		 * This filter may be useful if you encounter problems getting your custom
+		 * logo to appear. Note, however, that using this filter will hard-code the logo
+		 * information and settings in the Logo interface in the Customizer won't be
+		 * reflected.
+		 *
+		 * @since 1.0.0.
+		 *
+		 * @param array    $logo_information    The array of information.
+		 */
 		$this->logo_information = apply_filters( 'ttfmake_custom_logo_information', $this->logo_information );
 
 		return $this->logo_information;
@@ -311,6 +337,13 @@ class TTFMAKE_Logo {
 	 * @return void
 	 */
 	function print_logo_css() {
+		/**
+		 * Filter the maximum allowable width for a custom logo.
+		 *
+		 * @since 1.0.0.
+		 *
+		 * @param string|int    $width    The maximum width, in pixels.
+		 */
 		$size = apply_filters( 'ttfmake_custom_logo_max_width', '960' );
 
 		// Grab the logo information

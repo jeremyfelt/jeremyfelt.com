@@ -6,7 +6,7 @@
 /**
  * The current version of the theme.
  */
-define( 'TTFMAKE_VERSION', '1.4.4' );
+define( 'TTFMAKE_VERSION', '1.4.7' );
 
 /**
  * The suffix to use for scripts.
@@ -566,6 +566,6 @@ add_action( 'customize_controls_print_styles', 'ttfmake_plus_styles', 20 );
  * @return string                   The link.
  */
 function ttfmake_get_plus_link( $deprecated ) {
-	$url = 'https://thethemefoundry.com/wordpress-themes/make/#make-table';
+	$url = 'https://thethemefoundry.com/make-buy/';
 	return esc_url( $url );
 }

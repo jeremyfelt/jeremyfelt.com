@@ -155,7 +155,13 @@ function ttfmake_customizer_define_header_sections( $sections ) {
 		),
 	);
 
-	// Filter the definitions
+	/**
+	 * Filter the definitions for the controls in the Header panel of the Customizer.
+	 *
+	 * @since 1.3.0.
+	 *
+	 * @param array    $header_sections    The array of definitions.
+	 */
 	$header_sections = apply_filters( 'make_customizer_header_sections', $header_sections );
 
 	// Merge with master array

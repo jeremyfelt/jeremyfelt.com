@@ -93,9 +93,7 @@ var oneApp = oneApp || {}, $oneApp = $oneApp || jQuery(oneApp);
 			$selector = $('.ttfmake-gallery-background-color');
 		}
 
-		$selector.wpColorPicker({
-			hide: false
-		});
+		$selector.wpColorPicker();
 	};
 
 	// Initialize the sortables

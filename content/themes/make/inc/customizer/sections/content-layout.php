@@ -934,7 +934,13 @@ function ttfmake_customizer_define_contentlayout_sections( $sections ) {
 		),
 	);
 
-	// Filter the definitions
+	/**
+	 * Filter the definitions for the controls in the Content & Layout panel of the Customizer.
+	 *
+	 * @since 1.3.0.
+	 *
+	 * @param array    $contentlayout_sections    The array of definitions.
+	 */
 	$contentlayout_sections = apply_filters( 'make_customizer_contentlayout_sections', $contentlayout_sections );
 
 	// Merge with master array
