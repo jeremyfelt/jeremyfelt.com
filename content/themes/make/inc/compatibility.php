@@ -176,11 +176,7 @@ if ( ! function_exists( 'ttfmake_customizer_get_key_conversions' ) ) :
  * @return array    The list of key migration sets.
  */
 function ttfmake_customizer_get_key_conversions() {
-	/**
-	 * Sets are defined by the theme version they pertain to:
-	 * $theme_version => array
-	 *     $old => $new
-	 */
+	// $new_key => $old_key
 	$conversions = array(
 		'font-family-site-title' => 'font-site-title',
 		'font-family-h1'         => 'font-header',
@@ -203,6 +199,16 @@ function ttfmake_customizer_get_key_conversions() {
 		'font-size-body'         => 'font-body-size',
 	);
 
+	/**
+	 * Filter the array of Customizer option key conversions.
+	 *
+	 * The keys for some Customizer options have changed between versions. This array
+	 * defines each change as $new_key => $old key.
+	 *
+	 * @since 1.3.0.
+	 *
+	 * @param array    $conversions    The array of key conversions.
+	 */
 	return apply_filters( 'make_customizer_key_conversions', $conversions );
 }
 endif;

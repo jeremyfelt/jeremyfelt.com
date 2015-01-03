@@ -180,7 +180,7 @@ function ttfmake_customizer_define_general_sections( $sections ) {
 					'description'  => sprintf(
 						__( 'If you would like to add a social profile that is not listed above, or change the order of the icons, create a custom menu %s.', 'make' ),
 						sprintf(
-							'<a href="' . esc_url( 'https://thethemefoundry.com/tutorials/make/#social-profiles-and-rss' ) . '">%s</a>',
+							'<a href="' . esc_url( 'https://thethemefoundry.com/docs/make-docs/tutorials/set-social-profile-links-using-custom-menu/' ) . '">%s</a>',
 							__( 'as described here', 'make' )
 						)
 					),
@@ -235,7 +235,13 @@ function ttfmake_customizer_define_general_sections( $sections ) {
 	 * This is a built-in section.
 	 */
 
-	// Filter the definitions
+	/**
+	 * Filter the definitions for the controls in the General panel of the Customizer.
+	 *
+	 * @since 1.3.0.
+	 *
+	 * @param array    $general_sections    The array of definitions.
+	 */
 	$general_sections = apply_filters( 'make_customizer_general_sections', $general_sections );
 
 	// Merge with master array

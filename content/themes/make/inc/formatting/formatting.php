@@ -291,11 +291,22 @@ class TTFMAKE_Formatting {
 
 			// Format models
 			$default_uri = trailingslashit( get_template_directory_uri() ) . 'inc/formatting/format-builder/models';
+
+			/**
+			 * Filter the format model definitions and their script locations.
+			 *
+			 * model => URI of the model's script file
+			 *
+			 * @since 1.4.1
+			 *
+			 * @param array    $models    The array of format models.
+			 */
 			$models = apply_filters( 'make_format_builder_format_models', array(
 				'button' => array( 'uri' => $default_uri ),
 				'list'   => array( 'uri' => $default_uri ),
 				'notice' => array( 'uri' => $default_uri ),
 			) );
+
 			foreach ( $models as $model => $atts ) {
 				$handle = 'ttfmake-format-builder-model-' . $model;
 				$url = trailingslashit( $atts['uri'] ) . "$model.js";

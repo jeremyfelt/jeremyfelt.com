@@ -166,7 +166,13 @@ function ttfmake_customizer_define_footer_sections( $sections ) {
 		);
 	}
 
-	// Filter the definitions
+	/**
+	 * Filter the definitions for the controls in the Footer panel of the Customizer.
+	 *
+	 * @since 1.3.0.
+	 *
+	 * @param array    $footer_sections    The array of definitions.
+	 */
 	$footer_sections = apply_filters( 'make_customizer_footer_sections', $footer_sections );
 
 	// Merge with master array

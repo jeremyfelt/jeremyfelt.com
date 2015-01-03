@@ -12,7 +12,7 @@ $action-color: $highlight-color !default;
 
 // global
 
-$body-background: #f3f3f3 !default;
+$body-background: #f1f1f1 !default;
 
 $link: #0074a2 !default;
 $link-focus: lighten( $link, 10% ) !default;
@@ -56,4 +56,3 @@ $adminbar-avatar-frame: lighten( $menu-background, 7% ) !default;
 $adminbar-input-background: lighten( $menu-background, 7% ) !default;
 
 $menu-customizer-text: mix( $base-color, $text-color, 40% ) !default;
-

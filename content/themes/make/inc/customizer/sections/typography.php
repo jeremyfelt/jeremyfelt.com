@@ -354,7 +354,13 @@ function ttfmake_customizer_define_typography_sections( $sections ) {
 		),
 	);
 
-	// Filter the definitions
+	/**
+	 * Filter the definitions for the controls in the Typography panel of the Customizer.
+	 *
+	 * @since 1.3.0.
+	 *
+	 * @param array    $typography_sections    The array of definitions.
+	 */
 	$typography_sections = apply_filters( 'make_customizer_typography_sections', $typography_sections );
 
 	// Merge with master array

@@ -1,0 +1,2061 @@
+# Copyright (C) 2014 The Theme Foundry
+# This file is distributed under the GNU General Public License v2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Make 1.4.0\n"
+"Report-Msgid-Bugs-To: https://thethemefoundry.com/support\n"
+"POT-Creation-Date: 2014-09-23 23:51:34+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2014-12-10 18:01+0200\n"
+"Last-Translator: Lauri SÃ¤de <laurisade@gmail.com>\n"
+"Language-Team: \n"
+"X-Generator: Poedit 1.7.1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: et_ET\n"
+
+#: 404.php:12
+msgid "Oops! That page can&rsquo;t be found."
+msgstr "Ups! Seda lehte ei leita."
+
+#: 404.php:18
+msgid "Maybe try searching this website:"
+msgstr "Proovi otsida seda saiti:"
+
+#: comments.php:24 comments.php:40
+msgid "Comment navigation"
+msgstr "Kommenteerimise navigatsioon"
+
+#: comments.php:49
+msgid "Comments are closed."
+msgstr "Kommenteerne on keelatud."
+
+#: functions.php:145
+msgid "Primary Menu"
+msgstr "PeamenÃ¼Ã¼"
+
+#: functions.php:146
+msgid "Social Profile Links"
+msgstr "SotsiaalvÃµrgustiku lingid"
+
+#: functions.php:147
+msgid "Header Bar Menu"
+msgstr "PÃ¤ise riba menÃ¼Ã¼"
+
+#: functions.php:177
+msgid "Left Sidebar"
+msgstr "Vasak kÃ¼ljeriba"
+
+#: functions.php:186
+msgid "Right Sidebar"
+msgstr "Parem kÃ¼ljeriba"
+
+#: functions.php:195
+msgid "Footer 1"
+msgstr "Jalus 1"
+
+#: functions.php:204
+msgid "Footer 2"
+msgstr "Jalus 2"
+
+#: functions.php:213
+msgid "Footer 3"
+msgstr "Jalus 3"
+
+#: functions.php:222
+msgid "Footer 4"
+msgstr "Jalus 4"
+
+#: inc/builder/core/base.php:98
+msgid "Page Builder"
+msgstr "Lehe kohandaja"
+
+#: inc/builder/core/base.php:129
+msgid "Use Page Builder"
+msgstr "Kasuta lehe kohandajat"
+
+#: inc/builder/core/base.php:424 inc/builder/core/configuration-helpers.php:96
+#: inc/builder/sections/builder-templates/text.php:131
+msgid "Set image"
+msgstr "MÃ¤Ã¤ra pilt"
+
+#: inc/builder/core/base.php:457 inc/builder/core/templates/overlay-tinymce.php:4
+#: inc/builder/sections/builder-templates/banner-slide.php:42
+#: inc/builder/sections/builder-templates/banner-slide.php:44
+#: inc/builder/sections/builder-templates/gallery-item.php:40
+#: inc/builder/sections/builder-templates/gallery-item.php:42
+#: inc/builder/sections/builder-templates/text.php:84
+#: inc/builder/sections/builder-templates/text.php:91
+msgid "Edit content"
+msgstr "Muuda sisu"
+
+#: inc/builder/core/base.php:542
+msgid "Current image"
+msgstr "Praegune pilt"
+
+#: inc/builder/core/base.php:544
+msgid "Remove Current Image"
+msgstr "Eemalda praegune pilt"
+
+#: inc/builder/core/base.php:611
+msgid "Add Media"
+msgstr "Lisa meediafail"
+
+#: inc/builder/core/base.php:704
+msgid "Duplicate this page with %s."
+msgstr "Kopeeri seda lehekÃ¼lge %s."
+
+#: inc/builder/core/base.php:1110
+msgid "Want some ideas?"
+msgstr "Soovid ideid?"
+
+#: inc/builder/core/base.php:1113
+msgid "%s and get a quick start with pre-made designer builder templates."
+msgstr "%s ja saad kiirest alustada koos juba valmis loodud Å¡ablooniga."
+
+#: inc/builder/core/base.php:1118 inc/builder/sections/builder-templates/text.php:27
+#: inc/edit-page.php:96
+msgid "Upgrade to %s"
+msgstr "TÃ¤iusta tooteks %s"
+
+#: inc/builder/core/templates/menu.php:51
+msgid "Products"
+msgstr "Tooted"
+
+#: inc/builder/core/templates/menu.php:63
+msgid "Downloads"
+msgstr "Allalaadimised"
+
+#: inc/builder/core/templates/overlay-configuration.php:4
+#: inc/builder/core/templates/section-header.php:21
+#: inc/builder/core/templates/section-header.php:22
+msgid "Configure section"
+msgstr "Konfigureeri sektsiooni"
+
+#: inc/builder/core/templates/overlay-header.php:6
+msgid "Configuration"
+msgstr "Konfigeerimine"
+
+#: inc/builder/core/templates/overlay-header.php:7
+msgid "Done"
+msgstr "Valmis"
+
+#: inc/builder/core/templates/section-header.php:12
+#: inc/builder/core/templates/section-header.php:13
+msgid "Delete section"
+msgstr "Kustuta sektsioon"
+
+#: inc/builder/core/templates/section-header.php:67
+msgid "Click to toggle"
+msgstr "Kliki avamiseks"
+
+#: inc/builder/sections/builder-templates/banner-slide.php:31
+msgid "Drag-and-drop this slide into place"
+msgstr "Lohista ja vabasta see slaid asukohale"
+
+#: inc/builder/sections/builder-templates/banner-slide.php:35
+msgid "Set banner image"
+msgstr "MÃ¤Ã¤ra bÃ¤nneri pilt"
+
+#: inc/builder/sections/builder-templates/banner-slide.php:37
+#: inc/builder/sections/builder-templates/banner-slide.php:39
+#: inc/builder/sections/builder-templates/banner-slide.php:59
+msgid "Configure slide"
+msgstr "Konfigureeri slaidi"
+
+#: inc/builder/sections/builder-templates/banner-slide.php:47
+#: inc/builder/sections/builder-templates/banner-slide.php:49
+msgid "Delete slide"
+msgstr "Kustuta slaid"
+
+#: inc/builder/sections/builder-templates/banner-slide.php:67
+msgid "Content position"
+msgstr "Sisu asukoht"
+
+#: inc/builder/sections/builder-templates/banner-slide.php:70
+#: inc/builder/sections/section-definitions.php:208
+#: inc/builder/sections/section-definitions.php:343
+#: inc/builder/sections/section-definitions.php:354 inc/customizer/helpers.php:86
+#: inc/customizer/helpers.php:98 inc/customizer/helpers.php:109
+#: inc/customizer/helpers.php:209 inc/gallery-slider/gallery-slider.php:118
+msgid "None"
+msgstr "Mitte midagi"
+
+#: inc/builder/sections/builder-templates/banner-slide.php:71
+#: inc/customizer/helpers.php:131 inc/customizer/helpers.php:161
+msgid "Left"
+msgstr "Vasakul"
+
+#: inc/builder/sections/builder-templates/banner-slide.php:72
+#: inc/customizer/helpers.php:133 inc/customizer/helpers.php:162
+msgid "Right"
+msgstr "Paremal"
+
+#: inc/builder/sections/builder-templates/banner-slide.php:77
+#: inc/builder/sections/section-definitions.php:375
+msgid "Darken background to improve readability"
+msgstr "Tumenda tausta, et lugemist parandada"
+
+#: inc/builder/sections/builder-templates/banner-slide.php:83
+#: inc/builder/sections/section-definitions.php:391
+msgid "Background color"
+msgstr "Tausta vÃ¤rv"
+
+#: inc/builder/sections/builder-templates/banner.php:29
+msgid "Add new slide"
+msgstr "Lisa uus slaid"
+
+#: inc/builder/sections/builder-templates/banner.php:32
+#: inc/builder/sections/builder-templates/gallery.php:34
+msgid "Add Item"
+msgstr "Lisa objekt"
+
+#: inc/builder/sections/builder-templates/gallery-item.php:29
+msgid "Drag-and-drop this item into place"
+msgstr "Lohista ja vabasta see objekt asukohale"
+
+#: inc/builder/sections/builder-templates/gallery-item.php:33
+msgid "Set gallery image"
+msgstr "MÃ¤Ã¤ra galerii pildid"
+
+#: inc/builder/sections/builder-templates/gallery-item.php:35
+#: inc/builder/sections/builder-templates/gallery-item.php:37
+#: inc/builder/sections/builder-templates/gallery-item.php:57
+msgid "Configure item"
+msgstr "Konfigureeri objekti"
+
+#: inc/builder/sections/builder-templates/gallery-item.php:45
+#: inc/builder/sections/builder-templates/gallery-item.php:47
+msgid "Delete item"
+msgstr "Kustuta objekt"
+
+#: inc/builder/sections/builder-templates/gallery-item.php:65
+msgid "Title"
+msgstr "Pealkiri"
+
+#: inc/builder/sections/builder-templates/gallery-item.php:72
+msgid "Item link URL"
+msgstr "Objekti lingi URL"
+
+#: inc/builder/sections/builder-templates/gallery.php:31
+msgid "Add new item"
+msgstr "Lisa uus objekt"
+
+#: inc/builder/sections/builder-templates/text.php:22
+msgid "%s and convert any column into an area for widgets."
+msgstr "%s ja muuda mistahes veerg vidinate alaks."
+
+#: inc/builder/sections/builder-templates/text.php:81
+#: inc/builder/sections/builder-templates/text.php:149
+msgid "Configure column"
+msgstr "Konfigeeri veergu"
+
+#: inc/builder/sections/builder-templates/text.php:88
+msgid "Edit text column"
+msgstr "Muuda teksti veergu"
+
+#: inc/builder/sections/builder-templates/text.php:108
+msgid "Drag-and-drop this column into place"
+msgstr "Lohista ja vabasta see veerg asukohale"
+
+#: inc/builder/sections/builder-templates/text.php:157
+msgid "Enter column title"
+msgstr "Sisesta veeru pealkiri"
+
+#: inc/builder/sections/builder-templates/text.php:164
+msgid "Image link URL"
+msgstr "Pildi lingi URL"
+
+#: inc/builder/sections/section-definitions.php:75
+msgid "Create rearrangeable columns of content and images."
+msgstr "Loo sisu ja piltide Ã¼mbermuudetavad veerge."
+
+#: inc/builder/sections/section-definitions.php:85
+#: inc/builder/sections/section-definitions.php:173
+#: inc/builder/sections/section-definitions.php:318
+msgid "Enter section title"
+msgstr "Sisesta sektsiooni pealkiri"
+
+#: inc/builder/sections/section-definitions.php:92
+#: inc/builder/sections/section-definitions.php:324
+msgid "Columns"
+msgstr "Veerud"
+
+#: inc/builder/sections/section-definitions.php:163
+msgid "Display multiple types of content in a banner or a slider."
+msgstr "NÃ¤ita bÃ¤nneris vÃµi galeriis mitut tÃ¼Ã¼pi sisu."
+
+#: inc/builder/sections/section-definitions.php:178
+#: inc/gallery-slider/gallery-slider.php:98
+msgid "Hide navigation arrows"
+msgstr "Peida navigeerimise nooled"
+
+#: inc/builder/sections/section-definitions.php:184
+#: inc/gallery-slider/gallery-slider.php:102
+msgid "Hide navigation dots"
+msgstr "Peida navigeerimise punktid"
+
+#: inc/builder/sections/section-definitions.php:190
+msgid "Autoplay slideshow"
+msgstr "Korda slaide automaatselt"
+
+#: inc/builder/sections/section-definitions.php:196
+#: inc/gallery-slider/gallery-slider.php:110
+msgid "Time between slides (ms)"
+msgstr "Slaidide intervall (ms)"
+
+#: inc/builder/sections/section-definitions.php:202
+msgid "Transition effect"
+msgstr "Ãœlemineku effekt"
+
+#: inc/builder/sections/section-definitions.php:206
+#: inc/gallery-slider/gallery-slider.php:116
+msgid "Slide horizontal"
+msgstr "Libista horisontaalselt"
+
+#: inc/builder/sections/section-definitions.php:207
+#: inc/gallery-slider/gallery-slider.php:117
+msgid "Fade"
+msgstr "Tuhmu"
+
+#: inc/builder/sections/section-definitions.php:213
+msgid "Section height (px)"
+msgstr "Sektsiooni kÃµrgus (px)"
+
+#: inc/builder/sections/section-definitions.php:219
+msgid "Responsive behavior"
+msgstr "Responsive kÃ¤itumine"
+
+#: inc/builder/sections/section-definitions.php:222
+msgid "Choose how the banner will respond to varying screen widths."
+msgstr "Vali kuidas bÃ¤nner erinevate ekraani laiuste korral kÃ¤itub."
+
+#: inc/builder/sections/section-definitions.php:224 inc/customizer/helpers.php:148
+msgid "Default"
+msgstr "Standard"
+
+#: inc/builder/sections/section-definitions.php:225
+msgid "Aspect"
+msgstr "KÃ¼lg"
+
+#: inc/builder/sections/section-definitions.php:308
+msgid "Display your images in various grid combinations."
+msgstr "NÃ¤ita oma pilte erinevates grid kombinatsioonides"
+
+#: inc/builder/sections/section-definitions.php:337
+msgid "Aspect ratio"
+msgstr "KÃ¼lgede suhe"
+
+#: inc/builder/sections/section-definitions.php:340
+msgid "Square"
+msgstr "Ruut"
+
+#: inc/builder/sections/section-definitions.php:341
+msgid "Landscape"
+msgstr "Horisontaalne"
+
+#: inc/builder/sections/section-definitions.php:342
+msgid "Portrait"
+msgstr "Vertikaalne"
+
+#: inc/builder/sections/section-definitions.php:349
+msgid "Caption style"
+msgstr "Tiitri stiil"
+
+#: inc/builder/sections/section-definitions.php:352
+msgid "Reveal"
+msgstr "Paljasta"
+
+#: inc/builder/sections/section-definitions.php:353
+msgid "Overlay"
+msgstr "Pealiskiht"
+
+#: inc/builder/sections/section-definitions.php:360
+msgid "Caption color"
+msgstr "Tiitri vÃ¤rv"
+
+#: inc/builder/sections/section-definitions.php:363
+#: inc/customizer/legacy_sections/stylekit.php:67
+#: inc/customizer/sections/stylekit.php:48
+msgid "Light"
+msgstr "Hele"
+
+#: inc/builder/sections/section-definitions.php:364
+#: inc/customizer/legacy_sections/stylekit.php:68
+#: inc/customizer/sections/stylekit.php:49
+msgid "Dark"
+msgstr "Tume"
+
+#: inc/builder/sections/section-definitions.php:370
+msgid "Background image"
+msgstr "Taustapilt"
+
+#: inc/builder/sections/section-definitions.php:382
+msgid "Background style"
+msgstr "Tausta stiil"
+
+#: inc/builder/sections/section-definitions.php:385 inc/customizer/helpers.php:117
+msgid "Tile"
+msgstr "Plaat"
+
+#: inc/builder/sections/section-definitions.php:386 inc/customizer/helpers.php:142
+msgid "Cover"
+msgstr "Kate"
+
+#: inc/customizer/bootstrap.php:67 inc/customizer/bootstrap.php:340
+#: inc/customizer/sections/color-scheme.php:24
+msgid "General"
+msgstr "Ãœldine"
+
+#: inc/customizer/bootstrap.php:68
+msgid "Typography"
+msgstr "TrÃ¼kikunst"
+
+#: inc/customizer/bootstrap.php:69
+msgid "Color Scheme"
+msgstr "VÃ¤rviskeem"
+
+#: inc/customizer/bootstrap.php:70 inc/customizer/bootstrap.php:344
+#: inc/customizer/sections/color-scheme.php:89
+msgid "Header"
+msgstr "PÃ¤is"
+
+#: inc/customizer/bootstrap.php:71
+msgid "Content & Layout"
+msgstr "Sisu ja vÃ¤limus"
+
+#: inc/customizer/bootstrap.php:72 inc/customizer/bootstrap.php:352
+#: inc/customizer/sections/color-scheme.php:177
+msgid "Footer"
+msgstr "Jalus"
+
+#: inc/customizer/bootstrap.php:113
+msgid "Sidebars & Widgets"
+msgstr "KÃ¼ljeriba ja vidinad"
+
+#: inc/customizer/bootstrap.php:341 inc/customizer/sections/stylekit.php:23
+msgid "Style Kits"
+msgstr "Stiili komplektid"
+
+#: inc/customizer/bootstrap.php:342
+msgid "Fonts"
+msgstr "Fondid"
+
+#: inc/customizer/bootstrap.php:343
+msgid "Colors"
+msgstr "VÃ¤rvid"
+
+#: inc/customizer/bootstrap.php:345 inc/customizer/sections/general.php:31
+msgid "Logo"
+msgstr "Logo"
+
+#: inc/customizer/bootstrap.php:346
+msgid "Main"
+msgstr "Peamine"
+
+#: inc/customizer/bootstrap.php:347
+msgid "Layout: Blog (Posts Page)"
+msgstr "VÃ¤limus: blogi (artikklite lehekÃ¼lg)"
+
+#: inc/customizer/bootstrap.php:348
+msgid "Layout: Archives"
+msgstr "VÃ¤limus: Arhiivid"
+
+#: inc/customizer/bootstrap.php:349
+msgid "Layout: Search Results"
+msgstr "VÃ¤limus: Otsingtulemused"
+
+#: inc/customizer/bootstrap.php:350
+msgid "Layout: Posts"
+msgstr "VÃ¤limus: Artiklid"
+
+#: inc/customizer/bootstrap.php:351
+msgid "Layout: Pages"
+msgstr "VÃ¤limus: Lehed"
+
+#: inc/customizer/bootstrap.php:353 inc/customizer/sections/general.php:92
+msgid "Social Profiles &amp; RSS"
+msgstr "Sotsiaalsed profiilid &amp; RSS"
+
+#: inc/customizer/bootstrap.php:492 inc/customizer/legacy_sections/stylekit.php:32
+#: inc/customizer/sections/stylekit.php:29
+msgid "Upgrade to Make Plus"
+msgstr "TÃ¤iusta Make Plus"
+
+#: inc/customizer/helpers-defaults.php:118
+msgid "Menu"
+msgstr "MenÃ¼Ã¼"
+
+#: inc/customizer/helpers-defaults.php:132
+msgid "Featured"
+msgstr "Featured"
+
+#: inc/customizer/helpers-fonts.php:556
+msgid "All"
+msgstr "KÃµik"
+
+#: inc/customizer/helpers-fonts.php:557
+msgid "Cyrillic"
+msgstr "Kirillitsa"
+
+#: inc/customizer/helpers-fonts.php:558
+msgid "Cyrillic Extended"
+msgstr "Kirillitsa (laiendatud)"
+
+#: inc/customizer/helpers-fonts.php:559
+msgid "Devanagari"
+msgstr "Devanaagari"
+
+#: inc/customizer/helpers-fonts.php:560
+msgid "Greek"
+msgstr "Kreeka"
+
+#: inc/customizer/helpers-fonts.php:561
+msgid "Greek Extended"
+msgstr "Kreeka (laiendatud)"
+
+#: inc/customizer/helpers-fonts.php:562
+msgid "Khmer"
+msgstr "Khmeer"
+
+#: inc/customizer/helpers-fonts.php:563
+msgid "Latin"
+msgstr "Ladina"
+
+#: inc/customizer/helpers-fonts.php:564
+msgid "Latin Extended"
+msgstr "Ladina (laiendatud)"
+
+#: inc/customizer/helpers-fonts.php:565
+msgid "Vietnamese"
+msgstr "Vietnami"
+
+#: inc/customizer/helpers-fonts.php:610
+msgid "Loading&hellip;"
+msgstr "Laadin&hellip;"
+
+#: inc/customizer/helpers-fonts.php:672
+msgid "Standard Fonts"
+msgstr "Standartsed fondid"
+
+#: inc/customizer/helpers-fonts.php:674
+msgid "Google Fonts"
+msgstr "Google fondid"
+
+#: inc/customizer/helpers.php:74
+msgid "Full-width"
+msgstr "TÃ¤is-laius"
+
+#: inc/customizer/helpers.php:75
+msgid "Boxed"
+msgstr "Kastis"
+
+#: inc/customizer/helpers.php:84
+msgid "Post header"
+msgstr "Artikli pÃ¤is"
+
+#: inc/customizer/helpers.php:85
+msgid "Thumbnail"
+msgstr "Pisikuva"
+
+#: inc/customizer/helpers.php:96
+msgid "Absolute (%s)"
+msgstr "Absoluutne (%s)"
+
+#: inc/customizer/helpers.php:97
+msgid "Relative (1 week ago)"
+msgstr "Relatiivne (nÃ¤dal tagasi)"
+
+#: inc/customizer/helpers.php:107
+msgid "With avatar"
+msgstr "Avatariga"
+
+#: inc/customizer/helpers.php:108
+msgid "Without avatar"
+msgstr "Ilma avatarita"
+
+#: inc/customizer/helpers.php:116
+msgid "No Repeat"
+msgstr "Ã„ra korda"
+
+#: inc/customizer/helpers.php:118
+msgid "Tile Horizontally"
+msgstr "Paiguta horisontaalselt"
+
+#: inc/customizer/helpers.php:119
+msgid "Tile Vertically"
+msgstr "Paiguta vertikaalselt"
+
+#: inc/customizer/helpers.php:132
+msgid "Center"
+msgstr "Keskele"
+
+#: inc/customizer/helpers.php:141
+msgid "Auto"
+msgstr "Auto"
+
+#: inc/customizer/helpers.php:143
+msgid "Contain"
+msgstr "Sisalda"
+
+#: inc/customizer/helpers.php:149
+msgid "Flipped"
+msgstr "Ãœmber pÃ¶Ã¶ratud"
+
+#: inc/customizer/helpers.php:154 inc/customizer/helpers.php:176
+msgid "Traditional"
+msgstr "Tavaline"
+
+#: inc/customizer/helpers.php:155 inc/customizer/helpers.php:177
+msgid "Centered"
+msgstr "Keskele"
+
+#: inc/customizer/helpers.php:156
+msgid "Navigation Below"
+msgstr "Navigeerimine all"
+
+#: inc/customizer/helpers.php:196
+msgid "Top"
+msgstr "Peal"
+
+#: inc/customizer/helpers.php:197
+msgid "Before content"
+msgstr "Enne sisu"
+
+#: inc/customizer/helpers.php:198
+msgid "Post footer"
+msgstr "Artikli jalus"
+
+#: inc/customizer/helpers.php:207
+msgid "With icon"
+msgstr "Koos ikooniga"
+
+#: inc/customizer/helpers.php:208
+msgid "With text"
+msgstr "Koos tekstiga"
+
+#: inc/customizer/helpers.php:326 inc/customizer/legacy_sections/social.php:261
+msgid "Email"
+msgstr "E-post"
+
+#: inc/customizer/helpers.php:330
+msgid "RSS"
+msgstr "RSS"
+
+#: inc/customizer/legacy_sections/background.php:22
+#: inc/customizer/sections/color-scheme.php:70
+msgid "Background"
+msgstr "Taust"
+
+#: inc/customizer/legacy_sections/background.php:36
+msgid ""
+"With the Site Layout option (under <em>General</em>) set to \"Full Width\", the "
+"background color and image will not be visible."
+msgstr ""
+"Koos lehe vÃ¤limuse valikuga \"TÃ¤is laius\" (menÃ¼Ã¼s <em>Ãœldine</em>), pole "
+"taustavÃ¤rv ega pilt nÃ¤htaval."
+
+#: inc/customizer/legacy_sections/background.php:64
+#: inc/customizer/legacy_sections/footer.php:231
+#: inc/customizer/legacy_sections/header.php:335
+#: inc/customizer/legacy_sections/main.php:127
+msgid "Background Size"
+msgstr "Tausta suurus"
+
+#: inc/customizer/legacy_sections/color.php:38
+#: inc/customizer/sections/color-scheme.php:32
+msgid "Primary Color"
+msgstr "PÃµhiline vÃ¤rv"
+
+#: inc/customizer/legacy_sections/color.php:61
+#: inc/customizer/sections/color-scheme.php:41
+msgid "Secondary Color"
+msgstr "Sekundaarne vÃ¤rv"
+
+#: inc/customizer/legacy_sections/color.php:84
+#: inc/customizer/sections/color-scheme.php:50
+msgid "Text Color"
+msgstr "Teksti vÃ¤rv"
+
+#: inc/customizer/legacy_sections/color.php:107
+#: inc/customizer/sections/color-scheme.php:59
+msgid "Detail Color"
+msgstr "Detaili vÃ¤rv"
+
+#: inc/customizer/legacy_sections/font.php:31
+msgid "The list of Google fonts is long! You can %s before making your choices."
+msgstr "Google fontide list on pikk! VÃµid kasutada enne valiku tegemist %s."
+
+#: inc/customizer/legacy_sections/font.php:35
+msgid "preview"
+msgstr "eelvaadet"
+
+#: inc/customizer/legacy_sections/font.php:58
+msgid "Site Title"
+msgstr "LehekÃ¼lje pealkiri"
+
+#: inc/customizer/legacy_sections/font.php:80
+msgid "Headers"
+msgstr "PÃ¤ised"
+
+#: inc/customizer/legacy_sections/font.php:102
+msgid "Body"
+msgstr "Keha"
+
+#: inc/customizer/legacy_sections/font.php:119
+#: inc/customizer/sections/typography.php:25
+msgid "Typekit"
+msgstr "Typekit"
+
+#: inc/customizer/legacy_sections/font.php:134
+msgid "Looking to add premium fonts from Typekit to your website? %s."
+msgstr "Soovid oma lehele lisada preemium fonte Typekit'st? %s."
+
+#: inc/customizer/legacy_sections/font.php:139
+#: inc/customizer/legacy_sections/footer.php:355
+#: inc/customizer/sections/footer.php:159 inc/customizer/sections/typography.php:36
+msgid "Upgrade to %1$s"
+msgstr "TÃ¤iusta %1$s"
+
+#: inc/customizer/legacy_sections/font.php:179
+#: inc/customizer/sections/typography.php:95
+msgid "Site Title Font Size (in px)"
+msgstr "LehekÃ¼lje pealkirja fondi suurus (px)"
+
+#: inc/customizer/legacy_sections/font.php:200
+#: inc/customizer/sections/typography.php:114
+msgid "Site Tagline Font Size (in px)"
+msgstr "LehekÃ¼lje mÃ¤rksÃµnade fondi suurus (px)"
+
+#: inc/customizer/legacy_sections/font.php:221
+msgid "Navigation Font Size (in px)"
+msgstr "Navigeerimise fondi suurus (px)"
+
+#: inc/customizer/legacy_sections/font.php:242
+msgid "Header Font Size (in px)"
+msgstr "PÃ¤ise fondi suurus (px)"
+
+#: inc/customizer/legacy_sections/font.php:263
+#: inc/customizer/sections/typography.php:207
+msgid "Widget Font Size (in px)"
+msgstr "Vidina fondi suurus (px)"
+
+#: inc/customizer/legacy_sections/font.php:284
+#: inc/customizer/sections/typography.php:350
+msgid "Body Font Size (in px)"
+msgstr "Sisu (body) fondi suurus (px)"
+
+#: inc/customizer/legacy_sections/font.php:319
+#: inc/customizer/sections/typography.php:58
+msgid "Character Subset"
+msgstr "KirjatÃ¤he alamhulk"
+
+#: inc/customizer/legacy_sections/font.php:335
+#: inc/customizer/sections/typography.php:67
+msgid "Not all fonts provide each of these subsets."
+msgstr "KÃµik fondid ei taga kÃµiki neid alamhulki"
+
+#: inc/customizer/legacy_sections/footer.php:36
+#: inc/customizer/sections/footer.php:102
+msgid "Footer Layout"
+msgstr "Jaluse vÃ¤limus"
+
+#: inc/customizer/legacy_sections/footer.php:73
+#: inc/customizer/sections/footer.php:119
+msgid "Footer Text"
+msgstr "Jaluse tekst"
+
+#: inc/customizer/legacy_sections/footer.php:96
+#: inc/customizer/sections/color-scheme.php:194
+msgid "Footer Text Color"
+msgstr "Jaluse teksti vÃ¤rv"
+
+#: inc/customizer/legacy_sections/footer.php:119
+#: inc/customizer/sections/color-scheme.php:203
+msgid "Footer Border Color"
+msgstr "Jaluse Ã¤Ã¤re vÃ¤rv"
+
+#: inc/customizer/legacy_sections/footer.php:142
+#: inc/customizer/sections/color-scheme.php:185
+msgid "Footer Background Color"
+msgstr "Jaluse tausta vÃ¤rv"
+
+#: inc/customizer/legacy_sections/footer.php:165
+#: inc/customizer/sections/footer.php:33
+msgid "Footer Background Image"
+msgstr "Jaluse tausta pilt"
+
+#: inc/customizer/legacy_sections/footer.php:187
+#: inc/customizer/legacy_sections/header.php:291
+#: inc/customizer/legacy_sections/main.php:83
+msgid "Background Repeat"
+msgstr "Tausta kordamine"
+
+#: inc/customizer/legacy_sections/footer.php:209
+#: inc/customizer/legacy_sections/header.php:313
+#: inc/customizer/legacy_sections/main.php:105
+msgid "Background Position"
+msgstr "Tausta positsioon"
+
+#: inc/customizer/legacy_sections/footer.php:267
+msgid "Footer Widget Areas"
+msgstr "Jaluse vidina alad"
+
+#: inc/customizer/legacy_sections/footer.php:283
+msgid "Footer Options"
+msgstr "Jaluse valikud"
+
+#: inc/customizer/legacy_sections/footer.php:304
+msgid "Show social icons"
+msgstr "NÃ¤ita sotsiaalmeedia ikoone"
+
+#: inc/customizer/legacy_sections/footer.php:334
+#: inc/customizer/sections/footer.php:148
+msgid "White Label"
+msgstr "Valge etikett"
+
+#: inc/customizer/legacy_sections/footer.php:350
+msgid "Want to remove the theme byline from your website&#8217;s footer? %s."
+msgstr "Soovid teema informatsiooni jalusest eemaldada? %s."
+
+#: inc/customizer/legacy_sections/general.php:36
+#: inc/customizer/sections/content-layout.php:32
+msgid "Site Layout"
+msgstr "LehekÃ¼lje vÃ¤limus"
+
+#: inc/customizer/legacy_sections/general.php:59
+#: inc/customizer/sections/content-layout.php:43
+msgid "Sticky Label"
+msgstr "Sticky label"
+
+#: inc/customizer/legacy_sections/header.php:36 inc/customizer/sections/header.php:88
+msgid "Header Layout"
+msgstr "PÃ¤ise vÃ¤limus"
+
+#: inc/customizer/legacy_sections/header.php:58 inc/customizer/sections/header.php:98
+msgid "Show Title/Logo On"
+msgstr "NÃ¤ita pealkirja/logo"
+
+#: inc/customizer/legacy_sections/header.php:94
+#: inc/customizer/sections/header.php:114
+msgid "Header Bar Content Layout"
+msgstr "PÃ¤ise riba sisu vÃ¤limus"
+
+#: inc/customizer/legacy_sections/header.php:117
+#: inc/customizer/sections/header.php:125
+msgid "Header Bar Text"
+msgstr "PÃ¤ise riba tekst"
+
+#: inc/customizer/legacy_sections/header.php:140
+#: inc/customizer/sections/color-scheme.php:106
+msgid "Header Bar Text Color"
+msgstr "PÃ¤ise riba teksti vÃ¤rv"
+
+#: inc/customizer/legacy_sections/header.php:163
+#: inc/customizer/sections/color-scheme.php:115
+msgid "Header Bar Border Color"
+msgstr "PÃ¤ise riba Ã¤Ã¤re vÃ¤rv"
+
+#: inc/customizer/legacy_sections/header.php:186
+#: inc/customizer/sections/color-scheme.php:97
+msgid "Header Bar Background Color"
+msgstr "PÃ¤ise riba taustavÃ¤rv"
+
+#: inc/customizer/legacy_sections/header.php:223
+#: inc/customizer/sections/color-scheme.php:139
+msgid "Header Text Color"
+msgstr "PÃ¤ise teksti vÃ¤rv"
+
+#: inc/customizer/legacy_sections/header.php:246
+#: inc/customizer/sections/color-scheme.php:130
+msgid "Header Background Color"
+msgstr "PÃ¤ise taustavÃ¤rv"
+
+#: inc/customizer/legacy_sections/header.php:269
+#: inc/customizer/sections/header.php:33
+msgid "Header Background Image"
+msgstr "PÃ¤ise taustapilt"
+
+#: inc/customizer/legacy_sections/header.php:351
+#: inc/customizer/sections/header.php:134
+msgid "Header Options"
+msgstr "PÃ¤ise valikud"
+
+#: inc/customizer/legacy_sections/header.php:372
+msgid "Show social icons in header bar"
+msgstr "NÃ¤ita sotsiaalmeedia ikoone pÃ¤ise real"
+
+#: inc/customizer/legacy_sections/header.php:393
+msgid "Show search field in header bar"
+msgstr "NÃ¤ita pÃ¤ises otsingu vÃ¤lja"
+
+#: inc/customizer/legacy_sections/layout-archive.php:30
+#: inc/customizer/legacy_sections/layout-blog.php:30
+#: inc/customizer/legacy_sections/layout-page.php:30
+#: inc/customizer/legacy_sections/layout-post.php:30
+#: inc/customizer/legacy_sections/layout-search.php:30
+#: inc/customizer/sections/content-layout.php:78
+#: inc/customizer/sections/content-layout.php:259
+#: inc/customizer/sections/content-layout.php:440
+#: inc/customizer/sections/content-layout.php:621
+#: inc/customizer/sections/content-layout.php:786
+msgid "Header, Footer, Sidebars"
+msgstr "PÃ¤is, jalus, kÃ¼ljeriba"
+
+#: inc/customizer/legacy_sections/layout-archive.php:51
+#: inc/customizer/legacy_sections/layout-blog.php:51
+#: inc/customizer/legacy_sections/layout-page.php:51
+#: inc/customizer/legacy_sections/layout-post.php:51
+#: inc/customizer/legacy_sections/layout-search.php:51
+#: inc/customizer/sections/content-layout.php:86
+#: inc/customizer/sections/content-layout.php:267
+#: inc/customizer/sections/content-layout.php:448
+#: inc/customizer/sections/content-layout.php:629
+#: inc/customizer/sections/content-layout.php:794
+msgid "Hide site header"
+msgstr "Peida lehekÃ¼lje pÃ¤is"
+
+#: inc/customizer/legacy_sections/layout-archive.php:72
+#: inc/customizer/legacy_sections/layout-blog.php:72
+#: inc/customizer/legacy_sections/layout-page.php:72
+#: inc/customizer/legacy_sections/layout-post.php:72
+#: inc/customizer/legacy_sections/layout-search.php:72
+#: inc/customizer/sections/content-layout.php:95
+#: inc/customizer/sections/content-layout.php:276
+#: inc/customizer/sections/content-layout.php:457
+#: inc/customizer/sections/content-layout.php:638
+#: inc/customizer/sections/content-layout.php:803
+msgid "Hide site footer"
+msgstr "Peida lehekÃ¼lje jalus"
+
+#: inc/customizer/legacy_sections/layout-archive.php:93
+#: inc/customizer/legacy_sections/layout-blog.php:93
+#: inc/customizer/legacy_sections/layout-page.php:93
+#: inc/customizer/legacy_sections/layout-post.php:93
+#: inc/customizer/legacy_sections/layout-search.php:93
+#: inc/customizer/sections/content-layout.php:104
+#: inc/customizer/sections/content-layout.php:285
+#: inc/customizer/sections/content-layout.php:466
+#: inc/customizer/sections/content-layout.php:647
+#: inc/customizer/sections/content-layout.php:812
+msgid "Show left sidebar"
+msgstr "NÃ¤ita vasakut kÃ¼ljeriba"
+
+#: inc/customizer/legacy_sections/layout-archive.php:114
+#: inc/customizer/legacy_sections/layout-blog.php:114
+#: inc/customizer/legacy_sections/layout-page.php:114
+#: inc/customizer/legacy_sections/layout-post.php:114
+#: inc/customizer/legacy_sections/layout-search.php:114
+#: inc/customizer/sections/content-layout.php:113
+#: inc/customizer/sections/content-layout.php:294
+#: inc/customizer/sections/content-layout.php:475
+#: inc/customizer/sections/content-layout.php:656
+#: inc/customizer/sections/content-layout.php:821
+msgid "Show right sidebar"
+msgstr "NÃ¤ita paremat kÃ¼ljeriba"
+
+#: inc/customizer/legacy_sections/layout-archive.php:135
+#: inc/customizer/legacy_sections/layout-blog.php:135
+#: inc/customizer/legacy_sections/layout-page.php:186
+#: inc/customizer/legacy_sections/layout-post.php:135
+#: inc/customizer/legacy_sections/layout-search.php:135
+#: inc/customizer/sections/content-layout.php:128
+#: inc/customizer/sections/content-layout.php:309
+#: inc/customizer/sections/content-layout.php:490
+#: inc/customizer/sections/content-layout.php:671
+#: inc/customizer/sections/content-layout.php:859
+msgid "Featured Images"
+msgstr "Artikli pildid"
+
+#: inc/customizer/legacy_sections/layout-archive.php:157
+#: inc/customizer/legacy_sections/layout-blog.php:157
+#: inc/customizer/legacy_sections/layout-page.php:208
+#: inc/customizer/legacy_sections/layout-post.php:157
+#: inc/customizer/legacy_sections/layout-search.php:157
+#: inc/customizer/sections/content-layout.php:138
+#: inc/customizer/sections/content-layout.php:319
+#: inc/customizer/sections/content-layout.php:500
+#: inc/customizer/sections/content-layout.php:681
+#: inc/customizer/sections/content-layout.php:869
+msgid "Featured Images Alignment"
+msgstr "Artikli piltide joondus"
+
+#: inc/customizer/legacy_sections/layout-archive.php:179
+#: inc/customizer/legacy_sections/layout-blog.php:179
+#: inc/customizer/legacy_sections/layout-page.php:230
+#: inc/customizer/legacy_sections/layout-post.php:179
+#: inc/customizer/legacy_sections/layout-search.php:179
+#: inc/customizer/sections/content-layout.php:148
+#: inc/customizer/sections/content-layout.php:329
+#: inc/customizer/sections/content-layout.php:510
+#: inc/customizer/sections/content-layout.php:691
+#: inc/customizer/sections/content-layout.php:879
+msgid "Post Date"
+msgstr "Postituse kuupÃ¤ev"
+
+#: inc/customizer/legacy_sections/layout-archive.php:201
+#: inc/customizer/legacy_sections/layout-blog.php:201
+#: inc/customizer/legacy_sections/layout-page.php:252
+#: inc/customizer/legacy_sections/layout-post.php:201
+#: inc/customizer/legacy_sections/layout-search.php:201
+#: inc/customizer/sections/content-layout.php:158
+#: inc/customizer/sections/content-layout.php:339
+#: inc/customizer/sections/content-layout.php:520
+#: inc/customizer/sections/content-layout.php:701
+#: inc/customizer/sections/content-layout.php:889
+msgid "Post Date Location"
+msgstr "Postituse kuupÃ¤eva asukoht"
+
+#: inc/customizer/legacy_sections/layout-archive.php:223
+#: inc/customizer/legacy_sections/layout-blog.php:223
+#: inc/customizer/legacy_sections/layout-page.php:274
+#: inc/customizer/legacy_sections/layout-post.php:223
+#: inc/customizer/legacy_sections/layout-search.php:223
+#: inc/customizer/sections/content-layout.php:168
+#: inc/customizer/sections/content-layout.php:349
+#: inc/customizer/sections/content-layout.php:530
+#: inc/customizer/sections/content-layout.php:711
+#: inc/customizer/sections/content-layout.php:899
+msgid "Post Author"
+msgstr "Postituse autor"
+
+#: inc/customizer/legacy_sections/layout-archive.php:245
+#: inc/customizer/legacy_sections/layout-blog.php:245
+#: inc/customizer/legacy_sections/layout-page.php:296
+#: inc/customizer/legacy_sections/layout-post.php:245
+#: inc/customizer/legacy_sections/layout-search.php:245
+#: inc/customizer/sections/content-layout.php:178
+#: inc/customizer/sections/content-layout.php:359
+#: inc/customizer/sections/content-layout.php:540
+#: inc/customizer/sections/content-layout.php:721
+#: inc/customizer/sections/content-layout.php:909
+msgid "Post Author Location"
+msgstr "Postituse autori asukoht"
+
+#: inc/customizer/legacy_sections/layout-archive.php:261
+#: inc/customizer/legacy_sections/layout-blog.php:261
+#: inc/customizer/legacy_sections/layout-search.php:261
+#: inc/customizer/sections/content-layout.php:187
+#: inc/customizer/sections/content-layout.php:368
+#: inc/customizer/sections/content-layout.php:549
+msgid "Content"
+msgstr "Sisu"
+
+#: inc/customizer/legacy_sections/layout-archive.php:282
+#: inc/customizer/legacy_sections/layout-blog.php:282
+#: inc/customizer/legacy_sections/layout-search.php:282
+#: inc/customizer/sections/content-layout.php:195
+#: inc/customizer/sections/content-layout.php:376
+#: inc/customizer/sections/content-layout.php:557
+msgid "Generate excerpts automatically"
+msgstr "Loo vÃ¤ljavÃµtted automaatselt"
+
+#: inc/customizer/legacy_sections/layout-archive.php:297
+#: inc/customizer/legacy_sections/layout-blog.php:297
+#: inc/customizer/legacy_sections/layout-post.php:261
+#: inc/customizer/legacy_sections/layout-search.php:297
+#: inc/customizer/sections/content-layout.php:203
+#: inc/customizer/sections/content-layout.php:384
+#: inc/customizer/sections/content-layout.php:565
+#: inc/customizer/sections/content-layout.php:730
+msgid "Post Meta"
+msgstr "Postituse meta-andmed"
+
+#: inc/customizer/legacy_sections/layout-archive.php:318
+#: inc/customizer/legacy_sections/layout-blog.php:318
+#: inc/customizer/legacy_sections/layout-post.php:282
+#: inc/customizer/legacy_sections/layout-search.php:318
+#: inc/customizer/sections/content-layout.php:211
+#: inc/customizer/sections/content-layout.php:392
+#: inc/customizer/sections/content-layout.php:573
+#: inc/customizer/sections/content-layout.php:738
+msgid "Show categories"
+msgstr "NÃ¤ita kategooriaid"
+
+#: inc/customizer/legacy_sections/layout-archive.php:339
+#: inc/customizer/legacy_sections/layout-blog.php:339
+#: inc/customizer/legacy_sections/layout-post.php:303
+#: inc/customizer/legacy_sections/layout-search.php:339
+#: inc/customizer/sections/content-layout.php:220
+#: inc/customizer/sections/content-layout.php:401
+#: inc/customizer/sections/content-layout.php:582
+#: inc/customizer/sections/content-layout.php:747
+msgid "Show tags"
+msgstr "NÃ¤ita mÃ¤rksÃµnu"
+
+#: inc/customizer/legacy_sections/layout-archive.php:360
+#: inc/customizer/legacy_sections/layout-blog.php:360
+#: inc/customizer/legacy_sections/layout-page.php:318
+#: inc/customizer/legacy_sections/layout-post.php:324
+#: inc/customizer/legacy_sections/layout-search.php:360
+#: inc/customizer/sections/content-layout.php:229
+#: inc/customizer/sections/content-layout.php:410
+#: inc/customizer/sections/content-layout.php:591
+#: inc/customizer/sections/content-layout.php:756
+#: inc/customizer/sections/content-layout.php:919
+msgid "Comment Count"
+msgstr "Kommentaaride hulk"
+
+#: inc/customizer/legacy_sections/layout-archive.php:382
+#: inc/customizer/legacy_sections/layout-blog.php:382
+#: inc/customizer/legacy_sections/layout-page.php:340
+#: inc/customizer/legacy_sections/layout-post.php:346
+#: inc/customizer/legacy_sections/layout-search.php:382
+#: inc/customizer/sections/content-layout.php:239
+#: inc/customizer/sections/content-layout.php:420
+#: inc/customizer/sections/content-layout.php:601
+#: inc/customizer/sections/content-layout.php:766
+#: inc/customizer/sections/content-layout.php:929
+msgid "Comment Count Location"
+msgstr "Kommentaaride hulga asukoht"
+
+#: inc/customizer/legacy_sections/layout-page.php:129
+#: inc/customizer/sections/content-layout.php:829
+msgid "Sidebars are not available on pages using the Builder Template."
+msgstr ""
+"KÃ¼ljeribad pole saadaval lehtedel, mis kasutavad lehekÃ¼lje kohandaja Å¡ablooni."
+
+#: inc/customizer/legacy_sections/layout-page.php:144
+#: inc/customizer/sections/content-layout.php:842
+msgid "Page Title"
+msgstr "LehekÃ¼lje pealkiri"
+
+#: inc/customizer/legacy_sections/layout-page.php:165
+#: inc/customizer/sections/content-layout.php:850
+msgid "Hide title"
+msgstr "Peida pealkiri"
+
+#: inc/customizer/legacy_sections/logo.php:38 inc/customizer/sections/general.php:39
+msgid "Regular Logo"
+msgstr "Tavaline logo"
+
+#: inc/customizer/legacy_sections/logo.php:62 inc/customizer/sections/general.php:49
+msgid "Retina Logo (2x)"
+msgstr "Retina logo (2x)"
+
+#: inc/customizer/legacy_sections/logo.php:78 inc/customizer/sections/general.php:50
+msgid "The Retina Logo should be twice the size of the Regular Logo."
+msgstr "Retina logo peaks olema kaks korda suurem kui tavaline logo."
+
+#: inc/customizer/legacy_sections/logo.php:101 inc/customizer/sections/general.php:60
+msgid "Favicon"
+msgstr "Favicon"
+
+#: inc/customizer/legacy_sections/logo.php:118 inc/customizer/sections/general.php:61
+msgid ""
+"File must be <strong>.png</strong> or <strong>.ico</strong> format. Optimal "
+"dimensions: <strong>32px x 32px</strong>."
+msgstr ""
+"Fail peab olema <strong>.png</strong> vÃµi <strong>.ico</strong> formaadis. "
+"Optimaalsed mÃµÃµdud: <strong>32px x 32px</strong>."
+
+#: inc/customizer/legacy_sections/logo.php:141 inc/customizer/sections/general.php:72
+msgid "Apple Touch Icon"
+msgstr "Apple ikoon"
+
+#: inc/customizer/legacy_sections/logo.php:158 inc/customizer/sections/general.php:73
+msgid ""
+"File must be <strong>.png</strong> format. Optimal dimensions: <strong>152px x "
+"152px</strong>."
+msgstr ""
+"Fail peab olema <strong>.png</strong> formaadis. Optimaalsed mÃµÃµdud: <strong>152px "
+"x 152px</strong>."
+
+#: inc/customizer/legacy_sections/main.php:38
+msgid "Background Color"
+msgstr "TaustavÃ¤rv"
+
+#: inc/customizer/legacy_sections/main.php:61 inc/customizer/sections/footer.php:25
+#: inc/customizer/sections/header.php:25
+msgid "Background Image"
+msgstr "Taustapilt"
+
+#: inc/customizer/legacy_sections/main.php:143
+#: inc/customizer/sections/content-layout.php:51
+msgid "Content Options"
+msgstr "Sisu valikud"
+
+#: inc/customizer/legacy_sections/main.php:164
+#: inc/customizer/sections/content-layout.php:59
+msgid "Underline links in content"
+msgstr "Lisa linkidele alljoon"
+
+#: inc/customizer/legacy_sections/navigation.php:38
+#: inc/customizer/sections/navigation.php:73
+msgid "Mobile Menu Label"
+msgstr "Mobiilne menÃ¼Ã¼"
+
+#: inc/customizer/legacy_sections/navigation.php:53
+#: inc/customizer/sections/navigation.php:74
+msgid "Resize your browser window to preview the mobile menu label."
+msgstr "Muuda oma brauseri akna suurust, et nÃ¤ha mobiilse menÃ¼Ã¼ eelvaadet."
+
+#: inc/customizer/legacy_sections/site-title-tagline.php:38
+#: inc/customizer/sections/color-scheme.php:154
+msgid "Site Title Color"
+msgstr "Lehe pealkirja vÃ¤rv"
+
+#: inc/customizer/legacy_sections/site-title-tagline.php:63
+#: inc/customizer/sections/site-title-tagline.php:46
+msgid "Hide Site Title"
+msgstr "Peida lehe pealkiri"
+
+#: inc/customizer/legacy_sections/site-title-tagline.php:88
+#: inc/customizer/sections/site-title-tagline.php:64
+msgid "Hide Tagline"
+msgstr "Peida mÃ¤rksÃµnad"
+
+#: inc/customizer/legacy_sections/social.php:30
+#: inc/customizer/sections/general.php:93
+msgid ""
+"Enter the complete URL to your profile for each service below that you would like "
+"to share."
+msgstr "Sisesta tÃ¤ielikud lehekÃ¼lgede aadressid, mida soovid jagada, oma profiili"
+
+#: inc/customizer/legacy_sections/social.php:235
+msgid ""
+"If you would like to add a social profile that is not listed above, or change the "
+"order of the icons, use %s."
+msgstr ""
+"Kui soovid lisada listi mittekuuluvaid sotsiaalvÃµrgustike profiile, vÃµi muuta nende "
+"ikoonide jÃ¤rjekorda, kasuta %s."
+
+#: inc/customizer/legacy_sections/social.php:238
+msgid "this alternate method"
+msgstr "seda alternatiivsed meetodit"
+
+#: inc/customizer/legacy_sections/social.php:276
+#: inc/customizer/sections/general.php:208
+msgid "Default RSS"
+msgstr "Vaike RSS"
+
+#: inc/customizer/legacy_sections/social.php:297
+#: inc/customizer/sections/general.php:216
+msgid "Hide default RSS feed link"
+msgstr "Peida vaike RSS-link"
+
+#: inc/customizer/legacy_sections/social.php:318
+#: inc/customizer/sections/general.php:225
+msgid "Custom RSS URL (replaces default)"
+msgstr "Kohandatud RSS URL (asendab vaikevÃ¤Ã¤rtuse)"
+
+#: inc/customizer/legacy_sections/stylekit.php:28
+#: inc/customizer/sections/stylekit.php:25
+msgid ""
+"%s to quickly apply designer-picked style choices (fonts, layout, colors) to your "
+"website."
+msgstr ""
+"%s ,et kiiresti disaineri valitud stiilivalikut rakendada (fondid, vÃ¤limus, vÃ¤rvid) "
+"oma veebilehele."
+
+#: inc/customizer/legacy_sections/stylekit.php:49
+#: inc/customizer/sections/stylekit.php:37
+msgid "Kits"
+msgstr "Kits"
+
+#: inc/customizer/legacy_sections/stylekit.php:66
+#: inc/customizer/sections/stylekit.php:47
+msgid "Choose a kit"
+msgstr "Vali komplekt"
+
+#: inc/customizer/legacy_sections/stylekit.php:69
+#: inc/customizer/sections/stylekit.php:50
+msgid "Modern"
+msgstr "Kaasaegne"
+
+#: inc/customizer/legacy_sections/stylekit.php:70
+#: inc/customizer/sections/stylekit.php:51
+msgid "Creative"
+msgstr "Loov"
+
+#: inc/customizer/legacy_sections/stylekit.php:71
+#: inc/customizer/sections/stylekit.php:52
+msgid "Vintage"
+msgstr "VanatÃ¼Ã¼bi"
+
+#: inc/customizer/sections/background.php:23
+msgid "Site Background Color"
+msgstr "Lehe tausta vÃ¤rv"
+
+#: inc/customizer/sections/background.php:41
+msgid "Site Background Image"
+msgstr "Lehe taustapilt"
+
+#: inc/customizer/sections/background.php:42
+msgid "Site Background Repeat"
+msgstr "Lehe tausta kordamine"
+
+#: inc/customizer/sections/background.php:43
+msgid "Site Background Position"
+msgstr "Lehe tausta positsioon"
+
+#: inc/customizer/sections/background.php:44
+msgid "Site Background Attachment"
+msgstr "Lehe tausta manus"
+
+#: inc/customizer/sections/background.php:59
+msgid "Site Background Size"
+msgstr "Lehe tausta suurus"
+
+#: inc/customizer/sections/background.php:76
+msgid "Main Column Background Image"
+msgstr "Peaveeru taustapilt"
+
+#: inc/customizer/sections/background.php:85
+msgid "Main Column Background Repeat"
+msgstr "Peaveeru tausta kordamine"
+
+#: inc/customizer/sections/background.php:95
+msgid "Main Column Background Position"
+msgstr "Peaveeru tausta positsioon"
+
+#: inc/customizer/sections/background.php:105
+msgid "Main Column Background Size"
+msgstr "Peaveeru tausta suurus"
+
+#: inc/customizer/sections/color-scheme.php:78
+msgid "Main Column Background Color"
+msgstr "Peaveeru tausta vÃ¤rv"
+
+#: inc/customizer/sections/content-layout.php:25
+msgid "Global"
+msgstr "Globaalne"
+
+#: inc/customizer/sections/content-layout.php:72
+msgid "Blog (Posts Page)"
+msgstr "Blog (postituste lehekÃ¼lg)"
+
+#: inc/customizer/sections/content-layout.php:253 inc/extras.php:360
+msgid "Archives"
+msgstr "Arhiivid"
+
+#: inc/customizer/sections/content-layout.php:434 inc/extras.php:361
+msgid "Search Results"
+msgstr "Otsingtulemused"
+
+#: inc/customizer/sections/content-layout.php:615 inc/extras.php:362
+msgid "Posts"
+msgstr "Postitused"
+
+#: inc/customizer/sections/content-layout.php:780 inc/extras.php:363
+msgid "Pages"
+msgstr "Lehed"
+
+#: inc/customizer/sections/footer.php:42
+msgid "Footer Background Repeat"
+msgstr "Jaluse tausta kordamine"
+
+#: inc/customizer/sections/footer.php:52
+msgid "Footer Background Position"
+msgstr "Jaluse tausta positsioon"
+
+#: inc/customizer/sections/footer.php:62
+msgid "Footer Background Size"
+msgstr "Jaluse tausta suurus"
+
+#: inc/customizer/sections/footer.php:75
+msgid "Widget Areas"
+msgstr "Vidinate alad"
+
+#: inc/customizer/sections/footer.php:82
+msgid "Number of Widget Areas"
+msgstr "Vidinate ala hulk"
+
+#: inc/customizer/sections/footer.php:95 inc/customizer/sections/header.php:81
+msgid "Layout"
+msgstr "VÃ¤limus"
+
+#: inc/customizer/sections/footer.php:127
+msgid "Social Icons"
+msgstr "Sotsiaalmeedia ikoonid"
+
+#: inc/customizer/sections/footer.php:135
+msgid "Show social icons in footer"
+msgstr "NÃ¤ita sotsiaalmeedia ikoone"
+
+#: inc/customizer/sections/footer.php:149
+msgid "Want to remove the theme byline from your website&#8217;s footer?"
+msgstr "Soovid teema informatsiooni jalusest eemaldada? %s."
+
+#: inc/customizer/sections/general.php:181
+msgid ""
+"If you would like to add a social profile that is not listed above, or change the "
+"order of the icons, create a custom menu %s."
+msgstr ""
+"Kui soovid lisada listi mittekuuluvaid sotsiaalvÃµrgustike profiile, vÃµi muuta nende "
+"ikoonide jÃ¤rjekorda, kasuta %s."
+
+#: inc/customizer/sections/general.php:184
+msgid "as described here"
+msgstr "nagu on kirjeldatud siin"
+
+#: inc/customizer/sections/header.php:42
+msgid "Header Background Repeat"
+msgstr "PÃ¤ise tausta kordamine"
+
+#: inc/customizer/sections/header.php:52
+msgid "Header Background Position"
+msgstr "PÃ¤ise tausta positsioon"
+
+#: inc/customizer/sections/header.php:62
+msgid "Header Background Size"
+msgstr "PÃ¤ise tausta suurus"
+
+#: inc/customizer/sections/header.php:126
+msgid ""
+"This text only appears if a custom menu has not been assigned to the Header Bar "
+"Menu location in the Navigation section."
+msgstr ""
+"See tekst ilmub ainult siis, kui kohandatud menÃ¼Ã¼d pole navigeerimise sektsioonis "
+"pÃ¤ise riba menÃ¼Ã¼ asukohta mÃ¤Ã¤ratud."
+
+#: inc/customizer/sections/header.php:142
+msgid "Show social icons in Header Bar"
+msgstr "NÃ¤ita sotsiaalmeedia ikoone pÃ¤ise real"
+
+#: inc/customizer/sections/header.php:151
+msgid "Show search field in Header Bar"
+msgstr "NÃ¤ita pÃ¤ises otsingu vÃ¤lja"
+
+#: inc/customizer/sections/navigation.php:44
+msgid ""
+"After you have created your custom menu for social profile links, select it here."
+msgstr "PÃ¤rast kohandatud menÃ¼Ã¼ loomist sotsiaalvÃµrgustike linkidele, vali see siin."
+
+#: inc/customizer/sections/navigation.php:59
+msgid ""
+"Select which menu appears in each location. You can edit your menu content on the "
+"Menus screen in the Appearance section."
+msgstr ""
+"Vali, milline menÃ¼Ã¼ ilmub igas asukohas. MenÃ¼Ã¼ sisu saab muuta MenÃ¼Ã¼ ekraanil "
+"VÃ¤limuse sektsioonis."
+
+#: inc/customizer/sections/typography.php:26
+msgid "Looking to add premium fonts from Typekit to your website?"
+msgstr "Soovid oma lehele lisada premium fonte Typekit'st? %s."
+
+#: inc/customizer/sections/typography.php:51
+msgid "Google Web Fonts"
+msgstr "Google Web fondid"
+
+#: inc/customizer/sections/typography.php:78
+msgid "Site Title &amp; Tagline"
+msgstr "Lehe pealkiri &amp; mÃ¤rksÃµnad"
+
+#: inc/customizer/sections/typography.php:85
+msgid "Site Title Font Family"
+msgstr "Lehe pealkirja fondi perekond"
+
+#: inc/customizer/sections/typography.php:104
+msgid "Site Tagline Font Family"
+msgstr "Lehe mÃ¤rksÃµnade fondi perekond"
+
+#: inc/customizer/sections/typography.php:126
+msgid "Main Menu"
+msgstr "PeamenÃ¼Ã¼"
+
+#: inc/customizer/sections/typography.php:133
+msgid "Menu Item Font Family"
+msgstr "MenÃ¼Ã¼ objekti fondi perekond"
+
+#: inc/customizer/sections/typography.php:143
+msgid "Menu Item Font Size (in px)"
+msgstr "MenÃ¼Ã¼ objekti fondi suurus (px)"
+
+#: inc/customizer/sections/typography.php:152
+msgid "Sub-Menu Item Font Family"
+msgstr "AlammenÃ¼Ã¼ objekti fondi perekond"
+
+#: inc/customizer/sections/typography.php:162
+msgid "Sub-Menu Item Font Size (in px)"
+msgstr "AlammenÃ¼Ã¼ objekti fondi suurus ( px)"
+
+#: inc/customizer/sections/typography.php:170
+msgid "Sub-Menu Item Options"
+msgstr "AlammenÃ¼Ã¼ objekti valikud"
+
+#: inc/customizer/sections/typography.php:178
+msgid "Use Menu Item styles in mobile view"
+msgstr "Kasuta menÃ¼Ã¼ objekti stiile mobiilses vaates"
+
+#: inc/customizer/sections/typography.php:190
+msgid "Widgets"
+msgstr "Vidinad"
+
+#: inc/customizer/sections/typography.php:197
+msgid "Widget Font Family"
+msgstr "Vidina fondi perekond"
+
+#: inc/customizer/sections/typography.php:219
+msgid "Headers &amp; Body"
+msgstr "PÃ¤ised ja keha"
+
+#: inc/customizer/sections/typography.php:226
+msgid "H1 Font Family"
+msgstr "H1 fondi perekond"
+
+#: inc/customizer/sections/typography.php:236
+msgid "H1 Font Size (in px)"
+msgstr "H1 fondi suurus (px)"
+
+#: inc/customizer/sections/typography.php:245
+msgid "H2 Font Family"
+msgstr "H2 fondi perekond"
+
+#: inc/customizer/sections/typography.php:255
+msgid "H2 Font Size (in px)"
+msgstr "H2 fondi suurus (px)"
+
+#: inc/customizer/sections/typography.php:264
+msgid "H3 Font Family"
+msgstr "H3 fondi perekond"
+
+#: inc/customizer/sections/typography.php:274
+msgid "H3 Font Size (in px)"
+msgstr "H3 fondi suurus (px)"
+
+#: inc/customizer/sections/typography.php:283
+msgid "H4 Font Family"
+msgstr "H4 fondi perekond"
+
+#: inc/customizer/sections/typography.php:293
+msgid "H4 Font Size (in px)"
+msgstr "H4 fondi suurus (px)"
+
+#: inc/customizer/sections/typography.php:302
+msgid "H5 Font Family"
+msgstr "H5 fondi perekond"
+
+#: inc/customizer/sections/typography.php:312
+msgid "H5 Font Size (in px)"
+msgstr "H5 fondi suurus (px)"
+
+#: inc/customizer/sections/typography.php:321
+msgid "H6 Font Family"
+msgstr "H6 fondi perekond"
+
+#: inc/customizer/sections/typography.php:331
+msgid "H6 Font Size (in px)"
+msgstr "H6 fondi suurus (px)"
+
+#: inc/customizer/sections/typography.php:340
+msgid "Body Font Family"
+msgstr "Keha fondi perekond"
+
+#: inc/edit-page.php:29
+msgid ""
+"Featured images are not available for this page while using the current page "
+"template."
+msgstr "Artikli pildid pole kasutatava Å¡ablooni tÃµttu sellele lehekÃ¼ljele saadaval. "
+
+#: inc/edit-page.php:64
+msgid "Layout Settings"
+msgstr "VÃ¤limuse seaded"
+
+#: inc/edit-page.php:86
+msgid "Post"
+msgstr "Postitus"
+
+#: inc/edit-page.php:90
+msgid "Looking to configure a unique layout for this %1$s? %2$s."
+msgstr "Soovid konfigureerida unikaalset vÃ¤limust sellele postitusele? %2$s."
+
+#: inc/extras.php:78
+msgid "Page %s"
+msgstr "LehekÃ¼lg %s"
+
+#: inc/extras.php:320
+msgid ""
+"This widget area is currently disabled. Enable it in the \"Footer\" panel of the "
+"Customizer."
+msgstr ""
+"See vidina ala pole praegu aktiivne. LÃ¼lita see sisse \"Jalus\" paneelis, mille "
+"leiad Kohandaja menÃ¼Ã¼st."
+
+#: inc/extras.php:331
+msgid ""
+"This widget area is currently disabled. Enable it in the \"Content & Layout\" panel "
+"of the Customizer."
+msgstr ""
+"See vidina ala pole praegu aktiivne. LÃ¼lita see sisse \"Sisu ja vÃ¤limus\" paneelis "
+"Kohandaja menÃ¼Ã¼st."
+
+#: inc/extras.php:336
+msgid ""
+"This widget area is currently enabled for the following views: %s. Change this in "
+"the \"Content & Layout\" panel of the Customizer."
+msgstr ""
+"See vidina ala on praegu aktiivne jÃ¤rgnevatele vaatajatele: %s. Muuda seda \"Sisu "
+"ja vÃ¤limus\" paneelis Kohandaja menÃ¼Ã¼st."
+
+#: inc/extras.php:359
+msgid "Blog (Post Page)"
+msgstr "Blogi (posituste lehekÃ¼lg)"
+
+#: inc/extras.php:427
+msgid "The uploaded package appears to be a plugin. PLEASE INSTALL AS A PLUGIN."
+msgstr "Ãœles laaditud pakk paistab olevat plugin. PALUN PAIGALDA SEE PLUGINANA."
+
+#: inc/extras.php:739
+msgid ""
+"Please <a href=\"%1$s\"><em>update to Make Plus 1.4.0 or later</em></a> for "
+"compatibility with your version of Make. <a href=\"#\" data-nonce=\"%2$s\" class="
+"\"%3$s\">hide</a>"
+msgstr ""
+"Palun <a href=\"%1$s\"><em>uuenda Make Plus 1.4.0 vÃµi uuemaks</em></a> et see "
+"Ã¼hilduks sinu Make paigaldusega. <a href=\"#\" data-nonce=\"%2$s\" class=\"%3$s"
+"\">peida</a>"
+
+#: inc/gallery-slider/gallery-slider.php:91
+msgid "Slider Settings"
+msgstr "Liuguri seaded"
+
+#: inc/gallery-slider/gallery-slider.php:93
+msgid "Show gallery as slider"
+msgstr "NÃ¤ita galeriid liugurina"
+
+#: inc/gallery-slider/gallery-slider.php:106
+msgid "Autoplay"
+msgstr "MÃ¤ngi automaatselt"
+
+#: inc/gallery-slider/gallery-slider.php:114
+msgid "Effect"
+msgstr "Effekt"
+
+#: inc/template-tags.php:26
+msgid "Pingback:"
+msgstr "Pingback:"
+
+#: inc/template-tags.php:26
+msgid "Edit"
+msgstr "Muuda"
+
+#: inc/template-tags.php:66
+msgid "Your comment is awaiting moderation."
+msgstr "Sinu kommentaar ootab kinnitamist."
+
+#: inc/template-tags.php:164
+msgid "Read more"
+msgstr "Loe rohkem"
+
+#: inc/tinymce-buttons/tinymce-buttons.php:144
+msgid "Add button"
+msgstr "Lisa nupp"
+
+#: inc/tinymce-buttons/tinymce-buttons.php:145
+msgid "Insert Button"
+msgstr "Sisesta nupp"
+
+#: inc/tinymce-buttons/tinymce-buttons.php:146
+msgid "Button text"
+msgstr "Nupu tekst"
+
+#: inc/tinymce-buttons/tinymce-buttons.php:147
+msgid "Button URL"
+msgstr "Nupu URL"
+
+#: inc/tinymce-buttons/tinymce-buttons.php:148
+msgid "Normal"
+msgstr "Normaalne"
+
+#: inc/tinymce-buttons/tinymce-buttons.php:149 inc/tinymce.php:59
+msgid "Alert"
+msgstr "Hoiata"
+
+#: inc/tinymce-buttons/tinymce-buttons.php:150
+msgid "Download"
+msgstr "Laadi alla"
+
+#: inc/tinymce-buttons/tinymce-buttons.php:151
+msgid "Color"
+msgstr "VÃ¤rv"
+
+#: inc/tinymce-buttons/tinymce-buttons.php:152
+msgid "Primary"
+msgstr "Peamine"
+
+#: inc/tinymce-buttons/tinymce-buttons.php:153
+msgid "Secondary"
+msgstr "Sekundaarne"
+
+#: inc/tinymce-buttons/tinymce-buttons.php:154
+msgid "Green"
+msgstr "Roheline"
+
+#: inc/tinymce-buttons/tinymce-buttons.php:155
+msgid "Red"
+msgstr "Punane"
+
+#: inc/tinymce-buttons/tinymce-buttons.php:156
+msgid "Orange"
+msgstr "OranÅ¾"
+
+#: inc/tinymce-buttons/tinymce-buttons.php:157
+msgid "Style"
+msgstr "Stiil"
+
+#: inc/tinymce-buttons/tinymce-buttons.php:158
+msgid "Dotted"
+msgstr "TÃ¤piline"
+
+#: inc/tinymce-buttons/tinymce-buttons.php:159
+msgid "Double"
+msgstr "Topelt"
+
+#: inc/tinymce.php:37
+msgid "Big"
+msgstr "Suur"
+
+#: inc/tinymce.php:42
+msgid "Small"
+msgstr "VÃ¤ike"
+
+#: inc/tinymce.php:47
+msgid "Citation"
+msgstr "Tsitaat"
+
+#: inc/tinymce.php:52
+msgid "Blockquote: testimonial"
+msgstr "Tsitaat: soovituskiri"
+
+#: inc/tinymce.php:63
+msgid "Success (Green)"
+msgstr "Edukas (roheline)"
+
+#: inc/tinymce.php:71
+msgid "Error (Red)"
+msgstr "Viga (punane)"
+
+#: inc/tinymce.php:79
+msgid "Important (Orange)"
+msgstr "TÃ¤htis (oranÅ¾)"
+
+#: inc/tinymce.php:89
+msgid "List"
+msgstr "List"
+
+#: inc/tinymce.php:92
+msgid "Checkmark 1"
+msgstr "Linnuke 1"
+
+#: inc/tinymce.php:99
+msgid "Checkmark 2"
+msgstr "Linnuke 2"
+
+#: inc/tinymce.php:106
+msgid "Star"
+msgstr "TÃ¤ht"
+
+#: inc/tinymce.php:113
+msgid "Dot"
+msgstr "Punkt"
+
+#: partials/content-attachment.php:11
+msgid "Download this file:"
+msgstr "Laadi see fail alla:"
+
+#: partials/content-image.php:23
+msgid "Technical Details"
+msgstr "Tehnilised detailid"
+
+#: partials/content-none.php:10
+msgid "Nothing found"
+msgstr "Midagi ei leitud"
+
+#: partials/content-none.php:19
+msgid "Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
+msgstr "Oled valmis oma esimest postitust avaldama? <a href=\"%1$s\">Alusta siin</a>."
+
+#: partials/content-none.php:25
+msgid ""
+"Sorry, but nothing matched your search terms. Please try again with some different "
+"keywords."
+msgstr ""
+"Vabandame, aga otsing ei leidnud midagi. Palun proovi uuesi, kasutades otsimiseks "
+"teistsuguseid sÃµnu."
+
+#: partials/content-none.php:27
+msgid ""
+"It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can "
+"help."
+msgstr "Paistab, et me ei suuda seda leida. Ehk on otsimine abiks."
+
+#: partials/entry-date.php:18
+msgid "%s ago"
+msgstr "%s tagasi"
+
+#: partials/entry-pagination.php:12
+msgid "Pages:"
+msgstr "Lehed:"
+
+#: partials/entry-taxonomy.php:21
+msgid "<i class=\"fa fa-file\"></i> "
+msgstr "<i class=\"fa fa-file\"></i> "
+
+#: partials/entry-taxonomy.php:26
+msgid "<i class=\"fa fa-tag\"></i> "
+msgstr "<i class=\"fa fa-tag\"></i> "
+
+#: partials/footer-credit.php:29
+msgid "homepage"
+msgstr "koduleht"
+
+#: partials/header-layout-3.php:27 partials/header-layout-3.php:71
+#: partials/header-layout.php:27 partials/header-layout.php:70
+msgid "Skip to content"
+msgstr "JÃ¤ta vahele kuni sisuni"
+
+#: partials/nav-paging.php:9
+msgid "Posts navigation"
+msgstr "Postituste navigeerimine"
+
+#: partials/nav-paging.php:18
+msgid "Newer posts"
+msgstr "Uuemad postitused"
+
+#: partials/nav-paging.php:26
+msgid "Older posts"
+msgstr "Vanemad postitused"
+
+#: partials/nav-post.php:20
+msgid "Post navigation"
+msgstr "Postituse navigeerimine"
+
+#: partials/section-title.php:12 partials/section-title.php:24
+#: partials/section-title.php:30 partials/section-title.php:36
+msgid "From %s"
+msgstr "Alates %s"
+
+#: partials/section-title.php:18
+msgid "Tagged %s"
+msgstr "MÃ¤rgitud %s"
+
+#: partials/section-title.php:42
+msgid "By %s"
+msgstr "Autor %s"
+
+#: partials/section-title.php:47
+msgid "Archive"
+msgstr "Arhiiv"
+
+#: partials/section-title.php:53
+msgid "Search for %s"
+msgstr "Otsi %s"
+
+#: partials/section-title.php:59
+msgid "%s result found"
+msgid_plural "%s results found"
+msgstr[0] "%s tulemus leiti"
+msgstr[1] "%s tulemust leiti"
+
+#: searchform.php:10
+msgid "Press Enter to submit your search"
+msgstr "Vajuta Enter, et kÃ¤ivitada otsing"
+
+#. Theme Name of the plugin/theme
+msgid "Make"
+msgstr "Make"
+
+#. Theme URI of the plugin/theme
+msgid "https://thethemefoundry.com/wordpress-themes/make/"
+msgstr "https://thethemefoundry.com/wordpress-themes/make/"
+
+#. Description of the plugin/theme
+msgid ""
+"Create your website without touching a line of code. Make's flexible customization "
+"features and a powerful drag and drop page builder make designing your site fun and "
+"easy. Build almost anything: a simple portfolio or photography site, an ecommerce "
+"business site, a minimalist blog, or even a professional magazine. You'll start by "
+"customizing your background, layouts, fonts, colors, and logo. Next, add and "
+"organize your content using the drag and drop page builder. Add a photo, a video, a "
+"gallery, or even a slider to any page on your website. Make is responsive, so your "
+"website will naturally look great on phones, tablets, and desktop screens. It's "
+"also fully compatible with popular plugins like WooCommerce, Gravity Forms, Contact "
+"Form 7, Jetpack, and WP PageNavi."
+msgstr ""
+"Loo oma veebileht ilma, et puutuksid Ã¼htegi rida koodi. Make'i "
+"paindlikudkohandamise valikud ja vÃµimas lohista ja vabasta lehekÃ¼lje ehitaja "
+"muudavadsinu lehe disainimise kergeks ja lÃµbusaks. Ehita peaaegu kÃµike: lihtne "
+"portfoolio vÃµi fotograafia leht, internetipood, minimalistlik blogi vÃµi isegi "
+"professionaalne ajakiri. Alusta, kohandades tausta, vÃ¤limust, fonte, vÃ¤rve ja logo. "
+"JÃ¤rgmisena lisa ja organiseeri oma lehekÃ¼lje sisu, kasutades lohista ja vabasta "
+"veebilehe ehitajat. Lisa foto, video, galerii vÃµi isegi liugur mistahes "
+"veebilehele. Make on dÃ¼naamiline, seega sinu veebileht nÃ¤eb ilus vÃ¤lja nii "
+"tahvelarvutis, mobiilis kui ka tavalisel arvutil. Lisaks on see ka tÃ¤ielikult "
+"Ã¼hilduv populaarsete pluginatega nagu WooCommerce, Gravity Forms, Contact Form 7, "
+"Jetpack ja WP PageNavi."
+
+#. Author of the plugin/theme
+msgid "The Theme Foundry"
+msgstr "The Theme Foundry"
+
+#. Author URI of the plugin/theme
+msgid "https://thethemefoundry.com"
+msgstr "https://thethemefoundry.com"
+
+#. Template Name of the plugin/theme
+msgid "Builder Template"
+msgstr "Ehitaja Å¡abloon"
+
+#: comments.php:16
+msgctxt "comments title"
+msgid "One comment"
+msgid_plural "%1$s comments"
+msgstr[0] "Ãœks kommentaar"
+msgstr[1] "%1$s kommentaari"
+
+#: inc/builder/sections/section-definitions.php:73
+msgctxt "section name"
+msgid "Columns"
+msgstr "Veerud"
+
+#: inc/builder/sections/section-definitions.php:161
+msgctxt "section name"
+msgid "Banner"
+msgstr "BÃ¤nner"
+
+#: inc/builder/sections/section-definitions.php:306
+msgctxt "section name"
+msgid "Gallery"
+msgstr "Galerii"
+
+#: inc/customizer/helpers-fonts.php:706
+msgctxt "font style"
+msgid "Serif"
+msgstr "Serif"
+
+#: inc/customizer/helpers-fonts.php:710
+msgctxt "font style"
+msgid "Sans Serif"
+msgstr "Sans Serif"
+
+#: inc/customizer/helpers-fonts.php:714
+msgctxt "font style"
+msgid "Monospaced"
+msgstr "Monospaced"
+
+#: inc/customizer/helpers.php:167
+msgctxt "footer widget area number"
+msgid "0"
+msgstr "0"
+
+#: inc/customizer/helpers.php:168
+msgctxt "footer widget area number"
+msgid "1"
+msgstr "1"
+
+#: inc/customizer/helpers.php:169
+msgctxt "footer widget area number"
+msgid "2"
+msgstr "2"
+
+#: inc/customizer/helpers.php:170
+msgctxt "footer widget area number"
+msgid "3"
+msgstr "3"
+
+#: inc/customizer/helpers.php:171
+msgctxt "footer widget area number"
+msgid "4"
+msgstr "4"
+
+#: inc/extras.php:337
+msgctxt "list item separator"
+msgid ", "
+msgstr ","
+
+#: inc/template-tags.php:44
+msgctxt "1: date, 2: time"
+msgid "%1$s at %2$s"
+msgstr "%1$s kell %2$s"
+
+#: inc/template-tags.php:60
+msgctxt "e.g. Bob says hello."
+msgid "says:"
+msgstr "Ã¼tleb:"
+
+#: inc/template-tags.php:486
+msgctxt "time"
+msgid "second"
+msgstr "sekund"
+
+#: inc/template-tags.php:492
+msgctxt "time"
+msgid "seconds"
+msgstr "sekundit"
+
+#: inc/template-tags.php:511
+msgctxt "camera f-stop"
+msgid "f/"
+msgstr "f/"
+
+#: inc/template-tags.php:530
+msgctxt "camera setting"
+msgid "Camera:"
+msgstr "Kaamera:"
+
+#: inc/template-tags.php:536
+msgctxt "camera setting"
+msgid "Taken:"
+msgstr "VÃµtnud:"
+
+#: inc/template-tags.php:543
+msgctxt "camera setting"
+msgid "Focal length:"
+msgstr "Fookuse pikkus:"
+
+#: inc/template-tags.php:549
+msgctxt "camera setting"
+msgid "Aperture:"
+msgstr "Avamine:"
+
+#: inc/template-tags.php:555
+msgctxt "camera setting"
+msgid "Exposure:"
+msgstr "SÃ¤riaeg:"
+
+#: inc/template-tags.php:561
+msgctxt "camera setting"
+msgid "ISO:"
+msgstr "ISO:"
+
+#: inc/template-tags.php:544
+msgctxt "millimeters"
+msgid "mm"
+msgstr "mm"
+
+#: partials/entry-author.php:26
+msgctxt "author byline"
+msgid "by %s"
+msgstr "autorilt %s"
+
+#: partials/footer-credit.php:27
+msgctxt "attribution"
+msgid "by"
+msgstr "autorilt"
+
+#: partials/section-title.php:31
+msgctxt "monthly archives date format"
+msgid "F Y"
+msgstr "F Y"
+
+#: partials/section-title.php:37
+msgctxt "yearly archives date format"
+msgid "Y"
+msgstr "Y"
+
+#: searchform.php:9
+msgctxt "label"
+msgid "Search for:"
+msgstr "Otsi:"
+
+#: searchform.php:10
+msgctxt "placeholder"
+msgid "Search&hellip;"
+msgstr "Otsi&hellip;"
+
+#: searchform.php:12
+msgctxt "submit button"
+msgid "Search"
+msgstr "Otsi"

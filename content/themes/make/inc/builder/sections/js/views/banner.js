@@ -95,9 +95,7 @@ var oneApp = oneApp || {}, $oneApp = $oneApp || jQuery(oneApp);
 			$selector = $('.ttfmake-configuration-color-picker');
 		}
 
-		$selector.wpColorPicker({
-			hide: false
-		});
+		$selector.wpColorPicker();
 	};
 
 	// Initialize the sortables

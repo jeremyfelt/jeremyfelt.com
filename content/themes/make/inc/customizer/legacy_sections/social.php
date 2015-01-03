@@ -234,7 +234,7 @@ function ttfmake_customizer_social( $wp_customize, $section ) {
 				'description' => sprintf(
 					__( 'If you would like to add a social profile that is not listed above, or change the order of the icons, use %s.', 'make' ),
 					sprintf(
-						'<a href="' . esc_url( 'https://thethemefoundry.com/tutorials/make/#social-profiles-and-rss' ) . '">%s</a>',
+						'<a href="' . esc_url( 'https://thethemefoundry.com/docs/make-docs/tutorials/set-social-profile-links-using-custom-menu/' ) . '">%s</a>',
 						__( 'this alternate method', 'make' )
 					)
 				),

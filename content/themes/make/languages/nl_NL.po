@@ -8,7 +8,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2014-11-04 21:20+0100\n"
+"PO-Revision-Date: 2014-11-10 21:26+0100\n"
 "Last-Translator: Leo Oosterloo <leo.oosterloo@gmail.com>\n"
 "Language-Team: \n"
 "X-Generator: Poedit 1.6.10\n"
@@ -37,11 +37,11 @@ msgstr "Primair Menu"
 
 #: functions.php:146
 msgid "Social Profile Links"
-msgstr "Sociale Profiel Links"
+msgstr "Sociale profiel links"
 
 #: functions.php:147
 msgid "Header Bar Menu"
-msgstr "Header Balk Menu"
+msgstr "Header balk menu"
 
 #: functions.php:177
 msgid "Left Sidebar"
@@ -78,7 +78,7 @@ msgstr "Gebruik Pagina Bouwer"
 #: inc/builder/core/base.php:424 inc/builder/core/configuration-helpers.php:96
 #: inc/builder/sections/builder-templates/text.php:131
 msgid "Set image"
-msgstr "Afbeelding Instellen"
+msgstr "Afbeelding instellen"
 
 #: inc/builder/core/base.php:457
 #: inc/builder/core/templates/overlay-tinymce.php:4
@@ -97,7 +97,7 @@ msgstr "Huidige afbeelding"
 
 #: inc/builder/core/base.php:544
 msgid "Remove Current Image"
-msgstr "Verwijder Huidige Afbeelding"
+msgstr "Verwijder huidige afbeelding"
 
 #: inc/builder/core/base.php:611
 msgid "Add Media"
@@ -140,12 +140,12 @@ msgstr "Configuratie"
 
 #: inc/builder/core/templates/overlay-header.php:7
 msgid "Done"
-msgstr "Gedaan"
+msgstr "Klaar"
 
 #: inc/builder/core/templates/section-header.php:12
 #: inc/builder/core/templates/section-header.php:13
 msgid "Delete section"
-msgstr "Delete sectie"
+msgstr "Verwijder sectie"
 
 #: inc/builder/core/templates/section-header.php:67
 msgid "Click to toggle"
@@ -1588,7 +1588,7 @@ msgstr "Bericht"
 
 #: inc/edit-page.php:90
 msgid "Looking to configure a unique layout for this %1$s? %2$s."
-msgstr "Wil je een unieke layout instellen hiervoor %1$s opmaken? %2$s."
+msgstr "Wil je een unieke layout voor deze %1$s instellen? %2$s."
 
 #: inc/extras.php:78
 msgid "Page %s"

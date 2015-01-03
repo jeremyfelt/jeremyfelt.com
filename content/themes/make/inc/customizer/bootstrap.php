@@ -16,6 +16,7 @@ function ttfmake_customizer_init() {
 
 	// Always load
 	require_once( $path . 'controls.php' );
+	require_once( $path . 'google-fonts.php' );
 	require_once( $path . 'helpers.php' );
 	require_once( $path . 'helpers-css.php' );
 	require_once( $path . 'helpers-defaults.php' );
@@ -71,6 +72,13 @@ function ttfmake_customizer_get_panels() {
 		'footer'         => array( 'title' => __( 'Footer', 'make' ), 'priority' => 600 ),
 	);
 
+	/**
+	 * Filter the array of panel definitions for the Customizer.
+	 *
+	 * @since 1.3.0.
+	 *
+	 * @param array    $panels    The array of panel definitions.
+	 */
 	return apply_filters( 'make_customizer_panels', $panels );
 }
 endif;
@@ -123,6 +131,16 @@ if ( ! function_exists( 'ttfmake_customizer_get_sections' ) ) :
  * @return array    The master array of Customizer sections
  */
 function ttfmake_customizer_get_sections() {
+	/**
+	 * Filter the array of section definitions for the Customizer.
+	 *
+	 * This filter is used to compile a master array of section definitions for each
+	 * panel in the Customizer.
+	 *
+	 * @since 1.3.0.
+	 *
+	 * @param array    $sections    The array of section definitions.
+	 */
 	return apply_filters( 'make_customizer_sections', array() );
 }
 endif;

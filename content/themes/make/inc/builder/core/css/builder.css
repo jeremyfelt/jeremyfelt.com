@@ -505,6 +505,8 @@
 	background-color: #fff;
 	-webkit-box-shadow: 0 3px 6px rgba(0,0,0,.3);
 	box-shadow: 0 3px 6px rgba(0,0,0,.3);
+	/* Fix webkit bug. @link https://github.com/mgcrea/angular-strap/issues/1234#issuecomment-61913920 */
+	-webkit-transform: translate3d(0,0,0);
 }
 .ttfmake-overlay-window-head {
 	padding: 0; /*reser*/
