@@ -6,7 +6,5 @@ content/images
 *.pyc
 .vagrant
 *.sublime*
-/database/data/*
 *.sql
 *.sql.gz
-!/database/init.sql
