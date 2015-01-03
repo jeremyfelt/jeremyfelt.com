@@ -25,8 +25,7 @@ def pull_content():
 	pull_uploads()
 
 def sync_themes():
-	local( "rsync -rvzh --delete --exclude '*.git*' www/wordpress/wp-content/themes/twentyfourteen/ content/themes/twentyfourteen/" )
-	local( "rsync -rvzh --delete --exclude '*.git*' www/wordpress/wp-content/themes/twentythirteen/ content/themes/twentythirteen/" )
+	local( "rsync -rvzh --delete --exclude '*.git*' www/wordpress/wp-content/themes/twentyfifteen/ content/themes/twentyfifteen/" )
 
 def push_www():
 	sudo( "chown -R jeremyfelt:jeremyfelt /tmp/www/jeremyfelt.com/www" )
