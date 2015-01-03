@@ -29,17 +29,20 @@ def sync_themes():
 	local( "rsync -rvzh --delete --exclude '*.git*' www/wordpress/wp-content/themes/twentythirteen/ content/themes/twentythirteen/" )
 
 def push_www():
+	sudo( "chown -R jeremyfelt:jeremyfelt /tmp/www/jeremyfelt.com/www" )
 	local("rsync -rvzh -e ssh --delete --exclude '.git' --exclude 'remote-config.php' --exclude 'local-config.php' www/ foghlaimeoir:/tmp/www/jeremyfelt.com/www" )
 	sudo( "chown -R www-data:www-data /tmp/www/jeremyfelt.com/www" )
 	sudo( "rsync -rvzh -e ssh --delete --exclude '.git' --exclude 'remote-config.php' --exclude 'local-config.php' /tmp/www/jeremyfelt.com/www/ /var/www/jeremyfelt.com/www", user="www-data" )
 
 def push_tweets():
+	sudo( "chown -R jeremyfelt:jeremyfelt /tmp/www/jeremyfelt.com/tweets" )
 	local("rsync -rvzh -e ssh --delete --exclude '.git' tweets/ foghlaimeoir:/tmp/www/jeremyfelt.com/tweets" )
 	sudo( "chown -R www-data:www-data /tmp/www/jeremyfelt.com/tweets" )
 	sudo( "rsync -rvzh -e ssh --delete --exclude '.git' /tmp/www/jeremyfelt.com/tweets/ /var/www/jeremyfelt.com/tweets", user="www-data" )
 
 def push_content():
-	local("rsync -rvzh -e ssh --delete --exclude '*.git*' --include '*/images/' --include '*/uploads/' --exclude 'uploads' --exclude 'images' content/ foghlaimeoir:/tmp/www/jeremyfelt.com/content" )
+	sudo( "chown -R jeremyfelt:jeremyfelt /tmp/www/jeremyfelt.com/content" )
+	local( "rsync -rvzh -e ssh --delete --exclude '*.git*' --include '*/images/' --include '*/uploads/' --exclude 'uploads' --exclude 'images' content/ foghlaimeoir:/tmp/www/jeremyfelt.com/content" )
 	sudo( "chown -R www-data:www-data /tmp/www/jeremyfelt.com/content" )
 	sudo( "rsync -rvzh -e ssh --delete --exclude '*.git*' --include '*/images/' --include '*/uploads/' --exclude 'uploads' --exclude 'images' /tmp/www/jeremyfelt.com/content/ /var/www/jeremyfelt.com/content", user="www-data" )
 
