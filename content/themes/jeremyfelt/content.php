@@ -54,6 +54,11 @@
 
 	<footer class="entry-footer">
 		<?php twentyfifteen_entry_meta(); ?>
+		<?php if ( is_singular() ) : ?>
+		<span class="cc-copyright" style="display: block; margin-top: 2rem;">
+			"<?php the_title(); ?>", unless otherwise expressly stated, is licensed under a <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/us/">Creative Commons Attribution-Noncommercial-Share Alike 3.0 United States License</a>.
+		</span>
+		<?php endif; ?>
 	</footer><!-- .entry-footer -->
 
 </article><!-- #post-## -->
