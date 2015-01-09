@@ -22,7 +22,7 @@ if ( ! class_exists( 'Yoast_Api_Googleanalytics' ) ) {
 
 		/**
 		 * Autoload the API Oauth classes
-		 * 
+		 *
 		 * @param string $class_name - The class that should be loaded
 		 */
 		private function autoload_api_oauth_files( $class_name ) {
@@ -30,7 +30,7 @@ if ( ! class_exists( 'Yoast_Api_Googleanalytics' ) ) {
 			$class_name  = strtolower( $class_name );
 			$oauth_files = array(
 				'yoast_googleanalytics_reporting' => 'class-googleanalytics-reporting',
-				'yoast_google_analytics_client'       => 'class-google-analytics-client',
+				'yoast_google_analytics_client'   => 'class-google-analytics-client',
 			);
 
 			if ( ! empty( $oauth_files[$class_name] ) ) {
