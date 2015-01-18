@@ -7,7 +7,7 @@ if ( ! function_exists( 'ttfmake_get_google_fonts' ) ) :
 /**
  * Return an array of all available Google Fonts.
  *
- * Updated: 2014-12-22T20:48:36+00:00
+ * Updated: 2015-01-12T22:51:47+00:00
  *
  * @since  1.0.0.
  *
@@ -5631,6 +5631,17 @@ function ttfmake_get_google_fonts() {
 			),
 			'category' => 'sans-serif',
 		),
+		'Peddana' => array(
+			'label' => 'Peddana',
+			'variants' => array(
+				'regular',
+			),
+			'subsets' => array(
+				'latin',
+				'telugu',
+			),
+			'category' => 'serif',
+		),
 		'Peralta' => array(
 			'label' => 'Peralta',
 			'variants' => array(
@@ -6137,6 +6148,17 @@ function ttfmake_get_google_fonts() {
 				'telugu',
 			),
 			'category' => 'sans-serif',
+		),
+		'Ramaraja' => array(
+			'label' => 'Ramaraja',
+			'variants' => array(
+				'regular',
+			),
+			'subsets' => array(
+				'latin',
+				'telugu',
+			),
+			'category' => 'serif',
 		),
 		'Rambla' => array(
 			'label' => 'Rambla',
@@ -7342,6 +7364,17 @@ function ttfmake_get_google_fonts() {
 			),
 			'subsets' => array(
 				'latin',
+			),
+			'category' => 'sans-serif',
+		),
+		'Tenali Ramakrishna' => array(
+			'label' => 'Tenali Ramakrishna',
+			'variants' => array(
+				'regular',
+			),
+			'subsets' => array(
+				'latin',
+				'telugu',
 			),
 			'category' => 'sans-serif',
 		),

@@ -1,3 +1,13 @@
+## 1.4.8
+
+* Fixed bug preventing Builder section duplication in some cases
+* Fixed line breaks in post comment count in Webkit browsers
+* Fixed content editor in Builder overlay resizable
+* Deprecated unused Builder functions
+* Added new filter hook: `make_content_width`
+* Added theme support for title tag
+* Added Russian translation
+
 ## 1.4.7
 
 * Fixed bug where Customizer's font-family options weren't showing correct selected choice

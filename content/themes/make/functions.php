@@ -6,7 +6,7 @@
 /**
  * The current version of the theme.
  */
-define( 'TTFMAKE_VERSION', '1.4.7' );
+define( 'TTFMAKE_VERSION', '1.4.8' );
 
 /**
  * The suffix to use for scripts.
@@ -35,21 +35,33 @@ if ( ! function_exists( 'ttfmake_content_width' ) ) :
 function ttfmake_content_width() {
 	global $content_width;
 
+	$new_width = $content_width;
 	$left = ttfmake_has_sidebar( 'left' );
 	$right = ttfmake_has_sidebar( 'right' );
 
 	// No sidebars
 	if ( ! $left && ! $right ) {
-		$content_width = 960;
+		$new_width = 960;
 	}
 	// Both sidebars
 	else if ( $left && $right ) {
-		$content_width = 464;
+		$new_width = 464;
 	}
 	// One sidebar
 	else if ( $left || $right ) {
-		$content_width = 620;
+		$new_width = 620;
 	}
+
+	/**
+	 * Filter to modify the $content_width variable.
+	 *
+	 * @since 1.4.8
+	 *
+	 * @param int     $new_width    The new content width.
+	 * @param bool    $left         True if the current view has a left sidebar.
+	 * @param bool    $right        True if the current view has a right sidebar.
+	 */
+	$content_width = apply_filters( 'make_content_width', $new_width, $left, $right );
 }
 endif;
 
@@ -139,6 +151,9 @@ function ttfmake_setup() {
 		'gallery',
 		'caption'
 	) );
+
+	// Title tag
+	add_theme_support( 'title-tag' );
 
 	// Menu locations
 	register_nav_menus( array(
@@ -240,12 +255,26 @@ if ( ! function_exists( 'ttfmake_head_early' ) ) :
  * @return void
  */
 function ttfmake_head_early() {
+	// Title tag fallback
+	if ( ! function_exists( '_wp_render_title_tag' ) ) : ?>
+		<title><?php wp_title( '|', true, 'right' ); ?></title>
+<?php
+	endif;
+
 	// JavaScript detection ?>
-	<script type="text/javascript">
-		/* <![CDATA[ */
-		document.documentElement.className = document.documentElement.className.replace(new RegExp('(^|\\s)no-js(\\s|$)'), '$1js$2');
-		/* ]]> */
-	</script>
+
+		<script type="text/javascript">
+			/* <![CDATA[ */
+			document.documentElement.className = document.documentElement.className.replace(new RegExp('(^|\\s)no-js(\\s|$)'), '$1js$2');
+			/* ]]> */
+		</script>
+
+<?php
+	// Meta tags ?>
+		<meta charset="<?php bloginfo( 'charset' ); ?>">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
 <?php
 }
 endif;
