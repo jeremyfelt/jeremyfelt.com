@@ -128,9 +128,8 @@ body {
 // Editor stuff
 .editor {
 	padding: 0 em( 30px ) 0;
-	transform: translateZ( 0 );
 
-	@include breakpoint( phone ) {
+	@include breakpoint( S- ) {
 		padding: 0;
 	}
 }
@@ -143,16 +142,11 @@ body {
 	}
 }
 
-[contenteditable] { // Temporary
-	outline: 0;
-}
-
 .post__title {
 	margin: 0;
 	padding: .83em 0;
 	border-bottom: 1px solid $gray--light;
 	line-height: 1.4;
-	margin-bottom: em( 16px );
 
 	@include breakpoint( S- ) {
 		font-size: 1em;
@@ -285,7 +279,7 @@ body {
 	margin: 14px 30px 14px 0;
 	font-size: 0;
 
-	@include breakpoint( phone ) {
+	@include breakpoint( S- ) {
 		margin: 10px 10px 10px 0;
 	}
 }
@@ -304,7 +298,7 @@ body {
 	z-index: 9999;
 
 	.dashicons {
-		fill: #999;
+		color: #999;
 	}
 	@include breakpoint( S- ) {
 		min-height: 45px;
@@ -314,7 +308,7 @@ body {
 		border-bottom: 1px solid $gray--light;
 
 		.dashicons-wordpress-alt {
-			fill: $blue--light;
+			color: $blue--light;
 		}
 	}
 }
@@ -349,10 +343,11 @@ body {
 	}
 	.dashicons-wordpress-alt {
 		position: relative;
-		top: -2px;
+		top: -1px;
 		margin-right: 10px;
 		background: url( ../images/icons/png/wordpress-alt-white.png ) no-repeat center center;
 		background: none, none; // The magic
+		vertical-align: middle;
 	}
 }
 
@@ -396,5 +391,85 @@ body {
 
 	.dashicons-plus {
 		display: block;
+	}
+}
+
+
+// TinyMCE
+.wp-editor-wrap {
+	.wp-media-buttons {
+		float: none;
+	}
+	.button.add_media {
+		position: fixed;
+			bottom: 0;
+			left: 0;
+		width: 63px;
+		height: 58px;
+		z-index: 2;
+
+		// remove button styles
+		margin: 0;
+		padding: 11px;
+		border: 0;
+		border-right: 1px solid $gray--light;
+		border-radius: 0;
+		background: none;
+		box-shadow: none;
+		overflow: hidden;
+
+		@include breakpoint( S- ) {
+			width: 55px;
+			height: 50px;
+			padding: 7px;
+		}
+		&:hover,
+		&:focus,
+		&:active {
+			position: fixed;
+				top: auto;
+				bottom: 0;
+				left: 0;
+			margin: 0;
+			background: none;
+			border-color: $gray--light;
+			color: #222;
+		}
+		.wp-media-buttons-icon {
+			width: auto;
+			height: auto;
+			margin: 0 20px 0 0;
+
+			&:before {
+				font-size: 40px;
+				content: '\f306';
+			}
+		}
+	}
+	div.mce-toolbar-grp {
+		margin-bottom: em( 30px, 14px );
+		padding: em( 10px, 14px ) 0;
+		background: none;
+		border-color: $gray--light;
+	}
+}
+
+.mce-stack-layout {
+	@include clearfix;
+}
+
+.mce-container.mce-toolbar {
+	float: left;
+
+	&:nth-child( 2 ) {
+		float: right;
+	}
+}
+
+
+@include breakpoint( M- ) {
+	#mceu_11,
+	#mceu_12 {
+		display: none;
 	}
 }

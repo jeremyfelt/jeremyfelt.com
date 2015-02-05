@@ -135,10 +135,15 @@
 
 				// Add a source attribution if there is one available.
 				if ( ( ( title.length && __( 'new-post' ) !== title ) || site_name.length ) && url.length ) {
-					content += '<p>'
+					content += '<p class="wppt_source">'
 					+ __( 'source' )
 					+ ' <cite class="wppt_suggested_content_source"><a href="'+ encodeURI( url ) +'">'+ html_encode( title || site_name ) +'</a></cite>'
 					+ '</p>';
+				}
+
+				// Use embeddable URL if recognized, and hide selected images (but leave them selectable)
+				if ( data.u && is_embeddable( data ) ) {
+					content = '[embed]' + data.u + "[/embed]\n" + content;
 				}
 
 				if ( ! content.length ) {
@@ -146,6 +151,21 @@
 				}
 
 				return content.replace( /\\/g, '' );
+			}
+
+			function is_embeddable( data ) {
+				if ( ! data || ! data.u ) {
+					return false;
+				} else if ( data.u.match(/\/\/(m\.|www\.)?youtube\.com\/watch\?/) || data.u.match(/\/youtu\.be\/.+$/) ) {
+					return true;
+				} else if ( data.u.match(/\/\/vimeo\.com\/(.+\/)?[\d]+$/) ) {
+					return true;
+				} else if ( data.u.match(/\/\/(www\.)?dailymotion\.com\/video\/.+$/) ) {
+					return true;
+				} else if ( data.u.match(/\/\/soundcloud\.com\/.+$/) ) {
+					return true;
+				}
+				return false;
 			}
 
 			function is_src_uninteresting_path( src ) {
@@ -156,6 +176,7 @@
 				|| src.match(/\/([^\.\/]+[-_]{1})?(spinner|loading|spacer|blank)s?([-_]{1}[^\.\/]+)?\.[a-z0-9]{3,4}/) // fancy loaders, spinners, spacers
 				|| src.match(/([^\.\/]+[-_]{1})?thumb[^.]*\.(gif|jpg|png)$/) // thumbnails, too small, usually irrelevant to context
 				|| src.match(/\/wp-includes\//) // classic WP interface images
+				|| src.match(/[^\d]{1}\d{1,2}x\d+\.(gif|jpg|png)$/) // most often tiny buttons/thumbs (< 100px wide)
 				|| src.indexOf('/g.gif') > -1 // classic WP stats gif
 				|| src.indexOf('/pixel.mathtag.com') > -1 // classic WP stats gif
 				);
@@ -242,7 +263,6 @@
 
 			function submit_post( event, action ) {
 				show_spinner();
-		//		maybe_clear_suggested_content_placeholder();
 
 				var form = $('#wppt_form');
 
@@ -321,7 +341,6 @@
 			function show_nomedia_button() {
 				$('#wppt_no_image').click(function(){
 						unset_selected_media();
-						$( '#wppt_featured_image_container' ).addClass('no-media');
 				}).attr(
 					'title', __( 'no-media' )
 				);
@@ -337,6 +356,7 @@
 				$( '#wppt_selected_img_field' ).val('');
 				$( '#wppt_selected_img' ).attr( 'src', '' ).css('background-image', 'none' );
 				hide_selected_media();
+				$( '#wppt_featured_image_container' ).addClass('no-media');
 			}
 
 			function add_new_image_to_list( src ) {
@@ -365,15 +385,7 @@
 				if ( messages_div && messages_div.remove )
 					messages_div.remove();
 			}
-/*
-			function maybe_clear_suggested_content_placeholder() {
-				var content_field = $('#wppt_suggested_content_container');
-				if ( __( 'start-typing-here' ).toLowerCase() == content_field.text().toLowerCase() ) {
-					content_field.empty();
-					$('#wppt_content_field').val('');
-				}
-			}
-*/
+
 			function close_self( source_url ) {
 				if ( 'popup' == ux_context )
 					self.close();
@@ -403,7 +415,6 @@
 			function render_default_form_field_values() {
 				$('#wppt_nonce_field').val( nonce );
 				$('#wppt_title_field').val( suggested_title_str );
-		//		$('#wppt_content_field').val( suggested_content_str );
 				$('#wppt_selected_img_field').val( featured );
 				$('#wppt_source_url_field').val( get_canonical_link( data ) );
 				$('#wppt_source_name_field').val( get_source_site_name( data ) );
@@ -468,16 +479,15 @@
 				}
 
 				editor && editor.setContent( suggested_content_str );
+			}
 
-				/*
-				$('#wppt_suggested_content_container').css({
-					'display' : 'block'
-				}).on('focus', function(){
-					maybe_clear_suggested_content_placeholder();
-				}).on('input', function(){
-					$('#wppt_content_field').val( $(this).html() );
-				}).html( suggested_content_str );
-				*/
+			function render_images() {
+				if ( data && ! is_embeddable( data ) ) {
+					render_featured_image();
+				} else {
+					unset_selected_media();
+				}
+				render_interesting_images();
 			}
 
 			function render_featured_image() {
@@ -573,9 +583,8 @@
 				render_default_form_field_values();
 				render_admin_bar();
 				render_suggested_title();
-				render_featured_image();
-				render_interesting_images();
-			//	render_suggested_content();
+				render_images();
+				$( document ).on( 'tinymce-editor-init', render_suggested_content );
 				render_startup_notices();
 				return true;
 			}
@@ -651,8 +660,6 @@
 				// @TODO: couldn't monitor, fail gracefully
 				console.log('Could not monitor app...');
 			}
-
-			$( document ).on( 'tinymce-editor-init', render_suggested_content );
 
 			// Assign callback/public properties/methods to returned object
 			this.file_upload_success = file_upload_success;

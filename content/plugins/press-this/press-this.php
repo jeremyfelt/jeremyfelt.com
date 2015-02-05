@@ -3,11 +3,10 @@
 Plugin Name: Press This
 Plugin URI: https://wordpress.org/plugins/press-this/
 Description: Posting images, links, and cat gifs will never be the same.
-Version: 0.0.4.3-20150130
+Version: 0.0.4.3-20150204
 Author: Press This Team
 Author URI: https://corepressthis.wordpress.com/
 Text Domain: press-this
-Domain Path: /languages
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 */
@@ -23,18 +22,10 @@ class WpPressThis {
 	 * @uses remove_action(), add_action()
 	 */
 	public function __construct() {
-
-		/*
-		 * @TODO: IMPORTANT: must come up with final solution for SAMEORIGIN handling when in modal context (detect, secure, serve).
-		 */
-
 		$script_name = self::script_name();
 
 		if ( empty( $script_name ) )
 			return;
-
-		// Only needed with experimental iframe mode
-		// self::handle_sameorigin_policy();
 
 		if ( is_admin() ) {
 			if ( false !== strpos( self::runtime_url(), $script_name ) ) {
@@ -62,56 +53,8 @@ class WpPressThis {
 		}
 	}
 
-	/** TODO: consider dropping iframe mode and this function. Iframes obstruct the "main" window, cannot be easily moved or resized, etc.
-	 * WpPressThis::handle_sameorigin_policy()
-	 *
-	 * Relax local sameorigin policy to allow PT and some parts of wp-admin to be used from within an iframe.
-	 * Experimental and currently unused until proven to be handled securely.
-	 *
-	 * @uses WpPressThis::script_name(), WpPressThis::runtime_url(), site_url(), admin_url(), remove_action()
-	 */
-	public function handle_sameorigin_policy() {
-		$script_name = self::script_name();
-		if ( ! is_admin() ) {
-			if ( false !== strpos( site_url( 'wp-login.php' ), $script_name ) ) {
-				/*
-				 * Only remove SAMEORIGIN header for /wp-login.php, so it can be displayed in the modal/iframe if needed,
-				 * but only if then redirecting to /wp-admin/press-this.php
-				 */
-				if ( ! empty( $_GET['redirect_to'] )
-				     && false !== strpos( $_GET['redirect_to'], self::runtime_url() ) )
-					remove_action( 'login_init', 'send_frame_options_header' );
-			}
-		} else {
-			if ( false !== strpos( self::runtime_url(), $script_name ) ) {
-				/*
-				 * Remove SAMEORIGIN header for /wp-admin/press-this.php on targeted install so it can be used inside the modal's iframe
-				 */
-				remove_action( 'admin_init', 'send_frame_options_header' );
-			} else if ( false !== strpos( admin_url( 'post.php' ), $script_name ) ) {
-				/*
-				 * Remove SAMEORIGIN header for /wp-admin/post.php so it can be used inside the modal's iframe,
-				 * after saving a draft, but only if referred from /wp-admin/press-this.php or itself
-				 */
-				if ( ! empty( $_SERVER['HTTP_REFERER'] )
-				     && ( false !== strpos( $_SERVER['HTTP_REFERER'], self::runtime_url() )
-				          || false !== strpos( $_SERVER['HTTP_REFERER'], admin_url( 'post.php' ) ) ) )
-					remove_action( 'admin_init', 'send_frame_options_header' );
-			} else if ( false !== strpos( admin_url( 'admin-ajax.php' ), $script_name ) ) {
-				/*
-				 * Remove SAMEORIGIN header for /wp-admin/admin-ajax.php so it can be used from the modal's iframe,
-				 * after saving a draft, but only if referred from /wp-admin/press-this.php or /wp-admin/post.php
-				 */
-				if ( ! empty( $_SERVER['HTTP_REFERER'] )
-				     && ( false !== strpos( $_SERVER['HTTP_REFERER'], self::runtime_url() )
-				          || false !== strpos( $_SERVER['HTTP_REFERER'], admin_url( 'post.php' ) ) ) )
-					remove_action( 'admin_init', 'send_frame_options_header' );
-			}
-		}
-	}
-
-	/** TODO: maybe not needed, see above.
-	 * WpPressThis::script_name() 
+	/**
+	 * WpPressThis::script_name()
 	 * Returns the current app's fully qualified script name/url based on system-level tests
 	 *
 	 * @return mixed|string
@@ -130,7 +73,7 @@ class WpPressThis {
 			: $script_name;
 	}
 
-	/** TODO: maybe not needed, see above.
+	/**
 	 * WpPressThis::set_url_scheme( $url )
 	 * Sets the URL to https or http, depending on availability and related WP config settings/APIs.
 	 *
@@ -225,31 +168,28 @@ class WpPressThis {
 	 * @return array
 	 */
 	public function i18n() {
-		$domain = 'press-this';
-
-		// TODO: remove redundant!
 		return array(
-			'press-this'                 => __( 'Press This!', $domain ),
-			'welcome'                    => __( 'Welcome to Press This!', $domain ),
-			'source'                     => __( 'Source:', $domain ),
-			'settings'                   => __( 'Settings', $domain ),
-			'close'                      => __( 'Close', $domain ),
-			'no-media'                   => __( 'Clear selected media', $domain ),
-			'show-all-media'             => __( 'Display all media', $domain ),
-			'show-selected-media'        => __( 'Display selected media', $domain ),
-			'publish'                    => __( 'Publish', $domain ),
-			'save-draft'                 => __( 'Save Draft', $domain ),
-			'new-post'                   => __( 'New Post', $domain ),
-			'start-typing-here'          => __( 'Start typing here.', $domain ),
-			'enter-url-to-scan'          => __( 'Enter a URL to scan', $domain ),
-			'scan'                       => __( 'Scan', $domain ),
-			'enter-wp-url'               => __( 'Enter a WordPress URL', $domain ),
-			'add'                        => __( 'Add', $domain ),
-			'upload-photo'               => __( 'Upload Photo', $domain ),
-			'upload-failed'              => __( 'Sorry, but your upload failed.', $domain ),
-			'unexpected-error'           => __( 'Sorry, but an unexpected error occurred.', $domain ),
-			'should-upgrade-bookmarklet' => __( 'You should upgrade <a href="%s" target="_blank">your bookmarklet</a> to the latest version!', $domain ),
-			'limit-uploads-to-photos'    => __( 'Please limit your uploads to photos. The file is still in the media library, and can be used in a new post, or <a href="%s" target="_blank">downloaded here</a>.', $domain ),
+			'press-this'                 => __( 'Press This!', 'press-this' ),
+			'welcome'                    => __( 'Welcome to Press This!', 'press-this' ),
+			'source'                     => __( 'Source:', 'press-this' ),
+			'settings'                   => __( 'Settings', 'press-this' ),
+			'close'                      => __( 'Close', 'press-this' ),
+			'no-media'                   => __( 'Clear selected media', 'press-this' ),
+			'show-all-media'             => __( 'Display all media', 'press-this' ),
+			'show-selected-media'        => __( 'Display selected media', 'press-this' ),
+			'publish'                    => __( 'Publish', 'press-this' ),
+			'save-draft'                 => __( 'Save Draft', 'press-this' ),
+			'new-post'                   => __( 'New Post', 'press-this' ),
+			'start-typing-here'          => __( 'Start typing here.', 'press-this' ),
+			'enter-url-to-scan'          => __( 'Enter a URL to scan', 'press-this' ),
+			'scan'                       => __( 'Scan', 'press-this' ),
+			'enter-wp-url'               => __( 'Enter a WordPress URL', 'press-this' ),
+			'add'                        => __( 'Add', 'press-this' ),
+			'upload-photo'               => __( 'Upload Photo', 'press-this' ),
+			'upload-failed'              => __( 'Sorry, but your upload failed.', 'press-this' ),
+			'unexpected-error'           => __( 'Sorry, but an unexpected error occurred.', 'press-this' ),
+			'should-upgrade-bookmarklet' => __( 'You should upgrade <a href="%s" target="_blank">your bookmarklet</a> to the latest version!', 'press-this' ),
+			'limit-uploads-to-photos'    => __( 'Please limit your uploads to photos. The file is still in the media library, and can be used in a new post, or <a href="%s" target="_blank">downloaded here</a>.', 'press-this' ),
 		);
 	}
 
@@ -568,23 +508,6 @@ class WpPressThis {
 			return array( 'errors' => $source_content->get_error_messages() );
 		}
 
-		// Fetch and gather <meta> data
-		if ( empty( $data['_meta'] ) ) {
-			$data['_meta'] = array();
-		}
-		
-		if ( preg_match_all( '/<meta (.+)[\s]?\/>/  ', $source_content, $matches ) ) {
-			if ( !empty( $matches[0] ) ) {
-				foreach ( $matches[0] as $key => $value ) {
-					if ( preg_match( '/<meta[^>]+(property|name)="(.+)"[^>]+content="(.+)"[^>]+\/>/', $value, $new_matches ) ) {
-						if ( empty( $data['_meta'][ $new_matches[2] ] ) ) {
-							$data['_meta'][ $new_matches[2] ] = $new_matches[3];
-						}
-					}
-				}
-			}
-		}
-
 		// Fetch and gather <img> data
 		if ( empty( $data['_img'] ) ) {
 			$data['_img'] = array();
@@ -596,6 +519,62 @@ class WpPressThis {
 					if ( preg_match( '/<img[^>]+src="([^"]+)"[^>]+\/>/', $value, $new_matches ) ) {
 						if ( ! in_array( $new_matches[1], $data['_img'] ) ) {
 							$data['_img'][] = $new_matches[1];
+						}
+					}
+				}
+			}
+		}
+
+		// Fetch and gather <iframe> data
+		if ( empty( $data['_embed'] ) ) {
+			$data['_embed'] = array();
+		}
+
+		if ( preg_match_all( '/<iframe (.+)[\s]?\/>/', $source_content, $matches ) ) {
+			if ( !empty( $matches[0] ) ) {
+				foreach ( $matches[0] as $value ) {
+					if ( preg_match( '/<iframe[^>]+src="([^"]+)"[^>]+\/>/', $value, $new_matches ) ) {
+						if ( ! in_array( $new_matches[1], $data['_embed'] ) ) {
+							if ( preg_match( '/\/\/www\.youtube\.com\/embed\/([^\?]+)\?.+$/', $new_matches[1], $src_matches )
+								|| preg_match( '/\/\/player\.vimeo\.com\/video\/([\d]+)$/', $new_matches[1], $src_matches ) ) {
+								$data['_embed'][] = $src_matches[1];
+							}
+						}
+					}
+				}
+			}
+		}
+
+		// Fetch and gather <meta> data
+		if ( empty( $data['_meta'] ) ) {
+			$data['_meta'] = array();
+		}
+
+		if ( preg_match_all( '/<meta (.+)[\s]?\/?>/  ', $source_content, $matches ) ) {
+			if ( !empty( $matches[0] ) ) {
+				foreach ( $matches[0] as $key => $value ) {
+					if ( preg_match( '/<meta[^>]+(property|name)="(.+)"[^>]+content="(.+)"/', $value, $new_matches ) ) {
+						if ( empty( $data['_meta'][ $new_matches[2] ] ) ) {
+							if ( preg_match( '/:?(title|description|keywords)$/', $new_matches[2] ) ) {
+								$data['_meta'][ $new_matches[2] ] = str_replace( '&#039;', "'", str_replace( '&#034;', '', html_entity_decode( $new_matches[3] ) ) );
+							} else {
+								$data['_meta'][ $new_matches[2] ] = $new_matches[3];
+								if ( 'og:video' == $new_matches[2] || 'og:video:secure_url' == $new_matches[2] ) {
+									if ( preg_match( '/\/\/www\.youtube\.com\/v\/([^\?]+)/', $new_matches[3], $src_matches ) ) {
+										if ( ! in_array( 'https://www.youtube.com/watch?v=' . $src_matches[1], $data['_embed'] ) ) {
+											$data['_embed'][] = 'https://www.youtube.com/watch?v=' . $src_matches[1];
+										}
+									} else if ( preg_match( '/\/\/vimeo.com\/moogaloop\.swf\?clip_id=([\d]+)$/', $new_matches[3], $src_matches ) ) {
+										if ( ! in_array( 'https://vimeo.com/' . $src_matches[1], $data['_embed'] ) ) {
+											$data['_embed'][] = 'https://vimeo.com/' . $src_matches[1];
+										}
+									}
+								} else if ( 'og:image' == $new_matches[2] || 'og:image:secure_url' == $new_matches[2] ) {
+									if ( ! in_array( $new_matches[3], $data['_img'] ) ) {
+										$data['_img'][] = $new_matches[3];
+									}
+								}
+							}
 						}
 					}
 				}
@@ -655,7 +634,7 @@ class WpPressThis {
 	 */
 	public function serve_app_html() {
 		global $wp_locale;
-		
+
 		// Get i18n strings
 		$i18n                     = self::i18n();
 
@@ -683,7 +662,6 @@ class WpPressThis {
 		$load_js_inc              = $site_settings['plugin_dir_url'] . '/js/load.js';
 		$form_action              = $site_settings['runtime_url'];
 		$upload_action            = preg_replace( '/^(.+)\/press-this\.php$/', '\1/media-upload.php', $site_settings['runtime_url'] ) . '?referer=wptuts-settings&type=image&TB_iframe=true&post_id=0';
-		$svg_icons_inc            = self::plugin_dir_path() . '/images/icons/icons.svg';
 		$txt_domain               = 'press-this';
 
 		// Echo HTML
@@ -702,7 +680,7 @@ class WpPressThis {
 	<script src="<?php echo esc_url( $json_js_inc ) ?>" language="JavaScript"></script>
 	<script src="<?php echo esc_url( $jquery_js_inc ) ?>" language="JavaScript"></script>
 	<script src="<?php echo esc_url( $load_js_inc ) ?>" language="JavaScript"></script>
-	
+
 	<script type="text/javascript">
 		var ajaxurl = '<?php echo admin_url( 'admin-ajax.php', 'relative' ); ?>',
 		pagenow = 'press-this',
@@ -712,25 +690,23 @@ class WpPressThis {
 		decimalPoint = '<?php echo addslashes( $wp_locale->number_format['decimal_point'] ); ?>',
 		isRtl = <?php echo (int) is_rtl(); ?>;
 	</script>
-	
+
 	<?php
 		// $post->ID is needed for the embed shortcode so we can show oEmbed previews in the editor. Maybe find a way without it.
 		$post = get_default_post_to_edit( 'post', true );
-		
+
 		wp_enqueue_media( array( 'post' => $post->ID ) );
 		wp_enqueue_script( 'editor' );
-		
+
 		wp_enqueue_script( 'press-this-app', self::strip_url_scheme( plugin_dir_url( __FILE__ ) ) . 'js/app.js', array(), false, true );
 	?>
 </head>
 <body>
-	<?php
-		// Include generated SVG icons file
-		if ( file_exists( $svg_icons_inc ) )
-			require_once( $svg_icons_inc );
-	?>
 	<div id="wppt_adminbar" class="adminbar">
-		<h1 id="wppt_current_site" class="current-site"><div href="#" class="dashicons dashicons-wordpress-alt"><svg class="icon"><use xlink:href="#dashicons-wordpress-alt" /></svg></div><a href="#" target="_blank"></a></h1>
+		<h1 id="wppt_current_site" class="current-site">
+			<span class="dashicons dashicons-wordpress-alt"></span>
+			<a href="#" target="_blank"></a>
+		</h1>
 		<ul id="wppt_sites" class="site-list">
 		<?php
 			foreach( (array) $site_settings['instance_sites'] as $instance_url => $instance_name ) {
@@ -746,18 +722,12 @@ class WpPressThis {
 					<input type="text" name="wppt_new_site" id="wppt_new_site" class="add-site__url" value="" placeholder="<?php echo esc_attr( $i18n['enter-wp-url'] ) ?>" />
 					<input type="submit" name="wppt_new_site_submit" id="wppt_new_site_submit" class="add-site__submit" value="<?php echo esc_attr( $i18n['add'] ) ?>" style="display:none"/>
 					<a href="" class="add-site__submit">
-						<div href="#" class="dashicons dashicons-plus">
-							<svg class="icon"><use xlink:href="#dashicons-plus" /></svg>
-						</div>
+						<span class="dashicons dashicons-plus"></span>
 						Add
 					</a>
 				</form>
 			</li>
 		</ul>
-		<div class="adminbar__actions">
-			<a role="button" href="#" id="wppt_settings_button" title="<?php echo esc_attr( $i18n['settings'] ) ?>" class="dashicons dashicons-admin-settings"><svg class="icon"><use xlink:href="#dashicons-admin-settings" /></svg></a>
-			<a role="button" href="#" id="wppt_close_button" title="<?php echo esc_attr( $i18n['close'] ) ?>" class="dashicons dashicons-no"><svg class="icon"><use xlink:href="#dashicons-no" /></svg></a>
-		</div>
 	</div>
 	<div id="wppt_scanbar" class="scan">
 		<form action="<?php echo esc_url( $form_action ) ?>" method="GET">
@@ -765,7 +735,7 @@ class WpPressThis {
 			<input type="submit" name="wppt_url_scan_submit" id="wppt_url_scan_submit" class="scan__submit" value="<?php echo esc_attr( $i18n['scan'] ) ?>" />
 		</form>
 	</div>
-	
+
 	<form id="wppt_form" name="wppt_form" method="POST" action="<?php echo esc_url( $form_action ) ?>" target="_self">
 		<input type="hidden" name="post_ID" id="post_ID" value="<?php echo esc_attr( $post->ID ); ?>" />
 		<input type="hidden" name="wppt_nonce" id="wppt_nonce_field" value="<?php echo esc_attr( $nonce ) ?>"/>
@@ -773,44 +743,48 @@ class WpPressThis {
 		<input type="hidden" name="wppt_selected_img" id="wppt_selected_img_field" value=""/>
 		<input type="hidden" name="wppt_source_url" id="wppt_source_url_field" value=""/>
 		<input type="hidden" name="wppt_source_name" id=wppt_source_name_field" value=""/>
-	
+
 	<div id='wppt_app_container' class="editor">
 		<h2 id='wppt_title_container' class="post__title" contenteditable="true"></h2>
 		<div id='wppt_featured_image_container' class="featured-container">
 			<img src="" id="wppt_selected_img" class="featured-image" width="400" height="300" />
 			<div role="group">
-				<a role="button" href="#" title="<?php echo esc_attr( $i18n['show-all-media'] ) ?>" id="wppt_all_media_switch" class="icon-button--dark dashicons dashicons-images-alt2"><svg class="icon"><use xlink:href="#dashicons-images-alt2" /></svg></a>
-				<a role="button" href="#" title="<?php echo esc_attr( $i18n['no-media'] ) ?>" id="wppt_no_image" class="icon-button--dark dashicons dashicons-no"><svg class="icon"><use xlink:href="#dashicons-no" /></svg></a>
+				<a role="button" href="#" title="<?php echo esc_attr( $i18n['show-all-media'] ) ?>" id="wppt_all_media_switch" class="icon-button--dark dashicons dashicons-images-alt2"><span class="screen-reader-text"><?php _e( 'Switch featured image' ); ?></span></a>
+				<a role="button" href="#" title="<?php echo esc_attr( $i18n['no-media'] ) ?>" id="wppt_no_image" class="icon-button--dark dashicons dashicons-no"><span class="screen-reader-text"><?php _e( 'Remove featured image' ); ?></span></a>
 			</div>
 			<div id='wppt_all_media_widget' class="all-media">
 				<div id='wppt_all_media_container'></div>
 			</div>
 		</div>
-		
+
 		<?php
 
 		wp_editor( '', 'pressthis', array(
 			'drag_drop_upload' => true,
 	//		'tabfocus_elements' => 'content-html,save-post',
+			`editor_class` => 'press-thiss__editor',
 			'editor_height' => 350,
 			'teeny' => true,
 			'tinymce' => array(
 				'resize' => false,
+				'wordpress_adv_hidden' => false,
 	//			'add_unload_trigger' => false,
 	//			'statusbar' => false,
 				'plugins' => 'lists,media,paste,tabfocus,fullscreen,wordpress,wpeditimage,wpgallery,wplink,wpview',
-				'toolbar1' => 'bold,italic,bullist,numlist,blockquote,link,unlink,undo,redo',
-				'toolbar2' => '',
+				'toolbar1' => 'bold,italic,bullist,numlist,blockquote,link,unlink',
+				'toolbar2' => 'undo,redo'
 			),
 			'quicktags' => false,
 		) );
-		
+
 		?>
 	</div>
 
 	<div class="actions">
+		<div class="post-actions">
 			<input type="submit" class="button--subtle" name="wppt_draft" id="wppt_draft_field" value="<?php echo esc_attr( $i18n['save-draft'] ) ?>"/>
 			<input type="submit" class="button--primary" name="wppt_publish" id="wppt_publish_field" value="<?php echo esc_attr( $i18n['new-post'] ) ?>"/>
+		</div>
 	</div>
 	</form>
 
