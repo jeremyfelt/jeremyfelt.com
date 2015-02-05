@@ -1,0 +1,28 @@
+// ==========================================================================
+// Button extends
+// ==========================================================================
+
+// Base button styles
+%button {
+	display: inline-block;
+	margin: 0;
+	padding: 0 10px 1px;
+	border-width: 1px;
+	border-style: solid;
+	border-radius: 3px;
+	font-size: 13px;
+	line-height: 2;
+	text-decoration: none;
+	white-space: nowrap;
+	cursor: pointer;
+	-webkit-appearance: none;
+}
+
+$button-types: secondary, primary;
+
+@each $item in $button-types {
+	%button--#{$item} {
+		@extend %button;
+		@include button( map-get( $buttons, #{$item}__background ), map-get( $buttons, #{$item}__color ) );
+	}
+}
