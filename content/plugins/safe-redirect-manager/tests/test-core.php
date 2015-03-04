@@ -396,44 +396,89 @@ class SRMTestCore extends WP_UnitTestCase {
 		$this->assertTrue( ! $redirected );
 	}
 
+    /**
+     * Test that replace (both wildcard and regex) doesn't change the casing on the matched part
+     *
+     * @since 1.7.5
+     */
+    public function testReplaceCasing() {
+        global $safe_redirect_manager;
+
+        // with wildcard
+        $_SERVER['REQUEST_URI'] = '/myfiles1/FooBar.JPEG';
+        $redirected = false;
+        $redirect_to = '/images1/*';
+        $safe_redirect_manager->create_redirect( '/myfiles1/*', $redirect_to );
+
+        add_action( 'srm_do_redirect', function( $requested_path, $redirected_to, $status_code ) use ( &$redirect_to, &$redirected ) {
+            if ( $redirected_to === '/images1/FooBar.JPEG' ) {
+                $redirected = true;
+            }
+        }, 10, 3 );
+
+        $safe_redirect_manager->action_parse_request();
+
+        $this->assertTrue( $redirected );
+
+        // with regex
+        $_SERVER['REQUEST_URI'] = '/myfiles2/FooBar.JPEG';
+        $redirected = false;
+        $redirect_to = '/images2/$1';
+        $safe_redirect_manager->create_redirect( '/myfiles2/(.*\.jpe?g)', $redirect_to, 301, true );
+
+        add_action( 'srm_do_redirect', function( $requested_path, $redirected_to, $status_code ) use ( &$redirect_to, &$redirected ) {
+            if ( $redirected_to === '/images2/FooBar.JPEG' ) {
+                $redirected = true;
+            }
+        }, 10, 3 );
+
+        $safe_redirect_manager->action_parse_request();
+
+        $this->assertTrue( $redirected );
+    }
+
 	/**
-	 * Test that replace (both wildcard and regex) doesn't change the casing on the matched part
+	 * Tests import redirects from file.
 	 *
-	 * @since 1.7.5
+	 * @since 1.7.6
+	 *
+	 * @access public
+	 * @global SRM_Safe_Redirect_Manager $safe_redirect_manager The plugin instance.
 	 */
-	public function testReplaceCasing() {
+	public function testFileImport() {
 		global $safe_redirect_manager;
 
-		// with wildcard
-		$_SERVER['REQUEST_URI'] = '/myfiles1/FooBar.JPEG';
-		$redirected = false;
-		$redirect_to = '/images1/*';
-		$safe_redirect_manager->create_redirect( '/myfiles1/*', $redirect_to );
+		// create temp file and fill up it with redirects
+		$tmp_file = tmpfile();
 
-		add_action( 'srm_do_redirect', function( $requested_path, $redirected_to, $status_code ) use ( &$redirect_to, &$redirected ) {
-			if ( $redirected_to === '/images1/FooBar.JPEG' ) {
-				$redirected = true;
-			}
-		}, 10, 3 );
+		$redirects = array(
+			// headers
+			array( 'http code', 'legacy url', 'new url', 'is_regex' ),
+			// redirects
+			array( 302, '/some-url', '/new-url', 0 ),
+			array( 301, '/broken-url', '/fixed-url', 0 ),
+			array( 301, '/reg?ex/\d+/path', '/go/here', 1 ),
+		);
 
-		$safe_redirect_manager->action_parse_request();
+		foreach ( $redirects as $row ) {
+			fputcsv( $tmp_file, $row );
+		}
 
-		$this->assertTrue( $redirected );
+		// let's import it
+		fseek( $tmp_file, 0 );
+		$processed = $safe_redirect_manager->import_file( $tmp_file, array(
+			'source' => 'legacy url',
+			'target' => 'new url',
+			'regex'  => 'is_regex',
+			'code'   => 'http code',
+		) );
 
-		// with regex
-		$_SERVER['REQUEST_URI'] = '/myfiles2/FooBar.JPEG';
-		$redirected = false;
-		$redirect_to = '/images2/$1';
-		$safe_redirect_manager->create_redirect( '/myfiles2/(.*\.jpe?g)', $redirect_to, 301, true );
+		// assert results
+		$this->assertTrue( is_array( $processed ) && ! empty( $processed['created'] ) );
+		$this->assertEquals( count( $redirects ) - 1, $processed['created'] );
 
-		add_action( 'srm_do_redirect', function( $requested_path, $redirected_to, $status_code ) use ( &$redirect_to, &$redirected ) {
-			if ( $redirected_to === '/images2/FooBar.JPEG' ) {
-				$redirected = true;
-			}
-		}, 10, 3 );
-
-		$safe_redirect_manager->action_parse_request();
-
-		$this->assertTrue( $redirected );
+		// close temp file
+		fclose( $tmp_file );
 	}
+
 }
