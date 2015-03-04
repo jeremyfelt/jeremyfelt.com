@@ -219,9 +219,11 @@ class Yoast_GA_Options {
 		}
 		// Fallback to make sure every default option has a value
 		$defaults = $this->default_ga_values();
-		foreach ( $defaults[$this->option_prefix] as $key => $value ) {
-			if ( ! isset( $this->options[$key] ) ) {
-				$this->options[$key] = $value;
+		if ( is_array( $defaults ) ) {
+			foreach ( $defaults[$this->option_prefix] as $key => $value ) {
+				if ( ! isset( $this->options[$key] ) ) {
+					$this->options[$key] = $value;
+				}
 			}
 		}
 		// Set to the current version now that we've done all needed upgrades
@@ -244,7 +246,7 @@ class Yoast_GA_Options {
 				'track_internal_as_label'    => null,
 				'track_outbound'             => 0,
 				'anonymous_data'             => 0,
-				'enable_universal'           => 0,
+				'enable_universal'           => 1,
 				'demographics'               => 0,
 				'ignore_users'               => array( 'editor' ),
 				'dashboards_disabled'        => 0,
@@ -256,11 +258,13 @@ class Yoast_GA_Options {
 				'tag_links_in_rss'           => 0,
 				'allow_anchor'               => 0,
 				'add_allow_linker'           => 0,
+				'enhanced_link_attribution'  => 0,
 				'custom_code'                => null,
 				'debug_mode'                 => 0,
 			)
 		);
 		$options = apply_filters( 'yst_ga_default-ga-values', $options, $this->option_prefix );
+
 		return $options;
 	}
 
