@@ -12,14 +12,17 @@ function yst_clean(str) {
 	return str;
 }
 
-function ptest(str, p) {
-	str = yst_clean(str);
+function ptest( str, p ) {
+	str = yst_clean( str );
 	str = str.toLowerCase();
-	var r = str.match(p);
-	if (r != null)
+	str = removeLowerCaseDiacritics( str );
+	var r = str.match( p );
+
+	if ( r != null ){
 		return '<span class="good">Yes (' + r.length + ')</span>';
-	else
-		return '<span class="wrong">No</span>';
+	}
+
+	return '<span class="wrong">No</span>';
 }
 
 function removeLowerCaseDiacritics(str) {
@@ -79,13 +82,15 @@ function removeLowerCaseDiacritics(str) {
 function yst_testFocusKw() {
 	// Retrieve focus keyword and trim
 	var focuskw = jQuery.trim(jQuery('#' + wpseoMetaboxL10n.field_prefix + 'focuskw').val());
+
 	focuskw = yst_escapeFocusKw(focuskw).toLowerCase();
 
 	if (jQuery('#editable-post-name-full').length) {
 		var postname = jQuery('#editable-post-name-full').text();
 		var url = wpseoMetaboxL10n.wpseo_permalink_template.replace('%postname%', postname).replace('http://', '');
 	}
-	var p = new RegExp("(^|[ \s\n\r\t\.,'\(\"\+;!?:\-])" + focuskw + "($|[ \s\n\r\t.,'\)\"\+!?:;\-])", 'gim');
+	var p = new RegExp("(^|[ \s\n\r\t\.,'\(\"\+;!?:\-])" + removeLowerCaseDiacritics( focuskw ) + "($|[ \s\n\r\t.,'\)\"\+!?:;\-])", 'gim');
+
 	//remove diacritics of a lower cased focuskw for url matching in foreign lang
 	var focuskwNoDiacritics = removeLowerCaseDiacritics(focuskw);
 	var p2 = new RegExp(focuskwNoDiacritics.replace(/\s+/g, "[-_\\\//]"), 'gim');
@@ -163,7 +168,8 @@ function yst_replaceVariables(str, callback) {
 			if (replacedVars[matches[i]] != undefined) {
 				str = str.replace(matches[i], replacedVars[matches[i]]);
 			} else {
-				replaceableVar = matches[i];
+				var replaceableVar = matches[i];
+
 				// create the cache already, so we don't do the request twice.
 				replacedVars[replaceableVar] = '';
 				jQuery.post(ajaxurl, {
@@ -174,10 +180,9 @@ function yst_replaceVariables(str, callback) {
 						}, function (data) {
 							if (data) {
 								replacedVars[replaceableVar] = data;
-								yst_replaceVariables(str, callback);
-							} else {
-								yst_replaceVariables(str, callback);
 							}
+
+							yst_replaceVariables(str, callback);
 						}
 				);
 			}
@@ -277,8 +282,14 @@ function yst_updateDesc() {
 		snippet.find('.desc span.content').html('');
 		yst_testFocusKw();
 
-		if (jQuery('#content').length) {
-			desc = jQuery('#content').val();
+		if (tinyMCE.get('excerpt') !== null) {
+			desc = tinyMCE.get('excerpt').getContent();
+			desc = yst_clean(desc);
+		}
+
+		if ( tinyMCE.get('content') !== null && desc.length === 0) {
+			desc = tinyMCE.get('content').getContent();
+
 			desc = yst_clean(desc);
 		}
 
@@ -447,12 +458,24 @@ jQuery(document).ready(function () {
 	jQuery('#' + wpseoMetaboxL10n.field_prefix + 'metadesc').keyup(function () {
 		yst_updateDesc();
 	});
-	jQuery('#excerpt').keyup(function () {
-		yst_updateDesc();
-	});
-	jQuery('#content').focusout(function () {
-		yst_updateDesc();
-	});
+
+	// Set time out because of tinymce is initialized later then this is done
+	setTimeout(
+		function() {
+			yst_updateSnippet();
+
+			// Adding events to content and excerpt
+			if( tinyMCE.get( 'content' ) !== null ) {
+				tinyMCE.get( 'content' ).on( 'blur', yst_updateDesc );
+			}
+
+			if( tinyMCE.get( 'excerpt' ) !== null ) {
+				tinyMCE.get( 'excerpt' ).on( 'blur', yst_updateDesc );
+			}
+		},
+		500
+	);
+
 	var focuskwhelptriggered = false;
 	jQuery(document).on('change', '#' + wpseoMetaboxL10n.field_prefix + 'focuskw', function () {
 		var focuskwhelpElm = jQuery('#focuskwhelp');
@@ -499,5 +522,4 @@ jQuery(document).ready(function () {
 		}
 	);
 
-	yst_updateSnippet();
 });
