@@ -11,7 +11,11 @@
 	    topOffset = 0, bodyHeight, sidebarHeight, resizeTimer;
 
 	// Add dropdown toggle that display child menu items.
-	$( '.main-navigation .page_item_has_children > a, .main-navigation .menu-item-has-children > a' ).after( '<button class="dropdown-toggle" aria-expanded="false">' + screenReaderText.expand + '</button>' );
+	$( '.main-navigation .menu-item-has-children > a' ).after( '<button class="dropdown-toggle" aria-expanded="false">' + screenReaderText.expand + '</button>' );
+
+	// Toggle buttons and submenu items with active children menu items.
+	$( '.main-navigation .current-menu-ancestor > button' ).addClass( 'toggle-on' );
+	$( '.main-navigation .current-menu-ancestor > .sub-menu' ).addClass( 'toggled-on' );
 
 	$( '.dropdown-toggle' ).click( function( e ) {
 		var _this = $( this );
