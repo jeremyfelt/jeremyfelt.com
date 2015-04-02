@@ -12,7 +12,7 @@ class Jetpack_Modules_List_Table extends WP_List_Table {
 
 		// In WP 4.2 WP_List_Table will be sanitizing which values are __set()
 		global $wp_version;
-		if ( version_compare( $wp_version, '4.2-z', '>=' ) ) {
+		if ( version_compare( $wp_version, '4.2-z', '>=' ) && $this->compat_fields && is_array( $this->compat_fields ) ) {
 			array_push( $this->compat_fields, 'all_items' );
 		}
 
@@ -115,6 +115,9 @@ class Jetpack_Modules_List_Table extends WP_List_Table {
 			'all' => sprintf( $format, $title, $count, $url, $current ),
 		);
 		foreach ( $module_tags_unique as $title => $count ) {
+			if( 'Jumpstart' == $title ) {
+				continue;
+			}
 			$key           = sanitize_title( $title );
 			$display_title = esc_html( wptexturize( $title ) );
 			$url           = add_query_arg( 'module_tag', urlencode( $title ) );
