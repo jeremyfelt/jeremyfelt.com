@@ -1,7 +1,6 @@
 <?php
 /**
- * @package    GoogleAnalytics
- * @subpackage Admin
+ * @package GoogleAnalytics\Admin
  */
 
 /**
@@ -349,9 +348,7 @@ class Yoast_GA_Admin extends Yoast_GA_Options {
 	 */
 	private function google_analytics_listener() {
 		$google_auth_code = filter_input( INPUT_POST, 'google_auth_code' );
-		if ( $google_auth_code && current_user_can( 'manage_options' ) ) {
-			wp_verify_nonce( 'yoast_ga_nonce', 'save_settings' );
-
+		if ( $google_auth_code && current_user_can( 'manage_options' ) && wp_verify_nonce( filter_input( INPUT_POST, 'yoast_ga_nonce' ), 'save_settings' ) ) {
 			self::analytics_api_clean_up();
 
 			Yoast_Google_Analytics::get_instance()->authenticate( trim( $google_auth_code ) );
@@ -377,9 +374,8 @@ class Yoast_GA_Admin extends Yoast_GA_Options {
 		if ( ! empty( $this->options['analytics_profile'] ) ) {
 			return $this->options['analytics_profile'];
 		}
-		else {
-			return null;
-		}
+
+		return null;
 	}
 
 	/**
