@@ -39,6 +39,12 @@ def push_tweets():
 	sudo( "chown -R www-data:www-data /tmp/www/jeremyfelt.com/tweets" )
 	sudo( "rsync -rvzh -e ssh --delete --exclude '.git' /tmp/www/jeremyfelt.com/tweets/ /var/www/jeremyfelt.com/tweets", user="www-data" )
 
+def push_loop():
+    sudo( "chown -R jeremyfelt:jeremyfelt /tmp/www/jeremyfelt.com/loopconf" )
+    local("rsync -rvzh -e ssh --delete --exclude '.git' loopconf/ foghlaimeoir:/tmp/www/jeremyfelt.com/loopconf" )
+    sudo( "chown -R www-data:www-data /tmp/www/jeremyfelt.com/loopconf" )
+    sudo( "rsync -rvzh -e ssh --delete --exclude '.git' /tmp/www/jeremyfelt.com/loopconf/ /var/www/jeremyfelt.com/loopconf", user="www-data" )
+
 def push_content():
 	sudo( "chown -R jeremyfelt:jeremyfelt /tmp/www/jeremyfelt.com/content" )
 	local( "rsync -rvzh -e ssh --delete --exclude '*.git*' --include '*/images/' --include '*/uploads/' --exclude 'uploads' --exclude 'images' content/ foghlaimeoir:/tmp/www/jeremyfelt.com/content" )
