@@ -1,0 +1,660 @@
+/*
+Theme Name: Resonar
+
+Adding support for language written in a Right To Left (RTL) direction is easy -
+it's just a matter of overwriting all the horizontal positioning attributes
+of your CSS stylesheet in a separate stylesheet file named rtl.css.
+
+http://codex.wordpress.org/Right_to_Left_Language_Support
+*/
+
+
+body {
+	direction: rtl;
+	unicode-bidi: embed;
+}
+
+body,
+button,
+input,
+select,
+textarea,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+blockquote cite,
+blockquote small,
+input[type="button"],
+input[type="reset"],
+input[type="submit"],
+.post-password-form label,
+.post-navigation,
+.post-navigation .post-title,
+.pagination,
+.image-navigation,
+.comment-navigation,
+.widget-title,
+.widget_calendar caption,
+.widget_recent_entries .post-date,
+.widget_rss .rss-date,
+.widget_rss cite,
+.site-title,
+.site-description,
+.author-heading,
+.author-title,
+.author-description,
+.sticky-post,
+.posted-on,
+.cat-links,
+.tags-links,
+.comments-link,
+.edit-link,
+.full-size-link,
+.page-links,
+.entry-caption,
+.comments-title,
+.comment-reply-title,
+.comment-author,
+.comment-metadata,
+.pingback .edit-link,
+.comment-list .reply a,
+.comment-form label,
+.wp-caption-text,
+.gallery-caption,
+.widecolumn label,
+.widecolumn .mu_register label,
+#infinite-handle span,
+#infinite-footer .blog-info,
+.site .portfolio-entry-meta,
+.hentry div.sharedaddy h3.sd-title,
+.hentry h3.sd-title,
+.hentry div#jp-relatedposts h3.jp-relatedposts-headline,
+.hentry div#jp-relatedposts div.jp-relatedposts-items-visual h4.jp-relatedposts-post-title,
+.hentry .jp-relatedposts-post-title,
+.hentry div#jp-relatedposts div.jp-relatedposts-items .jp-relatedposts-post .jp-relatedposts-post-date,
+.hentry div#jp-relatedposts div.jp-relatedposts-items .jp-relatedposts-post .jp-relatedposts-post-context {
+	font-family: Arial, Tahoma, sans-serif;
+}
+
+::-webkit-input-placeholder {
+	font-family: Arial, Tahoma, sans-serif;
+}
+
+:-moz-placeholder {
+	font-family: Arial, Tahoma, sans-serif;
+}
+
+::-moz-placeholder {
+	font-family: Arial, Tahoma, sans-serif;
+}
+
+:-ms-input-placeholder {
+	font-family: Arial, Tahoma, sans-serif;
+}
+
+blockquote {
+	border-right: 4px solid currentColor;
+	padding-right: 20px;
+	padding-left: 0;
+	border-left: none;
+}
+
+ul, ol {
+	margin: 0 20px 24px 0;
+}
+
+caption,
+th,
+td {
+	text-align: right;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+	margin-left: 6px;
+	margin-right: auto;
+}
+
+
+div.entry-date a:hover,
+.entry-footer a:hover,
+.comment-author a:hover,
+.comment-metadata a:hover,
+.pingback .edit-link a:hover,
+.textwidget a,
+.entry-date a:hover,
+.entry-content a,
+.entry-summary a,
+.entry-footer .author-bio a,
+.page-content a,
+.comment-content a,
+.pingback .comment-body > a,
+.taxonomy-description a,
+.logged-in-as a,
+.site-info a,
+.image-navigation a:hover,
+.comment-navigation a:hover,
+.widget_gravatar a,
+.widget-grofile p a,
+#infinite-footer .blog-credits a {
+	background-image: -webkit-linear-gradient(right, currentColor 0%, currentColor 100%);
+	background-image: linear-gradient(to left, currentColor 0%, currentColor 100%);
+}
+
+.site-header .main-navigation {
+	float: left;
+}
+
+.site-header .nav-menu > li {
+	float: right;
+}
+
+.site-header .nav-menu > li + li {
+	border-right: 1px solid rgba(0, 0, 0,0.1);
+	border-left: none;
+}
+
+.site-header .menu-item-has-children > a {
+	padding-left: 38px;
+	padding-right: 16px;
+}
+
+.site-header .menu-item-has-children > a:after {
+	left: 12px;
+	right: auto;
+}
+
+.site-header .sub-menu {
+	right: -1px;
+	left: auto;
+}
+
+.site-header .nav-menu > li > .sub-menu:before {
+	right: 10px;
+	left: auto;
+}
+
+.site-header .nav-menu > li > .sub-menu:after {
+	right: 12px;
+	left: auto;
+}
+
+.site-header .sub-menu ul {
+	right: 100%;
+	left: auto;
+}
+
+.site-header .sub-menu .menu-item-has-children > a {
+	padding-left: 30px;
+	padding-right: 16px;
+}
+
+.site-header .sub-menu .menu-item-has-children > a:after {
+	left: 8px;
+	right: auto;
+}
+
+.sidebar .main-navigation ul ul {
+	margin-right: 12px;
+	margin-left: auto;
+}
+
+.sidebar .main-navigation .menu-item-has-children > a {
+	padding-left: 48px;
+	padding-right: 0;
+}
+
+.dropdown-toggle {
+	left: 0;
+	right: auto;
+}
+
+.social-navigation li {
+	float: right;
+	margin: 0 0 1px 1px;
+}
+
+.sidebar-toggle {
+	left: 7.6923%;
+	right: auto;
+	-webkit-transform: translate(-16px, -50%);
+	-ms-transform: translate(-16px, -50%);
+	transform: translate(-16px, -50%);
+}
+
+.sidebar-toggle.toggled-on:before {
+	left: 0;
+}
+
+.pagination .prev {
+	border-left: 1px solid rgba(0, 0, 0,0.1);
+	right: 0;
+	left: auto;
+	border-right: none;
+}
+
+.pagination .prev:before {
+	right: -1px;
+	left: auto;
+}
+
+.pagination .next {
+	border-right: 1px solid rgba(0, 0, 0,0.1);
+	left: 0;
+	right: auto;
+	border-left: none;
+}
+
+.pagination .next:before {
+	left: -1px;
+	right: auto;
+}
+
+.site .skip-link {
+	right: -9999em;
+	left: auto;
+}
+
+.site .skip-link:focus {
+	right: 6px;
+	left: auto;
+}
+
+.widget_archive ul ul,
+.widget_categories ul ul,
+.widget_links ul ul,
+.widget_meta ul ul,
+.widget_nav_menu ul ul,
+.widget_pages ul ul,
+.widget_recent_comments ul ul,
+.widget_recent_entries ul ul {
+	margin: 12px 12px 0 0;
+}
+
+.sidebar {
+	left: 100%;
+	right: auto;
+}
+
+.sidebar-open .sidebar {
+	left: 0;
+	right: auto;
+}
+
+.no-js .sidebar {
+	left: auto;
+	right: auto;
+}
+
+.site-branding {
+	float: right;
+}
+
+.site-navigation {
+	float: left;
+}
+
+.post-thumbnail {
+	float: left;
+	margin: 36px 4.54029457% 12px 0;
+}
+
+.author-info .avatar {
+	float: right;
+	margin: 0 0 24px 24px;
+}
+
+.cat-links,
+.tags-links,
+.comments-link,
+.edit-link,
+.full-size-link {
+	padding: 3px 19px 3px 0;
+}
+
+.cat-links:before,
+.tags-links:before,
+.comments-link:before,
+.edit-link:before,
+.full-size-link:before {
+	right: 0;
+	left: auto;
+}
+
+.page-links a,
+.page-links > span {
+	margin: 0 0 4px 4px;
+}
+
+.page-links > .page-links-title {
+	padding-left: 19px;
+	padding-right: 0;
+}
+
+.entry-header-wrapper {
+	right: 0;
+	left: auto;
+}
+
+.single .entry-title,
+.sticky .entry-title {
+	margin-left: 0;
+	margin-right: auto;
+}
+
+.scroll-indicator {
+	right: 50%;
+	left: auto;
+}
+
+.scroll-indicator:before {
+	right: -5px;
+	left: auto;
+	-webkit-transform: rotate(135deg);
+	-moz-transform: rotate(135deg);
+	transform: rotate(135deg);
+}
+
+.scroll-indicator:after {
+	right: 19px;
+	left: auto;
+	-webkit-transform: rotate(45deg);
+	-moz-transform: rotate(45deg);
+	transform: rotate(45deg);
+}
+
+.comment-list .children > li {
+	padding-right: 12px;
+	padding-left: 0;
+}
+
+.comment-author .avatar {
+	float: right;
+	margin-left: 12px;
+	margin-right: auto;
+}
+
+.bypostauthor > article .fn:after {
+	right: 3px;
+	left: auto;
+}
+
+.comment-metadata .edit-link,
+.pingback .edit-link {
+	margin-right: 6px;
+	margin-left: auto;
+}
+
+.comment-content ul,
+.comment-content ol {
+	margin: 0 20px 24px 0;
+}
+
+.comment-reply-title small a {
+	float: left;
+}
+
+.infinite-loader .spinner {
+	right: 50% !important;
+	left: auto;
+}
+
+.widget_jetpack_display_posts_widget .jetpack-display-remote-posts p {
+	margin: 0 !important 24px 0;
+}
+
+.widget_top-posts .widgets-list-layout .widgets-list-layout-blavatar {
+	margin-right: 0;
+	margin-left: 12px;
+}
+
+.widget_top-posts .widgets-list-layout-links {
+	float: right;
+}
+
+.widget_rss_links ul ul,
+.widget_top-posts ul ul,
+.widget_upcoming_events_widget ul ul {
+	margin: 12px 12px 0 0;
+}
+
+.hentry div#jp-relatedposts div.jp-relatedposts-items-visual .jp-relatedposts-post {
+	padding-left: 0;
+	padding-right: 0;
+}
+
+
+@media screen and (min-width: 37.5625em) {
+	.sidebar-toggle {
+		left: 3.84615%;
+		right: auto;
+	}
+
+	.sidebar .main-navigation,
+	.social-navigation,
+	.widget {
+		margin-left: 15.3846%;
+		margin-right: 15.3846%;
+	}
+}
+
+
+@media screen and (min-width: 43.75em) {
+	blockquote {
+		margin-right: -32px;
+		padding-right: 28px;
+		padding-left: 0;
+		margin-left: auto;
+	}
+
+	blockquote > blockquote {
+		margin-right: 0;
+		margin-left: auto;
+	}
+
+	li > ul,
+	li > ol,
+	blockquote > ul,
+	blockquote > ol {
+		margin-right: 24px;
+		margin-left: auto;
+	}
+
+	input[type="checkbox"],
+	input[type="radio"] {
+		margin-left: 8px;
+		margin-right: auto;
+	}
+
+	.sidebar .main-navigation ul ul {
+		margin-right: 16px;
+		margin-left: auto;
+	}
+
+	.pagination .prev:before {
+		right: -10px;
+		left: auto;
+	}
+
+	.pagination .next:before {
+		left: 3px;
+		right: auto;
+	}
+
+	.widget blockquote {
+		margin-right: -30px;
+		padding-right: 26px;
+		padding-left: 0;
+		margin-left: auto;
+	}
+
+	.widget blockquote > blockquote {
+		margin-right: 0;
+		margin-left: auto;
+	}
+
+	.widget li > ul,
+	.widget li > ol,
+	.widget blockquote > ul,
+	.widget blockquote > ol {
+		margin-right: 24px;
+		margin-left: auto;
+	}
+
+	.author-info .avatar {
+		margin: 0 0 32px 32px;
+	}
+
+	.cat-links,
+	.tags-links,
+	.comments-link,
+	.edit-link,
+	.full-size-link {
+		padding: 4px 19px 4px 0;
+	}
+
+	.page-links > .page-links-title {
+		padding-left: 26px;
+		padding-right: 0;
+	}
+
+	.comment-list .children > li {
+		padding-right: 32px;
+		padding-left: 0;
+	}
+
+	.comment-author .avatar {
+		margin-left: 16px;
+		margin-right: auto;
+	}
+
+	.comment-metadata .edit-link,
+	.pingback .edit-link {
+		margin-right: 8px;
+		margin-left: auto;
+	}
+
+	.comment-content li > ul,
+	.comment-content li > ol,
+	.comment-content blockquote > ul,
+	.comment-content blockquote > ol {
+		margin-right: 24px;
+		margin-left: auto;
+	}
+
+	.hentry div#jp-relatedposts div.jp-relatedposts-items .jp-relatedposts-post {
+		padding-left: 16px;
+		padding-right: 0;
+	}
+}
+
+
+@media screen and (min-width: 51.755em) {
+	.sidebar .main-navigation,
+	.social-navigation,
+	.widget {
+		margin-left: 23.0759%;
+		margin-right: 23.0759%;
+	}
+
+	.image-navigation,
+	.post-navigation,
+	.entry-content,
+	.entry-footer,
+	.comments-area,
+	.attachment .entry-header,
+	.not-found.page-header,
+	.page-content {
+		margin-left: 15.3846%;
+		margin-right: 15.3846%;
+	}
+
+	.single .entry-header-inner,
+		.widecolumn {
+		padding-left: 15.3846%;
+		padding-right: 15.3846%;
+	}
+
+	.entry-title,
+		.entry-summary {
+		margin-left: 27.27891994%;
+		margin-right: auto;
+	}
+}
+
+
+@media screen and (min-width: 57.8125em) {
+	.sidebar .main-navigation,
+	.social-navigation,
+	.widget {
+		margin-left: 23.5079%;
+		margin-right: 23.5079%;
+	}
+
+	.image-navigation,
+	.post-navigation,
+	.entry-content,
+	.entry-footer,
+	.comments-area,
+	.attachment .entry-header,
+	.not-found .page-header,
+	.page-content {
+		margin-left: 17.6471%;
+		margin-right: 17.6471%;
+	}
+
+	.single .entry-header-inner,
+		.widecolumn {
+		padding-left: 17.6471%;
+		padding-right: 17.6471%;
+	}
+
+	.sidebar-toggle {
+		float: left;
+		left: auto;
+		right: auto;
+		-webkit-transform: translate(-16px, 0);
+		-ms-transform: translate(-16px, 0);
+		transform: translate(-16px, 0);
+	}
+
+	.custom-menu .site-branding {
+		margin-left: 32px;
+		margin-right: auto;
+	}
+
+	.custom-menu .sidebar-toggle {
+		border-right-color: rgba(0, 0, 0,0.1);
+	}
+
+	.menu-right .site-branding {
+		margin-left: 0;
+		margin-right: auto;
+	}
+
+	.menu-right .site-header .main-navigation {
+		float: right;
+	}
+
+	.menu-right .sidebar-toggle {
+		left: 32px;
+		right: auto;
+		-webkit-transform: translate(-16px, -50%);
+		-ms-transform: translate(-16px, -50%);
+		transform: translate(-16px, -50%);
+	}
+
+	.post-thumbnail {
+		margin-right: 6.66829507%;
+		margin-left: auto;
+	}
+
+	.entry-title,
+	.entry-summary {
+		margin-left: 33.34147533%;
+		margin-right: auto;
+	}
+}

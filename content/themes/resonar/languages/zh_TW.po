@@ -1,0 +1,281 @@
+# Translation of Resonar in Chinese (Taiwan)
+# This file is distributed under the same license as the Resonar package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2015-04-24 05:40:12+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: GlotPress/1.0-alpha-1000\n"
+"Project-Id-Version: Resonar\n"
+
+#: functions.php:258
+msgid "Menu &amp; Widgets"
+msgstr ""
+
+#. Description of the plugin/theme
+#: wp-content/themes/pub/resonar/style.css
+msgid "Resonar is an elegant blog theme that features full-screen featured images."
+msgstr "Resonar是一個具全螢幕顯示特色圖片功能、優美的佈景主題。"
+
+#: single.php:31
+msgid "Previous post:"
+msgstr "上一篇文章："
+
+#: single.php:30
+msgid "Previous"
+msgstr "先前的"
+
+#: single.php:28
+msgid "Next post:"
+msgstr "下一篇文章："
+
+#: single.php:27
+msgid "Next"
+msgstr "下一步"
+
+#: functions.php:256 sidebar.php:15
+msgid "Menu"
+msgstr "選單"
+
+#: search.php:17
+msgid "Search Results for: %s"
+msgstr "%s 的搜尋結果："
+
+#. translators: %s: Name of current post
+#: inc/template-tags.php:195
+msgid "Continue reading %s"
+msgstr "繼續閱讀 %s"
+
+#: inc/template-tags.php:130
+msgid "% Comments"
+msgstr "% 則迴響"
+
+#: inc/template-tags.php:130
+msgid "1 Comment"
+msgstr "1 則迴響"
+
+#: inc/template-tags.php:130
+msgid "Leave a comment"
+msgstr "發表留言"
+
+#: inc/template-tags.php:84
+msgctxt "Used before category names."
+msgid "Categories"
+msgstr "分類"
+
+#: inc/template-tags.php:92
+msgctxt "Used before tag names."
+msgid "Tags"
+msgstr "標籤"
+
+#: inc/template-tags.php:102
+msgctxt "Used before project type names."
+msgid "Project Types"
+msgstr ""
+
+#: inc/template-tags.php:110
+msgctxt "Used before project tag names."
+msgid "Project Tags"
+msgstr ""
+
+#: inc/template-tags.php:121
+msgctxt "Used before full size attachment link."
+msgid "Full size"
+msgstr "原始尺寸"
+
+#: inc/template-tags.php:65
+msgctxt "Used before publish date."
+msgid "Posted on"
+msgstr "發佈於"
+
+#: inc/template-tags.php:81 inc/template-tags.php:89 inc/template-tags.php:99
+#: inc/template-tags.php:107
+msgctxt "Used between list items, there is a space after the comma."
+msgid ", "
+msgstr ", "
+
+#: inc/template-tags.php:47
+msgid "Featured"
+msgstr "精選"
+
+#: inc/template-tags.php:28
+msgid "Newer Comments"
+msgstr "較新的迴響"
+
+#: inc/template-tags.php:24
+msgid "Older Comments"
+msgstr "較舊的迴響"
+
+#: inc/template-tags.php:21
+msgid "Comment navigation"
+msgstr "評論分頁導航"
+
+#: image.php:85
+msgctxt "Parent post link"
+msgid "<span class=\"meta-nav\">Published in</span><span class=\"post-title\">%title</span>"
+msgstr "<span class=\"meta-nav\">發佈於</span><span class=\"post-title\">%title</span>"
+
+#: inc/back-compat.php:36 inc/back-compat.php:46 inc/back-compat.php:59
+msgid "Resonar requires at least WordPress version 4.1. You are running version %s. Please upgrade and try again."
+msgstr ""
+
+#: inc/customizer.php:20
+msgid "Tagline is hidden in this theme."
+msgstr ""
+
+#: image.php:23
+msgid "Next Image"
+msgstr "下一張圖片"
+
+#: image.php:23
+msgid "Previous Image"
+msgstr "上一張圖片"
+
+#: functions.php:257
+msgid "Widgets"
+msgstr "模組"
+
+#: functions.php:252
+msgid "collapse child menu"
+msgstr " 收合子選單"
+
+#: header.php:22
+msgid "Skip to content"
+msgstr "直接觀看文章"
+
+#. translators: If there are characters in your language that are not supported
+#. by Inconsolata, translate this to 'off'. Do not translate into your own
+#. language.
+#: functions.php:186
+msgctxt "Inconsolata font: on or off"
+msgid "on"
+msgstr "on"
+
+#: functions.php:194
+msgctxt "Add new subset (cyrillic)"
+msgid "no-subset"
+msgstr ""
+
+#: functions.php:251
+msgid "expand child menu"
+msgstr "展開子選單"
+
+#. translators: If there are characters in your language that are not supported
+#. by Playfair Display, translate this to 'off'. Do not translate into your own
+#. language.
+#: functions.php:181
+msgctxt "Playfair Display font: on or off"
+msgid "on"
+msgstr "開啟"
+
+#. translators: If there are characters in your language that are not supported
+#. by Libre Baskerville, translate this to 'off'. Do not translate into your
+#. own language.
+#: functions.php:171
+msgctxt "Libre Baskerville font: on or off"
+msgid "on"
+msgstr ""
+
+#. translators: If there are characters in your language that are not supported
+#. by Lato, translate this to 'off'. Do not translate into your own language.
+#: functions.php:176
+msgctxt "Lato font: on or off"
+msgid "on"
+msgstr "on"
+
+#: functions.php:148
+msgid "Add widgets here to appear in your sidebar."
+msgstr "在這裡加入小工具來讓它顯示於側邊欄。"
+
+#: functions.php:146
+msgid "Widget Area"
+msgstr "小工具區塊"
+
+#: functions.php:64
+msgid "Social Links Menu"
+msgstr "社交網路鏈結選單"
+
+#: functions.php:63
+msgid "Primary Menu"
+msgstr "主要選單"
+
+#: footer.php:19
+msgid "Theme: %1$s by %2$s."
+msgstr "佈景主題：%1$s，發表者：%2$s。"
+
+#: footer.php:17
+msgid "Proudly powered by %s"
+msgstr "自豪的使用  %s"
+
+#: footer.php:17
+msgid "http://wordpress.org/"
+msgstr "http://tw.wordpress.org/"
+
+#: content-page.php:50 content-single.php:59 image.php:71
+msgid "Edit"
+msgstr "編輯"
+
+#: content-page.php:22 content-single.php:24
+msgid "Scroll down to see more content"
+msgstr ""
+
+#: content-page.php:40 content-single.php:46 image.php:59
+msgid "Pages:"
+msgstr "頁次："
+
+#: content-none.php:30
+msgid "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help."
+msgstr "我們似乎找不到你正在尋找的項目。請嘗試搜尋功能。"
+
+#: content-none.php:25
+msgid "Sorry, but nothing matched your search terms. Please try again with some different keywords."
+msgstr "抱歉，沒有項目符合你的搜尋字詞。請再嘗試其他不同的關鍵字！"
+
+#: content-none.php:21
+msgid "Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
+msgstr "準備好發表你的第一篇文章了嗎？<a href=\"%1$s\">自這裡開始</a>。"
+
+#: content-none.php:14
+msgid "Nothing Found"
+msgstr "什麼都沒找到"
+
+#: comments.php:52
+msgid "Comments are closed."
+msgstr "迴響已被關閉。"
+
+#: comments.php:27
+msgctxt "comments title"
+msgid "One thought on &ldquo;%2$s&rdquo;"
+msgid_plural "%1$s thoughts on &ldquo;%2$s&rdquo;"
+msgstr[0] "對「%2$s」的想法"
+
+#: author-bio.php:34
+msgid "View all posts by %s"
+msgstr "檢視所有%s的文章"
+
+#: author-bio.php:27
+msgid "Published by"
+msgstr "作者"
+
+#: archive.php:62 content-page.php:44 content-single.php:50 image.php:63
+#: index.php:68 search.php:44
+msgid "Page"
+msgstr "頁面"
+
+#: archive.php:61 index.php:67 search.php:43
+msgid "Next page"
+msgstr "後一頁"
+
+#: archive.php:60 index.php:66 search.php:42
+msgid "Previous page"
+msgstr "前一頁"
+
+#: 404.php:20
+msgid "It looks like nothing was found at this location. Maybe try a search?"
+msgstr "看來這裡什麼也沒有。或許試試搜尋？"
+
+#: 404.php:16
+msgid "Oops! That page can&rsquo;t be found."
+msgstr "糟糕！找不到該頁面。"

@@ -1,0 +1,286 @@
+# Translation of Resonar in Esperanto
+# This file is distributed under the same license as the Resonar package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2015-03-13 13:05:44+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: GlotPress/0.1\n"
+"Project-Id-Version: Resonar\n"
+
+#. Description of the plugin/theme
+#: wp-content/themes/pub/resonar/style.css
+msgid "Resonar is an elegant blog theme that features full-screen featured images."
+msgstr ""
+
+#: single.php:31
+msgid "Previous post:"
+msgstr "Antaŭa afiŝo:"
+
+#: single.php:30
+msgid "Previous"
+msgstr "Antaŭa"
+
+#: single.php:28
+msgid "Next post:"
+msgstr "Sekva afiŝo:"
+
+#: single.php:27
+msgid "Next"
+msgstr "Sekva"
+
+#: sidebar.php:15
+msgid "Menu"
+msgstr "Menuo"
+
+#: search.php:17
+msgid "Search Results for: %s"
+msgstr "Serĉrezultoj por: %s"
+
+#. translators: %s: Name of current post
+#: inc/template-tags.php:195
+msgid "Continue reading %s"
+msgstr "Daŭrigi legi %s"
+
+#: inc/template-tags.php:130
+msgid "% Comments"
+msgstr "% Komentoj"
+
+#: inc/template-tags.php:130
+msgid "1 Comment"
+msgstr "1 komento"
+
+#: inc/template-tags.php:130
+msgid "Leave a comment"
+msgstr "Komenti"
+
+#: inc/template-tags.php:84
+msgctxt "Used before category names."
+msgid "Categories"
+msgstr "Kategorioj"
+
+#: inc/template-tags.php:92
+msgctxt "Used before tag names."
+msgid "Tags"
+msgstr "Etikedoj"
+
+#: inc/template-tags.php:102
+msgctxt "Used before project type names."
+msgid "Project Types"
+msgstr ""
+
+#: inc/template-tags.php:110
+msgctxt "Used before project tag names."
+msgid "Project Tags"
+msgstr ""
+
+#: inc/template-tags.php:121
+msgctxt "Used before full size attachment link."
+msgid "Full size"
+msgstr "Plena grandeco"
+
+#: inc/template-tags.php:65
+msgctxt "Used before publish date."
+msgid "Posted on"
+msgstr "Publikigita je"
+
+#: inc/template-tags.php:81 inc/template-tags.php:89 inc/template-tags.php:99
+#: inc/template-tags.php:107
+msgctxt "Used between list items, there is a space after the comma."
+msgid ", "
+msgstr ", "
+
+#: inc/template-tags.php:47
+msgid "Featured"
+msgstr "Elstarigita"
+
+#: inc/template-tags.php:28
+msgid "Newer Comments"
+msgstr "Pli novaj komentoj"
+
+#: inc/template-tags.php:24
+msgid "Older Comments"
+msgstr "Pli malnovaj komentoj"
+
+#: inc/template-tags.php:21
+msgid "Comment navigation"
+msgstr "Navigado tra komentoj"
+
+#: image.php:85
+msgctxt "Parent post link"
+msgid "<span class=\"meta-nav\">Published in</span><span class=\"post-title\">%title</span>"
+msgstr "<span class=\"meta-nav\">Publikigita en</span><span class=\"post-title\">%title</span>"
+
+#: inc/back-compat.php:36 inc/back-compat.php:46 inc/back-compat.php:59
+msgid "Resonar requires at least WordPress version 4.1. You are running version %s. Please upgrade and try again."
+msgstr ""
+
+#: inc/customizer.php:20 inc/customizer.php:21
+msgid "May only be visible on wide screens."
+msgstr "Eble nur estos videbla sur larĝaj ekranoj. "
+
+#: inc/customizer.php:22
+msgid "Tagline is hidden in this theme."
+msgstr ""
+
+#: inc/customizer.php:24 inc/customizer.php:25
+msgid "Background may only be visible on wide screens."
+msgstr "Malantaŭo eble nur estos videbla sur larĝaj ekranoj."
+
+#: image.php:23
+msgid "Next Image"
+msgstr "Sekva bildo"
+
+#: image.php:23
+msgid "Previous Image"
+msgstr "Antaŭa bildo"
+
+#: header.php:48
+msgid "Widgets"
+msgstr "Kromprogrametoj"
+
+#: functions.php:203
+msgid "collapse child menu"
+msgstr "Maletendi infanan menuon"
+
+#: header.php:22
+msgid "Skip to content"
+msgstr "Iri rekte al la enhavo"
+
+#. translators: If there are characters in your language that are not supported
+#. by Inconsolata, translate this to 'off'. Do not translate into your own
+#. language.
+#: functions.php:137
+msgctxt "Inconsolata font: on or off"
+msgid "on"
+msgstr "off"
+
+#: functions.php:145
+msgctxt "Add new subset (cyrillic)"
+msgid "no-subset"
+msgstr ""
+
+#: functions.php:202
+msgid "expand child menu"
+msgstr "Etendi infanan menuon"
+
+#. translators: If there are characters in your language that are not supported
+#. by Playfair Display, translate this to 'off'. Do not translate into your own
+#. language.
+#: functions.php:132
+msgctxt "Playfair Display font: on or off"
+msgid "on"
+msgstr ""
+
+#. translators: If there are characters in your language that are not supported
+#. by Libre Baskerville, translate this to 'off'. Do not translate into your
+#. own language.
+#: functions.php:122
+msgctxt "Libre Baskerville font: on or off"
+msgid "on"
+msgstr ""
+
+#. translators: If there are characters in your language that are not supported
+#. by Lato, translate this to 'off'. Do not translate into your own language.
+#: functions.php:127
+msgctxt "Lato font: on or off"
+msgid "on"
+msgstr "off"
+
+#: functions.php:99
+msgid "Add widgets here to appear in your sidebar."
+msgstr "Aldonu kromprogametojn ĉi tien por ke ili aperu en la flankpanelo."
+
+#: functions.php:97
+msgid "Widget Area"
+msgstr "Kromprogrameta loko"
+
+#: functions.php:64
+msgid "Social Links Menu"
+msgstr "Menuo por sociaj ligoj"
+
+#: functions.php:63
+msgid "Primary Menu"
+msgstr "Ĉefa menuo"
+
+#: footer.php:19
+msgid "Theme: %1$s by %2$s."
+msgstr "Etoso: %1$s de %2$s. "
+
+#: footer.php:17
+msgid "Proudly powered by %s"
+msgstr "Fiere kreata de %s"
+
+#: footer.php:17
+msgid "http://wordpress.org/"
+msgstr "http://wordpress.org/"
+
+#: content-page.php:50 content-single.php:59 image.php:71
+msgid "Edit"
+msgstr "Redakti"
+
+#: content-page.php:22 content-single.php:24
+msgid "Scroll down to see more content"
+msgstr ""
+
+#: content-page.php:40 content-single.php:46 image.php:59
+msgid "Pages:"
+msgstr "Paĝoj:"
+
+#: content-none.php:30
+msgid "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help."
+msgstr "Ŝajne ni ne havas kion vi serĉas. Eble uzu la serĉilon."
+
+#: content-none.php:25
+msgid "Sorry, but nothing matched your search terms. Please try again with some different keywords."
+msgstr "Bedaŭrinde, nenio kongruis kun viaj serĉaj kriterioj. Bonvolu provi denove, uzante malsamajn vortojn."
+
+#: content-none.php:21
+msgid "Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
+msgstr "Ĉu vi pretas publigiki vian unuan afiŝon? <a href=\"%1$s\">Startu ĉi tie</a>."
+
+#: content-none.php:14
+msgid "Nothing Found"
+msgstr "Nenio trovita"
+
+#: comments.php:52
+msgid "Comments are closed."
+msgstr "Komentado estas fermita."
+
+#: comments.php:27
+msgctxt "comments title"
+msgid "One thought on &ldquo;%2$s&rdquo;"
+msgid_plural "%1$s thoughts on &ldquo;%2$s&rdquo;"
+msgstr[0] "Penso pri &ldquo;%2$s&rdquo;"
+msgstr[1] "%1$s pensoj pri &ldquo;%2$s&rdquo;"
+
+#: author-bio.php:34
+msgid "View all posts by %s"
+msgstr "Vidu ĉiujn afiŝojn de %s"
+
+#: author-bio.php:27
+msgid "Published by"
+msgstr "Publikita de"
+
+#: archive.php:62 content-page.php:44 content-single.php:50 image.php:63
+#: index.php:68 search.php:44
+msgid "Page"
+msgstr "Paĝo"
+
+#: archive.php:61 index.php:67 search.php:43
+msgid "Next page"
+msgstr "La sekva paĝo"
+
+#: archive.php:60 index.php:66 search.php:42
+msgid "Previous page"
+msgstr "La antaŭa paĝo"
+
+#: 404.php:20
+msgid "It looks like nothing was found at this location. Maybe try a search?"
+msgstr "Ŝajne nenio estis trovita je ĉi tiu loko. Ĉu eble provi serĉon?"
+
+#: 404.php:16
+msgid "Oops! That page can&rsquo;t be found."
+msgstr "Ne eblas trovi tiun paĝon."
