@@ -10,7 +10,7 @@ Easily post syntax-highlighted code to your site without having to modify the co
 
 == Description ==
 
-SyntaxHighlighter Evolved allows you to easily post syntax-highlighted code to your site without losing it's formatting or making any manual changes. It uses the [SyntaxHighlighter JavaScript package by Alex Gorbatchev](http://alexgorbatchev.com/wiki/SyntaxHighlighter).
+SyntaxHighlighter Evolved allows you to easily post syntax-highlighted code to your site without losing its formatting or making any manual changes. It uses the [SyntaxHighlighter JavaScript package by Alex Gorbatchev](http://alexgorbatchev.com/wiki/SyntaxHighlighter).
 
 For a live demo, see [this plugin's homepage](http://www.viper007bond.com/wordpress-plugins/syntaxhighlighter/).
 
@@ -54,6 +54,11 @@ Make sure your theme's `footer.php` file has `<?php wp_footer(); ?>` somewhere i
 2. A part of the Settings page which controls the defaults.
 
 == ChangeLog ==
+
+= Version 3.1.13 =
+
+* Fix setting sanitization bug. Props Alexander Concha (@xknown).
+* Don't encode shortcode contents on (un)trash. Props Andrew Ozz (@azaozz).
 
 = Version 3.1.12 =
 
