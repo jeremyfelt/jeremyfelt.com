@@ -2,8 +2,8 @@
 Contributors: Viper007Bond, automattic
 Donate link: http://www.viper007bond.com/wordpress-plugins/syntaxhighlighter/donate/
 Tags: code, sourcecode, php, xhtml, html, css, WordPress.com
-Requires at least: 2.7
-Tested up to: 4.3
+Requires at least: 4.2.3
+Tested up to: 4.5
 Stable tag: trunk
 
 Easily post syntax-highlighted code to your site without having to modify the code at all. As seen on WordPress.com.
@@ -54,6 +54,15 @@ Make sure your theme's `footer.php` file has `<?php wp_footer(); ?>` somewhere i
 2. A part of the Settings page which controls the defaults.
 
 == ChangeLog ==
+
+= Version 3.2.1 =
+
+* Fix shortcode issues that would occur during post editing if the code contained what looked like opening HTML tags such as `<?php`. See [this forum thread](https://wordpress.org/support/topic/php-opening-closing-tags-break-code-blocks) for details.
+
+= Version 3.2.0 =
+
+* Don't parse shortcodes inside of HTML entities, which could result in broken HTML.
+* Drop PHP4 support. This should result in PHP7 support.
 
 = Version 3.1.13 =
 

@@ -4,7 +4,7 @@
 
 Plugin Name:  SyntaxHighlighter Evolved
 Plugin URI:   http://www.viper007bond.com/wordpress-plugins/syntaxhighlighter/
-Version:      3.1.13
+Version:      3.2.1
 Description:  Easily post syntax-highlighted code to your site without having to modify the code at all. Uses Alex Gorbatchev's <a href="http://alexgorbatchev.com/wiki/SyntaxHighlighter">SyntaxHighlighter</a>. <strong>TIP:</strong> Don't use the Visual editor if you don't want your code mangled. TinyMCE will "clean up" your HTML.
 Author:       Alex Mills (Viper007Bond)
 Author URI:   http://www.viper007bond.com/
@@ -13,7 +13,7 @@ Author URI:   http://www.viper007bond.com/
 
 Thanks to:
 
-* Alex Gorbatchev for writing the Javascript-powered synatax highlighter script
+* Alex Gorbatchev for writing the Javascript-powered syntax highlighter script
 
 * Andrew Ozz for writing the TinyMCE plugin
 
@@ -21,7 +21,7 @@ Thanks to:
 
 class SyntaxHighlighter {
 	// All of these variables are private. Filters are provided for things that can be modified.
-	var $pluginver            = '3.1.13';  // Plugin version
+	var $pluginver            = '3.2.1';  // Plugin version
 	var $agshver              = false;    // Alex Gorbatchev's SyntaxHighlighter version (dynamically set below due to v2 vs v3)
 	var $shfolder             = false;    // Controls what subfolder to load SyntaxHighlighter from (v2 or v3)
 	var $settings             = array();  // Contains the user's settings
@@ -36,7 +36,7 @@ class SyntaxHighlighter {
 
 	// Initalize the plugin by registering the hooks
 	function __construct() {
-		if ( ! function_exists( 'esc_html' ) )
+		if ( ! function_exists( 'do_shortcodes_in_html_tags' ) )
 			return;
 
 		// Load localization domain
@@ -73,12 +73,9 @@ class SyntaxHighlighter {
 		add_filter( 'plugin_action_links',                array( $this, 'settings_link' ),                                 10, 2 );
 
 		// Register widget hooks
-		// Requires change added in WordPress 2.9
-		if ( class_exists('WP_Embed') ) {
-			add_filter( 'widget_text',                    array( $this, 'widget_text_output' ),                            7, 2 );
-			add_filter( 'widget_update_callback',         array( $this, 'widget_text_save' ),                              1, 4 );
-			add_filter( 'widget_form_callback',           array( $this, 'widget_text_form' ),                              1, 2 );
-		}
+		add_filter( 'widget_text',                        array( $this, 'widget_text_output' ),                            7, 2 );
+		add_filter( 'widget_update_callback',             array( $this, 'widget_text_save' ),                              1, 4 );
+		add_filter( 'widget_form_callback',               array( $this, 'widget_text_form' ),                              1, 2 );
 
 
 		// Create array of default settings (you can use the filter to modify these)
@@ -238,7 +235,7 @@ class SyntaxHighlighter {
 		// Register each shortcode with a placeholder callback so that strip_shortcodes() will work
 		// The proper callback and such is done in SyntaxHighlighter::shortcode_hack()
 		foreach ( $this->shortcodes as $shortcode )
-			add_shortcode( $shortcode, '__return_true' );
+			add_shortcode( $shortcode, '__return_empty_string' );
 
 
 		// Create list of themes and their human readable names
@@ -323,20 +320,80 @@ class SyntaxHighlighter {
 	}
 
 
-	// A filter function that runs do_shortcode() but only with this plugin's shortcodes
-	function shortcode_hack( $content, $callback ) {
+	/**
+	 * Process only this plugin's shortcodes.
+	 *
+	 * If we waited for the normal do_shortcode() call at priority 11,
+	 * then wpautop() and maybe others would mangle all of the code.
+	 *
+	 * So instead we hook in earlier with this function and process
+	 * just this plugins's shortcodes. To do this requires some trickery.
+	 *
+	 * First we need to clear out all existing shortcodes, then register
+	 * just this plugin's ones, process them, and then restore the original
+	 * list of shortcodes.
+	 *
+	 * To make matters more complicated, if someone has done [[code]foo[/code]]
+	 * in order to display the shortcode (not render it), then do_shortcode()
+	 * will strip the outside brackets and when do_shortcode() runs a second
+	 * time later on, it will render it.
+	 *
+	 * So instead before do_shortcode() runs for the first time, we add
+	 * even more brackets escaped shortcodes in order to result in
+	 * the shortcodes actually being displayed instead rendered.
+	 *
+	 * We only need to do this for this plugin's shortcodes however
+	 * as all other shortcodes such as [[gallery]] will be untouched
+	 * by this pass of do_shortcode.
+	 *
+	 * Phew!
+	 *
+	 * @param string $content     The post content.
+	 * @param string $callback    The callback function that should be used for add_shortcode()
+	 * @param bool   $ignore_html When true, shortcodes inside HTML elements will be skipped.
+	 *
+	 * @return string The filtered content, with this plugin's shortcodes parsed.
+	 */
+	function shortcode_hack( $content, $callback, $ignore_html = true ) {
 		global $shortcode_tags;
+
+		// Regex is slow. Let's do some strpos() checks first.
+		if ( ! $this->string_has_shortcodes( $content, $this->shortcodes ) ) {
+			return $content;
+		}
 
 		// Backup current registered shortcodes and clear them all out
 		$orig_shortcode_tags = $shortcode_tags;
 		remove_all_shortcodes();
 
 		// Register all of this plugin's shortcodes
-		foreach ( $this->shortcodes as $shortcode )
+		foreach ( $this->shortcodes as $shortcode ) {
 			add_shortcode( $shortcode, $callback );
+		}
 
-		// Do the shortcodes (only this plugins's are registered)
-		$content = $this->do_shortcode_keep_escaped_tags( $content );
+		$regex = '/' . get_shortcode_regex( $this->shortcodes ) . '/';
+
+		// Parse the shortcodes (only this plugins's are registered)
+		if ( $ignore_html ) {
+			// Extra escape escaped shortcodes because do_shortcode_tag() called by do_shortcode() is going to strip a pair of square brackets when it runs
+			$content = preg_replace_callback(
+				$regex,
+				array( $this, 'shortcode_hack_extra_escape_escaped_shortcodes' ),
+				$content
+			);
+
+			// Normal, safe parsing
+			$content = do_shortcode( $content, true );
+		} else {
+			// Extra escape escaped shortcodes because do_shortcode_tag() called by do_shortcode() is going to strip a pair of square brackets when it runs.
+			// Then call do_shortcode_tag(). This is basically do_shortcode() without calling do_shortcodes_in_html_tags() which breaks things.
+			// For context, see https://wordpress.org/support/topic/php-opening-closing-tags-break-code-blocks
+			$content = preg_replace_callback(
+				$regex,
+				array( $this, 'shortcode_hack_extra_escape_escaped_shortcodes_and_parse' ),
+				$content
+			);
+		}
 
 		// Put the original shortcodes back
 		$shortcode_tags = $orig_shortcode_tags;
@@ -345,42 +402,56 @@ class SyntaxHighlighter {
 	}
 
 
-	// This is a clone of do_shortcode() that uses a different callback function
-	// The new callback function will keep escaped tags escaped, i.e. [[foo]]
-	// Up to date as of r18324 (3.2)
-	function do_shortcode_keep_escaped_tags( $content ) {
-		global $shortcode_tags;
+	/**
+	 * A quick checker to see if any of this plugin's shortcodes are in use in a string.
+	 * Since all of the tags can't be self-closing, we look for the closing tag.
+	 *
+	 * @param string $string     The string to look through. This is a post's contents usually.
+	 * @param array  $shortcodes The array of shortcodes to look for.
+	 *
+	 * @return bool Whether any shortcode usage was found.
+	 */
+	function string_has_shortcodes( $string, $shortcodes ) {
+		foreach ( $shortcodes as $shortcode ) {
+			if ( false !== strpos( $string, "[/{$shortcode}]" ) ) {
+				return true;
+			}
+		}
 
-		if (empty($shortcode_tags) || !is_array($shortcode_tags))
-			return $content;
-
-		$pattern = get_shortcode_regex();
-		return preg_replace_callback('/'.$pattern.'/s', array( $this, 'do_shortcode_tag_keep_escaped_tags' ), $content);
+		return false;
 	}
 
 
-	// Callback for above do_shortcode_keep_escaped_tags() function
-	// It's a clone of core's do_shortcode_tag() function with a modification to the escaped shortcode return
-	// Up to date as of r18324 (3.2)
-	function do_shortcode_tag_keep_escaped_tags( $m ) {
-		global $shortcode_tags;
-
-		// allow [[foo]] syntax for escaping a tag
-		if ( $m[1] == '[' && $m[6] == ']' ) {
-			return $m[0]; // This line was modified for this plugin (no substr call)
+	/**
+	 * Add extra square brackets around escaped shortcodes.
+	 * This is to counteract the beginning of the do_shortcode_tag() function.
+	 *
+	 * @param array $match The array of matches generated by get_shortcode_regex()
+	 *
+	 * @return string What should be placed into the post content. In this case it's the raw match, or an extra-wrapped raw match.
+	 */
+	function shortcode_hack_extra_escape_escaped_shortcodes( $match ) {
+		if ( $match[1] == '[' && $match[6] == ']' ) {
+			return '[' . $match[0] . ']';
 		}
 
-		$tag = $m[2];
-		$attr = shortcode_parse_atts( $m[3] );
-
-		if ( isset( $m[5] ) ) {
-			// enclosing tag - extra parameter
-			return $m[1] . call_user_func( $shortcode_tags[$tag], $attr, $m[5], $tag ) . $m[6];
-		} else {
-			// self-closing tag
-			return $m[1] . call_user_func( $shortcode_tags[$tag], $attr, NULL,  $tag ) . $m[6];
-		}
+		return $match[0];
 	}
+
+	/**
+	 * This is a combination of this class's shortcode_hack_extra_escape_escaped_shortcodes()
+  	 * and do_shortcode_tag() for performance reasons so that we don't have to run some regex twice.
+ 	 *
+	 * @param array $match Regular expression match array.
+	 *
+	 * @return string|false False on failure, otherwise a parse shortcode tag.
+	 */
+	function shortcode_hack_extra_escape_escaped_shortcodes_and_parse( $match ) {
+		$match[0] = $this->shortcode_hack_extra_escape_escaped_shortcodes( $match );
+
+		return do_shortcode_tag( $match );
+	}
+
 
 	// The main filter for the post contents. The regular shortcode filter can't be used as it's post-wpautop().
 	function parse_shortcodes( $content ) {
@@ -390,7 +461,7 @@ class SyntaxHighlighter {
 
 	// HTML entity encode the contents of shortcodes
 	function encode_shortcode_contents( $content ) {
-		return $this->shortcode_hack( $content, array( $this, 'encode_shortcode_contents_callback' ) );
+		return $this->shortcode_hack( $content, array( $this, 'encode_shortcode_contents_callback' ), false );
 	}
 
 
@@ -423,7 +494,7 @@ class SyntaxHighlighter {
 
 	// HTML entity decode the contents of shortcodes
 	function decode_shortcode_contents( $content ) {
-		return $this->shortcode_hack( $content, array( $this, 'decode_shortcode_contents_callback' ) );
+		return $this->shortcode_hack( $content, array( $this, 'decode_shortcode_contents_callback' ), false );
 	}
 
 
@@ -1247,12 +1318,6 @@ class SyntaxHighlighter {
 
 		return $settings;
 	}
-
-
-	// PHP4 compatibility
-	function SyntaxHighlighter() {
-		$this->__construct();
-	}
 }
 
 
@@ -1262,5 +1327,3 @@ function SyntaxHighlighter() {
 	global $SyntaxHighlighter;
 	$SyntaxHighlighter = new SyntaxHighlighter();
 }
-
-?>
