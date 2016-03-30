@@ -2,7 +2,7 @@
 /*
 Plugin Name: React
 Description: 💩 Reactions.
-Version: 0.1-20160310
+Version: 0.1-20160329
 Text Domain: react
 */
 
