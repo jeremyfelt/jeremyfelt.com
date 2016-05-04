@@ -1,16 +1,16 @@
 <?php
 
-if( ! class_exists( "Yoast_Update_Manager", false ) ) {
+if( ! class_exists( "MI_Update_Manager", false ) ) {
 
-	class Yoast_Update_Manager {
+	class MI_Update_Manager {
 
 		/**
-		 * @var Yoast_Product
+		 * @var MI_Product
 		 */
 		protected $product;
 
 		/**
-		 * @var Yoast_License_Manager
+		 * @var MI_License_Manager
 		 */
 		protected $license_manager;
 
@@ -44,7 +44,7 @@ if( ! class_exists( "Yoast_Update_Manager", false ) ) {
 		 * @param string $version     The current plugin or theme version
 		 * @param string $author      (optional) The item author.
 		 */
-		public function __construct( Yoast_Product $product, $license_manager ) {
+		public function __construct( MI_Product $product, $license_manager ) {
 			$this->product = $product;
 			$this->license_manager = $license_manager;
 
@@ -126,7 +126,7 @@ if( ! class_exists( "Yoast_Update_Manager", false ) ) {
 			);
 
 			require_once dirname( __FILE__ ) . '/class-api-request.php';
-			$request = new Yoast_API_Request( $this->product->get_api_url(), $request_params );
+			$request = new MI_API_Request( $this->product->get_api_url(), $request_params );
 
 			if( $request->is_valid() !== true ) {
 
@@ -150,7 +150,7 @@ if( ! class_exists( "Yoast_Update_Manager", false ) ) {
 				$this->license_manager->set_license_status( 'invalid' );
 
 				// show notice to let the user know we deactivated his/her license
-				$this->error_message = __( "This site has not been activated properly on yoast.com and thus cannot check for future updates. Please activate your site with a valid license key.", $this->product->get_text_domain() );
+				$this->error_message = __( "This site has not been activated properly on monsterinsights.com and thus cannot check for future updates. Please activate your site with a valid license key.", $this->product->get_text_domain() );
 				add_action( 'admin_notices', array( $this, 'show_update_error' ) );
 			}
 

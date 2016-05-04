@@ -3,7 +3,7 @@
 include( dirname( __FILE__ ) . '../../class-product.php' );
 include( dirname( __FILE__ ) . '../../class-license-manager.php' );
 
-class Yoast_Product_Double extends Yoast_Product {
+class MI_Product_Double extends MI_Product {
 
 	/**
 	 * Construct the real Product class with our fake data
@@ -14,12 +14,12 @@ class Yoast_Product_Double extends Yoast_Product {
 
 }
 
-class Yoast_License_Manager_Double extends Yoast_License_Manager {
+class MI_License_Manager_Double extends MI_License_Manager {
 
 	public $product;
 
 	public function __construct() {
-		$this->product = new Yoast_Product_Double();
+		$this->product = new MI_Product_Double();
 
 		parent::__construct( $this->product );
 	}
@@ -43,18 +43,18 @@ class Yoast_License_Manager_Double extends Yoast_License_Manager {
 
 }
 
-class Test_Yoast_License_Manager extends Yst_License_Manager_UnitTestCase {
+class Test_MI_License_Manager extends Yst_License_Manager_UnitTestCase {
 
 	private $class;
 
 	public function setUp() {
-		$this->class = new Yoast_License_Manager_Double();
+		$this->class = new MI_License_Manager_Double();
 	}
 
 	/**
 	 * Make sure the API url is correct in the product
 	 *
-	 * @covers Yoast_License_Manager::get_api_url()
+	 * @covers MI_License_Manager::get_api_url()
 	 */
 	public function test_get_api_url(){
 		$this->assertEquals( $this->class->product->get_api_url(), get_site_url() );
@@ -63,7 +63,7 @@ class Test_Yoast_License_Manager extends Yst_License_Manager_UnitTestCase {
 	/**
 	 * Make sure the API url is correct in the product
 	 *
-	 * @covers Yoast_License_Manager::get_curl_version()
+	 * @covers MI_License_Manager::get_curl_version()
 	 */
 	public function test_get_curl_version_WITH_curl_installed_on_test_server(){
 		$curl_result = $this->class->double_get_curl_version();

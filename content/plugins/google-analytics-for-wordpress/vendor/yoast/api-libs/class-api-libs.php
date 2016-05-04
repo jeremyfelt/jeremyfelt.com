@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Include this class to use the Yoast_Api_Libs, you can include this as a submodule in your project
+ * Include this class to use the MI_Api_Libs, you can include this as a submodule in your project
  * and you just have to autoload this class
  *
  *
@@ -11,7 +11,7 @@
  * - Create file 'class-api-oauth.php'
  * - Class name should be 'Yoast_Api_Oauth'
  */
-class Yoast_Api_Libs {
+class MI_Api_Libs {
 
 	/**
 	 * Current version number of the API-libs

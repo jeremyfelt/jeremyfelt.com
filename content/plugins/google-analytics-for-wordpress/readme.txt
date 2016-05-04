@@ -1,20 +1,20 @@
-=== Google Analytics by Yoast ===
-Contributors: joostdevalk
-Donate link: https://yoast.com/donate/
-Tags: analytics, google analytics, statistics, tracking, stats, google, yoast
+﻿=== Google Analytics by MonsterInsights ===
+Contributors: chriscct7, smub
+Donate link: http://www.wpbeginner.com/wpbeginner-needs-your-help/
+Tags: analytics, google analytics, statistics, tracking, stats, google, yoast, google analytics by yoast, ga, monster insights, monsterinsights
 Requires at least: 3.9
-Tested up to: 4.3
-Stable tag: 5.4.6
+Tested up to: 4.5
+Stable tag: 5.4.9
 License: GPL v3
 
 Track your WordPress site easily with the latest tracking codes and lots added data for search result pages and error pages.
 
 == Description ==
 
-The Google Analytics by Yoast plugin for WordPress allows you to track your blog easily and always stays up to date with the newest features in Google Analytics.
+The Google Analytics for WordPress by MonsterInsights allows you to track your blog easily and always stays up to date with the newest features in Google Analytics.
 
-> <strong>Upgrade to GA by Yoast Premium</strong><br>
-> If you need support or want to use custom dimensions, upgrade to [Google Analytics by Yoast Premium](https://yoast.com/wordpress/plugins/google-analytics/#utm_source=wporg&utm_medium=readme&utm_campaign=wpgaplugin) today!
+> <strong>Upgrade to MonsterInsights Premium</strong><br>
+> If you need support or want to use custom dimensions, upgrade to <a href="https://monsterinsights.com/pricing/?utm_source=wporg&utm_medium=readme&utm_campaign=wpgaplugin" rel="friend">Google Analytics by MonsterInsights Pro today!</a>
 
 Full list of features:
 
@@ -23,33 +23,74 @@ Full list of features:
 * Gives you incredibly nice visitor metric dashboards right in your WordPress install.
 * Option to enable demographics and interest reports.
 * Outbound link & downloads tracking.
-	* Configurable options to track outbound links either as pageviews or as events.
-	* Option to track just downloads as pageviews or events in Google Analytics.
-	* Option to track internal links with a particular format as outbound links, very useful for affiliate links that start with /out/, for instance.
+    * Configurable options to track outbound links either as pageviews or as events.
+    * Option to track just downloads as pageviews or events in Google Analytics.
+    * Option to track internal links with a particular format as outbound links, very useful for affiliate links that start with /out/, for instance.
 * Possibility to ignore any user level and up, so all editors and higher for instance.
 * Option to anonymize IP's for use in countries with stricter privacy regulations.
 * Tracking of your search result pages and 404 pages.
 * Full [debug mode](http://yoast.com/google-analytics-debug-mode/), including Firebug lite and ga_debug.js for debugging Google Analytics issues.
-
 > <strong>Development on GitHub</strong><br>
-> The development of Google Analytics by Yoast [takes place on GitHub](https://github.com/Yoast/google-analytics-for-wordpress). Bugs and pull requests are welcomed there. For support, you have two options: either [buy the premium version of Google Analytics by Yoast on Yoast.com](https://yoast.com/wordpress/plugins/google-analytics/), this will give you access to our support team, or refer to the forums.
+> The development of Google Analytics by MonsterInsights [takes place on GitHub](https://github.com/Yoast/google-analytics-for-wordpress). Bugs and pull requests are welcomed there. For support, you have two options: either <a href="https://monsterinsights.com/pricing/?utm_source=wporg&utm_medium=readme&utm_campaign=wpgaplugin" rel="friend">buy the premium version of Google Analytics by MonsterInsights</a>, this will give you access to our support team, or refer to the forums.
 
-Other interesting stuff:
+= Note for Beginners =
 
-* Check out the other [WordPress Plugins](https://yoast.com/wordpress/plugins/) by the same team.
-* Want to increase traffic to your WordPress blog? Check out the [WordPress SEO](https://yoast.com/articles/wordpress-seo/) Guide!
-* Check out the authors [WordPress Hosting](https://yoast.com/articles/wordpress-hosting/) experience. Good hosting is hard to come by, but it doesn't have to be expensive, Joost tells you why!
+Like all WordPress plugins, Google Analytics by MonsterInsights is only available for self-hosted WordPress sites. This means you will need to <a href="http://www.wpbeginner.com/wp-tutorials/how-to-properly-move-your-blog-from-wordpress-com-to-wordpress-org/" rel="friend" title="How to properly move from WordPress.com to WordPress.org">switch from WordPress.com to WordPress.org</a> if you want to use this plugin on your WordPress site.
+
+For more details, see this infographic on <a href="http://www.wpbeginner.com/beginners-guide/self-hosted-wordpress-org-vs-free-wordpress-com-infograph/" rel="friend" title="Self Hosted WordPress.org vs Free WordPress.com">self hosted WordPress.org vs free WordPress.com</a>
+
+= Credits =
+
+This plugin is created by <a href="https://twitter.com/chriscct7" rel="friend" title="Chris Christoff">Chris Christoff</a> and <a href="https://syedbalkhi.com/" rel="friend" title="Syed Balkhi">Syed Balkhi</a> with sponsorship from <a href="http://www.wpbeginner.com/" rel="friend" title="WPBeginner">WPBeginner</a>.
+
+= What's Next =
+
+If you like this plugin, then consider checking out our other projects:
+
+* <a href="http://optinmonster.com/" rel="friend" title="OptinMonster">OptinMonster</a> - Get More Email Subscribers
+* <a href="http://soliloquywp.com/" rel="friend" title="Soliloquy">Soliloquy</a> - Best WordPress Slider Plugin
+* <a href="http://enviragallery.com/" rel="friend" title="Envira Gallery">Envira Gallery</a> - Best WordPress Gallery Plugin
+* <a href="https://wpforms.com/" rel="friend" title="WPForms">WPForms</a> - Best WordPress Contact Form Plugin
+
+This plugin would not be possible without the help and support of <a href="http://www.wpbeginner.com/" rel="friend" title="WPBeginner">WPBeginner</a>, the largest WordPress resource site. You can learn from our <a href="http://www.wpbeginner.com/category/wp-tutorials/" rel="friend" title="WordPress Tutorials">free WordPress Tutorials</a> like <a href="http://www.wpbeginner.com/how-to-install-wordpress/" rel="friend" title="How to Install WordPress - Step by Step">how to install WordPress</a>, <a href="http://www.wpbeginner.com/wordpress-hosting/" rel="friend" title="How to choose the best WordPress hosting">choose the best WordPress hosting</a>, <a href="http://www.wpbeginner.com/glossary/" rel="friend" title="WordPress Glossary Terms for Beginners">WordPress glossary</a>, and more.
+
+You can also learn about other <a href="http://www.wpbeginner.com/category/plugins/" rel="friend" title="Best WordPress Plugins">best WordPress plugins</a>.
+
 
 == Installation ==
 
-This section describes how to install the plugin and get it working.
-
-1. Delete any existing `gapp` or `google-analytics-for-wordpress` folder from the `/wp-content/plugins/` directory
-1. Upload `google-analytics-for-wordpress` folder to the `/wp-content/plugins/` directory
-1. Activate the plugin through the 'Plugins' menu in WordPress
-1. Go to the options panel under the 'Settings' menu and add your Analytics account number and set the settings you want.
+1. Install Google Analytics by MonsterInsights either via the WordPress.org plugin repository or by uploading the files to your server. (See instructions on <a href="http://www.wpbeginner.com/beginners-guide/step-by-step-guide-to-install-a-wordpress-plugin-for-beginners/" rel="friend">how to install a WordPress plugin</a>)
+2. Activate Google Analytics by MonsterInsights.
+3. Navigate to the Analytics tab in your admin menu and configure the plugin.
+4. Want more features? <a href="https://monsterinsights.com/?utm_source=wporg&utm_medium=readme&utm_campaign=wpgaplugin" rel="friend" title="MonsterInsights">Purchase the premium version of MonsterInsights</a>!
 
 == Changelog ==
+
+= 5.4.9 = 
+
+Release Date: April 15th, 2015
+
+* Bugfixes:
+    * Fixes issue with eCommerce addon (also requires user to update eCommerce addon)
+	* Fixes issue with 2 dashboard links
+	* A bug in pre-existing code caused the menu of the plugin to skyrocket unintentionally. This has been corrected.
+	
+* Enhancements:
+    * New font based dashboard icon
+	* The "MonsterInsights" menu item name has been renamed to just "Insights"
+
+= 5.4.8 = 
+
+Release Date: April 14th, 2015
+
+* Bugfixes:
+    * Fixes compatibility issue with WordPress 4.5
+	
+* Annoucements:	
+	* Google Analytics by Yoast is now MonsterInsights.
+	
+* Enhancements:
+    * Adds ground work for new features coming soon.
 
 = 5.4.6 =
 
@@ -154,7 +195,7 @@ Release Date: February 18th, 2015
 Release Date: February 11th, 2015
 
 * Enhancements:
-	* Added a filter (`yst-ga-filter-api-end-date`) to enable our [premium plugin](https://yoast.com/wordpress/plugins/google-analytics/) to show more recent data in the dashboards.
+	* Added a filter (`yst-ga-filter-api-end-date`) to enable our [premium plugin](https://www.monsterinsights.com/) to show more recent data in the dashboards.
 
 * Features:
 	* Added [Enhanced link attribution](https://support.google.com/analytics/answer/2558867) for Universal tracking.
@@ -729,13 +770,12 @@ This version fixes several issues related to your site's security. Update immedi
 
 == Frequently Asked Questions ==
 
-For all frequently asked questions, and their answers, check the [Yoast Knowledge base](http://kb.yoast.com/category/43-google-analytics-for-wordpress).
+For all frequently asked questions, and their answers, check the [MonsterInsights Knowledge base](https://www.monsterinsights.com/docs/).
 
 == Screenshots ==
 
-1. Screenshot of the dashboards this plugin generates. To get dashboards for custom dimensions, upgrade to [GA by Yoast Premium](https://yoast.com/wordpress/plugins/google-analytics/#utm_source=wporg&utm_medium=readme&utm_campaign=wpgaplugin&utm_content=screenshot).
+1. Screenshot of the dashboards this plugin generates. To get dashboards for custom dimensions, upgrade to [GA by MonsterInsights Pro](https://www.monsterinsights.com/#utm_source=wporg&utm_medium=readme&utm_campaign=wpgaplugin&utm_content=screenshot).
 2. Screenshot of the general settings panel for this plugin.
-3. Screenshot of the universal settings panel.
-4. Screenshot of the advanced settings panel.
-5. Screenshot of the account selection drop down.
+3. Screenshot of the advanced settings panel.
+
 

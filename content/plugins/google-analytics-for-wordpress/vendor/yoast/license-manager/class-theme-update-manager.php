@@ -1,8 +1,8 @@
 <?php
 
-if( class_exists( 'Yoast_Update_Manager' ) && ! class_exists( "Yoast_Theme_Update_Manager", false ) ) {
+if( class_exists( 'MI_Update_Manager' ) && ! class_exists( "MI_Theme_Update_Manager", false ) ) {
 
-	class Yoast_Theme_Update_Manager extends Yoast_Update_Manager {
+	class MI_Theme_Update_Manager extends MI_Update_Manager {
 
 		/**
 		* Constructor
@@ -14,7 +14,7 @@ if( class_exists( 'Yoast_Update_Manager' ) && ! class_exists( "Yoast_Theme_Updat
 		* @param string $theme_version
 		* @param string $author (optional)
 		*/
-		public function __construct( Yoast_Product $product, $license_key ) {
+		public function __construct( MI_Product $product, $license_key ) {
 			
 			parent::__construct( $product, $license_key );
 

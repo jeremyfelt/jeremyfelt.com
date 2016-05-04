@@ -6,11 +6,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 ?><script type="text/javascript">
 (function($) {
 	
-	if( typeof YoastLicenseManager !== "undefined" ) {
+	if( typeof MILicenseManager !== "undefined" ) {
 		return;
 	}
 
-	window.YoastLicenseManager = (function () {
+	window.MILicenseManager = (function () {
 
 		function init() {
 			var $keyInputs = $(".yoast-license-key-field.yoast-license-obfuscate");
@@ -61,7 +61,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	
 	})();
 
-	YoastLicenseManager.init();
+	MILicenseManager.init();
 
 })(jQuery);
 </script>

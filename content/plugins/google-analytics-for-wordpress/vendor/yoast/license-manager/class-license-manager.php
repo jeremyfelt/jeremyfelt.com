@@ -1,8 +1,8 @@
 <?php
 
-if ( ! interface_exists( 'iYoast_License_Manager', false ) ) {
+if ( ! interface_exists( 'iMI_License_Manager', false ) ) {
 
-	interface iYoast_License_Manager {
+	interface iMI_License_Manager {
 
 		public function specific_hooks();
 
@@ -13,15 +13,15 @@ if ( ! interface_exists( 'iYoast_License_Manager', false ) ) {
 }
 
 
-if ( ! class_exists( 'Yoast_License_Manager', false ) ) {
+if ( ! class_exists( 'MI_License_Manager', false ) ) {
 
 	/**
-	 * Class Yoast_License_Manager
+	 * Class MI_License_Manager
 	 *
 	 * @todo Maybe create a license class that contains key and option
-	 * @todo Not sure if Yoast_License_Manager is a good name for this class, it's more managing the product (plugin or theme)
+	 * @todo Not sure if MI_License_Manager is a good name for this class, it's more managing the product (plugin or theme)
 	 */
-	abstract class Yoast_License_Manager implements iYoast_License_Manager {
+	abstract class MI_License_Manager implements iMI_License_Manager {
 
 		/**
 		 * @const VERSION The version number of the License_Manager class
@@ -66,9 +66,9 @@ if ( ! class_exists( 'Yoast_License_Manager', false ) ) {
 		/**
 		 * Constructor
 		 *
-		 * @param Yoast_Product $product
+		 * @param MI_Product $product
 		 */
-		public function __construct( Yoast_Product $product ) {
+		public function __construct( MI_Product $product ) {
 
 			// Set the license
 			$this->product = $product;
@@ -265,7 +265,7 @@ if ( ! class_exists( 'Yoast_License_Manager', false ) ) {
 			$url = add_query_arg( $api_params, $this->product->get_api_url() );
 
 			require_once dirname( __FILE__ ) . '/class-api-request.php';
-			$request = new Yoast_API_Request( $url );
+			$request = new MI_API_Request( $url );
 
 			if ( $request->is_valid() !== true ) {
 				$this->set_notice( sprintf( __( "Request error: \"%s\" (%scommon license notices%s)", $this->product->get_text_domain() ), $request->get_error_message(), '<a href="http://kb.yoast.com/article/13-license-activation-notices">', '</a>' ), false );
@@ -527,7 +527,7 @@ if ( ! class_exists( 'Yoast_License_Manager', false ) ) {
 		}
 
 		/**
-		 * Output the script containing the YoastLicenseManager JS Object
+		 * Output the script containing the MILicenseManager JS Object
 		 *
 		 * This takes care of disabling the 'activate' and 'deactivate' buttons
 		 */

@@ -11,7 +11,7 @@ $tracking_code = $options_class->get_tracking_code();
 
 echo $yoast_ga_admin->content_head();
 ?>
-	<h2 id="yoast_ga_title"><?php echo __( 'Google Analytics by Yoast: ', 'google-analytics-for-wordpress' ) . __( 'Dashboard', 'google-analytics-for-wordpress' ); ?> <?php do_action( 'yst_ga_dashboard_title' ); ?></h2>
+	<h2 id="yoast_ga_title"><?php echo __( 'Google Analytics by MonsterInsights: ', 'google-analytics-for-wordpress' ) . __( 'Dashboard', 'google-analytics-for-wordpress' ); ?> <?php do_action( 'yst_ga_dashboard_title' ); ?></h2>
 
 	<h2 class="nav-tab-wrapper" id="ga-tabs">
 		<a class="nav-tab" id="general-tab" href="#top#general"><?php _e( 'Overview', 'google-analytics-for-wordpress' ); ?></a>
@@ -62,7 +62,7 @@ echo $yoast_ga_admin->content_head();
 				else {
 					echo '<div class="ga-promote"><p>';
 					echo sprintf(
-						__( 'You have not yet finished setting up Google Analytics for Wordpress by Yoast. Please %sadd your Analytics profile here%s to enable tracking.', 'google-analytics-for-wordpress' ),
+						__( 'You have not yet finished setting up Google Analytics for Wordpress by MonsterInsights. Please %sadd your Analytics profile here%s to enable tracking.', 'google-analytics-for-wordpress' ),
 						'<a href=" ' . admin_url( 'admin.php?page=yst_ga_settings#top#general' ) . '">',
 						'</a>'
 					);
@@ -108,7 +108,7 @@ echo $yoast_ga_admin->content_head();
 			else {
 				echo '<div class="ga-promote"><p>';
 				echo sprintf(
-					__( 'You have not yet finished setting up Google Analytics for Wordpress by Yoast. Please %sadd your Analytics profile here%s to enable tracking.', 'google-analytics-for-wordpress' ),
+					__( 'You have not yet finished setting up Google Analytics for Wordpress by MonsterInsights. Please %sadd your Analytics profile here%s to enable tracking.', 'google-analytics-for-wordpress' ),
 					'<a href=" ' . admin_url( 'admin.php?page=yst_ga_settings#top#general' ) . '">',
 					'</a>'
 				);

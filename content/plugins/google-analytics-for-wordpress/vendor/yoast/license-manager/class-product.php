@@ -1,13 +1,13 @@
 <?php
 
-if( ! class_exists( "Yoast_Product", false ) ) {
+if( ! class_exists( "MI_Product", false ) ) {
 
 	/**
-	 * Class Yoast_Product
+	 * Class MI_Product
 	 *
 	 * @todo create a license class and store an object of it in this class
 	 */
-	class Yoast_Product {
+	class MI_Product {
 
 		/**
 		 * @var string The URL of the shop running the EDD API.

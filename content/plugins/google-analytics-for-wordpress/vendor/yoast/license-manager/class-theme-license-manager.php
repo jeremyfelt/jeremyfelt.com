@@ -1,8 +1,8 @@
 <?php
 
-if( class_exists( 'Yoast_License_Manager' ) &&  ! class_exists( "Yoast_Theme_License_Manager", false ) ) {
+if( class_exists( 'MI_License_Manager' ) &&  ! class_exists( "MI_Theme_License_Manager", false ) ) {
 
-	class Yoast_Theme_License_Manager extends Yoast_License_Manager {
+	class MI_Theme_License_Manager extends MI_License_Manager {
 
 		/**
 	     * Setup auto updater for themes
@@ -12,7 +12,7 @@ if( class_exists( 'Yoast_License_Manager' ) &&  ! class_exists( "Yoast_Theme_Lic
 				// setup auto updater
 				require_once dirname( __FILE__ ) . '/class-update-manager.php';
 				require_once dirname( __FILE__ ) . '/class-theme-update-manager.php'; // @TODO: Autoload?
-				new Yoast_Theme_Update_Manager( $this->product, $this );
+				new MI_Theme_Update_Manager( $this->product, $this );
 			}
 		}
 

@@ -3,10 +3,10 @@
 /*
 Plugin Name: Sample Plugin
 Version: 1.0
-Plugin URI: https://yoast.com/
+Plugin URI: https://www.monsterinsights.com/
 Description: A sample plugin to test the License Manager
-Author: Yoast, DvanKooten
-Author URI: http://yoast.com/
+Author: chriscct7, msub, DvanKooten
+Author URI: http://www.monsterinsights.com/
 Text Domain: sample-plugin
 */
 
@@ -39,7 +39,7 @@ class Sample_Plugin {
 	public function load_license_manager() {
 
 		// Instantiate license class
-		$license_manager = new Yoast_Plugin_License_Manager( new Sample_Product() );
+		$license_manager = new MI_Plugin_License_Manager( new Sample_Product() );
 
 		// Setup the required hooks
 		$license_manager->setup_hooks();
@@ -59,7 +59,7 @@ class Sample_Plugin {
 	public function show_license_page() {
 
 		// Instantiate license class
-		$license_manager = new Yoast_Plugin_License_Manager( new Sample_Product() );
+		$license_manager = new MI_Plugin_License_Manager( new Sample_Product() );
 
 		?>
 		<div class="wrap">
