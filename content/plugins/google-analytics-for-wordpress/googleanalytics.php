@@ -9,7 +9,7 @@
  * Plugin URI: https://www.monsterinsights.com/pricing/#utm_source=wordpress&utm_medium=plugin&utm_campaign=wpgaplugin&utm_content=v504
  * Description: This plugin makes it simple to add Google Analytics to your WordPress site, adding lots of features, e.g. error page, search result and automatic outgoing links and download tracking.
  * Author: MonsterInsights
- * Version: 5.4.9
+ * Version: 5.5
  * Requires at least: 3.9
  * Author URI: https://www.monsterinsights.com/
  * License: GPL v3
@@ -35,7 +35,7 @@
 
 // This plugin was originally based on Rich Boakes' Analytics plugin: http://boakes.org/analytics, but has since been rewritten and refactored multiple times.
 
-define( 'GAWP_VERSION', '5.4.9' );
+define( 'GAWP_VERSION', '5.5' );
 
 define( 'GAWP_FILE', __FILE__ );
 

@@ -1,17 +1,21 @@
 ﻿=== Google Analytics by MonsterInsights ===
 Contributors: chriscct7, smub
 Donate link: http://www.wpbeginner.com/wpbeginner-needs-your-help/
-Tags: analytics, google analytics, statistics, tracking, stats, google, yoast, google analytics by yoast, ga, monster insights, monsterinsights
+Tags: analytics, analytics dashboard, google analytics, google analytics dashboard, google analytics widget, universal google analytics, statistics, tracking, stats, google, yoast, google analytics by yoast, ga, monster insights, monsterinsights, universal analytics, web stats, ecommerce, ecommerce tracking
 Requires at least: 3.9
 Tested up to: 4.5
-Stable tag: 5.4.9
+Stable tag: 5.5
 License: GPL v3
 
-Track your WordPress site easily with the latest tracking codes and lots added data for search result pages and error pages.
+Connect Google Analytics with WordPress by adding your Google Analytics tracking code. Get the stats that matter.
 
 == Description ==
 
+= Google Analytics Plugin for WordPress =
+
 The Google Analytics for WordPress by MonsterInsights allows you to track your blog easily and always stays up to date with the newest features in Google Analytics.
+
+MonsterInsights is the most popular Google Analytics plugin for WordPress with roughly 11 million downloads.
 
 > <strong>Upgrade to MonsterInsights Premium</strong><br>
 > If you need support or want to use custom dimensions, upgrade to <a href="https://monsterinsights.com/pricing/?utm_source=wporg&utm_medium=readme&utm_campaign=wpgaplugin" rel="friend">Google Analytics by MonsterInsights Pro today!</a>
@@ -66,9 +70,19 @@ You can also learn about other <a href="http://www.wpbeginner.com/category/plugi
 
 == Changelog ==
 
+= 5.5 = 
+
+Release Date: May 1st, 2016
+
+* Bugfixes:
+	* Fixes issue with changelog missing some deployed versions
+	
+* Enhancements:
+	* Add new System Info tab for faster support
+
 = 5.4.9 = 
 
-Release Date: April 15th, 2015
+Release Date: April 15th, 2016
 
 * Bugfixes:
     * Fixes issue with eCommerce addon (also requires user to update eCommerce addon)
@@ -81,7 +95,7 @@ Release Date: April 15th, 2015
 
 = 5.4.8 = 
 
-Release Date: April 14th, 2015
+Release Date: April 14th, 2016
 
 * Bugfixes:
     * Fixes compatibility issue with WordPress 4.5

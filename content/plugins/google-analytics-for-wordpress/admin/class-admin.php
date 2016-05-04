@@ -26,6 +26,8 @@ class Yoast_GA_Admin extends Yoast_GA_Options {
 			}
 		}
 
+		add_action( 'admin_init', array( $this, 'system_info' ) );
+
 	}
 
 	/**
@@ -476,18 +478,27 @@ class Yoast_GA_Admin extends Yoast_GA_Options {
 	}
 
 	/**
+	 * Output System Info file
+	 */
+	public function system_info() {
+		if ( ! empty( $_REQUEST['monsterinsights-action'] ) && $_REQUEST['monsterinsights-action'] === 'download_sysinfo' ) {
+			if ( ! current_user_can( 'manage_options' ) ) {
+				return;
+			}
+			nocache_headers();
+			header( 'Content-Type: text/plain' );
+			header( 'Content-Disposition: attachment; filename="monsterinsights-system-info.txt"' );
+			echo wp_strip_all_tags( $_POST['monsterinsights-sysinfo'] );
+			die();
+		}
+	}
+
+	/**
 	 * Render the admin page footer with sidebar for the GA Plugin
 	 */
 	public function content_footer() {
 
 		do_action( 'yoast_ga_admin_footer' );
-
-		if ( true == WP_DEBUG ) {
-			// Show the debug information if debug is enabled in the wp_config file
-			echo '<div id="ga-debug-info" class="postbox"><h3 class="hndle"><span>' . __( 'Debug information', 'google-analytics-for-wordpress' ) . '</span></h3><div class="inside"><pre>';
-			var_dump( $this->options );
-			echo '</pre></div></div>';
-		}
 
 		if ( class_exists( 'MI_Product_GA_Premium' ) ) {
 			$license_manager = new MI_Plugin_License_Manager( new MI_Product_GA_Premium() );
