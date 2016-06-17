@@ -1,0 +1,471 @@
+# Translation of Ryu in Turkish
+# This file is distributed under the same license as the Ryu package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2014-06-30 17:38:50+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: GlotPress/0.1\n"
+"Project-Id-Version: Ryu\n"
+
+#: eventbrite/eventbrite-index.php:51 eventbrite/eventbrite-single.php:38
+msgid "Eventbrite event"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://wordpress.com/themes/"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "Ryu is a clutter-free theme for personal bloggers. It has great readability with a large font size, and the one-column layout is perfect for displaying large images. Optional widgets are located at the top panel with social media links and a search field. Background color for an image post will automatically match the uploaded image in the post."
+msgstr "Ryu kişisel blog yazarları için derli toplu bir temadır. Büyük yazı tipi boyutuyla harika okunabilirliğe sahiptir ve tek sütunlu yerleşimi büyük görüntüleri göstermek için mükemmeldir. İsteğe bağlı pencere öğeleri üst panelde sosyal medya bağlantıları ve bir arama alanı ile birlikte bulunur. Bir görüntü iletisinin arka plan rengi iletide yüklenen görüntüyle otomatik olarak eşleşir."
+
+#: searchform.php:12
+msgctxt "submit button"
+msgid "Search"
+msgstr "Ara"
+
+#: searchform.php:11
+msgctxt "placeholder"
+msgid "Search &hellip;"
+msgstr "Ara &hellip;"
+
+#: searchform.php:10
+msgctxt "assistive text"
+msgid "Search"
+msgstr "Ara"
+
+#: search.php:16
+msgid "Search Results for: %s"
+msgstr "Arama sonuçları: %s"
+
+#: no-results.php:29
+msgid "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help."
+msgstr "Aradığınız sayfa bulunamadı. Belki arama kutusu aradığınızı bulma konusunda yardımcı olabilir."
+
+#: no-results.php:24
+msgid "Sorry, but nothing matched your search terms. Please try again with some different keywords."
+msgstr "Üzgünüz fakat aradığınız kriterler ile örtüşen sonuç bulunamadı. Lütfen başka kriterler ile tekrar deneyin."
+
+#: no-results.php:20
+msgid "Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
+msgstr "İlk yazınızı yayınlamaya hazır mısınız? <a href=\"%1$s\">Buradan başlayın</a>."
+
+#: no-results.php:14
+msgid "Nothing Found"
+msgstr "Bulunamadı"
+
+#: inc/template-tags.php:185
+msgid "View all posts by %s"
+msgstr "%s tarafından yazılmış tüm yazıları görüntüle"
+
+#: inc/template-tags.php:173
+msgid "<span class=\"featured-post\"><a href=\"%1$s\" title=\"%2$s\" rel=\"bookmark\">Sticky</a></span>"
+msgstr "<span class=\"featured-post\"><a href=\"%1$s\" title=\"%2$s\" rel=\"bookmark\">Yapışkan</a></span>"
+
+#: inc/template-tags.php:179
+msgid "<span class=\"entry-date\"><a href=\"%1$s\" title=\"%2$s\" rel=\"bookmark\"><time datetime=\"%3$s\">%4$s</time></a></span><span class=\"author vcard\"><a class=\"url fn n\" href=\"%5$s\" title=\"%6$s\" rel=\"author\">%7$s</a></span>"
+msgstr "<span class=\"entry-date\"><a href=\"%1$s\" title=\"%2$s\" rel=\"bookmark\"><time datetime=\"%3$s\">%4$s</time></a></span><span class=\"author vcard\"><a class=\"url fn n\" href=\"%5$s\" title=\"%6$s\" rel=\"author\">%7$s</a></span>"
+
+#: inc/template-tags.php:102
+msgctxt "1: date, 2: time"
+msgid "%1$s at %2$s"
+msgstr "%1$s %2$s"
+
+#: inc/template-tags.php:96
+msgid "Your comment is awaiting moderation."
+msgstr "Yorumunuz denetim için bekliyor."
+
+#: inc/template-tags.php:89
+msgid "%s <span class=\"says\">says:</span>"
+msgstr "%s <span class=\"says\">dedi ki:</span>"
+
+#: inc/template-tags.php:51
+msgid "<span class=\"meta-nav\">&rarr;</span> <span class=\"text-nav\">Newer posts</span>"
+msgstr "<span class=\"meta-nav\">&rarr;</span> <span class=\"text-nav\">Yeni yazılar</span>"
+
+#: inc/template-tags.php:55
+msgid "<span class=\"meta-nav\">&larr;</span> <span class=\"text-nav\">Older posts</span>"
+msgstr "<span class=\"meta-nav\">&larr;</span> <span class=\"text-nav\">Eski yazılar</span>"
+
+#: inc/template-tags.php:79
+msgid "Pingback:"
+msgstr "Geri bildirim: "
+
+#: inc/template-tags.php:45
+msgctxt "Previous post link"
+msgid "&larr;"
+msgstr "&larr;"
+
+#: inc/template-tags.php:43
+msgctxt "Next post link"
+msgid "&rarr;"
+msgstr "&rarr;"
+
+#: inc/template-tags.php:39
+msgid "Post navigation"
+msgstr "Yazı dolaşımı"
+
+#: inc/extras.php:66
+msgid "Page %s"
+msgstr "Sayfa %s"
+
+#: inc/customizer.php:136
+msgid "Dribbble Link"
+msgstr "Dribbble Bağlantısı"
+
+#: inc/customizer.php:148
+msgid "Vimeo Link"
+msgstr "Vimeo Bağlantısı"
+
+#: inc/customizer.php:160
+msgid "YouTube Link"
+msgstr "YouTube Bağlantısı"
+
+#: inc/customizer.php:172
+msgid "Tumblr Link"
+msgstr "Tumblr Bağlantısı"
+
+#: inc/customizer.php:112
+msgid "Flickr Link"
+msgstr "Flickr Bağlantısı"
+
+#: inc/customizer.php:124
+msgid "Github Link"
+msgstr "Github Bağlantısı"
+
+#: inc/customizer.php:76
+msgid "Pinterest Link"
+msgstr "Pinterest Bağlantısı"
+
+#: inc/customizer.php:88
+msgid "Google+ Link"
+msgstr "Google+ Bağlantısı"
+
+#: inc/customizer.php:100
+msgid "LinkedIn Link"
+msgstr "LinkedIn Bağlantısı"
+
+#: inc/customizer.php:52
+msgid "Twitter Link"
+msgstr "Twitter Bağlantısı"
+
+#: inc/customizer.php:64
+msgid "Facebook Link"
+msgstr "Facebook bağlantısı"
+
+#: inc/customizer.php:28
+msgid "Gravatar"
+msgstr ""
+
+#: inc/customizer.php:40
+msgid "Email Link"
+msgstr "Eposta Bağlantısı"
+
+#: image.php:57
+msgid "<span class=\"entry-date\"><time class=\"entry-date\" datetime=\"%1$s\">%2$s</time></span><span class=\"full-size-link\"><a href=\"%3$s\" title=\"Link to full-size image\">%4$s &times; %5$s</a></span><span class=\"parent-post-link\"><a href=\"%6$s\" title=\"Return to %7$s\" rel=\"gallery\">%8$s</a></span>"
+msgstr "<span class=\"entry-date\"><time class=\"entry-date\" datetime=\"%1$s\">%2$s</time></span><span class=\"full-size-link\"><a href=\"%3$s\" title=\"Link to full-size image\">%4$s &times; %5$s</a></span><span class=\"parent-post-link\"><a href=\"%6$s\" title=\"Return to %7$s\" rel=\"gallery\">%8$s</a></span>"
+
+#: image.php:82
+msgid "<div class=\"next\"><span class=\"meta-nav\">&rarr;</span> <span class=\"text-nav\">Next</span></div>"
+msgstr "<div class=\"next\"><span class=\"meta-nav\">&rarr;</span> <span class=\"text-nav\">Sonraki</span></div>"
+
+#: image.php:83
+msgid "<div class=\"previous\"><span class=\"meta-nav\">&larr;</span> <span class=\"text-nav\">Previous</span></div>"
+msgstr "<div class=\"previous\"><span class=\"meta-nav\">&larr;</span> <span class=\"text-nav\">Önceki</span></div>"
+
+#: inc/customizer.php:18
+msgid "Theme Options"
+msgstr "Tema Seçenekleri"
+
+#: image.php:44
+msgid "Both comments and trackbacks are currently closed."
+msgstr "Yorumlar ve geri izlemeler şimdilik kapalı"
+
+#: image.php:42
+msgid "Trackbacks are closed, but you can <a class=\"comment-link\" href=\"#respond\" title=\"Post a comment\">post a comment</a>."
+msgstr "Geri izlemeler kapatıldı, ama <a class=\"comment-link\" href=\"#respond\" title=\"Bir yorum gönder\">bir yorum gönderebilirsiniz</a>."
+
+#: image.php:40
+msgid "Comments are closed, but you can leave a trackback: <a class=\"trackback-link\" href=\"%s\" title=\"Trackback URL for your post\" rel=\"trackback\">Trackback URL</a>."
+msgstr "Yorumlar kapalı, ama geri besleme bırakabilirsiniz: <a class=\"trackback-link\" href=\"%s\" title=\"Yazınızdan Trackback Bağlantısı\" rel=\"trackback\">Trackback Bağlantısı</a>. "
+
+#: image.php:38
+msgid "<a class=\"comment-link\" href=\"#respond\" title=\"Post a comment\">Post a comment</a> or leave a trackback: <a class=\"trackback-link\" href=\"%s\" title=\"Trackback URL for your post\" rel=\"trackback\">Trackback URL</a>."
+msgstr "<a class=\"comment-link\" href=\"#respond\" title=\"Post a comment\">Bir yorum yazın</a> veya bir geri besleme bırakın: <a class=\"trackback-link\" href=\"%s\" title=\"Trackback URL for your post\" rel=\"trackback\">Geri Besleme Adresi</a>. "
+
+#: header.php:224
+msgid "Skip to content"
+msgstr "İçeriğe geç"
+
+#: header.php:223
+msgid "Menu"
+msgstr "Menü"
+
+#: header.php:197 header.php:198
+msgid "Search"
+msgstr "Ara"
+
+#: header.php:190 header.php:191
+msgid "Connect"
+msgstr "Bağlan"
+
+#: header.php:182 header.php:183
+msgid "Widgets"
+msgstr "Bileşenler"
+
+#: header.php:151 header.php:152
+msgid "YouTube"
+msgstr "YouTube"
+
+#: header.php:159 header.php:160
+msgid "Tumblr"
+msgstr "Tumblr"
+
+#: header.php:127 header.php:128
+msgid "Github"
+msgstr "Github"
+
+#: header.php:135 header.php:136
+msgid "Dribbble"
+msgstr "Dribbble"
+
+#: header.php:143 header.php:144
+msgid "Vimeo"
+msgstr "Vimeo"
+
+#: header.php:119 header.php:120
+msgid "Flickr"
+msgstr "Flickr"
+
+#: header.php:103 header.php:104
+msgid "Google Plus"
+msgstr "Google Plus"
+
+#: header.php:111 header.php:112
+msgid "LinkedIn"
+msgstr "LinkedIn"
+
+#: header.php:95 header.php:96
+msgid "Pinterest"
+msgstr "Pinterest"
+
+#: header.php:87 header.php:88
+msgid "Facebook"
+msgstr "Facebook"
+
+#: header.php:79 header.php:80
+msgid "Twitter"
+msgstr "Twitter"
+
+#. translators: If there are characters in your language that are not supported
+#. by Playfair Display, translate this to 'off'. Do not translate into your
+#. own language.
+#: functions.php:142
+msgctxt "Playfair Display font: on or off"
+msgid "on"
+msgstr "açık"
+
+#. translators: To add an additional Playfair Display character subset specific
+#. to your language, translate this to 'cyrillic'. Do not translate into your
+#. own language.
+#: functions.php:146
+msgctxt "Playfair Display font: add new subset (cyrillic)"
+msgid "no-subset"
+msgstr "ikincil dizi yok"
+
+#: header.php:71 header.php:72
+msgid "Email"
+msgstr "e-posta"
+
+#: functions.php:90
+msgid "Top Widget Area One"
+msgstr "Üst Bileşen Alanı Bir"
+
+#: functions.php:99
+msgid "Top Widget Area Two"
+msgstr "Üst Bileşen Alanı İki"
+
+#: functions.php:108
+msgid "Top Widget Area Three"
+msgstr "Üst Bileşen Alanı Üç"
+
+#: functions.php:117
+msgid "Top Widget Area Four"
+msgstr "Üst Bileşen Alanı Dört"
+
+#. translators: If there are characters in your language that are not supported
+#. by Lato, translate this to 'off'. Do not translate into your own
+#. language.
+#: functions.php:133
+msgctxt "Lato font: on or off"
+msgid "on"
+msgstr "off"
+
+#: functions.php:50
+msgid "Primary Menu"
+msgstr "Birincil menü"
+
+#: footer.php:18
+msgid "Theme: %1$s by %2$s."
+msgstr "Tema: %2$s tarafından %1$s."
+
+#: footer.php:16
+msgid "Proudly powered by %s"
+msgstr "%s gururla sunar"
+
+#: footer.php:16
+msgid "A Semantic Personal Publishing Platform"
+msgstr "Bir Anlambilimsel Kişisel Yayın Platformu"
+
+#: content.php:61
+msgid "Standard"
+msgstr "Standart"
+
+#: content.php:11
+msgid "Permalink to %s"
+msgstr "%s için kalıcı bağlantı"
+
+#: content-aside.php:33 content-gallery.php:17 content-image.php:19
+#: content-link.php:33 content-page.php:31 content-quote.php:33
+#: content-video.php:49 content.php:52 image.php:28
+msgid "Pages:"
+msgstr "Sayfalar:"
+
+#: content-aside.php:30 content-gallery.php:14 content-image.php:16
+#: content-link.php:30 content-quote.php:30 content-video.php:46 content.php:49
+msgid "Continue reading <span class=\"meta-nav\">&rarr;</span>"
+msgstr "Okumaya devam et <span class=\"meta-nav\">&rarr;</span>"
+
+#: content-aside.php:26 content-gallery.php:48 content-image.php:50
+#: content-link.php:26 content-page.php:23 content-quote.php:26
+#: content-video.php:39 content.php:40 eventbrite/eventbrite-index.php:44
+#: eventbrite/eventbrite-single.php:29 image.php:68 inc/template-tags.php:79
+#: inc/template-tags.php:105
+msgid "Edit"
+msgstr "Düzenle"
+
+#: content-aside.php:24 content-aside.php:48 content-gallery.php:46
+#: content-gallery.php:59 content-image.php:48 content-image.php:61
+#: content-link.php:24 content-link.php:41 content-quote.php:24
+#: content-quote.php:47 content-video.php:37 content-video.php:42
+msgid "All %s posts"
+msgstr "Tüm %s yazıları"
+
+#: content-aside.php:21 content-gallery.php:43 content-image.php:45
+#: content-link.php:21 content-page.php:20 content-quote.php:21
+#: content-video.php:34 content.php:37
+msgid "% Comments"
+msgstr "% Yorum"
+
+#: content-aside.php:21 content-gallery.php:43 content-image.php:45
+#: content-link.php:21 content-page.php:20 content-quote.php:21
+#: content-video.php:34 content.php:37
+msgid "1 Comment"
+msgstr ""
+
+#: content-aside.php:21 content-gallery.php:43 content-image.php:45
+#: content-link.php:21 content-page.php:20 content-quote.php:21
+#: content-video.php:34 content.php:37
+msgid "Leave a comment"
+msgstr "Yorum yapın"
+
+#: content-aside.php:11 content-gallery.php:27 content-image.php:29
+#: content-link.php:11 content-quote.php:11 content-video.php:18 content.php:21
+#: inc/template-tags.php:190
+msgid ", "
+msgstr ", "
+
+#: comments.php:67
+msgid "Comments are closed."
+msgstr "Yorumlar kapalı."
+
+#: comments.php:37 comments.php:57
+msgid "Newer Comments &rarr;"
+msgstr "Yeni yorumlar &arr;"
+
+#: comments.php:36 comments.php:56
+msgid "&larr; Older Comments"
+msgstr "&arr; Eski yorumlar"
+
+#: comments.php:35 comments.php:55
+msgid "Comment navigation"
+msgstr "Yorum dolaşımı"
+
+#: comments.php:28
+msgctxt "comments title"
+msgid "One thought on &ldquo;%2$s&rdquo;"
+msgid_plural "%1$s thoughts on &ldquo;%2$s&rdquo;"
+msgstr[0] "&ldquo;%2$s&rdquo; üzerine bir yorum"
+msgstr[1] "&ldquo;%2$s&rdquo; üzerine %1$s yorum"
+
+#: archive.php:64
+msgid "Archives"
+msgstr "Arşivler"
+
+#: archive.php:61
+msgid "Links"
+msgstr "Bağlantılar"
+
+#: archive.php:58
+msgid "Quotes"
+msgstr "Alıntılar"
+
+#: archive.php:55
+msgid "Videos"
+msgstr "Videolar"
+
+#: archive.php:52
+msgid "Images"
+msgstr "Resimler"
+
+#: archive.php:49
+msgid "Asides"
+msgstr "Yan sütunlar"
+
+#: archive.php:46
+msgid "Yearly Archives: %s"
+msgstr "Yıllık arşivler: %s"
+
+#: archive.php:43
+msgid "Monthly Archives: %s"
+msgstr "Aylık arşivler: %s"
+
+#: archive.php:40
+msgid "Daily Archives: %s"
+msgstr "Günlük arşivler: %s"
+
+#: archive.php:32
+msgid "Author Archives: %s"
+msgstr "Yazar arşivleri: %s"
+
+#: archive.php:25
+msgid "Tag Archives: %s"
+msgstr "Etiket arşivi: %s"
+
+#: archive.php:22
+msgid "Category Archives: %s"
+msgstr "Kategori arşivi: %s"
+
+#. translators: %1$s: smiley
+#: 404.php:37
+msgid "Try looking in the monthly archives. %1$s"
+msgstr "Aylık arşivlere bakmayı deneyin. %1$s"
+
+#: 404.php:33
+msgid "Calendar"
+msgstr "Takvim"
+
+#: 404.php:27
+msgid "Most Used Categories"
+msgstr "En çok Kullanılan Kategoriler"
+
+#: 404.php:20
+msgid "It looks like nothing was found at this location. Maybe try one of the links below or a search?"
+msgstr "Burada hiçbir şeyin bulunmadığı görülüyor. Belki alttaki bağlantılardan birini veya bir arama yapmayı denemelisin?"
+
+#: 404.php:16
+msgid "Oops! That page can&rsquo;t be found."
+msgstr "Üzgünüz! Bu sayfa bulunamıyor."

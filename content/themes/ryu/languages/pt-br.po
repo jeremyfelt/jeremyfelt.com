@@ -1,0 +1,471 @@
+# Translation of Ryu in Portuguese (Brazil)
+# This file is distributed under the same license as the Ryu package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2014-11-26 03:49:17+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: GlotPress/0.1\n"
+"Project-Id-Version: Ryu\n"
+
+#: eventbrite/eventbrite-index.php:51 eventbrite/eventbrite-single.php:38
+msgid "Eventbrite event"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://wordpress.com/themes/"
+msgstr "https://wordpress.com/themes/"
+
+#. Description of the plugin/theme
+msgid "Ryu is a clutter-free theme for personal bloggers. It has great readability with a large font size, and the one-column layout is perfect for displaying large images. Optional widgets are located at the top panel with social media links and a search field. Background color for an image post will automatically match the uploaded image in the post."
+msgstr "Ryu é um tema clean para blogs pessoais. Super legível com suas grandes fontes e seu layout de coluna única, Ryu é perfeito para imagens grandes. Widgets opcionais podem ser adicionados no painel superior, com links para redes sociais e um campo de busca. A cor de fundo de posts de imagens irá automaticamente combinar com a imagem no post."
+
+#: searchform.php:12
+msgctxt "submit button"
+msgid "Search"
+msgstr "Pesquisar"
+
+#: searchform.php:11
+msgctxt "placeholder"
+msgid "Search &hellip;"
+msgstr "Pesquisar &hellip;"
+
+#: searchform.php:10
+msgctxt "assistive text"
+msgid "Search"
+msgstr "Pesquisar"
+
+#: search.php:16
+msgid "Search Results for: %s"
+msgstr "Resultados da pesquisa por: %s"
+
+#: no-results.php:29
+msgid "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help."
+msgstr "Parece que não podemos encontrar o que você está procurando. Talvez pesquisar pode ajudar."
+
+#: no-results.php:24
+msgid "Sorry, but nothing matched your search terms. Please try again with some different keywords."
+msgstr "Nada foi encontrado com os termos da sua pesquisa. Tente novamente com algumas palavras-chaves diferentes."
+
+#: no-results.php:20
+msgid "Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
+msgstr "Pronto para publicar seu primeiro post? <a href=\"%1$s\">Comece aqui</a>."
+
+#: no-results.php:14
+msgid "Nothing Found"
+msgstr "Nada Encontrado"
+
+#: inc/template-tags.php:185
+msgid "View all posts by %s"
+msgstr "Ver todos os artigos de %s"
+
+#: inc/template-tags.php:173
+msgid "<span class=\"featured-post\"><a href=\"%1$s\" title=\"%2$s\" rel=\"bookmark\">Sticky</a></span>"
+msgstr "<span class=\"featured-post\"><a href=\"%1$s\" title=\"%2$s\" rel=\"bookmark\">Fixo</a></span>"
+
+#: inc/template-tags.php:179
+msgid "<span class=\"entry-date\"><a href=\"%1$s\" title=\"%2$s\" rel=\"bookmark\"><time datetime=\"%3$s\">%4$s</time></a></span><span class=\"author vcard\"><a class=\"url fn n\" href=\"%5$s\" title=\"%6$s\" rel=\"author\">%7$s</a></span>"
+msgstr "<span class=\"entry-date\"><a href=\"%1$s\" title=\"%2$s\" rel=\"bookmark\"><time datetime=\"%3$s\">%4$s</time></a></span><span class=\"author vcard\"><a class=\"url fn n\" href=\"%5$s\" title=\"%6$s\" rel=\"author\">%7$s</a></span>"
+
+#: inc/template-tags.php:102
+msgctxt "1: date, 2: time"
+msgid "%1$s at %2$s"
+msgstr "%1$s às %2$s"
+
+#: inc/template-tags.php:96
+msgid "Your comment is awaiting moderation."
+msgstr "O seu comentário aguarda moderação."
+
+#: inc/template-tags.php:89
+msgid "%s <span class=\"says\">says:</span>"
+msgstr "%s <span class=\"says\">disse:</span>"
+
+#: inc/template-tags.php:51
+msgid "<span class=\"meta-nav\">&rarr;</span> <span class=\"text-nav\">Newer posts</span>"
+msgstr "<span class=\"meta-nav\">&rarr;</span> <span class=\"text-nav\">Posts recentes</span>"
+
+#: inc/template-tags.php:55
+msgid "<span class=\"meta-nav\">&larr;</span> <span class=\"text-nav\">Older posts</span>"
+msgstr "<span class=\"meta-nav\">&larr;</span> <span class=\"text-nav\">Posts antigos</span>"
+
+#: inc/template-tags.php:79
+msgid "Pingback:"
+msgstr "Pingback: "
+
+#: inc/template-tags.php:45
+msgctxt "Previous post link"
+msgid "&larr;"
+msgstr "&larr;"
+
+#: inc/template-tags.php:43
+msgctxt "Next post link"
+msgid "&rarr;"
+msgstr "&rarr;"
+
+#: inc/template-tags.php:39
+msgid "Post navigation"
+msgstr "Navegação de Posts"
+
+#: inc/extras.php:66
+msgid "Page %s"
+msgstr "Página %s"
+
+#: inc/customizer.php:136
+msgid "Dribbble Link"
+msgstr "Link do Dribble"
+
+#: inc/customizer.php:148
+msgid "Vimeo Link"
+msgstr "Link do Viemo"
+
+#: inc/customizer.php:160
+msgid "YouTube Link"
+msgstr "Link do YouTube"
+
+#: inc/customizer.php:172
+msgid "Tumblr Link"
+msgstr "Link do Tumblr"
+
+#: inc/customizer.php:112
+msgid "Flickr Link"
+msgstr "Link Flickr"
+
+#: inc/customizer.php:124
+msgid "Github Link"
+msgstr "Link do GitHub"
+
+#: inc/customizer.php:76
+msgid "Pinterest Link"
+msgstr "Link do Pinterest"
+
+#: inc/customizer.php:88
+msgid "Google+ Link"
+msgstr "Link Google+"
+
+#: inc/customizer.php:100
+msgid "LinkedIn Link"
+msgstr "Link do LinkedIn"
+
+#: inc/customizer.php:52
+msgid "Twitter Link"
+msgstr "Link Twitter"
+
+#: inc/customizer.php:64
+msgid "Facebook Link"
+msgstr "Link do Facebook"
+
+#: inc/customizer.php:28
+msgid "Gravatar"
+msgstr "Gravatar"
+
+#: inc/customizer.php:40
+msgid "Email Link"
+msgstr "Link de e-mail"
+
+#: image.php:57
+msgid "<span class=\"entry-date\"><time class=\"entry-date\" datetime=\"%1$s\">%2$s</time></span><span class=\"full-size-link\"><a href=\"%3$s\" title=\"Link to full-size image\">%4$s &times; %5$s</a></span><span class=\"parent-post-link\"><a href=\"%6$s\" title=\"Return to %7$s\" rel=\"gallery\">%8$s</a></span>"
+msgstr "<span class=\"entry-date\"><time class=\"entry-date\" datetime=\"%1$s\">%2$s</time></span><span class=\"full-size-link\"><a href=\"%3$s\" title=\"Link para imagem inteira\">%4$s &times; %5$s</a></span><span class=\"parent-post-link\"><a href=\"%6$s\" title=\"Voltar para %7$s\" rel=\"gallery\">%8$s</a></span>"
+
+#: image.php:82
+msgid "<div class=\"next\"><span class=\"meta-nav\">&rarr;</span> <span class=\"text-nav\">Next</span></div>"
+msgstr "<div class=\"next\"><span class=\"meta-nav\">&rarr;</span> <span class=\"text-nav\">Seguinte</span></div>"
+
+#: image.php:83
+msgid "<div class=\"previous\"><span class=\"meta-nav\">&larr;</span> <span class=\"text-nav\">Previous</span></div>"
+msgstr "<div class=\"previous\"><span class=\"meta-nav\">&larr;</span> <span class=\"text-nav\">Anterior</span></div>"
+
+#: inc/customizer.php:18
+msgid "Theme Options"
+msgstr "Opções do tema"
+
+#: image.php:44
+msgid "Both comments and trackbacks are currently closed."
+msgstr "Os comentários e os trackbacks estão atualmente desativados."
+
+#: image.php:42
+msgid "Trackbacks are closed, but you can <a class=\"comment-link\" href=\"#respond\" title=\"Post a comment\">post a comment</a>."
+msgstr "Os trackbacks estão desactivados, mas pode <a class=\"comment-link\" href=\"#respond\" title=\"Comente\">publicar um comentário</a>. "
+
+#: image.php:40
+msgid "Comments are closed, but you can leave a trackback: <a class=\"trackback-link\" href=\"%s\" title=\"Trackback URL for your post\" rel=\"trackback\">Trackback URL</a>."
+msgstr "Os comentários estão desactivados, mas pode deixar um trackback: <a class=\"trackback-link\" href=\"%s\" title=\"URL do trackback para o seu artigo\" rel=\"trackback\">URL do Trackback</a>. "
+
+#: image.php:38
+msgid "<a class=\"comment-link\" href=\"#respond\" title=\"Post a comment\">Post a comment</a> or leave a trackback: <a class=\"trackback-link\" href=\"%s\" title=\"Trackback URL for your post\" rel=\"trackback\">Trackback URL</a>."
+msgstr "<a class=\"comment-link\" href=\"#respond\" title=\"Comentar\">Comente</a> ou deixe um trackback: <a class=\"trackback-link\" href=\"%s\" title=\"URL do Trackback para o seu artigo\" rel=\"trackback\">URL do Trackback</a>."
+
+#: header.php:224
+msgid "Skip to content"
+msgstr "Pular para o conteúdo"
+
+#: header.php:223
+msgid "Menu"
+msgstr "Menu"
+
+#: header.php:197 header.php:198
+msgid "Search"
+msgstr "Pesquisa"
+
+#: header.php:190 header.php:191
+msgid "Connect"
+msgstr "Conectar"
+
+#: header.php:182 header.php:183
+msgid "Widgets"
+msgstr "Widgets"
+
+#: header.php:151 header.php:152
+msgid "YouTube"
+msgstr "YouTube"
+
+#: header.php:159 header.php:160
+msgid "Tumblr"
+msgstr "Tumblr"
+
+#: header.php:127 header.php:128
+msgid "Github"
+msgstr "GitHub"
+
+#: header.php:135 header.php:136
+msgid "Dribbble"
+msgstr "Dribbble"
+
+#: header.php:143 header.php:144
+msgid "Vimeo"
+msgstr "b"
+
+#: header.php:119 header.php:120
+msgid "Flickr"
+msgstr "Flickr"
+
+#: header.php:103 header.php:104
+msgid "Google Plus"
+msgstr "Google Plus"
+
+#: header.php:111 header.php:112
+msgid "LinkedIn"
+msgstr "LinkedIn"
+
+#: header.php:95 header.php:96
+msgid "Pinterest"
+msgstr "Pinterest"
+
+#: header.php:87 header.php:88
+msgid "Facebook"
+msgstr "Facebook"
+
+#: header.php:79 header.php:80
+msgid "Twitter"
+msgstr "Twitter"
+
+#. translators: If there are characters in your language that are not supported
+#. by Playfair Display, translate this to 'off'. Do not translate into your
+#. own language.
+#: functions.php:142
+msgctxt "Playfair Display font: on or off"
+msgid "on"
+msgstr "on"
+
+#. translators: To add an additional Playfair Display character subset specific
+#. to your language, translate this to 'cyrillic'. Do not translate into your
+#. own language.
+#: functions.php:146
+msgctxt "Playfair Display font: add new subset (cyrillic)"
+msgid "no-subset"
+msgstr "no-subset"
+
+#: header.php:71 header.php:72
+msgid "Email"
+msgstr "email"
+
+#: functions.php:90
+msgid "Top Widget Area One"
+msgstr "Widget de topo 1"
+
+#: functions.php:99
+msgid "Top Widget Area Two"
+msgstr "Widget de topo 2"
+
+#: functions.php:108
+msgid "Top Widget Area Three"
+msgstr "Widget de topo 3"
+
+#: functions.php:117
+msgid "Top Widget Area Four"
+msgstr "Widget de topo 4"
+
+#. translators: If there are characters in your language that are not supported
+#. by Lato, translate this to 'off'. Do not translate into your own
+#. language.
+#: functions.php:133
+msgctxt "Lato font: on or off"
+msgid "on"
+msgstr "ativa"
+
+#: functions.php:50
+msgid "Primary Menu"
+msgstr "Menu Principal"
+
+#: footer.php:18
+msgid "Theme: %1$s by %2$s."
+msgstr "Tema: %1$s por %2$s. "
+
+#: footer.php:16
+msgid "Proudly powered by %s"
+msgstr "Orgulhosamente mantido com %s"
+
+#: footer.php:16
+msgid "A Semantic Personal Publishing Platform"
+msgstr "Plataforma de publicação pessoal semântica"
+
+#: content.php:61
+msgid "Standard"
+msgstr "Padrão"
+
+#: content.php:11
+msgid "Permalink to %s"
+msgstr "Ligação permanente para %s"
+
+#: content-aside.php:33 content-gallery.php:17 content-image.php:19
+#: content-link.php:33 content-page.php:31 content-quote.php:33
+#: content-video.php:49 content.php:52 image.php:28
+msgid "Pages:"
+msgstr "Páginas"
+
+#: content-aside.php:30 content-gallery.php:14 content-image.php:16
+#: content-link.php:30 content-quote.php:30 content-video.php:46 content.php:49
+msgid "Continue reading <span class=\"meta-nav\">&rarr;</span>"
+msgstr "Continuar lendo <span class=\"meta-nav\">&rarr;</span>"
+
+#: content-aside.php:26 content-gallery.php:48 content-image.php:50
+#: content-link.php:26 content-page.php:23 content-quote.php:26
+#: content-video.php:39 content.php:40 eventbrite/eventbrite-index.php:44
+#: eventbrite/eventbrite-single.php:29 image.php:68 inc/template-tags.php:79
+#: inc/template-tags.php:105
+msgid "Edit"
+msgstr "Editar"
+
+#: content-aside.php:24 content-aside.php:48 content-gallery.php:46
+#: content-gallery.php:59 content-image.php:48 content-image.php:61
+#: content-link.php:24 content-link.php:41 content-quote.php:24
+#: content-quote.php:47 content-video.php:37 content-video.php:42
+msgid "All %s posts"
+msgstr "Todos o conteúdo de tipo %s"
+
+#: content-aside.php:21 content-gallery.php:43 content-image.php:45
+#: content-link.php:21 content-page.php:20 content-quote.php:21
+#: content-video.php:34 content.php:37
+msgid "% Comments"
+msgstr "% Comentários"
+
+#: content-aside.php:21 content-gallery.php:43 content-image.php:45
+#: content-link.php:21 content-page.php:20 content-quote.php:21
+#: content-video.php:34 content.php:37
+msgid "1 Comment"
+msgstr "1 comentário"
+
+#: content-aside.php:21 content-gallery.php:43 content-image.php:45
+#: content-link.php:21 content-page.php:20 content-quote.php:21
+#: content-video.php:34 content.php:37
+msgid "Leave a comment"
+msgstr "Deixe um comentário"
+
+#: content-aside.php:11 content-gallery.php:27 content-image.php:29
+#: content-link.php:11 content-quote.php:11 content-video.php:18 content.php:21
+#: inc/template-tags.php:190
+msgid ", "
+msgstr ", "
+
+#: comments.php:67
+msgid "Comments are closed."
+msgstr "Os comentários estão desativados."
+
+#: comments.php:37 comments.php:57
+msgid "Newer Comments &rarr;"
+msgstr "Comentários mais recentes &rarr;"
+
+#: comments.php:36 comments.php:56
+msgid "&larr; Older Comments"
+msgstr "&larr; Comentários mais antigos"
+
+#: comments.php:35 comments.php:55
+msgid "Comment navigation"
+msgstr "Navegação de Comentários"
+
+#: comments.php:28
+msgctxt "comments title"
+msgid "One thought on &ldquo;%2$s&rdquo;"
+msgid_plural "%1$s thoughts on &ldquo;%2$s&rdquo;"
+msgstr[0] "Um comentário sobre &ldquo;%2$s&rdquo;"
+msgstr[1] "%1$s comentários sobre &ldquo;%2$s&rdquo;"
+
+#: archive.php:64
+msgid "Archives"
+msgstr "Arquivos"
+
+#: archive.php:61
+msgid "Links"
+msgstr "Links"
+
+#: archive.php:58
+msgid "Quotes"
+msgstr "Citações"
+
+#: archive.php:55
+msgid "Videos"
+msgstr "Vídeos"
+
+#: archive.php:52
+msgid "Images"
+msgstr "Imagens"
+
+#: archive.php:49
+msgid "Asides"
+msgstr "Notas"
+
+#: archive.php:46
+msgid "Yearly Archives: %s"
+msgstr "Arquivo anual: %s"
+
+#: archive.php:43
+msgid "Monthly Archives: %s"
+msgstr "Arquivo mensal: %s"
+
+#: archive.php:40
+msgid "Daily Archives: %s"
+msgstr "Arquivo diário: %s"
+
+#: archive.php:32
+msgid "Author Archives: %s"
+msgstr "Arquivo do autor:%s"
+
+#: archive.php:25
+msgid "Tag Archives: %s"
+msgstr "Arquivo da tag: %s"
+
+#: archive.php:22
+msgid "Category Archives: %s"
+msgstr "Arquivo da categoria: %s"
+
+#. translators: %1$s: smiley
+#: 404.php:37
+msgid "Try looking in the monthly archives. %1$s"
+msgstr "Tente olhar nos arquivos mensais. %1$s"
+
+#: 404.php:33
+msgid "Calendar"
+msgstr "Agenda"
+
+#: 404.php:27
+msgid "Most Used Categories"
+msgstr "Categorias mais Usadas"
+
+#: 404.php:20
+msgid "It looks like nothing was found at this location. Maybe try one of the links below or a search?"
+msgstr "Parece que nada foi encontrado neste lugar. Quem sabe você possa tentar um dos links abaixo ou uma busca?"
+
+#: 404.php:16
+msgid "Oops! That page can&rsquo;t be found."
+msgstr "Opa! Esta página não pode ser encontrada."

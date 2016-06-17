@@ -1,0 +1,462 @@
+# Translation of Ryu in Dutch
+# This file is distributed under the same license as the Ryu package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2014-06-02 04:08:43+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: GlotPress/0.1\n"
+"Project-Id-Version: Ryu\n"
+
+#. Description of the plugin/theme
+msgid "Ryu is a clutter-free theme for personal bloggers. It has great readability with a large font size, and the one-column layout is perfect for displaying large images. Optional widgets are located at the top panel with social media links and a search field. Background color for an image post will automatically match the uploaded image in the post."
+msgstr ""
+
+#: searchform.php:12
+msgctxt "submit button"
+msgid "Search"
+msgstr "Zoeken"
+
+#: searchform.php:11
+msgctxt "placeholder"
+msgid "Search &hellip;"
+msgstr "Zoek &hellip;"
+
+#: searchform.php:10
+msgctxt "assistive text"
+msgid "Search"
+msgstr "zoeken"
+
+#: search.php:16
+msgid "Search Results for: %s"
+msgstr "Zoekresultaten voor: %s"
+
+#: no-results.php:29
+msgid "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help."
+msgstr "Het lijkt erop dat we niet kunnen vinden wat je zoekt. Misschien kan zoeken helpen."
+
+#: no-results.php:24
+msgid "Sorry, but nothing matched your search terms. Please try again with some different keywords."
+msgstr "Sorry, maar niets kwam overeen met je zoektermen. Gelieve het opnieuw te proberen met een aantal andere trefwoorden."
+
+#: no-results.php:20
+msgid "Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
+msgstr "Klaar om je eerste bericht te publiceren? <a href=\"%1$s\">Begin hier</a>."
+
+#: no-results.php:14
+msgid "Nothing Found"
+msgstr "Niets gevonden"
+
+#: inc/template-tags.php:185
+msgid "View all posts by %s"
+msgstr "Bekijk alle berichten van %s"
+
+#: inc/template-tags.php:173
+msgid "<span class=\"featured-post\"><a href=\"%1$s\" title=\"%2$s\" rel=\"bookmark\">Sticky</a></span>"
+msgstr ""
+
+#: inc/template-tags.php:179
+msgid "<span class=\"entry-date\"><a href=\"%1$s\" title=\"%2$s\" rel=\"bookmark\"><time datetime=\"%3$s\">%4$s</time></a></span><span class=\"author vcard\"><a class=\"url fn n\" href=\"%5$s\" title=\"%6$s\" rel=\"author\">%7$s</a></span>"
+msgstr ""
+
+#: inc/template-tags.php:102
+msgctxt "1: date, 2: time"
+msgid "%1$s at %2$s"
+msgstr "%1$s om %2$s"
+
+#: inc/template-tags.php:96
+msgid "Your comment is awaiting moderation."
+msgstr "Je reactie is in afwachting van moderatie."
+
+#: inc/template-tags.php:89
+msgid "%s <span class=\"says\">says:</span>"
+msgstr "%s <span class=\"says\">zegt:</span>"
+
+#: inc/template-tags.php:51
+msgid "<span class=\"meta-nav\">&rarr;</span> <span class=\"text-nav\">Newer posts</span>"
+msgstr "<span class=\"meta-nav\">&rarr;</span> <span class=\"text-nav\">Nieuwere berichten</span>"
+
+#: inc/template-tags.php:55
+msgid "<span class=\"meta-nav\">&larr;</span> <span class=\"text-nav\">Older posts</span>"
+msgstr "<span class=\"meta-nav\">&larr;</span> <span class=\"text-nav\">Oudere berichten</span>"
+
+#: inc/template-tags.php:79
+msgid "Pingback:"
+msgstr "Pingback:"
+
+#: inc/template-tags.php:45
+msgctxt "Previous post link"
+msgid "&larr;"
+msgstr "&larr;"
+
+#: inc/template-tags.php:43
+msgctxt "Next post link"
+msgid "&rarr;"
+msgstr "&rarr;"
+
+#: inc/template-tags.php:39
+msgid "Post navigation"
+msgstr "Berichtnavigatie"
+
+#: inc/extras.php:66
+msgid "Page %s"
+msgstr "Pagina %s"
+
+#: inc/customizer.php:136
+msgid "Dribbble Link"
+msgstr ""
+
+#: inc/customizer.php:148
+msgid "Vimeo Link"
+msgstr ""
+
+#: inc/customizer.php:160
+msgid "YouTube Link"
+msgstr ""
+
+#: inc/customizer.php:172
+msgid "Tumblr Link"
+msgstr ""
+
+#: inc/customizer.php:112
+msgid "Flickr Link"
+msgstr "Flickr link"
+
+#: inc/customizer.php:124
+msgid "Github Link"
+msgstr ""
+
+#: inc/customizer.php:76
+msgid "Pinterest Link"
+msgstr ""
+
+#: inc/customizer.php:88
+msgid "Google+ Link"
+msgstr "Google+ link"
+
+#: inc/customizer.php:100
+msgid "LinkedIn Link"
+msgstr "Linkedin link"
+
+#: inc/customizer.php:52
+msgid "Twitter Link"
+msgstr "Twitter-link"
+
+#: inc/customizer.php:64
+msgid "Facebook Link"
+msgstr "Facebook-link"
+
+#: inc/customizer.php:28
+msgid "Gravatar"
+msgstr "Gravatar"
+
+#: inc/customizer.php:40
+msgid "Email Link"
+msgstr "E-mail-link"
+
+#: image.php:57
+msgid "<span class=\"entry-date\"><time class=\"entry-date\" datetime=\"%1$s\">%2$s</time></span><span class=\"full-size-link\"><a href=\"%3$s\" title=\"Link to full-size image\">%4$s &times; %5$s</a></span><span class=\"parent-post-link\"><a href=\"%6$s\" title=\"Return to %7$s\" rel=\"gallery\">%8$s</a></span>"
+msgstr "<span class=\"entry-date\"><time class=\"entry-date\" datetime=\"%1$s\">%2$s</time></span><span class=\"full-size-link\"><a href=\"%3$s\" title=\"Link naar foto op volledige grootte\">%4$s &times; %5$s</a></span><span class=\"parent-post-link\"><a href=\"%6$s\" title=\"Terug naar %7$s\" rel=\"gallery\">%8$s</a></span>"
+
+#: image.php:82
+msgid "<div class=\"next\"><span class=\"meta-nav\">&rarr;</span> <span class=\"text-nav\">Next</span></div>"
+msgstr "<div class=\"next\"><span class=\"meta-nav\">&rarr;</span> <span class=\"text-nav\">Volgende</span></div>"
+
+#: image.php:83
+msgid "<div class=\"previous\"><span class=\"meta-nav\">&larr;</span> <span class=\"text-nav\">Previous</span></div>"
+msgstr "<div class=\"previous\"><span class=\"meta-nav\">&larr;</span> <span class=\"text-nav\">Vorige</span></div>"
+
+#: inc/customizer.php:18
+msgid "Theme Options"
+msgstr "Thema opties"
+
+#: image.php:44
+msgid "Both comments and trackbacks are currently closed."
+msgstr "Reacties en trackbacks zijn beide gesloten op dit moment."
+
+#: image.php:42
+msgid "Trackbacks are closed, but you can <a class=\"comment-link\" href=\"#respond\" title=\"Post a comment\">post a comment</a>."
+msgstr "Trackbacks zijn gesloten, maar je kan <a class=\"comment-link\" href=\"#respond\" title=\"Plaats een reactie\">een reactie plaatsen</a>."
+
+#: image.php:40
+msgid "Comments are closed, but you can leave a trackback: <a class=\"trackback-link\" href=\"%s\" title=\"Trackback URL for your post\" rel=\"trackback\">Trackback URL</a>."
+msgstr "Je kan geen reacties meer toevoegen, maar laat gerust een trackback na: <a class=\"trackback-link\" href=\"%s\" title=\"Trackback URL voor je bericht\" rel=\"trackback\">Trackback URL</a>."
+
+#: image.php:38
+msgid "<a class=\"comment-link\" href=\"#respond\" title=\"Post a comment\">Post a comment</a> or leave a trackback: <a class=\"trackback-link\" href=\"%s\" title=\"Trackback URL for your post\" rel=\"trackback\">Trackback URL</a>."
+msgstr "<a class=\"comment-link\" href=\"#respond\" title=\"Voeg een reactie toe\">Voeg een reactie toe</a> of laat een trackback achter: <a class=\"trackback-link\" href=\"%s\" title=\"Trackback URL voor je bericht\" rel=\"trackback\">Trackback URL</a>."
+
+#: header.php:224
+msgid "Skip to content"
+msgstr "Spring naar inhoud"
+
+#: header.php:223
+msgid "Menu"
+msgstr "Menu"
+
+#: header.php:197 header.php:198
+msgid "Search"
+msgstr "Zoeken"
+
+#: header.php:190 header.php:191
+msgid "Connect"
+msgstr "Verbind"
+
+#: header.php:182 header.php:183
+msgid "Widgets"
+msgstr "Widgets"
+
+#: header.php:151 header.php:152
+msgid "YouTube"
+msgstr "YouTube"
+
+#: header.php:159 header.php:160
+msgid "Tumblr"
+msgstr "Tumblr"
+
+#: header.php:127 header.php:128
+msgid "Github"
+msgstr "Github"
+
+#: header.php:135 header.php:136
+msgid "Dribbble"
+msgstr "Dribbble"
+
+#: header.php:143 header.php:144
+msgid "Vimeo"
+msgstr "Vimeo"
+
+#: header.php:119 header.php:120
+msgid "Flickr"
+msgstr "Flickr"
+
+#: header.php:103 header.php:104
+msgid "Google Plus"
+msgstr "Google Plus"
+
+#: header.php:111 header.php:112
+msgid "LinkedIn"
+msgstr "LinkedIn"
+
+#: header.php:95 header.php:96
+msgid "Pinterest"
+msgstr "Pinterest"
+
+#: header.php:87 header.php:88
+msgid "Facebook"
+msgstr "Facebook"
+
+#: header.php:79 header.php:80
+msgid "Twitter"
+msgstr "Twitter"
+
+#. translators: If there are characters in your language that are not supported
+#. by Playfair Display, translate this to 'off'. Do not translate into your
+#. own language.
+#: functions.php:136
+msgctxt "Playfair Display font: on or off"
+msgid "on"
+msgstr "aan"
+
+#. translators: To add an additional Playfair Display character subset specific
+#. to your language, translate this to 'cyrillic'. Do not translate into your
+#. own language.
+#: functions.php:140
+msgctxt "Playfair Display font: add new subset (cyrillic)"
+msgid "no-subset"
+msgstr ""
+
+#: header.php:71 header.php:72
+msgid "Email"
+msgstr "email"
+
+#: functions.php:84
+msgid "Top Widget Area One"
+msgstr ""
+
+#: functions.php:93
+msgid "Top Widget Area Two"
+msgstr ""
+
+#: functions.php:102
+msgid "Top Widget Area Three"
+msgstr ""
+
+#: functions.php:111
+msgid "Top Widget Area Four"
+msgstr ""
+
+#. translators: If there are characters in your language that are not supported
+#. by Lato, translate this to 'off'. Do not translate into your own
+#. language.
+#: functions.php:127
+msgctxt "Lato font: on or off"
+msgid "on"
+msgstr "on"
+
+#: functions.php:50
+msgid "Primary Menu"
+msgstr "Primair menu"
+
+#: footer.php:18
+msgid "Theme: %1$s by %2$s."
+msgstr "Thema: %1$s door %2$s."
+
+#: footer.php:16
+msgid "Proudly powered by %s"
+msgstr "Met trots ondersteund door %s"
+
+#: footer.php:16
+msgid "A Semantic Personal Publishing Platform"
+msgstr "Een semantisch persoonlijk publicatieplatform"
+
+#: content.php:61
+msgid "Standard"
+msgstr "Standaard"
+
+#: content.php:11
+msgid "Permalink to %s"
+msgstr "Permalink naar %s"
+
+#: content-aside.php:33 content-gallery.php:17 content-image.php:19
+#: content-link.php:33 content-page.php:31 content-quote.php:33
+#: content-video.php:49 content.php:52 image.php:28
+msgid "Pages:"
+msgstr "Pagina&#39;s:"
+
+#: content-aside.php:30 content-gallery.php:14 content-image.php:16
+#: content-link.php:30 content-quote.php:30 content-video.php:46 content.php:49
+msgid "Continue reading <span class=\"meta-nav\">&rarr;</span>"
+msgstr "Lees verder <span class=\"meta-nav\">&rarr;</span>"
+
+#: content-aside.php:26 content-gallery.php:48 content-image.php:50
+#: content-link.php:26 content-page.php:23 content-quote.php:26
+#: content-video.php:39 content.php:40 image.php:68 inc/template-tags.php:79
+#: inc/template-tags.php:105
+msgid "Edit"
+msgstr "Bewerken"
+
+#: content-aside.php:24 content-aside.php:48 content-gallery.php:46
+#: content-gallery.php:59 content-image.php:48 content-image.php:61
+#: content-link.php:24 content-link.php:41 content-quote.php:24
+#: content-quote.php:47 content-video.php:37 content-video.php:42
+msgid "All %s posts"
+msgstr "Alle %s berichten"
+
+#: content-aside.php:21 content-gallery.php:43 content-image.php:45
+#: content-link.php:21 content-page.php:20 content-quote.php:21
+#: content-video.php:34 content.php:37
+msgid "% Comments"
+msgstr "% reacties"
+
+#: content-aside.php:21 content-gallery.php:43 content-image.php:45
+#: content-link.php:21 content-page.php:20 content-quote.php:21
+#: content-video.php:34 content.php:37
+msgid "1 Comment"
+msgstr ""
+
+#: content-aside.php:21 content-gallery.php:43 content-image.php:45
+#: content-link.php:21 content-page.php:20 content-quote.php:21
+#: content-video.php:34 content.php:37
+msgid "Leave a comment"
+msgstr "Een reactie plaatsen"
+
+#: content-aside.php:11 content-gallery.php:27 content-image.php:29
+#: content-link.php:11 content-quote.php:11 content-video.php:18 content.php:21
+#: inc/template-tags.php:190
+msgid ", "
+msgstr ", "
+
+#: comments.php:67
+msgid "Comments are closed."
+msgstr "Reacties zijn gesloten."
+
+#: comments.php:37 comments.php:57
+msgid "Newer Comments &rarr;"
+msgstr "Nieuwe reacties &rarr;"
+
+#: comments.php:36 comments.php:56
+msgid "&larr; Older Comments"
+msgstr "&larr; Oudere reacties"
+
+#: comments.php:35 comments.php:55
+msgid "Comment navigation"
+msgstr "Reactienavigatie"
+
+#: comments.php:28
+msgctxt "comments title"
+msgid "One thought on &ldquo;%2$s&rdquo;"
+msgid_plural "%1$s thoughts on &ldquo;%2$s&rdquo;"
+msgstr[0] "Een gedachte over &ldquo;%2$s&rdquo;"
+msgstr[1] "%1$s gedachtes over &ldquo;%2$s&rdquo;"
+
+#: archive.php:64
+msgid "Archives"
+msgstr "Archief"
+
+#: archive.php:61
+msgid "Links"
+msgstr "Links"
+
+#: archive.php:58
+msgid "Quotes"
+msgstr "Gezegden"
+
+#: archive.php:55
+msgid "Videos"
+msgstr "Video&#39;s"
+
+#: archive.php:52
+msgid "Images"
+msgstr "Afbeeldingen"
+
+#: archive.php:49
+msgid "Asides"
+msgstr "Opmerkingen"
+
+#: archive.php:46
+msgid "Yearly Archives: %s"
+msgstr "Jaarlijks archief: %s"
+
+#: archive.php:43
+msgid "Monthly Archives: %s"
+msgstr "Maandelijks archief: %s"
+
+#: archive.php:40
+msgid "Daily Archives: %s"
+msgstr "Dagelijks archief: %s"
+
+#: archive.php:32
+msgid "Author Archives: %s"
+msgstr "Auteursarchief: %s"
+
+#: archive.php:25
+msgid "Tag Archives: %s"
+msgstr "Tagarchief: %s"
+
+#: archive.php:22
+msgid "Category Archives: %s"
+msgstr "Categorie archief: %s"
+
+#. translators: %1$s: smiley
+#: 404.php:37
+msgid "Try looking in the monthly archives. %1$s"
+msgstr "Probeer eens te zoeken in het maandelijks archief. %1$s"
+
+#: 404.php:33
+msgid "Calendar"
+msgstr "Kalender"
+
+#: 404.php:27
+msgid "Most Used Categories"
+msgstr "Meest gebruikte categorie&#235;n"
+
+#: 404.php:20
+msgid "It looks like nothing was found at this location. Maybe try one of the links below or a search?"
+msgstr "Het lijkt erop dat niets werd gevonden op deze locatie. Probeer dan misschien een van de links hieronder of een zoekopdracht?"
+
+#: 404.php:16
+msgid "Oops! That page can&rsquo;t be found."
+msgstr "Oeps! Die pagina kon niet worden gevonden."
