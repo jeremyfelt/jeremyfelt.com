@@ -46,6 +46,12 @@ def push_loop():
     sudo( "chown -R www-data:www-data /tmp/www/jeremyfelt.com/loopconf" )
     sudo( "rsync -rvzh -e ssh --delete --exclude '.git' /tmp/www/jeremyfelt.com/loopconf/ /var/www/jeremyfelt.com/loopconf", user="www-data" )
 
+def push_wceu():
+    sudo( "mkdir -p /tmp/www/jeremyfelt.com/wceu-2016 && chown -R jeremyfelt:jeremyfelt /tmp/www/jeremyfelt.com/wceu-2016" )
+    local("rsync -rvzh -e ssh --delete --exclude '.git' wceu-2016/ foghlaimeoir:/tmp/www/jeremyfelt.com/wceu-2016" )
+    sudo( "chown -R www-data:www-data /tmp/www/jeremyfelt.com/wceu-2016" )
+    sudo( "rsync -rvzh -e ssh --delete --exclude '.git' /tmp/www/jeremyfelt.com/wceu-2016/ /var/www/jeremyfelt.com/wceu-2016", user="www-data" )
+
 def push_content():
 	sudo( "chown -R jeremyfelt:jeremyfelt /tmp/www/jeremyfelt.com/content" )
 	local( "rsync -rvzh -e ssh --delete --exclude '*.git*' --include '*/images/' --include '*/uploads/' --exclude 'uploads' --exclude 'images' content/ foghlaimeoir:/tmp/www/jeremyfelt.com/content" )
