@@ -3,15 +3,11 @@
 if ( ! interface_exists( 'iMI_License_Manager', false ) ) {
 
 	interface iMI_License_Manager {
-
 		public function specific_hooks();
-
 		public function setup_auto_updater();
-
 	}
 
 }
-
 
 if ( ! class_exists( 'MI_License_Manager', false ) ) {
 
@@ -29,7 +25,7 @@ if ( ! class_exists( 'MI_License_Manager', false ) ) {
 		const VERSION = 1;
 
 		/**
-		 * @var Yoast_License The license
+		 * @var MI_License The license
 		 */
 		protected $product;
 
@@ -612,8 +608,6 @@ if ( ! class_exists( 'MI_License_Manager', false ) ) {
 				$this->license_constant_is_defined = true;
 			}
 		}
-
-
 	}
 
 }

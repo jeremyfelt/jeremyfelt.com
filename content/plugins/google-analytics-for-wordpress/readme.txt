@@ -3,8 +3,8 @@ Contributors: chriscct7, smub
 Donate link: http://www.wpbeginner.com/wpbeginner-needs-your-help/
 Tags: analytics, analytics dashboard, google analytics, google analytics dashboard, google analytics widget, universal google analytics, statistics, tracking, stats, google, yoast, google analytics by yoast, ga, monster insights, monsterinsights, universal analytics, web stats, ecommerce, ecommerce tracking
 Requires at least: 3.9
-Tested up to: 4.5
-Stable tag: 5.5
+Tested up to: 4.6
+Stable tag: 5.5.2
 License: GPL v3
 
 Connect Google Analytics with WordPress by adding your Google Analytics tracking code. Get the stats that matter.
@@ -69,6 +69,16 @@ You can also learn about other <a href="http://www.wpbeginner.com/category/plugi
 4. Want more features? <a href="https://monsterinsights.com/?utm_source=wporg&utm_medium=readme&utm_campaign=wpgaplugin" rel="friend" title="MonsterInsights">Purchase the premium version of MonsterInsights</a>!
 
 == Changelog ==
+
+= 5.5.2 = 
+
+Release Date: July 7th, 2016
+
+* Bugfixes:
+	* Fixes compatibiltiy with upcoming Shiny Updates v2 in WP core
+	
+* Enhancements:
+	* Updates license manager to have more reliable update information including better compatibility with Yoast SEO products.
 
 = 5.5 = 
 

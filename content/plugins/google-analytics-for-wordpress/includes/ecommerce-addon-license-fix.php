@@ -17,15 +17,19 @@ if ( ! class_exists( 'MI_Product_GA_eCommerce', false ) && class_exists( 'MI_Pro
 
 
 		public function __construct() {
+			$file = plugin_basename( Yoast_GA_eCommerce_Tracking::PLUGIN_FILE );
+			$slug = dirname( $file );
+
 			parent::__construct(
 				'https://www.monsterinsights.com',
 				'eCommerce Addon',
-				plugin_basename( Yoast_GA_eCommerce_Tracking::PLUGIN_FILE ),
+				$slug,
 				Yoast_GA_eCommerce_Tracking::VERSION,
 				'https://www.monsterinsights.com/pricing/',
 				'admin.php?page=yst_ga_extensions#top#licenses',
 				'yoast-ga-ecommerce',
-				'MonsterInsights'
+				'MonsterInsights',
+				$file
 			);
 
 			$this->setup_license_manager();

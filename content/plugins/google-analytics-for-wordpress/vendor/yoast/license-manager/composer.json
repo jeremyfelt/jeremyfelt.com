@@ -1,18 +1,18 @@
 {
     "name"       : "yoast/license-manager",
-    "description": "Yoast License Manager.",
+    "description": "MI License Manager.",
     "keywords"   : ["wordpress"],
-    "homepage"   : "https://github.com/Yoast/License-Manager",
+    "homepage"   : "https://github.com/MI/License-Manager",
     "license"    : "GPL-2.0+",
     "authors"    : [
         {
-            "name"    : "Team Yoast",
+            "name"    : "Team MI",
             "email"   : "support@yoast.com",
             "homepage": "https://yoast.com"
         }
     ],
     "support"    : {
-        "issues": "https://github.com/Yoast/License-Manager/issues"
+        "issues": "https://github.com/MI/License-Manager/issues"
     },
     "autoload"   : {
         "classmap": [

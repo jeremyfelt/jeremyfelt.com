@@ -509,7 +509,7 @@ class Yoast_GA_Admin extends Yoast_GA_Options {
 
 		$banners   = array();
 		$banners[] = array(
-			'url'    => 'https://www.optinmonster.com/?utm_source=monsterinsights-config&utm_medium=banner&utm_campaign=gaplugin',
+			'url'    => 'https://optinmonster.com/?utm_source=monsterinsights-config&utm_medium=banner&utm_campaign=gaplugin',
 			'banner' => $this->plugin_url . 'assets/img/omupsell.png',
 			'title'  => 'Convert Visitors into Subscribers',
 		);
