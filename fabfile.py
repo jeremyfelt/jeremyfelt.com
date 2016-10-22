@@ -4,7 +4,7 @@ from fabric.contrib.files import comment, uncomment
 
 env.user = 'jeremyfelt'
 env.hosts = ['jeremyfelt.com']
-env.key_filename = '~/.ssh/foghlaimeoir'
+env.key_filename = '~/.ssh/foghlaim_rsa'
 
 def initial_sync():
     run( "mkdir -p /tmp/www/jeremyfelt.com")
