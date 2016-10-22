@@ -1,3 +1,4 @@
+/* Do not modify this file directly.  It is concatenated from individual module CSS files. */
 #loginform {
 	/* We set !important because sometimes static is added inline */
 	position: relative !important;
@@ -176,4 +177,10 @@
 
 .jetpack-sso-form-display #backtoblog {
 	margin: 24px 0 0;
+}
+
+.jetpack-sso-clear:after {
+	content: "";
+	display: table;
+	clear: both;
 }

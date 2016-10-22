@@ -2,13 +2,14 @@
 
 /**
  * Module Name: Shortcode Embeds
- * Module Description: Embed content from YouTube, Vimeo, SlideShare, and more, no coding necessary.
+ * Module Description: Embed media from popular sites without any coding.
  * Sort Order: 3
  * First Introduced: 1.1
  * Major Changes In: 1.2
  * Requires Connection: No
  * Auto Activate: Yes
  * Module Tags: Photos and Videos, Social, Writing, Appearance
+ * Feature: Writing
  * Additional Search Queries: shortcodes, shortcode, embeds, media, bandcamp, blip.tv, dailymotion, facebook, flickr, google calendars, google maps, google+, polldaddy, recipe, recipes, scribd, slideshare, slideshow, slideshows, soundcloud, ted, twitter, vimeo, vine, youtube
  */
 
@@ -39,12 +40,12 @@ function shortcode_new_to_old_params( $params, $old_format_support = false ) {
 }
 
 function jetpack_load_shortcodes() {
-	global $wp_version;
-
 	$shortcode_includes = array();
 
 	foreach ( Jetpack::glob_php( dirname( __FILE__ ) . '/shortcodes' ) as $file ) {
-		$shortcode_includes[] = $file;
+		$filename = substr( basename( $file ), 0, -4 );
+
+		$shortcode_includes[ $filename ] = $file;
 	}
 
 /**
@@ -53,6 +54,7 @@ function jetpack_load_shortcodes() {
  * @module shortcodes
  *
  * @since 2.2.1
+ * @since 4.2.0 Added filename without extension as array key.
  *
  * @param array $shortcode_includes An array of which shortcodes to include.
  */

@@ -246,7 +246,7 @@ class Jetpack_Top_Posts_Widget extends WP_Widget {
 			$get_image_options = array(
 				'fallback_to_avatars' => true,
 				/** This filter is documented in modules/stats.php */
-				'gravatar_default' => apply_filters( 'jetpack_static_url', set_url_scheme( 'http://en.wordpress.com/i/logo/white-gray-80.png' ) ),
+				'gravatar_default' => apply_filters( 'jetpack_static_url', set_url_scheme( 'https://en.wordpress.com/i/logo/white-gray-80.png' ) ),
 			);
 			if ( 'grid' == $display ) {
 				$get_image_options['avatar_size'] = 200;
@@ -308,7 +308,6 @@ class Jetpack_Top_Posts_Widget extends WP_Widget {
 		switch ( $display ) {
 		case 'list' :
 		case 'grid' :
-			wp_enqueue_style( 'widget-grid-and-list' );
 			foreach ( $posts as &$post ) {
 				$image = Jetpack_PostImages::get_image( $post['post_id'], array( 'fallback_to_avatars' => true ) );
 				$post['image'] = $image['src'];
@@ -511,12 +510,23 @@ class Jetpack_Top_Posts_Widget extends WP_Widget {
 		foreach ( (array) $post_ids as $post_id ) {
 			$post = get_post( $post_id );
 
-			if ( ! $post )
+			if ( ! $post ) {
 				continue;
+			}
+
+			/**
+			 * Attachment pages use the 'inherit' post status by default.
+			 * To be able to remove attachment pages from private and password protect posts,
+			 * we need to replace their post status by the parent post' status.
+			 */
+			if ( 'inherit' == $post->post_status && 'attachment' == $post->post_type ) {
+				$post->post_status = get_post_status( $post_id );
+			}
 
 			// hide private and password protected posts
-			if ( 'publish' != $post->post_status || ! empty( $post->post_password ) || empty( $post->ID ) )
+			if ( 'publish' != $post->post_status || ! empty( $post->post_password ) ) {
 				continue;
+			}
 
 			// Both get HTML stripped etc on display
 			if ( empty( $post->post_title ) ) {
