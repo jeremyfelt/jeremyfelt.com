@@ -4,7 +4,7 @@ Donate link: http://www.wpbeginner.com/wpbeginner-needs-your-help/
 Tags: analytics, analytics dashboard, google analytics, google analytics dashboard, google analytics widget, universal google analytics, statistics, tracking, stats, google, yoast, google analytics by yoast, ga, monster insights, monsterinsights, universal analytics, web stats, ecommerce, ecommerce tracking
 Requires at least: 3.9
 Tested up to: 4.6
-Stable tag: 5.5.2
+Stable tag: 5.5.3
 License: GPL v3
 
 Connect Google Analytics with WordPress by adding your Google Analytics tracking code. Get the stats that matter.
@@ -27,9 +27,9 @@ Full list of features:
 * Gives you incredibly nice visitor metric dashboards right in your WordPress install.
 * Option to enable demographics and interest reports.
 * Outbound link & downloads tracking.
-    * Configurable options to track outbound links either as pageviews or as events.
-    * Option to track just downloads as pageviews or events in Google Analytics.
-    * Option to track internal links with a particular format as outbound links, very useful for affiliate links that start with /out/, for instance.
+	* Configurable options to track outbound links either as pageviews or as events.
+	* Option to track just downloads as pageviews or events in Google Analytics.
+	* Option to track internal links with a particular format as outbound links, very useful for affiliate links that start with /out/, for instance.
 * Possibility to ignore any user level and up, so all editors and higher for instance.
 * Option to anonymize IP's for use in countries with stricter privacy regulations.
 * Tracking of your search result pages and 404 pages.
@@ -70,6 +70,16 @@ You can also learn about other <a href="http://www.wpbeginner.com/category/plugi
 
 == Changelog ==
 
+= 5.5.3 = 
+
+Release Date: October 3rd, 2016
+
+* Bugfixes:
+	* Fixes issue with PHP compatibility scanner's bug
+	
+* Enhancements:
+	* Announces MI 6.0 beta
+
 = 5.5.2 = 
 
 Release Date: July 7th, 2016
@@ -95,12 +105,12 @@ Release Date: May 1st, 2016
 Release Date: April 15th, 2016
 
 * Bugfixes:
-    * Fixes issue with eCommerce addon (also requires user to update eCommerce addon)
+	* Fixes issue with eCommerce addon (also requires user to update eCommerce addon)
 	* Fixes issue with 2 dashboard links
 	* A bug in pre-existing code caused the menu of the plugin to skyrocket unintentionally. This has been corrected.
 	
 * Enhancements:
-    * New font based dashboard icon
+	* New font based dashboard icon
 	* The "MonsterInsights" menu item name has been renamed to just "Insights"
 
 = 5.4.8 = 
@@ -108,98 +118,98 @@ Release Date: April 15th, 2016
 Release Date: April 14th, 2016
 
 * Bugfixes:
-    * Fixes compatibility issue with WordPress 4.5
+	* Fixes compatibility issue with WordPress 4.5
 	
 * Annoucements:	
 	* Google Analytics by Yoast is now MonsterInsights.
 	
 * Enhancements:
-    * Adds ground work for new features coming soon.
+	* Adds ground work for new features coming soon.
 
 = 5.4.6 =
 
 Release Date: August 25th, 2015
 
 * Bugfixes:
-    * Fixes the dashboard tables which were broken in WordPress 4.3 because of a new version of jQuery that was introduced.
+	* Fixes the dashboard tables which were broken in WordPress 4.3 because of a new version of jQuery that was introduced.
 
 = 5.4.5 =
 
 Release Date: August 5th, 2015
 
 * Security:
-    * Fixes a small stored XSS issue (only exploitable by admins), thanks [Tom Adams](https://twitter.com/tom_dxw) from [dxw security](https://security.dxw.com/) for responsibly disclosing the issue.
+	* Fixes a small stored XSS issue (only exploitable by admins), thanks [Tom Adams](https://twitter.com/tom_dxw) from [dxw security](https://security.dxw.com/) for responsibly disclosing the issue.
 
 * Enhancements:
-    * Only allows showing and saving the custom code field for users with the `unfiltered_html` capability.
-    * Improves JavaScript output escaping on the frontend.
+	* Only allows showing and saving the custom code field for users with the `unfiltered_html` capability.
+	* Improves JavaScript output escaping on the frontend.
 
 = 5.4.4 =
 
 Release Date: July 21st, 2015
 
 * Enhancements:
-    * Makes sure core functionality is only loaded when needed, improving admin performance and preventing compatibility issues with the upcoming 2.3 release of Yoast SEO.
+	* Makes sure core functionality is only loaded when needed, improving admin performance and preventing compatibility issues with the upcoming 2.3 release of Yoast SEO.
 
 = 5.4.3 =
 
 Release Date: July 15th, 2015
 
 * Enhancements:
-    * Improved form labels for remarketing / demographics and interests reports.
-    * Improved the notice that is shown in the head to non-admin users when their usergroup has been excluded from tracking or debug mode is enabled.
-    * Adds 4 translations: ca, en_AU, ja, pt_PT
+	* Improved form labels for remarketing / demographics and interests reports.
+	* Improved the notice that is shown in the head to non-admin users when their usergroup has been excluded from tracking or debug mode is enabled.
+	* Adds 4 translations: ca, en_AU, ja, pt_PT
 
 * Bugfixes:
-    * Fixes a bug where the plugin would fetch a refresh token from Google on every page request.
-    * Fixes an undefined index notice which was triggered when running WordPress using WP CLI.
+	* Fixes a bug where the plugin would fetch a refresh token from Google on every page request.
+	* Fixes an undefined index notice which was triggered when running WordPress using WP CLI.
 
 = 5.4.2 =
 
 Release Date: April 21th, 2015
 
 * Bugfixes:
-    * Fixes a bug where our link tracking broke the content in case of multiline links.
-    * Fixes a bug where it was no longer possible to dismiss the i18n module.
+	* Fixes a bug where our link tracking broke the content in case of multiline links.
+	* Fixes a bug where it was no longer possible to dismiss the i18n module.
 
 = 5.4.1 =
 
 Release Date: April 21th, 2015
 
 * Bugfixes:
-    * Fixes a bug where GA API was being pinged too often.
-    * Fixes a bug where users were unable to authenticate with Google Analytics. It might take a while for authentication to work again, as the API key within the plugin has to be within its quota limits again. We’re very sorry for the inconvenience. Note that for Premium users everything still works.
+	* Fixes a bug where GA API was being pinged too often.
+	* Fixes a bug where users were unable to authenticate with Google Analytics. It might take a while for authentication to work again, as the API key within the plugin has to be within its quota limits again. We’re very sorry for the inconvenience. Note that for Premium users everything still works.
 
 = 5.4 =
 
 Release Date: April 20th, 2015
 
 * Enhancements:
-    * Complete technical overhaul of the way settings are being stored. Switched to WP Settings API and added input validation and sanitation for several settings.
-    * Made the settings more accessible by adding `for` attributes to the labels, connecting them with the corresponding form fields. Props to [Steve Repsher](https://github.com/steverep) for the awesome contribution!
-    * Made Universal tracking the default for new installs.
-    * Adds administrators to the default user roles to ignore for tracking.
+	* Complete technical overhaul of the way settings are being stored. Switched to WP Settings API and added input validation and sanitation for several settings.
+	* Made the settings more accessible by adding `for` attributes to the labels, connecting them with the corresponding form fields. Props to [Steve Repsher](https://github.com/steverep) for the awesome contribution!
+	* Made Universal tracking the default for new installs.
+	* Adds administrators to the default user roles to ignore for tracking.
 
 * Security:
-    * Fixes several security issues that were discovered during an elaborate security review performed by our friends from [Sucuri](https://sucuri.net/).
-    * Fixes two other XSS issues. Thanks to [Johannes Schmitt](https://github.com/schmittjoh) from [Scrutinizer CI](https://scrutinizer-ci.com/) and [Jouko Pynnönen](http://klikki.fi) for discovering and responsibly disclosing these issues.
+	* Fixes several security issues that were discovered during an elaborate security review performed by our friends from [Sucuri](https://sucuri.net/).
+	* Fixes two other XSS issues. Thanks to [Johannes Schmitt](https://github.com/schmittjoh) from [Scrutinizer CI](https://scrutinizer-ci.com/) and [Jouko Pynnönen](http://klikki.fi) for discovering and responsibly disclosing these issues.
 
 * Bugfixes:
-    * Fixes an issue where some GA dashboard style sheets and scripts were also loaded outside of the Google Analytics by Yoast dashboard, thereby unnecessarily slowing down the WP admin.
-    * Fixes a bug where a PHP warning could be raised on the dashboard when no data is available.
+	* Fixes an issue where some GA dashboard style sheets and scripts were also loaded outside of the Google Analytics by Yoast dashboard, thereby unnecessarily slowing down the WP admin.
+	* Fixes a bug where a PHP warning could be raised on the dashboard when no data is available.
 
 = 5.3.3 =
 
 Release Date: March 19th, 2015
 
 * Several security fixes:
-    1. Fix minor XSS issue where admins could XSS each other through an unescaped manual UA field.
-    1. Fix stored XSS issue where changing a property's name in Google Analytics to contain malicious JS would allow execution of that JS in the admin as the profile name was not escaped properly.
-    1. Fix un-authenticated change of the GA profile list, allowing the previous XSS to become a slightly bigger issue. Issues 2 and 3 combined lead to a [DREAD score](http://blog.sucuri.net/2015/03/understanding-wordpress-plugin-vulnerabilities.html) of 5.
+	1. Fix minor XSS issue where admins could XSS each other through an unescaped manual UA field.
+	1. Fix stored XSS issue where changing a property's name in Google Analytics to contain malicious JS would allow execution of that JS in the admin as the profile name was not escaped properly.
+	1. Fix un-authenticated change of the GA profile list, allowing the previous XSS to become a slightly bigger issue. Issues 2 and 3 combined lead to a [DREAD score](http://blog.sucuri.net/2015/03/understanding-wordpress-plugin-vulnerabilities.html) of 5.
 * Other fixes:
-    * Small code style improvements.
-    * Throw an error and deactivate if either the PHP SPL or PHP filter libraries aren't loaded.
-    * Introduced a filter `yst_ga_track_super_admin` to allow disabling of super admin tracking on multi-site, defaulting to true.
+	* Small code style improvements.
+	* Throw an error and deactivate if either the PHP SPL or PHP filter libraries aren't loaded.
+	* Introduced a filter `yst_ga_track_super_admin` to allow disabling of super admin tracking on multi-site, defaulting to true.
 
 Big thanks to [Jouko Pynnönen](http://klikki.fi) for responsibly disclosing security issues #2 and #3.
 
@@ -241,8 +251,8 @@ Release Date: January 27th, 2015
 	* Reduced the number of results retrieved from the Google Analytics API per call from 10,000 to 1,000. This is filterable through `yst-ga-filter-api-limit`.
 
 * Bugfixes:
-    * When toggling checkbox the authentication token input was showing up.
-    * Fixed internal links that were being tracked as outbound-article- (with trailing dash).
+	* When toggling checkbox the authentication token input was showing up.
+	* Fixed internal links that were being tracked as outbound-article- (with trailing dash).
 	* Makes sure re-authentication notice is only shown when authentication has actually failed.
 	* Introduces a notice for when authentication isn't the problem but the plugin was somehow unable to fetch data from GA.
 
@@ -352,8 +362,8 @@ Release Date: December 2nd, 2014
 	* Removed firebug lite as it's rather obsolete with todays development consoles.
 
 * i18n:
-    * Several string fixes for easier translation.
-    * Added en_GB and he_IL.
+	* Several string fixes for easier translation.
+	* Added en_GB and he_IL.
 
 * Bugfixes:
 	* Fixes a bug where site admins for sites on a multisite setup would receive a notice when visiting another site on the same setup which they didn't administrate, props [nerrad](https://github.com/nerrad).

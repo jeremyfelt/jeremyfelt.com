@@ -9,7 +9,7 @@
  * Plugin URI: https://www.monsterinsights.com/pricing/#utm_source=wordpress&utm_medium=plugin&utm_campaign=wpgaplugin&utm_content=v504
  * Description: This plugin makes it simple to add Google Analytics to your WordPress site, adding lots of features, e.g. error page, search result and automatic outgoing links and download tracking.
  * Author: MonsterInsights
- * Version: 5.5.2
+ * Version: 5.5.3
  * Requires at least: 3.9
  * Author URI: https://www.monsterinsights.com/
  * License: GPL v3
@@ -35,7 +35,7 @@
 
 // This plugin was originally based on Rich Boakes' Analytics plugin: http://boakes.org/analytics, but has since been rewritten and refactored multiple times.
 
-define( 'GAWP_VERSION', '5.5.2' );
+define( 'GAWP_VERSION', '5.5.3' );
 
 define( 'GAWP_FILE', __FILE__ );
 
@@ -48,21 +48,20 @@ function monsterinsights_needs_manual_update_check(){
 }
 add_action( 'plugins_loaded', 'monsterinsights_needs_manual_update_check');
 
-function welcome_to_monsterinsights_admin_notice() {
-	$user = get_current_user_id();
-	if ( !current_user_can('manage_options' ) ) {
+function monsterinsights_lite_60_admin_notice() {
+	if ( ! current_user_can('manage_options' ) ) {
 		return;
 	}
-	if ( ! get_option( 'monsterinsights_welcome_' . $user, false ) ) { ?>
+	if ( ! get_option( 'monsterinsights_60_beta' , false ) ) { ?>
 		<div class="updated notice is-dismissible">
-			<p><?php echo sprintf(__( 'Google Analytics By Yoast is now MonsterInsights. Read about this transition %s here %s', 'google-analytics-for-wordpress'), '<a href="https://monsterinsights.com/welcome-to-monsterinsights">', '</a>' ); ?></p>
+			<p><?php echo sprintf(__( 'MonsterInsights 6.0 is Coming Soon — %sCheck out the sneak peak%s — It’s going to be awesome', 'google-analytics-for-wordpress'), '<a href="https://www.monsterinsights.com/whats-coming-monsterinsights-6-0-sneak-peak/">', '</a>' ); ?></p>
 		</div>
-	<?php 
-	update_option( 'monsterinsights_welcome_' . $user, true );
+		<?php 
+		update_option( 'monsterinsights_60_beta', true );
 	}
 
 }
-add_action( 'admin_notices', 'welcome_to_monsterinsights_admin_notice' );
+add_action( 'admin_notices', 'monsterinsights_lite_60_admin_notice' );
 
 if ( file_exists( dirname( GAWP_FILE ) . '/vendor/autoload_52.php' ) ) {
 	require dirname( GAWP_FILE ) . '/vendor/autoload_52.php';
