@@ -1,6 +1,6 @@
 <?php
 /**
- * Template part for displaying gallery posts
+ * Template part for displaying audio posts
  *
  * @link https://codex.wordpress.org/Template_Hierarchy
  *
@@ -9,12 +9,13 @@
  * @since 1.0
  * @version 1.0
  */
+
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<?php
 		if ( is_sticky() && is_home() ) :
-			echo twentyseventeen_get_svg( array( 'icon' => 'pinned' ) );
+			echo twentyseventeen_get_svg( array( 'icon' => 'thumb-tack' ) );
 		endif;
 	?>
 	<header class="entry-header">
@@ -38,7 +39,18 @@
 		?>
 	</header><!-- .entry-header -->
 
-	<?php if ( '' !== get_the_post_thumbnail() && ! is_single() && ! get_post_gallery() ) : ?>
+	<?php
+		$content = apply_filters( 'the_content', get_the_content() );
+		$audio = false;
+
+		// Only get audio from the content if a playlist isn't present.
+		if ( false === strpos( $content, 'wp-playlist-script' ) ) {
+			$audio = get_media_embedded_in_content( $content, array( 'audio' ) );
+		}
+
+	?>
+
+	<?php if ( '' !== get_the_post_thumbnail() && ! is_single() ) : ?>
 		<div class="post-thumbnail">
 			<a href="<?php the_permalink(); ?>">
 				<?php the_post_thumbnail( 'twentyseventeen-featured-image' ); ?>
@@ -50,16 +62,18 @@
 
 		<?php if ( ! is_single() ) :
 
-			// If not a single post, highlight the gallery.
-			if ( get_post_gallery() ) :
-				echo '<div class="entry-gallery">';
-					echo get_post_gallery();
-				echo '</div>';
+			// If not a single post, highlight the audio file.
+			if ( ! empty( $audio ) ) :
+				foreach ( $audio as $audio_html ) {
+					echo '<div class="entry-audio">';
+						echo $audio_html;
+					echo '</div><!-- .entry-audio -->';
+				}
 			endif;
 
 		endif;
 
-		if ( is_single() || ! get_post_gallery() ) :
+		if ( is_single() || empty( $audio ) ) :
 
 			/* translators: %s: Name of current post */
 			the_content( sprintf(

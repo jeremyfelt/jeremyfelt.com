@@ -1,6 +1,6 @@
 <?php
 /**
- * Template part for displaying video posts
+ * Template part for displaying image posts
  *
  * @link https://codex.wordpress.org/Template_Hierarchy
  *
@@ -14,7 +14,7 @@
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<?php
 		if ( is_sticky() && is_home() ) :
-			echo twentyseventeen_get_svg( array( 'icon' => 'pinned' ) );
+			echo twentyseventeen_get_svg( array( 'icon' => 'thumb-tack' ) );
 		endif;
 	?>
 	<header class="entry-header">
@@ -38,12 +38,7 @@
 		?>
 	</header><!-- .entry-header -->
 
-	<?php
-		$content = apply_filters( 'the_content', get_the_content() );
-		$video = get_media_embedded_in_content( $content, array( 'video', 'object', 'embed', 'iframe' ) );
-	?>
-
-	<?php if ( '' !== get_the_post_thumbnail() && ! is_single() && empty( $video ) ) : ?>
+	<?php if ( '' !== get_the_post_thumbnail() && ! is_single() ) : ?>
 		<div class="post-thumbnail">
 			<a href="<?php the_permalink(); ?>">
 				<?php the_post_thumbnail( 'twentyseventeen-featured-image' ); ?>
@@ -53,21 +48,9 @@
 
 	<div class="entry-content">
 
-		<?php if ( ! is_single() ) :
+		<?php if ( is_single() || '' === get_the_post_thumbnail() ) :
 
-			// If not a single post, highlight the video file.
-			if ( ! empty( $video ) ) :
-				foreach ( $video as $video_html ) {
-					echo '<div class="entry-video">';
-						echo $video_html;
-					echo '</div>';
-				}
-			endif;
-
-		endif;
-
-		if ( is_single() || empty( $video ) ) :
-
+			// Only show content if is a single post, or if there's no featured image.
 			/* translators: %s: Name of current post */
 			the_content( sprintf(
 				__( 'Continue reading<span class="screen-reader-text"> "%s"</span>', 'twentyseventeen' ),
