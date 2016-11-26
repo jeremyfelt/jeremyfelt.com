@@ -121,7 +121,7 @@ strong {
 
 b,
 strong {
-	font-weight: bolder;
+	font-weight: 700;
 }
 
 code,
@@ -1680,6 +1680,32 @@ body:not(.title-tagline-hidden) .site-branding-text {
 	transform: translateX(-50%) translateY(-50%);
 }
 
+.wp-custom-header .wp-custom-header-video-button { /* Specificity prevents .color-dark button overrides */
+	background-color: rgba(34, 34, 34, 0.5);
+	border: 1px solid rgba(255, 255, 255, 0.6);
+	color: rgba(255, 255, 255, 0.6);
+	height: 45px;
+	overflow: hidden;
+	padding: 0;
+	position: fixed;
+	right: 30px;
+	top: 30px;
+	-webkit-transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out, color 0.3s ease-in-out;
+	transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out, color 0.3s ease-in-out;
+	width: 45px;
+}
+
+.wp-custom-header .wp-custom-header-video-button:hover,
+.wp-custom-header .wp-custom-header-video-button:focus { /* Specificity prevents .color-dark button overrides */
+	border-color: rgba(255, 255, 255, 0.8);
+	background-color: rgba(34, 34, 34, 0.8);
+	color: #fff;
+}
+
+.admin-bar .wp-custom-header-video-button {
+	top: 62px;
+}
+
 .has-header-image:not(.twentyseventeen-front-page):not(.home) .custom-header-image img {
 	bottom: 0;
 	position: absolute;
@@ -1988,10 +2014,12 @@ body:not(.twentyseventeen-front-page) .entry-header {
 	color: #222;
 	display: inline-block;
 	margin-left: 1em;
+	white-space: nowrap;
 }
 
 .search .page .entry-meta a.post-edit-link {
 	margin-left: 0;
+	white-space: nowrap;
 }
 
 .taxonomy-description {
@@ -2108,6 +2136,7 @@ body:not(.twentyseventeen-front-page) .entry-header {
 	padding: 0.7em 2em;
 	-webkit-transition: background-color 0.2s ease-in-out;
 	transition: background-color 0.2s ease-in-out;
+	white-space: nowrap;
 }
 
 .entry-footer .edit-link a.post-edit-link:hover,
@@ -2909,6 +2938,7 @@ object {
 	box-shadow: none;
 	background: none;
 	display: inline-block;
+	width: 100%;
 }
 
 .gallery-item a img {
@@ -2981,22 +3011,9 @@ object {
 	left: 30px;
 }
 
-/* Prevent color schemes from showing 1px dots everywhere. */
-.customize-partial-edit-shortcut {
-	background: transparent !important;
-}
-
 /* Ensure that placeholder icons are visible. */
 .twentyseventeen-panel .customize-partial-edit-shortcut-hidden:before {
 	visibility: visible;
-}
-
-/* Prevent icon colors from clashing with color schemes. */
-.colors-custom .customize-partial-edit-shortcut button {
-	text-shadow: 0 -1px 1px rgba(0,0,0,.2),
-	             1px 0 1px rgba(0,0,0,.2),
-	             0 1px 1px rgba(0,0,0,.2),
-	            -1px 0 1px rgba(0,0,0,.2);
 }
 
 /*--------------------------------------------------------------
@@ -3021,7 +3038,7 @@ object {
 .no-svg .dropdown-toggle .svg-fallback.icon-angle-down {
 	font-size: 20px;
 	font-size: 1.25rem;
-	font-weight: normal;
+	font-weight: 400;
 	line-height: 1;
 	-webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
 	-ms-transform: rotate(180deg); /* IE 9 */
@@ -3068,6 +3085,7 @@ object {
 
 /* Adjust positioning of edit shortcuts, override style in customize-preview.css */
 @media screen and (min-width: 20em) {
+
 	body.customize-partial-edit-shortcuts-shown .site-header .site-title {
 		padding-left: 0;
 	}
@@ -3590,6 +3608,11 @@ object {
 		max-height: 1200px;
 	}
 
+	/* With panel images 100% of the screen height, we're going to fix the background image where supported to create a parallax-like effect. */
+	.background-fixed .panel-image {
+		background-attachment: fixed;
+	}
+
 	.page-two-column .panel-content .entry-header {
 		float: left;
 		width: 36%;
@@ -3977,13 +4000,6 @@ object {
 	.page-two-column .entry-content blockquote.alignright,
 	.twentyseventeen-front-page .entry-content blockquote.alignright {
 		margin-right: -20%;
-	}
-}
-
-@media screen and ( min-width: 85.45em ) {
-
-	.panel-image {
-		background-attachment: fixed;
 	}
 }
 
