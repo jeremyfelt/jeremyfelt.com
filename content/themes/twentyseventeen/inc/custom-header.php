@@ -69,7 +69,7 @@ function twentyseventeen_header_style() {
 
 	// If we get this far, we have custom styles. Let's do this.
 	?>
-	<style type="text/css">
+	<style id="twentyseventeen-custom-header-styles" type="text/css">
 	<?php
 		// Has the text been hidden?
 		if ( 'blank' === $header_text_color ) :
@@ -84,9 +84,23 @@ function twentyseventeen_header_style() {
 		else :
 	?>
 		.site-title a,
-		 body.has-header-image .site-title a,
+		.colors-dark .site-title a,
+		.colors-custom .site-title a,
+		body.has-header-image .site-title a,
+		body.has-header-video .site-title a,
+		body.has-header-image.colors-dark .site-title a,
+		body.has-header-video.colors-dark .site-title a,
+		body.has-header-image.colors-custom .site-title a,
+		body.has-header-video.colors-custom .site-title a,
 		.site-description,
-		body.has-header-image .site-description {
+		.colors-dark .site-description,
+		.colors-custom .site-description,
+		body.has-header-image .site-description,
+		body.has-header-video .site-description,
+		body.has-header-image.colors-dark .site-description,
+		body.has-header-video.colors-dark .site-description,
+		body.has-header-image.colors-custom .site-description,
+		body.has-header-video.colors-custom .site-description {
 			color: #<?php echo esc_attr( $header_text_color ); ?>;
 		}
 	<?php endif; ?>
@@ -97,6 +111,8 @@ endif; // End of twentyseventeen_header_style.
 
 /**
  * Customize video play/pause button in the custom header.
+ *
+ * @param array $settings Video settings.
  */
 function twentyseventeen_video_controls( $settings ) {
 	$settings['l10n']['play'] = '<span class="screen-reader-text">' . __( 'Play background video', 'twentyseventeen' ) . '</span>' . twentyseventeen_get_svg( array( 'icon' => 'play' ) );

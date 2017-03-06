@@ -18,7 +18,7 @@ function twentyseventeen_custom_colors_css() {
 	 *
 	 * @since Twenty Seventeen 1.0
 	 *
-	 * @param $saturation integer
+	 * @param int $saturation Color saturation level.
 	 */
 	$saturation = absint( apply_filters( 'twentyseventeen_custom_colors_saturation', 50 ) );
 	$reduced_saturation = ( .8 * $saturation ) . '%';
@@ -95,7 +95,7 @@ function twentyseventeen_custom_colors_css() {
 .colors-custom .site-footer .widget-area a,
 .colors-custom .posts-navigation a,
 .colors-custom .widget_authors a strong {
-	-webkit-box-shadow: inset 0 -1px 0 hsl( ' . $hue . ', ' . $saturation  . ', 6% ); /* base: rgba(15, 15, 15, 1); */
+	-webkit-box-shadow: inset 0 -1px 0 hsl( ' . $hue . ', ' . $saturation . ', 6% ); /* base: rgba(15, 15, 15, 1); */
 	box-shadow: inset 0 -1px 0 hsl( ' . $hue . ', ' . $saturation . ', 6% ); /* base: rgba(15, 15, 15, 1); */
 }
 
@@ -201,7 +201,7 @@ function twentyseventeen_custom_colors_css() {
 .colors-custom .widget ul li a:focus,
 .colors-custom .widget ul li a:hover {
 	-webkit-box-shadow: inset 0 0 0 hsl( ' . $hue . ', ' . $saturation . ', 13% ), 0 3px 0 hsl( ' . $hue . ', ' . $saturation . ', 13% );
-	box-shadow: inset 0 0 0 hsl( ' . $hue . ', ' . $saturation. ' , 13% ), 0 3px 0 hsl( ' . $hue . ', ' . $saturation . ', 13% );
+	box-shadow: inset 0 0 0 hsl( ' . $hue . ', ' . $saturation . ' , 13% ), 0 3px 0 hsl( ' . $hue . ', ' . $saturation . ', 13% );
 }
 
 body.colors-custom,
@@ -443,8 +443,11 @@ body.colors-custom,
 .colors-custom .next.page-numbers:focus,
 .colors-custom .next.page-numbers:hover,
 .colors-custom.has-header-image .site-title,
+.colors-custom.has-header-video .site-title,
 .colors-custom.has-header-image .site-title a,
-.colors-custom.has-header-image .site-description {
+.colors-custom.has-header-video .site-title a,
+.colors-custom.has-header-image .site-description,
+.colors-custom.has-header-video .site-description {
 	color: hsl( ' . $hue . ', ' . $saturation . ', 100% ); /* base: #fff; */
 }
 
@@ -557,5 +560,14 @@ body.colors-custom,
 	}
 }';
 
-	return $css;
+	/**
+	 * Filters Twenty Seventeen custom colors CSS.
+	 *
+	 * @since Twenty Seventeen 1.0
+	 *
+	 * @param string $css        Base theme colors CSS.
+	 * @param int    $hue        The user's selected color hue.
+	 * @param string $saturation Filtered theme color saturation level.
+	 */
+	return apply_filters( 'twentyseventeen_custom_colors_css', $css, $hue, $saturation );
 }
