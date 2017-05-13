@@ -4,7 +4,7 @@ require_once( JETPACK__PLUGIN_DIR . 'modules/sso/class.jetpack-sso-notices.php' 
 
 /**
  * Module Name: Single Sign On
- * Module Description: Secure user authentication with WordPress.com.
+ * Module Description: Allow users to log into this site using WordPress.com accounts
  * Jumpstart Description: Lets you log in to all your Jetpack-enabled sites with one click using your WordPress.com account.
  * Sort Order: 30
  * Recommendation Order: 5
@@ -31,8 +31,8 @@ class Jetpack_SSO {
 		add_action( 'init',                   array( $this, 'maybe_logout_user' ), 5 );
 		add_action( 'jetpack_modules_loaded', array( $this, 'module_configure_button' ) );
 		add_action( 'login_form_logout',      array( $this, 'store_wpcom_profile_cookies_on_logout' ) );
-		add_action( 'wp_login',               array( 'Jetpack_SSO', 'clear_wpcom_profile_cookies' ) );
 		add_action( 'jetpack_unlinked_user',  array( $this, 'delete_connection_for_user') );
+		add_action( 'wp_login',               array( 'Jetpack_SSO', 'clear_cookies_after_login' ) );
 
 		// Adding this action so that on login_init, the action won't be sanitized out of the $action global.
 		add_action( 'login_form_jetpack-sso', '__return_true' );
@@ -554,6 +554,44 @@ class Jetpack_SSO {
 		}
 	}
 
+	/**
+	 * Clear cookies that are no longer needed once the user has logged in.
+	 *
+	 * @since 4.8.0
+	 */
+	static function clear_cookies_after_login() {
+		self::clear_wpcom_profile_cookies();
+		if ( isset( $_COOKIE[ 'jetpack_sso_nonce' ] ) ) {
+			setcookie(
+				'jetpack_sso_nonce',
+				' ',
+				time() - YEAR_IN_SECONDS,
+				COOKIEPATH,
+				COOKIE_DOMAIN
+			);
+		}
+
+		if ( isset( $_COOKIE[ 'jetpack_sso_original_request' ] ) ) {
+			setcookie(
+				'jetpack_sso_original_request',
+				' ',
+				time() - YEAR_IN_SECONDS,
+				COOKIEPATH,
+				COOKIE_DOMAIN
+			);
+		}
+
+		if ( isset( $_COOKIE[ 'jetpack_sso_redirect_to' ] ) ) {
+			setcookie(
+				'jetpack_sso_redirect_to',
+				' ',
+				time() - YEAR_IN_SECONDS,
+				COOKIEPATH,
+				COOKIE_DOMAIN
+			);
+		}
+	}
+
 	static function delete_connection_for_user( $user_id ) {
 		if ( ! $wpcom_user_id = get_user_meta( $user_id, 'wpcom_user_id', true ) ) {
 			return;
@@ -577,17 +615,33 @@ class Jetpack_SSO {
 	}
 
 	static function request_initial_nonce() {
-		Jetpack::load_xml_rpc_client();
-		$xml = new Jetpack_IXR_Client( array(
-			'user_id' => get_current_user_id(),
-		) );
-		$xml->query( 'jetpack.sso.requestNonce' );
+		$nonce = ! empty( $_COOKIE[ 'jetpack_sso_nonce' ] )
+			? $_COOKIE[ 'jetpack_sso_nonce' ]
+			: false;
 
-		if ( $xml->isError() ) {
-			return new WP_Error( $xml->getErrorCode(), $xml->getErrorMessage() );
+		if ( ! $nonce ) {
+			Jetpack::load_xml_rpc_client();
+			$xml = new Jetpack_IXR_Client( array(
+				'user_id' => get_current_user_id(),
+			) );
+			$xml->query( 'jetpack.sso.requestNonce' );
+
+			if ( $xml->isError() ) {
+				return new WP_Error( $xml->getErrorCode(), $xml->getErrorMessage() );
+			}
+
+			$nonce = $xml->getResponse();
+
+			setcookie(
+				'jetpack_sso_nonce',
+				$nonce,
+				time() + ( 10 * MINUTE_IN_SECONDS ),
+				COOKIEPATH,
+				COOKIE_DOMAIN
+			);
 		}
 
-		return $xml->getResponse();
+		return sanitize_key( $nonce );
 	}
 
 	/**
@@ -667,7 +721,7 @@ class Jetpack_SSO {
 			 * user, then we know that email is unused, so it's safe to add.
 			 */
 			if ( Jetpack_SSO_Helpers::match_by_email() || ! get_user_by( 'email', $user_data->email ) ) {
-				
+
 				if ( $new_user_override_role ) {
 					$user_data->role = $new_user_override_role;
 				}
@@ -727,8 +781,6 @@ class Jetpack_SSO {
 			if ( ! empty( $_COOKIE['jetpack_sso_redirect_to'] ) ) {
 				// Set that as the requested redirect to
 				$redirect_to = $_request_redirect_to = esc_url_raw( $_COOKIE['jetpack_sso_redirect_to'] );
-				// And then purge it
-				setcookie( 'jetpack_sso_redirect_to', ' ', time() - YEAR_IN_SECONDS, COOKIEPATH, COOKIE_DOMAIN );
 			}
 
 			$json_api_auth_environment = Jetpack_SSO_Helpers::get_json_api_auth_environment();
