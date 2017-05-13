@@ -7,7 +7,6 @@
  * @since 1.0
  * @version 1.0
  */
-
 ?>
 
 <?php $unique_id = esc_attr( uniqid( 'search-form-' ) ); ?>

@@ -128,8 +128,8 @@ endif;
 /**
  * Display a front page section.
  *
- * @param WP_Customize_Partial $partial Partial associated with a selective refresh request.
- * @param integer              $id Front page section to display.
+ * @param $partial WP_Customize_Partial Partial associated with a selective refresh request.
+ * @param $id integer Front page section to display.
  */
 function twentyseventeen_front_page_section( $partial = null, $id = 0 ) {
 	if ( is_a( $partial, 'WP_Customize_Partial' ) ) {
@@ -141,6 +141,7 @@ function twentyseventeen_front_page_section( $partial = null, $id = 0 ) {
 
 	global $post; // Modify the global post object before setting up post data.
 	if ( get_theme_mod( 'panel_' . $id ) ) {
+		global $post;
 		$post = get_post( get_theme_mod( 'panel_' . $id ) );
 		setup_postdata( $post );
 		set_query_var( 'panel', $id );

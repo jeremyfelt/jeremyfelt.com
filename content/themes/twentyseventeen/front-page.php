@@ -35,7 +35,7 @@ get_header(); ?>
 			 *
 			 * @since Twenty Seventeen 1.0
 			 *
-			 * @param int $num_sections Number of front page sections.
+			 * @param $num_sections integer
 			 */
 			$num_sections = apply_filters( 'twentyseventeen_front_page_sections', 4 );
 			global $twentyseventeencounter;

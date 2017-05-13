@@ -90,7 +90,7 @@ function twentyseventeen_customize_register( $wp_customize ) {
 	 *
 	 * @since Twenty Seventeen 1.0
 	 *
-	 * @param int $num_sections Number of front page sections.
+	 * @param $num_sections integer
 	 */
 	$num_sections = apply_filters( 'twentyseventeen_front_page_sections', 4 );
 
@@ -123,8 +123,6 @@ add_action( 'customize_register', 'twentyseventeen_customize_register' );
 
 /**
  * Sanitize the page layout options.
- *
- * @param string $input Page layout.
  */
 function twentyseventeen_sanitize_page_layout( $input ) {
 	$valid = array(
@@ -141,13 +139,11 @@ function twentyseventeen_sanitize_page_layout( $input ) {
 
 /**
  * Sanitize the colorscheme.
- *
- * @param string $input Color scheme.
  */
 function twentyseventeen_sanitize_colorscheme( $input ) {
 	$valid = array( 'light', 'dark', 'custom' );
 
-	if ( in_array( $input, $valid, true ) ) {
+	if ( in_array( $input, $valid ) ) {
 		return $input;
 	}
 
