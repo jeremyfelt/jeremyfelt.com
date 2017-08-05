@@ -1,9 +1,9 @@
 === Jetpack by WordPress.com ===
 Contributors: automattic, adamkheckler, aduth, akirk, allendav, alternatekev, andy, annezazu, apeatling, azaozz, batmoo, barry, beaulebens, blobaugh, cainm, cena, cfinke, chaselivingston, chellycat, csonnek, danielbachhuber, davoraltman, daniloercoli, designsimply, dllh, drawmyface, dsmart, dzver, ebinnion, eliorivero, enej, eoigal, erania-pinnera, ethitter, gcorne, georgestephanis, gibrown, goldsounds, hew, hugobaeta, hypertextranch, iammattthomas, iandunn, jacobshere, jblz, jeherve, jenhooks, jenia, jgs, jkudish, jmdodd, Joen, johnjamesjacoby, jshreve, koke, kraftbj, lamdayap, lancewillett, lschuyler, macmanx, martinremy, matt, matveb, mattwiebe, maverick3x6, mcsf, mdawaffe, michael-arestad, migueluy, mikeyarce, mkaz, nancythanki, nickmomrik, obenland, pento, professor44, rachelsquirrel, rdcoll, ryancowles, richardmuscat, richardmtl, roccotripaldi, samhotchkiss, scarstocea, sdquirk, stephdau, tmoorewp, tyxla, Viper007Bond, westi, yoavf, zinigor
 Tags: Jetpack, WordPress.com, backup, security, related posts, CDN, speed, anti-spam, social sharing, SEO, video, stats
-Stable tag: 5.0
+Stable tag: 5.2.1
 Requires at least: 4.7
-Tested up to: 4.7
+Tested up to: 4.8
 
 The one plugin you need for stats, related posts, search engine optimization, social sharing, protection, backups, speed, and email list management.
 
@@ -62,7 +62,7 @@ Installation is free, quick, and easy. Set up <a href="https://jetpack.com/insta
 Installation is free, quick, and easy. [Install Jetpack from our site](https://jetpack.com/install?from=wporg) in minutes.
 
 = Manual Alternatives =
-Alternatively, install Jetpack via the plugin directory, or upload the files manually to your server and follow the on-screen instructions. If you need additional help [read our detailed instructions](http://jetpack.com/support/installing-jetpack/).
+Alternatively, install Jetpack via the plugin directory, or upload the files manually to your server and follow the on-screen instructions. If you need additional help [read our detailed instructions](https://jetpack.com/support/installing-jetpack/).
 
 == Frequently Asked Questions ==
 
@@ -103,102 +103,54 @@ There are opportunities for developers at all levels to contribute. [Learn more 
 
 == Changelog ==
 
-= 5.0 =
+= 5.2.1 =
 
-* Release date: June 6th, 2017
-* Release post: http://wp.me/p1moTy-5hK
+* Release date: August 2, 2017
+* Release post: https://jetpack.com/?p=22686
 
-**Enhancements**
+**Bug fixes**
+* Solves an issue that caused widgets to lose their content when saved in WP Admin or Customizer.
 
-* Several changes to the Jetpack dashboard and notices: alignment tweaks, code refactor, text simplification, and more.
-* Changes to the communication layer between your site and WordPress.com, to improve performance and allow you to do more to manage your site from WordPress.com.
-* Social menu gets icons for Etsy, Meetup, 500px, and Goodreads.
-* Jetpack data sync now better supports WordPress updates, themes changes, widgets, and multisite networks.
-* Video is updated to be fully compatible with the upcoming Media Widget.
-* Force secure WordPress.com API requests for request body, remove deprecated stats methods, and add new endpoints for post listing and user invitations.
-* Jetpack's Command Line tools can now output information about the primary Jetpack site owner. Try `wp jetpack status`!
-* Custom CSS now supports the `animation-fill-mode`, `fill`, and `stroke` properties.
-* Remove the "Menus" item from the WordPress.com toolbar for parity with the toolbar on WordPress.com.
-* Improve the display of the Omnisearch results page on sites using an RTL language.
-* Trim any white space when adding new email address in the Contact Info Widget.
-* Improve the look of your recipes in search engine result pages, when you use the Recipe shortcode.
+= 5.2 =
 
-**Compatibility Improvements**
-
-* Improve the connection process for end users and hosts.
-* Improve compatibility of Jetpack data sync with WooCommerce and Pet Manager plugins.
-* Make sure Jetpack's SEO Tools don't conflict with other SEO plugins that may already be active on the site, like Yoast SEO or All In One SEO Pack.
-
-**Bug Fixes**
-
-* Add a "Set Up" button when a Personal plan is purchased, but VaultPress isn't active yet.
-* When the Ads feature is active, do not display Ads in RSS feeds.
-* Comments do not use Photon for Facebook and Twitter avatars and now avoid non-secure warnings when submitting comments on a HTTP site in Safari.
-* Contact form emails are now sent in a way that ensures they are correctly rendered as HTML.
-* Properly print the full list of modules when using the sync command in Jetpack's Command Line Interface (CLI).
-* Avoid errors when reordering a lot of Restaurant menu items at once.
-* Add a mechanism to detect broken connection states and resolve them.
-* Autosaves can now be restored as Markdown.
-* Photon no longer conflicts with Facebook's CDN, local images, and plugins that customize reponsive images.
-* Avoid potential PHP notice in Publicize.
-* Fix bad jQuery selector in Presentations shortcode.
-* Avoid fatal errors for Social Links on sites running PHP 7.1.
-* Properly escape button attribute in spellchecker.
-* Avoid PHP notices for stats on some sites when user roles are not attributed properly.
-* No longer attempt to sync options that do not exist and avoid fatal errors when de/activating plugins.
-* Avoid errors when Social Menu functions have already been defined in the theme or in another plugin.
-* VideoPress media items now always return their unique ID, and do not trigger any PHP notice.
-* Fix style of the EU Cookie Law Widget on themes with specific positioning.
-* Use correct time constant to define an hour in Upcoming Events Widget.
-* Avoid HTML encoding issues in sitemaps.
-
-= 4.9 =
-
-* Release date: May 2nd, 2017
-* Release post: http://wp.me/p1moTy-4Rl
+* Release date: August 1, 2017
+* Release post: https://jetpack.com/?p=22509
 
 **Major Enhancements**
+* Contact Forms now sports a fancy new interface that allows you to visually compose your form in the editor.
+* We have a new and slick way to showcase and explain the features we recommend to activate to new users.
 
-* New "EU Cookie Law Banner", Flickr, and "Internet Defense League" widgets.
+**Enhancements**
+* Reduced 500kb from plugin zip file, which means faster updates.
+* Refactored and reduced code for Comment Likes so it's faster and lighter.
 
-**Slightly Less Exciting Enhancements**
+**Bug fixes**
+* An inconsistency experienced in WordPress.com dashboard when Related Posts settings were set in the local site's WP Admin is now fixed.
+* Fixed a 404 when loading Open Sans font from a stylesheet plus now it's only enqueued if it will be used.
+* Solve PHP warnings when Image widget wasn't migrated.
 
-* Success notices are automatically dismissed after a short period.
-* Removed unused code from "My Jetpack" interface and deprecated an XML-RPC method.
-* Contact Form now adds display names to email addresses in the `To` header.
-* Updated multiple unit tests to increase code coverage.
-* Development mode now also shows module list.
-* Updated the list of locales available in Jetpack.
-* Plugin auto-updates only triggered from WordPress.com and now trigger WordPress' maintenance mode.
+= 5.1 =
 
-**Performance Improvements**
+* Release date: July 5th, 2017
+* Release post: https://jetpack.com/?p=20888
 
-* Record comment content modifications and moderation events to make sure comments are always up to date on WordPress.com.
-* Sync post deletions, changes to sidebar, user events (addition, removal, and update) and theme installation.
-* We now distinguish between a new and an updated attachment.
-* Sync plugin and theme names when a related event is triggered including theme updates.
+**Major Enhancements**
+* You and your readers can now show appreciation to particularly clever comments with the new Comment Likes feature.
+
+**Enhancements**
+* Quickly visit your current site's front-end directly from the Masterbar's new "View Site" item.
+* Site data fetch from /me/sites REST API endpoint now includes `blog_public` in the list of returned options.
+* The Flickr widget now automatically displays images in a grid if there's enough room.
+* E-mail sharing is now disabled by default unless it's explicitly enabled by a filter or Akismet is active.
 
 **Compatibility Improvements**
 
-* Protect avoid conflicts with other plugins hooking into the log in form.
-* Contact Form not auto-activated when Ninja Forms is active.
-* WordPess.com REST API now allows `HTTP PUT` requests.
-* Ensure that Jetpack's Image Widget is fully compatible with the Media Widget soon to be available in WordPress 4.8.
+* Updated instructions in Flickr widget to reflect recent changes to the Flickr UI.
 
-**Bug Fixes**
+**Bug fixes**
 
-* Fixed wording in Post By Email button when no email address has been generated.
-* Fixed a notice in the subscription widget in PHP 7.1
-* Properly display VaultPress notices in the Jetpack dashboard.
-* VideoPress now included in search results for "video" and fixed positioning of search icon on mobile screens.
-* Protect supports IPv6 addresses properly.
-* Dashboard avoids API requests being cached on some hosts and avoids errors when Spellchecker is inactive.
-* Contact Form message content type is now set properly to restore compatibility with email plugins.
-* Ads not displayed in the portfolio projects custom content type.
-* Display all sites available in a network, even on large multisite installations.
-* Featured Image is always used in tweets posted via Publicize.
-* Avoid fatal errors when the exclusion parameter in Related Posts is not a string.
-* Allow the removal of all custom title settings in the SEO feature.
-* Make sure images are not distorted when Tiled Galleries uses Photon.
-* Avoid PHP warnings and errors in the Stats dashboard on Multisite.
-* Avoid errors when the Jetpack plugin is deleted.
+* EU Cookie Law Banner cookie no longer cached.
+* WP Admin menu can now be accessed in mobile when Masterbar is displayed.
+* We now sync the `order_id` for `order_items` in older WooCommerce versions.
+* UI now handles VaultPress connection or registration problems gracefully.
+* Photon now works correctly with images uploaded before WordPress 2.7.

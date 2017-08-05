@@ -110,6 +110,9 @@ class Jetpack {
 			'Google+ Comments'                     => 'google-plus-comments/google-plus-comments.php',
 			'WP-SpamShield Anti-Spam'              => 'wp-spamshield/wp-spamshield.php',
 		),
+		'comment-likes' => array(
+			'Epoch'                                => 'epoch/plugincore.php',
+		),
 		'contact-form'      => array(
 			'Contact Form 7'                       => 'contact-form-7/wp-contact-form-7.php',
 			'Gravity Forms'                        => 'gravityforms/gravityforms.php',
@@ -1291,15 +1294,15 @@ class Jetpack {
 	 * @return array Active Jetpack plan details
 	 */
 	public static function get_active_plan() {
-		$plan = get_option( 'jetpack_active_plan' );
+		$plan = get_option( 'jetpack_active_plan', array() );
 
 		// Set the default options
-		if ( ! $plan ) {
-			$plan = array(
+		if ( empty( $plan ) || ( isset( $plan['product_slug'] ) && 'jetpack_free' === $plan['product_slug'] ) ) {
+			$plan = wp_parse_args( $plan, array(
 				'product_slug' => 'jetpack_free',
 				'supports'     => array(),
 				'class'        => 'free',
-			);
+			) );
 		}
 
 		// Define what paid modules are supported by personal plans
@@ -2458,7 +2461,13 @@ class Jetpack {
 		return $string;
 	}
 
-	public static function activate_default_modules( $min_version = false, $max_version = false, $other_modules = array(), $redirect = true ) {
+	public static function activate_default_modules(
+		$min_version = false,
+		$max_version = false,
+		$other_modules = array(),
+		$redirect = true,
+		$send_state_messages = true
+	) {
 		$jetpack = Jetpack::init();
 
 		$modules = Jetpack::get_default_modules( $min_version, $max_version );
@@ -2519,7 +2528,7 @@ class Jetpack {
 				continue;
 			}
 
-			if ( in_array( $module, $active ) ) {
+			if ( $send_state_messages && in_array( $module, $active ) ) {
 				$module_info = Jetpack::get_module( $module );
 				if ( ! $module_info['deactivate'] ) {
 					$state = in_array( $module, $other_modules ) ? 'reactivated_modules' : 'activated_modules';
@@ -2543,26 +2552,39 @@ class Jetpack {
 			if ( $redirect ) {
 				wp_safe_redirect( Jetpack::admin_url( 'page=jetpack' ) );
 			}
-			Jetpack::state( 'error', 'module_activation_failed' );
-			Jetpack::state( 'module', $module );
+
+			if ( $send_state_messages ) {
+				Jetpack::state( 'error', 'module_activation_failed' );
+				Jetpack::state( 'module', $module );
+			}
+
 			ob_start();
 			require $file;
 
 			$active[] = $module;
-			$state    = in_array( $module, $other_modules ) ? 'reactivated_modules' : 'activated_modules';
-			if ( $active_state = Jetpack::state( $state ) ) {
-				$active_state = explode( ',', $active_state );
-			} else {
-				$active_state = array();
+
+			if ( $send_state_messages ) {
+
+				$state    = in_array( $module, $other_modules ) ? 'reactivated_modules' : 'activated_modules';
+				if ( $active_state = Jetpack::state( $state ) ) {
+					$active_state = explode( ',', $active_state );
+				} else {
+					$active_state = array();
+				}
+				$active_state[] = $module;
+				Jetpack::state( $state, implode( ',', $active_state ) );
 			}
-			$active_state[] = $module;
-			Jetpack::state( $state, implode( ',', $active_state ) );
+
 			Jetpack::update_active_modules( $active );
 
 			ob_end_clean();
 		}
-		Jetpack::state( 'error', false );
-		Jetpack::state( 'module', false );
+
+		if ( $send_state_messages ) {
+			Jetpack::state( 'error', false );
+			Jetpack::state( 'module', false );
+		}
+
 		Jetpack::catch_errors( false );
 		/**
 		 * Fires when default modules are activated.
@@ -2871,7 +2893,7 @@ p {
 				'fallback_no_verify_ssl_certs',
 			)
 		);
-		
+
 		Jetpack_IDC::clear_all_idc_options();
 		Jetpack_Options::delete_raw_option( 'jetpack_secrets' );
 
@@ -4089,8 +4111,12 @@ p {
 		return self::$capability_translations[$role];
 	}
 
-	static function sign_role( $role ) {
-		if ( ! $user_id = (int) get_current_user_id() ) {
+	static function sign_role( $role, $user_id = null ) {
+		if ( empty( $user_id ) ) {
+			$user_id = (int) get_current_user_id();
+		}
+
+		if ( ! $user_id  ) {
 			return false;
 		}
 
@@ -5756,7 +5782,7 @@ p {
 	 */
 	public static function normalize_url_protocol_agnostic( $url ) {
 		$parsed_url = wp_parse_url( trailingslashit( esc_url_raw( $url ) ) );
-		if ( ! $parsed_url ) {
+		if ( ! $parsed_url || empty( $parsed_url['host'] ) || empty( $parsed_url['path'] ) ) {
 			return new WP_Error( 'cannot_parse_url', sprintf( esc_html__( 'Cannot parse URL %s', 'jetpack' ), $url ) );
 		}
 
@@ -5774,9 +5800,10 @@ p {
 	 * @return array Array of the local urls, wpcom urls, and error code
 	 */
 	public static function get_sync_error_idc_option( $response = array() ) {
+		require_once JETPACK__PLUGIN_DIR . 'sync/class.jetpack-sync-functions.php';
 		$local_options = array(
-			'home' => get_home_url(),
-			'siteurl' => get_site_url(),
+			'home'    => Jetpack_Sync_Functions::home_url(),
+			'siteurl' => Jetpack_Sync_Functions::site_url(),
 		);
 
 		$options = array_merge( $local_options, $response );
@@ -6140,7 +6167,10 @@ p {
 
 		$version = Jetpack::is_development_version() ? filemtime( JETPACK__PLUGIN_DIR . 'css/jetpack.css' ) : JETPACK__VERSION;
 
-		wp_enqueue_style( 'jetpack_css', plugins_url( 'css/jetpack.css', __FILE__ ), array(), $version );
+		if ( ! wp_style_is( 'open-sans', 'registered' ) ) {
+			wp_register_style( 'open-sans', 'https://fonts.googleapis.com/css?family=Open+Sans', array(), $version );
+		}
+		wp_enqueue_style( 'jetpack_css', plugins_url( 'css/jetpack.css', __FILE__ ), array( 'open-sans' ), $version );
 		wp_style_add_data( 'jetpack_css', 'rtl', 'replace' );
 	}
 
@@ -6547,5 +6577,18 @@ p {
 				}
 			</style>
 		<?php }
+	}
+
+	/**
+	 * Checks if Akismet is active and working.
+	 *
+	 * @since  5.1.0
+	 * @return bool True = Akismet available. False = Aksimet not available.
+	 */
+	public static function is_akismet_active() {
+		if ( method_exists( 'Akismet' , 'http_post' ) || function_exists( 'akismet_http_post' ) ) {
+			return true;
+		}
+		return false;
 	}
 }
