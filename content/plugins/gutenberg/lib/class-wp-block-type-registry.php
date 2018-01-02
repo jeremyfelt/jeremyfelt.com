@@ -45,6 +45,7 @@ final class WP_Block_Type_Registry {
 	 *     ones described below are supported by default. Default empty array.
 	 *
 	 *     @type callable $render_callback Callback used to render blocks of this block type.
+	 *     @type array    $attributes      Block attributes mapping, property name to schema.
 	 * }
 	 * @return WP_Block_Type|false The registered block type on success, or false on failure.
 	 */
@@ -52,12 +53,18 @@ final class WP_Block_Type_Registry {
 		$block_type = null;
 		if ( is_a( $name, 'WP_Block_Type' ) ) {
 			$block_type = $name;
-			$name = $block_type->name;
+			$name       = $block_type->name;
 		}
 
 		if ( ! is_string( $name ) ) {
 			$message = __( 'Block type names must be strings.', 'gutenberg' );
 			_doing_it_wrong( __METHOD__, $message, '0.1.0' );
+			return false;
+		}
+
+		if ( preg_match( '/[A-Z]+/', $name ) ) {
+			$message = __( 'Block type names must not contain uppercase characters.', 'gutenberg' );
+			_doing_it_wrong( __METHOD__, $message, '1.5.0' );
 			return false;
 		}
 

@@ -1,4 +1,4 @@
-Safe Redirect Manager [![Build Status](https://travis-ci.org/tlovett1/Safe-Redirect-Manager.svg?branch=master)](https://travis-ci.org/tlovett1/Safe-Redirect-Manager) [![Dockunit Status](https://dockunit.io/svg/tlovett1/Safe-Redirect-Manager?master)](https://dockunit.io/projects/tlovett1/Safe-Redirect-Manager#master)
+Safe Redirect Manager [![Build Status](https://travis-ci.org/tlovett1/safe-redirect-manager.svg?branch=master)](https://travis-ci.org/tlovett1/safe-redirect-manager)
 ==============
 
 A WordPress plugin to safely and easily manage your website's HTTP redirects.
@@ -10,7 +10,7 @@ them store redirects in the options table or in custom tables. Most of them prov
 of them have serious performance implications (404 error logging). Safe Redirect Manager stores redirects as Custom
 Post Types. This makes your data portable and your website scalable. Safe Redirect Manager is built to handle enterprise
 level traffic and is used on major publishing websites. The plugin comes with only what you need following the
-WordPress mantra decisions not options. Actions in filters make the plugin very extensible.
+WordPress mantra, decisions not options. Actions in filters make the plugin very extensible.
 
 ## Installation
 
@@ -55,7 +55,7 @@ temporarily moved, or 301, permanently moved.
 
 * Redirects are cached using the Transients API. Cache busts occur when redirects are added, updated, and deleted
 so you shouldn't be serving stale redirects.
-* By default the plugin only allows at most 150 redirects to prevent performance issues. There is a filter
+* By default the plugin only allows at most 250 redirects to prevent performance issues. There is a filter
 `srm_max_redirects` that you can utilize to up this number.
 * "Redirect From" and requested paths are case insensitive by default.
 
@@ -71,34 +71,19 @@ add_filter( 'my_srm_redirect_loop_filter', '__return_true' );
 
 #### Setup
 Follow the configuration instructions above to setup the plugin. I recommend developing the plugin locally in an
-environment such as [Varying Vagrant Vagrants](https://github.com/Varying-Vagrant-Vagrants/VVV).
+environment such as [WP Local Docker](https://github.com/10up/wp-local-docker).
 
 #### Translation
-Safe Redirect Manager has a [.pot file](https://github.com/tlovett1/Safe-Redirect-Manager/blob/master/languages/safe-redirect-manager.pot)
-containing strings ready for translation. You can use a program like [POedit](http://poedit.net) to generate .po/.mo
-files for your language.
+Safe Redirect Manager has a [.pot file](https://github.com/tlovett1/Safe-Redirect-Manager/blob/master/lang/safe-redirect-manager.pot)
+containing strings ready for translation.
 
 #### Testing
 Within the terminal change directories to the plugin folder. Initialize your unit testing environment by running the
 following command:
 
-For VVV users:
 ```bash
-bash bin/install-wp-tests.sh wordpress_test root root localhost latest
+bash bin/install-wp-tests.sh database username password host version
 ```
-
-For VIP Quickstart users:
-```bash
-bash bin/install-wp-tests.sh wordpress_test root '' localhost latest
-```
-
-where:
-
-* wordpress_test is the name of the test database (all data will be deleted!)
-* root is the MySQL user name
-* root is the MySQL user password (if you're running VVV). Blank if you're running VIP Quickstart.
-* localhost is the MySQL server host
-* latest is the WordPress version; could also be 3.7, 3.6.2 etc.
 
 Run the plugin tests:
 ```bash

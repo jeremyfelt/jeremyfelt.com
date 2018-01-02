@@ -227,7 +227,7 @@ class Jetpack_Sync_Module_Posts extends Jetpack_Sync_Module {
 		global $post;
 		$post = $post_object;
 
-		// return non existant post 
+		// return non existant post
 		$post_type = get_post_type_object( $post->post_type );
 		if ( empty( $post_type ) || ! is_object( $post_type ) ) {
 			$non_existant_post                    = new stdClass();
@@ -345,6 +345,11 @@ class Jetpack_Sync_Module_Posts extends Jetpack_Sync_Module {
 			$just_published = true;
 		}
 
+		// workaround for https://github.com/woocommerce/woocommerce/issues/18007
+		if ( $post && 'shop_order' === $post->post_type ) {
+			$post = get_post( $post_ID );
+		}
+
 		call_user_func( $this->action_handler, $post_ID, $post, $update, $is_auto_save, $just_published );
 		$this->send_published( $post_ID, $post );
 		$this->send_trashed( $post_ID, $post );
@@ -363,6 +368,17 @@ class Jetpack_Sync_Module_Posts extends Jetpack_Sync_Module {
 		$post_flags = array(
 			'post_type' => $post->post_type
 		);
+
+		$author_user_object = get_user_by( 'id', $post->post_author );
+		if ( $author_user_object ) {
+			$post_flags['author'] = array(
+				'id'              => $post->post_author,
+				'wpcom_user_id'   => get_user_meta( $post->post_author, 'wpcom_user_id', true ),
+				'display_name'    => $author_user_object->display_name,
+				'email'           => $author_user_object->user_email,
+				'translated_role' => Jetpack::translate_user_to_role( $author_user_object ),
+			);
+		}
 
 		/**
 		 * Filter that is used to add to the post flags ( meta data ) when a post gets published
@@ -383,7 +399,6 @@ class Jetpack_Sync_Module_Posts extends Jetpack_Sync_Module {
 		 * @param mixed array $flags post flags that are added to the post
 		 */
 		do_action( 'jetpack_published_post', $post_ID, $flags );
-
 		$this->just_published = array_diff( $this->just_published, array( $post_ID ) );
 	}
 
