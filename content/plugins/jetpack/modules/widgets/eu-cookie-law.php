@@ -94,7 +94,16 @@ if ( ! class_exists( 'Jetpack_EU_Cookie_Law_Widget' ) ) {
 		 */
 		function enqueue_frontend_scripts() {
 			wp_enqueue_style( 'eu-cookie-law-style', plugins_url( 'eu-cookie-law/style.css', __FILE__ ), array(), '20170403' );
-			wp_enqueue_script( 'eu-cookie-law-script', plugins_url( 'eu-cookie-law/eu-cookie-law.js', __FILE__ ), array( 'jquery' ), '20170404', true );
+			wp_enqueue_script(
+				'eu-cookie-law-script',
+				Jetpack::get_file_url_for_environment(
+					'_inc/build/widgets/eu-cookie-law/eu-cookie-law.min.js',
+					'modules/widgets/eu-cookie-law/eu-cookie-law.js'
+				),
+				array( 'jquery' ),
+				'20170404',
+				true
+			);
 		}
 
 		/**
@@ -172,15 +181,24 @@ if ( ! class_exists( 'Jetpack_EU_Cookie_Law_Widget' ) ) {
 				$instance['text'] = $this->text_options[0];
 			}
 
-			if ( isset( $new_instance['custom-policy-url'] ) ) {
+			if ( isset( $new_instance['policy-url'] ) ) {
+				$instance['policy-url'] = 'custom' === $new_instance['policy-url']
+					? 'custom'
+					: 'default';
+			} else {
+				$instance['policy-url'] = $this->policy_url_options[0];
+			}
+
+			if ( 'custom' === $instance['policy-url'] && isset( $new_instance['custom-policy-url'] ) ) {
 				$instance['custom-policy-url'] = esc_url( $new_instance['custom-policy-url'], array( 'http', 'https' ) );
 
 				if ( strlen( $instance['custom-policy-url'] ) < 10 ) {
 					unset( $instance['custom-policy-url'] );
-					$instance['policy-url'] = $this->policy_url_options[0];
+					global $wp_customize;
+					if ( ! isset( $wp_customize ) ) {
+						$instance['policy-url'] = $this->policy_url_options[0];
+					}
 				}
-			} else {
-				$instance['policy-url'] = $this->policy_url_options[0];
 			}
 
 			if ( isset( $new_instance['policy-link-text'] ) ) {

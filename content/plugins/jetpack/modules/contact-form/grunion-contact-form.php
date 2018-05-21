@@ -59,9 +59,30 @@ class Grunion_Contact_Form_Plugin {
 			return;
 		}
 
+		/**
+		 * Fires right before deleting the _feedback_akismet_values post meta on $feedback_ids
+		 *
+		 * @module contact-form
+		 *
+		 * @since 6.1.0
+		 *
+		 * @param array $feedback_ids list of feedback post ID
+		 */
+		do_action( 'jetpack_daily_akismet_meta_cleanup_before', $feedback_ids );
 		foreach ( $feedback_ids as $feedback_id ) {
 			delete_post_meta( $feedback_id, '_feedback_akismet_values' );
 		}
+
+		/**
+		 * Fires right after deleting the _feedback_akismet_values post meta on $feedback_ids
+		 *
+		 * @module contact-form
+		 *
+		 * @since 6.1.0
+		 *
+		 * @param array $feedback_ids list of feedback post ID
+		 */
+		do_action( 'jetpack_daily_akismet_meta_cleanup_after', $feedback_ids );
 	}
 
 	/**
@@ -2683,7 +2704,14 @@ class Grunion_Contact_Form_Field extends Crunion_Contact_Form_Shortcode {
 				$r .= "\t\t<input type='text' name='" . esc_attr( $field_id ) . "' id='" . esc_attr( $field_id ) . "' value='" . esc_attr( $field_value ) . "' " . $field_class . ( $field_required ? "required aria-required='true'" : '' ) . "/>\n";
 				$r .= "\t</div>\n";
 
-				wp_enqueue_script( 'grunion-frontend', plugins_url( 'js/grunion-frontend.js', __FILE__ ), array( 'jquery', 'jquery-ui-datepicker' ) );
+				wp_enqueue_script(
+					'grunion-frontend',
+					Jetpack::get_file_url_for_environment(
+						'_inc/build/contact-form/js/grunion-frontend.min.js',
+						'modules/contact-form/js/grunion-frontend.js'
+					),
+					array( 'jquery', 'jquery-ui-datepicker' )
+				);
 				wp_enqueue_style( 'jp-jquery-ui-datepicker', plugins_url( 'css/jquery-ui-datepicker.css', __FILE__ ), array( 'dashicons' ), '1.0' );
 
 				// Using Core's built-in datepicker localization routine
