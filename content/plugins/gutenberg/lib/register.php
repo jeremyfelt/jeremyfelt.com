@@ -41,6 +41,9 @@ function gutenberg_collect_meta_box_data() {
 
 	$screen = $current_screen;
 
+	// Disable hidden metaboxes because there's no UI to toggle visibility.
+	add_filter( 'hidden_meta_boxes', '__return_empty_array' );
+
 	// If we are working with an already predetermined post.
 	if ( isset( $_REQUEST['post'] ) ) {
 		$post    = get_post( absint( $_REQUEST['post'] ) );
@@ -387,6 +390,7 @@ function gutenberg_register_post_types() {
 			'singular_name' => 'Block',
 		),
 		'public'                => false,
+		'rewrite'               => false,
 		'show_in_rest'          => true,
 		'rest_base'             => 'blocks',
 		'rest_controller_class' => 'WP_REST_Blocks_Controller',

@@ -1,5 +1,505 @@
 == Changelog ==
 
+= 3.4.0 =
+
+* Add the Inline Blocks API.
+* Rename Shared Blocks to Reusable Blocks.
+* Add a Modal component.
+* Add a REST API Search controller.
+* Add a warning in the classic editor when attempting to edit a post that contains blocks.
+* Add ability for themes to configure font sizes.
+* Add RTL CSS to all packages.
+* Add an edit button to embed blocks.
+* Remove all wp.api usage from the editor package.
+* Add error handling for file block drag-and-drop.
+* Add registerBlockStyleVariation, for registering block style variations.
+* Add a border between panels in the block sidebar.
+* Add a editor.PostFeaturedImage.imageSize filter for the Featured Image.
+* Create a video block when dropping a video on an insertion point.
+* Expose a custom class name hook for mobile.
+* Add a React Native entrypoint for mobile.
+* Only disable wpautop on the main classic editor instance.
+* Retain the id attribute when converting heading tags to heading blocks.
+* Retain target="_blank" on links in converted paragraphs.
+* Improve the handling of imported shortcode blocks.
+* Replace the File block’s filename editor with a RichText.
+* Tweak the block warning style.
+* Add a max-height to the table of contents.
+* Remove the inset shadow from the table of contents.
+* Fix the tag placeholder text for long translations.
+* Fix the table of contents sometimes causing JavaScript errors.
+* Fix the link suggestion dropdown not allowing the first suggestion to be selected by keyboard.
+* Make tooltips persist when hovering them.
+* Add missing aria-labels to the audio and video block UIs.
+* Add an icon and accessibility text to links that open in a new tab.
+* Fixed shared blocks adding unnecessary rewrite rules.
+* Fix a regression in the colour picker width.
+* Fix the colour picker focus border being off-centre.
+* Combine ColorPalettes into a single panel for Button and Paragraph blocks.
+* Fix the ColorIndicator style import.
+* Fix auto-linking a URL pasted on top of another URL.
+* Add persistent store support to the data module.
+* Fix the Latest Comments block using admin imports.
+* Fix a warning when adding an image block.
+* Fix the classic block toolbar alignment.
+* Fix a warning in the block menu.
+* Change all blocks to use supports: align, instead of the align attribute.
+* Improve the ContrastChecker logic for large font sizes.
+* Update the is-shallow-equal package to use ES5 code.
+* Deprecate getMimeTypesArray, mediaUpload, and preloadImage.
+* Deprecate wideAlign in favour of alignWide.
+* Document Node version switching in the testing documentation.
+* Document examples of the registerBlockType hook.
+* Document an example of the block transforms property.
+* Document Gutenberg’s camelCase coding style.
+* Improved all of the package descriptions.
+* Update coding standards to allow double quoted strings to avoid escaping single quotes.
+* Standardise the package descriptions and titles.
+* Extract the editor package.
+* Isolate and reset e2e tests every run.
+* Improve test configuration and mocking strategy.
+* Fix test coverage configuration.
+* Fix the block icons e2e tests.
+* Bump the Puppeteer version.
+* Use simpler jest.fn() mocks for api-fetch calls in unit tests.
+
+= 3.3.0 =
+
+* Add new Archives block for displaying site archives.
+* Add new Latest Comments block to widgets category.
+* Add “Convert to blocks” option in HTML block.
+* Correct caret placement when merging to inline boundary.
+* Move block switcher from header to multi-block toolbar for multiselection.
+* Add video block attributes for Autoplay, Controls, Loop, Muted.
+* Remove HTML beautification and preserve whitespace on save.
+* Formalize RichText children value abstraction.
+* Allow transformation of image block to file block and vice-versa.
+* Support preload attribute for Audio Block.
+* Avoid popover refresh on Tip mount.
+* Introduce “registry” concept to the Data Module.
+* Convert successive shortcodes properly.
+* Hide “Convert to Shared Block” button on Classic blocks.
+* Update spacing in pre-publish panel titles.
+* Use do_blocks to render core blocks content.
+* Remove restoreContentAndSplit in RichText.
+* Hide insertion point when it is not possible to insert the default block.
+* Refactor block converters to share common UI functionality.
+* Replace the apiRequest module with api-fetch module.
+* Add audio/video settings title to settings panel.
+* Normalize the behavior of BlockListBlock’s “Enter” key handling to insert the default block.
+* Rename baseUrl entities property as baseURL in entities.
+* Rename UrlInput component as URLInput.
+* Give File block a low files transform priority.
+* Make tooltips persist when hovering them.
+* Optimise design of heading line heights.
+* Add a filter(‘editor.FeaturedImage’) for the FeaturedImage component.
+* Fix vertical arrow navigation skips in writing flow.
+* Fix incorrect polyfill script handles.
+* Fix template example so that it is correct.
+* Fix exception error when saving a new shared block.
+* Fix getInserterItems caching bug and add new test case.
+* Fix issue with spacer block resizing and sibling inserter.
+* Fix files configuration entry in package.json for wordpress/babel-preset-default.
+* Fix config and regenerate updated docs.
+* Fix dependency mistake in api-fetch.
+* Fix metaboxes save request (parse: false).
+* Fix issue with name field not being focused when a shared block is created.
+* Fix box sizing for pseudo elements.
+* Fix an error which occurs when assigning the URL of a Button block.
+* Improve usage and documentation of the landmark region labels.
+* Substitute the remaining uses of unfiltered_html capability and withAPIData.
+* Remove the “Extended Settings” meta box wrapper.
+* Remove NewBlock event handling from RichText.
+* Remove legacy context API child context from Block API.
+* Remove Text Columns block from insertion menus in preparation for Try outreach.
+* Remove unused autocompleter backcompat case.
+* Change label in Cover Image block for background opacity.
+* Change the text label on Image block from “Source Type” to “Image Size”.
+* Backup and restore global $post when preloading API data.
+* Move packages repository into Gutenberg with its history.
+* Enhance the deprecated module to log a message only once per session.
+* Switch tests away from using enzyme (enzyme.shallow, enzyme.mount, etc).
+* Unblock tests from being skipped.
+* Add basic test for shortcode transformation.
+* Add e2e test for block icons.
+* Add e2e tests for the NUX tips.
+* Add e2e tests for shared blocks.
+* Remove data-test attribute from UrlInputButton output.
+* Deprecate id prop in favor of clientId.
+* Rename MediaPlaceholder onSelectUrl prop as onSelectURL.
+* Remove unnecessary default prop from test.
+* Point the package entry to src directly for native mobile.
+* Use clearer filenames for saved vendor scripts.
+* Update local install instructions and add add more verbose instructions when node versions don’t match.
+* Reorder package.json devDependencies alphabetically.
+* Coding Guidelines: Prescribe specific camelCasing behaviors.
+* Regenerate docs using docs:build command.
+* Add documentation for ALLOWED_BLOCKS in Columns.
+* Add link to support forum in plugin menu.
+* Deprecate buildTermTree function in utilities.
+* Deprecate property source in Block API.
+* Deprecate uid in favor of clientId.
+* Deprecate grouped inner blocks layouts.
+* Improve eslint checks for deep imports.
+* Improve IntelliSense support when using VS Code.
+* Move the components module partially to the packages folder.
+* Add the blocks module to the packages folder.
+* Add wp-deprecated dependency to wp-element.
+* Add @babel/runtime as a dependency to wordpress/components.
+* Add @babel/runtime as a dependency for packages.
+* Add a new compose package.
+* Extract entities package.
+* Extract viewport package.
+* Extract @wordpress/nux package.
+* Create new spec-parser package.
+* Update Dashicons to latest build.
+* Update test for babel-preset-default.
+* Update code to work with Babel 7.
+* Update package-lock.json with eslint-scope version 3.7.3.
+* Update node-sass.
+
+= 3.2.0 =
+
+* Add block styles variations to the Block API.
+* Add support for Inline Images and Inline Blocks API.
+* Convert Columns to a set of parent and child blocks, including a wrapper element and more reliable front-end presentation.
+* Allow registering new block categories.
+* Add support for locking Inner Block areas.
+* Add File Block for uploading and listing documents, with drag and drop support.
+* Introduce Modal component to expand the extensibility suite of UI components.
+* Redesign block transformation menu.
+* Improve style display of region focus areas.
+* Prevent blocks from being draggable if a template lock exists.
+* Parse superfluous classes as custom classes preventing a block being considered invalid for such cases.
+* Support “Autoplay” and “Loop” in Audio Block “Playback Controls”.
+* Always show “new gallery item” below the gallery.
+* When dragging images to create a gallery, immediately show the images while uploading is happening.
+* Optimize withSelect to avoid generating merge props on equal props.
+* Remove the “scroll shadow” at the bottom of the inserter library.
+* Remove the bottom border on the last collapsible panel.
+* Remove wrapping div from paragraph block (in the editor) for performance audit.
+* Add Image Block ‘Link to’ setting.
+* Allow margins to collapse & refactor block toolbar.
+* Keep NUX tips open when the user clicks outside.
+* Add initialTabName prop to Tab Panel component.
+* Add higher order component to constrain Tab keyboard navigation.
+* Display server error message on media upload when one exists.
+* Improve “add block” text in NUX onboarding.
+* Improve experience of using image resize handles — placing them at the middle of the edges instead of the corners.
+* Update color of the Shared panel icon to be the same as all other icons.
+* Verify if block icon background and foreground colors are readable. Warn in the console otherwise.
+* Address various design details on Plugin API icon treatment in header and popover.
+* Include all image sizes on the media upload object when they exist.
+* Move the delete block action to the ellipsis menu for the block. Introduce separator in the menu.
+* Make the inserter results panel focusable and improve accessibility.
+* Improve publish panel accessibility and add new publish landmark region.
+* Open preview to previewLink if not autosaveable.
+* Make sure autocompleted values make it into the block’s saved content.
+* Avoid setAttributes on end-of-paragraph seeking to resolve unnecessary performance degradations.
+* Avoid re-render and subsequent action dispatch by adopting module constant.
+* Avoid focusing link in new NUX tooltip
+* Avoid showing hover effect if the ancestor of a block is multi-selected.
+* Schedule render by store update via setState. Fixes condition where appender would insert two copies of a block.
+* Inner Blocks refactor:
+* * Update deprecated componentWillReceiveProps to equivalent componentDidUpdate.
+* * Avoid deep equality check on flat allowedBlocks prop shape.
+* * Avoid handling unexpected case where UPDATE_BLOCK_LIST_SETTINGS is not passed an id.
+* * Avoid creating new references for blockListSettings when settings not set, but the id never existed in state anyways.
+* * Avoid switch fallthrough on case where previous updateIsRequired condition would be false, which could have introduced future maintainability issues if additional case statements were added.
+* * Add test to verify state reference is not changed when no update is needed.
+* * Consistently name allowedBlocks (previously also referred to as supportedBlocks).
+* Consider horizontal handled by stopPropagation in RichText. Fixes edge case with inline boundaries at the end of lines﻿. With further improvements﻿.
+* Ensure ellipsis icon button is visible when block settings menu is open.
+* Simplify RichText to have a single function for setting content vs. the current updateContent and setContent, by removing updateContent.
+* Optimize RichText by removing the creation of undo levels at split and merge steps.
+* Simplify the RichText component’s getContent function to remove a call to TinyMCE’s isEmpty function, which incurs a DOM walk to determine emptiness.
+* Optimize the RichText component to avoid needing to keep a focusPosition state.
+* Reenable pointer events on insertion point hover for Firefox.
+* Introduce colors slugs in color palette definitions to ensure localization.
+* Respect inner blocks locking when displaying default block appender.
+* Use color styles on the editor even if the classes were not set.
+* Move “opinionated” Gutenberg block styles to theme.scss.
+* Don’t allow negative values in image dimensions.
+* Fix IE11 formatting toolbar visibility.
+* Fix issues with gallery block in IE11.
+* Fix import statement for InnerBlocks.
+* Fix broken links in documentation.
+* Fix text wrapping issues in Firefox.
+* Fix showing the permalink edit box on the title element.
+* Fix focus logic error in Tips and tidy up docs.
+* Fix instance of keycode package import.
+* Fix case where an explicit string value assigned as an attribute would be wrongly interpreted as false when assigned as a boolean attribute type in the parser.
+* Fix the data module docs by moving them to the root level of the handbook.
+* Fix specificity issue with button group selector.
+* Fix CSS property serialization.
+* Fix left / right alignments of blocks.
+* Fix CSS vendor-prefixed property serialization.
+* Fix arrows navigation in the block more options menu.
+* Let ⌘A’s select all blocks again.
+* Check for forwardedRef in withGlobalEvents.
+* Address issues with left / right align improvements in RTL.
+* Different approach for fixing sibling inserter in Firefox.
+* Correctly handle case where ‘post-thumbnails’ is array of post types.
+* Remove blocks/index.native as the default is compatible with React Native app.
+* Allow editor color palette to be empty.
+* Support setup with single array argument in Color Palette registration.
+* Only save metaboxes when it’s not an autosave.
+* Force the display of hidden meta boxes.
+* Implement core style of including revisions data on Post response.
+* Remove post type ‘viewable’ compatibility shim.
+* Remove unused block-transformations component.
+* Use withSafeTimeout in NUX tips﻿ to handle cases where plugins modify the $post global.
+* Update HOCs to use createHigherOrderComponent.
+* Deprecate property source in Block API.
+* Documentation: fix rich-text markdown source.
+* Tweak release docs and improve release build script.
+* Add focusOnMount change to deprecations.
+* Add e2e test for sidebar behaviours on mobile and desktop.
+* Add e2e test for PluginPostStatusInfo.
+* Add snapshot update script.
+* Update import from @wordpress/deprecated.
+* Extract “keycodes” into its own package and rework the Readme file.
+* Add shortcode package instead of global.
+* Add package: @wordpress/babel-plugin-import-jsx-pragma.
+* Update nested templates to new columns format.
+* Generate the manifest dynamically to include the data module docs in the handbook.
+* Expose the grammar parser to the mobile app.
+* Drop the .js extension from @wordpress/element’s package.json entry-point so when used in the mobile RN app the correct module (index.native.js﻿) can be resolved by Metro.
+* Add packages Readme files to the handbook.
+* Add link in documentation to supported browsers.
+* Add initial document on copy guidelines.
+* Add missing documentation for InnerBlocks props.
+* Regenerate package-lock.json to address unintentional changes.
+* Use cross-env for plugin build scripts to address issues on Windows machines.
+* Invert JSX pragma application condition.
+* Ignore non-JS file events in packages.
+* Drop deprecations slated for 3.2 removal.
+* Publish multiple new versions of packages.
+
+= 3.1.1 =
+
+* Fix permalink editor not appearing.
+* Fix sibling block inserter not working in Firefox and Safari.
+
+= 3.1.0 =
+
+* Implement Tips Interface to guide a user in the new editor interface.
+* New design version of sibling inserter (the ability to insert blocks between other blocks).
+* Allow users to re-enable Tips.
+* Allow the user to preview changes to a published post without first updating the post.
+* Show the preview mode for HTML blocks converted into shared blocks. This streamlines the process of creating straightforward HTML blocks and letting users insert them visually.
+* Exclude the currently focused block from the block completer options. (i.e. don’t show paragraph as an option if already on a paragraph)
+* Trigger autosave as standard save for draft by current user.
+* Add mime type checking to the pre-upload error messaging system when uploading media.
+* Allow block hover outlines to draw color from admin theme.
+* Allow transforming multiple paragraph blocks into a single quote block.
+* Block API: move useOnce block configuration to supports.multiple = false.
+* Add strikethrough support for Markdown conversion when pasting.
+* Add yAxis=middle support to Popover to allow showing arrows vertically centered for NUX tips.
+* Add BlockIconWithColors component and use it for the block header with description in the inspector.
+* Add error notices mechanism directly to media placeholder.
+* Refactor the initialization of the editor to only require a post ID.
+* Optimize the default column width for character length and use the same width for the text editor.
+* Incremental improvements and polish to the mobile block toolbar.
+* Visually compensate nested blocks for block padding.
+* Prevent slash autocompleter from letting users insert two cases of a useOnce block.
+* Let screen readers announce the block aria label.
+* Improve the accessibility of featured images.
+* Make aria-multiline true by default in RichText so the content field is properly announced.
+* Add back role textbox to the List block and improve aria-multiline usage.
+* Replace the renderBlockMenu prop with Slot/Fill.
+* Hide disabled blocks from shortcut inserter.
+* Avoid deprecated React Lifecycle hooks in withAPIData.
+* Improve the element serializer to avoid double ampersand encoding of valid character references.
+* Update drop-cap design to better balance line length.
+* Describe expanded state of “more options” panel.
+* Improve DotTip positioning fix.
+* Implement Button component as assigning ref via forwardRef (new React API).
+* Improve serialising JSON to PHP-compatible query strings.
+* Introduce rendererPathWithAttributes() for ServerSideRender.
+* Refactor the getPostEdits selector to avoid relying on Lodash’s _.get.
+* Refactor withSelect to use getDerivedStateFromProps.
+* Replace JSON-escaped quotation mark with unicode escape sequence in Block API. Fixes PlainText component not properly escaping attributes under some specific user roles.
+* Fix regression in Columns block’s front-end style.
+* Fix regression in SVG support for block icons.
+* Fix PHP 5.2 notice by ensuring $memo is always an array.
+* Fix margins of embed block content.
+* Fix autocomplete behaviour in IE11.
+* Fix regression with formatting toolbar not showing divider between some block controls.
+* Fix issue where pasting an inline shortcode would produce a separate shortcode block.
+* Fix issue when copy pasting images in Chrome.
+* Fix typos in code comments.
+* Fix consistency of hover styles in toolbars.
+* Fix option for linking to attachment page on gallery block.
+* Fix Classic Editor adding paragraphs from block boundaries.
+* Fix post publish panel showing incorrect UX for contributors who don’t have publishing capability.
+* Fix issues with floats and the side UI on wide and full-wide.
+* Fix issue where server side upload errors disappear automatically.
+* Fix block inserter popover in RTL mode.
+* Fix mp3 uploads on chrome.
+* Fix getMimeTypesArray return documentation.
+* Avoid showing error if autosave runs and there are no changes to save.
+* Prevent any disabled button from changing the cursor to pointer.
+* Remove ‘who’=>’authors’ compatibility shim as it’s part of WP 4.9.6.
+* Remove confusing “wrap text” from Button settings.
+* Remove the usage of the componentWillMount lifecycle.
+* Remove the componentWillReceiveProps lifecycle usage.
+* Remove createInnerBlockList utility / context. This should be a simplification of block context, potentially with some performance and/or memory improvements, as an intermediary component is no longer created.
+* Improve translatable strings containing “%s” to have a translator comment.
+* Move trash post URL change to the BrowserUrl component. Consolidates all browser navigation (url changes and actual navigation).
+* Simplify the withColors HOC so we can avoid the usage of memoize while still having a correct implementation without unnecessary rerenders.
+* Refactor Higher-order components in data module to avoid the use of componentWillMount.
+* Use mdash for block description in cover image.
+* Ensure that only the latest promise updates the autocompleter state for more predictable behaviour.
+* Wrap PluginPostStatusInfo with PanelRow rather than Slot. Fix issue with hard to style divs.
+* Update demo content to avoid dirtying embed.
+* Allow using ServerSideRender component without defined attributes.
+* Avoid loading Gutenberg assets in other admin pages.
+* Add a new @wordpress/api-request package. Instead of relying on globals to set the nonce/rootURL, it users configurable middlewares. Preloading support is also built as a middleware.
+* Move the Core Data Module to packages.
+* Move Plugins module to packages.
+* Rename all the hooks moved from blocks to editor.
+* Add NUX e2e tests.
+* Add e2e tests for Plugins API.
+* Add es5 samples to edit-post and plugins.
+* Add e2e test to blocks.BlockEdit filter.
+* Add snapshot test for MoreMenu component.
+* Fix broken links in readme files.
+* Build tooling: add linting for package.json files.
+* Further explanation for why .normalize() is optional in raw-handling.
+* Update icon color readme example.
+* Generate docs for the data module.
+* Enable Strict-Mode of React.
+* Publish new versions of WP packages.
+* Regenerate integrity checks to sha512.
+* Drop deprecations slated for 3.1 removal.
+* Upgrade React 16.3.2 to React 16.4.1.
+
+= 3.0.1 =
+
+* Fix regression in Columns block's front-end style
+* Fix regression in SVG support for block icons
+* Build tooling: Add linting for package.json files
+
+= 3.0.0 =
+
+* Redesign the inserter with collapsible panels.
+* Add support for Child Blocks. These create a relationship between blocks and updates the inserter to show blocks based on context.
+* Implement a new block hover and select approach to improve nested block selection and clarity.
+* Allow expanding selection on consecutive Meta+A presses.
+* Add shared blocks to the blocks autocompleter.
+* Iterate on behaviour of the “between blocks inserter”.
+* Multiple longstanding fixes to the UrlInput box by using Popover component instead of custom positioning.
+* Allow themes to opt-in to the visual styles provided by core blocks.
+* Allow custom colors in block icons.
+* When focused on a parent with InnerBlocks set, show available child blocks clearly at the top. Blocks with children are marked visually in the root inserter.
+* Add publish panels support for plugins.
+* Scroll the inserter menu to the relevant position when opening a panel.
+* Expand matching categories when searching the block library.
+* Introduce a dedicated autosaves endpoint for handling autosave behavior. Improves general handling of revisions through REST API saves.
+* Show autosave notice when autosave exists.
+* Send all fields when transmitting an autosave, fixing missing titles.
+* Allow clicking the block’s input fields.
+* Move “Saved” blocks to the bottom and show distinct icon on the panel name.
+* Improve max-upload size error message.
+* Normalize unicode in raw handling.
+* Allow inserting a link with no text selected.
+* Center the background of the cover image block.
+* Make the Classic block toolbar sticky while scrolling.
+* Make Button component styles independent from Core Styles.
+* Use new "theme" style mechanism to restore Quote styles on the front.
+* Make various greys less dull when used with opacity.
+* Set the correct min-width for the ChromePicker popover.
+* Unify all the media blocks placeholders under a unique component.
+* Address focus style regression in menu and improve display of keyboard shortcut.
+* Refactor popover to clarify computations and address multiple cases of overflow issues.
+* Avoid URL redirect for published post autosave.
+* Refactor URL redirect as BrowserURL component and ensure redirect for new posts.
+* Avoid superfluous changes in RichText.
+* Improve performance for PublishPanel and extensions.
+* Unselect blocks when opening the document settings.
+* Add text alignment options to verse block toolbar.
+* Make sure the Title element uses the same max-width as blocks.
+* Improve title component so it works with and without editor styles.
+* Properly associate the spacer height input label.
+* Further visual polish to new inserter design.
+* Simplify inserter accessibility.
+* Fix block icon alignment in block inspector.
+* Fix issue with excerpt textarea height overflow.
+* Fix typo in withRehydration function call.
+* Fix Post Formats UI not showing.
+* Fix regressions with Button component after PostCSS.
+* Fix issue with applied formats being lost.
+* Fix unset background-color on sidebar headings.
+* Fix case where inbetweenserter would linger if you clicked to insert and then clicked away.
+* Fix issue with rich text toolbar being gone in captions.
+* Fix padding and outline style for expander panel.
+* Fix CodeEditor component not loading when WordPress is installed in a subfolder.
+* Fix regression with sticky toolbar border.
+* Fix some intermittent E2E test failures.
+* Fix “no results” message within inserter.
+* Fix visual issue with normal buttons with icons.
+* Fix issue where the sidebar would remain open on mobile when the page loaded if it was opened before.
+* Fix fileName not being respected when the image is uploaded via drag & drop.
+* Fix regression in spacer block.
+* Fix getInserterItems cache.
+* Fix intermittent adding-blocks E2E test failure.
+* Fix issue with shared block preview being rendered hidden.
+* Fix alignment issue with hover label on wide and full-wide.
+* Fix Windows-unfriendly theme.scss loader rule.
+* Fix issue where pasting would fail in IE11.
+* Fix issue with editing paragraph blocks in shared blocks.
+* Address small code style fixes on the core-data module.
+* Add support for getEntityRecords selectors/resolvers to the core data module to avoid duplication across the different entities.
+* Remove drag handle from block breadcrumb.
+* Improve Child Blocks code footprint.
+* Address package issues with npm audit fix.
+* Use Core’s TinyMCE version to avoid conflicts.
+* Scope the rule adding a white background to the html element.
+* Remove onFocus from core blocks’ RichText usage.
+* Remove post type capabilities from the user object.
+* Remove the dependency on the editor module code from blocks tests.
+* Expose preview_link through the REST API and use within client.
+* Only load Gutenberg Polyfill in editor pages.
+* Refine code statement of image classes.
+* Add support for the default_page_template_title filter in page-attributes meta-box.
+* Add additional condition to “Available templates” meta-box logic.
+* Ensure the wp-editor script is also enqueued soon using the enqueue_block_assets hook.
+* Cleanup shared block tests.
+* Provide cross-browser node containment checking.
+* Add unit tests for core-blocks/more/edit.js components.
+* Add documentation about ServerSideRender.
+* Auto-generate human-readable version of Gutenberg block grammar.
+* Doc Block cleanup for rich-text component.
+* Address multiple typos in code comments.
+* Skip test files when generating build folders for packages.
+* Fail E2E tests when uncaught page error occurs.
+* Extract new blob package out of utils module.
+* Update the wait function name to discourage its use in E2E tests.
+* Introduce new module with deprecation utility.
+* Introduce insertBlock() utility for E2E tests.
+* Move data module to the package maintained by Lerna.
+* Avoid using spread for objects to work with all node 8x versions.
+* Add lint rule to check that memize() is used.
+* Add global guard against ZWSP in E2E content retrieval.
+* Add building/watching support to Gutenberg packages.
+* Add further explanation for why .normalize() is optional.
+* Add new webpack plugin to handle library default export.
+* Reload the page after webpack watch compile.
+* Publish numerous WP packages updates from repository.
+* Drop deprecations slated for 3.0 removal.
+* Always publish main and module distributions in packages.
+* Upgrade mousetrap to 1.6.2.
+* Update all WordPress packages to the latest version.
+* Bump WordPress requirements to 4.9.6.
+
+= 2.9.2 =
+
+* Ensure the Title uses the same max-width as blocks
+* Center the background of the cover image block
+* Fix formatting controls regression
+* Fix classic editor visual mode regression
+
 = 2.9.1 =
 
 * Ensure the wp-editor script is also enqueued soon using the `enqueue_block_assets` hook

@@ -1,8 +1,8 @@
 === Gutenberg ===
 Contributors: matveb, joen, karmatosed
-Requires at least: 4.9
-Tested up to: 4.9.6
-Stable tag: 2.9.0
+Requires at least: 4.9.6
+Tested up to: 4.9
+Stable tag: 3.3.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -81,6 +81,63 @@ See also <a href="https://github.com/WordPress/gutenberg/blob/master/CONTRIBUTIN
 
 = Latest =
 
-* Ensure the wp-editor script is also enqueued soon using the `enqueue_block_assets` hook
-* Allow clicking the block's input fields (regression fix)
-* Remove post type capabilities from the user object
+* Add the Inline Blocks API.
+* Rename Shared Blocks to Reusable Blocks.
+* Add a Modal component.
+* Add a REST API Search controller.
+* Add a warning in the classic editor when attempting to edit a post that contains blocks.
+* Add ability for themes to configure font sizes.
+* Add RTL CSS to all packages.
+* Add an edit button to embed blocks.
+* Remove all wp.api usage from the editor package.
+* Add error handling for file block drag-and-drop.
+* Add registerBlockStyleVariation, for registering block style variations.
+* Add a border between panels in the block sidebar.
+* Add a editor.PostFeaturedImage.imageSize filter for the Featured Image.
+* Create a video block when dropping a video on an insertion point.
+* Expose a custom class name hook for mobile.
+* Add a React Native entrypoint for mobile.
+* Only disable wpautop on the main classic editor instance.
+* Retain the id attribute when converting heading tags to heading blocks.
+* Retain target="_blank" on links in converted paragraphs.
+* Improve the handling of imported shortcode blocks.
+* Replace the File block’s filename editor with a RichText.
+* Tweak the block warning style.
+* Add a max-height to the table of contents.
+* Remove the inset shadow from the table of contents.
+* Fix the tag placeholder text for long translations.
+* Fix the table of contents sometimes causing JavaScript errors.
+* Fix the link suggestion dropdown not allowing the first suggestion to be selected by keyboard.
+* Make tooltips persist when hovering them.
+* Add missing aria-labels to the audio and video block UIs.
+* Add an icon and accessibility text to links that open in a new tab.
+* Fixed shared blocks adding unnecessary rewrite rules.
+* Fix a regression in the colour picker width.
+* Fix the colour picker focus border being off-centre.
+* Combine ColorPalettes into a single panel for Button and Paragraph blocks.
+* Fix the ColorIndicator style import.
+* Fix auto-linking a URL pasted on top of another URL.
+* Add persistent store support to the data module.
+* Fix the Latest Comments block using admin imports.
+* Fix a warning when adding an image block.
+* Fix the classic block toolbar alignment.
+* Fix a warning in the block menu.
+* Change all blocks to use supports: align, instead of the align attribute.
+* Improve the ContrastChecker logic for large font sizes.
+* Update the is-shallow-equal package to use ES5 code.
+* Deprecate getMimeTypesArray, mediaUpload, and preloadImage.
+* Deprecate wideAlign in favour of alignWide.
+* Document Node version switching in the testing documentation.
+* Document examples of the registerBlockType hook.
+* Document an example of the block transforms property.
+* Document Gutenberg’s camelCase coding style.
+* Improved all of the package descriptions.
+* Update coding standards to allow double quoted strings to avoid escaping single quotes.
+* Standardise the package descriptions and titles.
+* Extract the editor package.
+* Isolate and reset e2e tests every run.
+* Improve test configuration and mocking strategy.
+* Fix test coverage configuration.
+* Fix the block icons e2e tests.
+* Bump the Puppeteer version.
+* Use simpler jest.fn() mocks for api-fetch calls in unit tests.
