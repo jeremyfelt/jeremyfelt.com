@@ -357,14 +357,16 @@ class Jetpack_Connection_Banner {
 							?>
 						</p>
 
-						<p>
-							<?php
-							esc_html_e(
-								'Customers on paid plans also benefit from unlimited backups of your entire site, spam protection, malware scanning, and automated fixes.',
-								'jetpack'
-							);
-							?>
-						</p>
+						<?php if ( Jetpack::show_backups_ui() ): ?>
+							<p>
+								<?php
+								esc_html_e(
+									'Customers on paid plans also benefit from unlimited backups of your entire site, spam protection, malware scanning, and automated fixes.',
+									'jetpack'
+								);
+								?>
+							</p>
+						<?php endif; ?>
 
 						<p>
 							<?php
@@ -802,13 +804,15 @@ class Jetpack_Connection_Banner {
 							?>
 						</p>
 
-						<p>
-							<?php
-							esc_html_e(  'Paying customers also benefit from automated backups, malware scans, and priority support.',
-								'jetpack'
-							);
-							?>
-						</p>
+						<?php if ( Jetpack::show_backups_ui() ): ?>
+							<p>
+								<?php
+								esc_html_e(  'Paying customers also benefit from automated backups, malware scans, and priority support.',
+									'jetpack'
+								);
+								?>
+							</p>
+						<?php endif; ?>
 
 						<p class="jp-banner__button-container">
 							<span class="jp-banner__tos-blurb">
@@ -883,7 +887,7 @@ class Jetpack_Connection_Banner {
 					?></p>
 					<p><?php
 						esc_html_e(
-							'Publish: Post on the go from any device using the WordPress apps for iOS, Android, Windows, Linux, and OSX.',
+							'Publish: Post on the go from any device using the WordPress apps for iOS, Android, Windows, Linux, and macOS.',
 							'jetpack'
 						);
 					?></p>
@@ -939,12 +943,14 @@ class Jetpack_Connection_Banner {
 							'jetpack'
 						);
 					?></p>
-					<p><?php
-						esc_html_e(
-							'Backup & Restore: Rest assured with real-time site backups and easy roll-back site restores.',
-							'jetpack'
-						);
-					?></p>
+					<?php if ( Jetpack::show_backups_ui() ) : ?>
+						<p><?php
+							esc_html_e(
+								'Backup & Restore: Rest assured with real-time site backups and easy roll-back site restores.',
+								'jetpack'
+							);
+						?></p>
+					<?php endif; ?>
 				</div>
 				<div class="jp-connect-full__slide-card illustration">
 					<img
@@ -954,7 +960,7 @@ class Jetpack_Connection_Banner {
 				</div>
 			</div>
 
-			
+
 			<img
 				class="support-characters"
 				src="<?php echo plugins_url( 'images/characters.svg', JETPACK__PLUGIN_FILE ); ?>"
@@ -973,7 +979,7 @@ class Jetpack_Connection_Banner {
 
 			<p class="jp-connect-full__button-container">
 				<a href="https://jetpack.com/contact-support/" class="dops-button">
-					<?php esc_html_e( 'Chat with us', 'jetpack' ); ?>
+					<?php esc_html_e( 'Get in touch with us', 'jetpack' ); ?>
 				</a>
 				<a href="https://jetpack.com/support" class="dops-button">
 					<?php esc_html_e( 'Search our support site', 'jetpack' ); ?>

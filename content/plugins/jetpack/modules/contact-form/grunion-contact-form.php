@@ -34,6 +34,18 @@ class Grunion_Contact_Form_Plugin {
 
 	static $using_contact_form_field = false;
 
+	/**
+	 * @var int The last Feedback Post ID Erased as part of the Personal Data Eraser.
+	 * Helps with pagination.
+	 */
+	private $pde_last_post_id_erased = 0;
+
+	/**
+	 * @var string The email address for which we are deleting/exporting all feedbacks
+	 * as part of a Personal Data Eraser or Personal Data Exporter request.
+	 */
+	private $pde_email_address = '';
+
 	static function init() {
 		static $instance = false;
 
@@ -749,7 +761,7 @@ class Grunion_Contact_Form_Plugin {
 	 * @return array $exporters An array of personal data exporters.
 	 */
 	public function register_personal_data_exporter( $exporters ) {
-		$exporters[] = array(
+		$exporters['jetpack-feedback'] = array(
 			'exporter_friendly_name' => __( 'Feedback', 'jetpack' ),
 			'callback'               => array( $this, 'personal_data_exporter' ),
 		);
@@ -767,7 +779,7 @@ class Grunion_Contact_Form_Plugin {
 	 * @return array $erasers An array of personal data erasers.
 	 */
 	public function register_personal_data_eraser( $erasers ) {
-		$erasers[] = array(
+		$erasers['jetpack-feedback'] = array(
 			'eraser_friendly_name' => __( 'Feedback', 'jetpack' ),
 			'callback'             => array( $this, 'personal_data_eraser' ),
 		);
@@ -786,7 +798,25 @@ class Grunion_Contact_Form_Plugin {
 	 * @return array  $return Associative array with keys expected by core.
 	 */
 	public function personal_data_exporter( $email, $page = 1 ) {
-		$per_page    = 250;
+		return $this->_internal_personal_data_exporter( $email, $page );
+	}
+
+	/**
+	 * Internal method for exporting personal data.
+	 *
+	 * Allows us to have a different signature than core expects
+	 * while protecting against future core API changes.
+	 *
+	 * @internal
+	 * @since 6.5
+	 *
+	 * @param  string $email    Email address.
+	 * @param  int    $page     Page to export.
+	 * @param  int    $per_page Number of feedbacks to process per page. Internal use only (testing)
+	 *
+	 * @return array            Associative array with keys expected by core.
+	 */
+	public function _internal_personal_data_exporter( $email, $page = 1, $per_page = 250 ) {
 		$export_data = array();
 		$post_ids    = $this->personal_data_post_ids_by_email( $email, $per_page, $page );
 
@@ -843,17 +873,64 @@ class Grunion_Contact_Form_Plugin {
 	 * @return array         Associative array with keys expected by core.
 	 */
 	public function personal_data_eraser( $email, $page = 1 ) {
-		$per_page = 250;
-		$removed  = 0;
-		$retained = 0;
+		return $this->_internal_personal_data_eraser( $email, $page );
+	}
+
+	/**
+	 * Internal method for erasing personal data.
+	 *
+	 * Allows us to have a different signature than core expects
+	 * while protecting against future core API changes.
+	 *
+	 * @internal
+	 * @since 6.5
+	 *
+	 * @param  string $email    Email address.
+	 * @param  int    $page     Page to erase.
+	 * @param  int    $per_page Number of feedbacks to process per page. Internal use only (testing)
+	 *
+	 * @return array            Associative array with keys expected by core.
+	 */
+	public function _internal_personal_data_eraser( $email, $page = 1, $per_page = 250 ) {
+		$removed  = false;
+		$retained = false;
 		$messages = array();
-		$post_ids = $this->personal_data_post_ids_by_email( $email, $per_page, $page );
+		$option_name = sprintf( '_jetpack_pde_feedback_%s', md5( $email ) );
+		$last_post_id = 1 === $page ? 0 : get_option( $option_name, 0 );
+		$post_ids = $this->personal_data_post_ids_by_email( $email, $per_page, $page, $last_post_id );
 
 		foreach ( $post_ids as $post_id ) {
+			/**
+			 * Filters whether to erase a particular Feedback post.
+			 *
+			 * @since 6.3.0
+			 *
+			 * @param bool|string $prevention_message Whether to apply erase the Feedback post (bool).
+			 *                                        Custom prevention message (string). Default true.
+			 * @param int         $post_id            Feedback post ID.
+			 */
+			$prevention_message = apply_filters( 'grunion_contact_form_delete_feedback_post', true, $post_id );
+
+			if ( true !== $prevention_message ) {
+				if ( $prevention_message && is_string( $prevention_message ) ) {
+					$messages[] = esc_html( $prevention_message );
+				} else {
+					$messages[] = sprintf(
+						// translators: %d: Post ID.
+						__( 'Feedback ID %d could not be removed at this time.', 'jetpack' ),
+						$post_id
+					);
+				}
+
+				$retained = true;
+
+				continue;
+			}
+
 			if ( wp_delete_post( $post_id, true ) ) {
-				$removed++;
+				$removed = true;
 			} else {
-				$retained++;
+				$retained = true;
 				$messages[] = sprintf(
 					// translators: %d: Post ID.
 					__( 'Feedback ID %d could not be removed at this time.', 'jetpack' ),
@@ -862,11 +939,19 @@ class Grunion_Contact_Form_Plugin {
 			}
 		}
 
+		$done = count( $post_ids ) < $per_page;
+
+		if ( $done ) {
+			delete_option( $option_name );
+		} else {
+			update_option( $option_name, (int) $post_id );
+		}
+
 		return array(
 			'items_removed'  => $removed,
 			'items_retained' => $retained,
 			'messages'       => $messages,
-			'done'           => count( $post_ids ) < $per_page,
+			'done'           => $done,
 		);
 	}
 
@@ -875,26 +960,35 @@ class Grunion_Contact_Form_Plugin {
 	 *
 	 * @since 6.1.1
 	 *
-	 * @param  string $email    Email address.
-	 * @param  int    $per_page Post IDs per page. Default is `250`.
-	 * @param  int    $page     Page to query. Default is `1`.
+	 * @param  string $email        Email address.
+	 * @param  int    $per_page     Post IDs per page. Default is `250`.
+	 * @param  int    $page         Page to query. Default is `1`.
+	 * @param  int    $last_post_id Page to query. Default is `0`. If non-zero, used instead of $page.
 	 *
-	 * @return array            An array of post IDs.
+	 * @return array An array of post IDs.
 	 */
-	public function personal_data_post_ids_by_email( $email, $per_page = 250, $page = 1 ) {
+	public function personal_data_post_ids_by_email( $email, $per_page = 250, $page = 1, $last_post_id = 0 ) {
 		add_filter( 'posts_search', array( $this, 'personal_data_search_filter' ) );
+
+		$this->pde_last_post_id_erased = $last_post_id;
+		$this->pde_email_address = $email;
 
 		$post_ids = get_posts( array(
 			'post_type'        => 'feedback',
 			'post_status'      => 'publish',
-			's'                => 'AUTHOR EMAIL: ' . $email,
+			// This search parameter gets overwritten in ->personal_data_search_filter()
+			's'                => '..PDE..AUTHOR EMAIL:..PDE..',
 			'sentence'         => true,
 			'order'            => 'ASC',
+			'orderby'          => 'ID',
 			'fields'           => 'ids',
 			'posts_per_page'   => $per_page,
-			'paged'            => $page,
+			'paged'            => $last_post_id ? 1 : $page,
 			'suppress_filters' => false,
 		) );
+
+		$this->pde_last_post_id_erased = 0;
+		$this->pde_email_address = '';
 
 		remove_filter( 'posts_search', array( $this, 'personal_data_search_filter' ) );
 
@@ -916,14 +1010,21 @@ class Grunion_Contact_Form_Plugin {
 		/*
 		 * Limits search to `post_content` only, and we only match the
 		 * author's email address whenever it's on a line by itself.
-		 * `CHAR(13)` = `\r`, `CHAR(10)` = `\n`
 		 */
-		if ( preg_match( '/AUTHOR EMAIL\: ([^{\s]+)/', $search, $m ) ) {
-			$esc_like_email = esc_sql( $wpdb->esc_like( 'AUTHOR EMAIL: ' . $m[1] ) );
-			$search         = " AND (
-				{$wpdb->posts}.post_content LIKE CONCAT('%', CHAR(13), '{$esc_like_email}', CHAR(13), '%')
-				OR {$wpdb->posts}.post_content LIKE CONCAT('%', CHAR(10), '{$esc_like_email}', CHAR(10), '%')
-			)";
+		if ( $this->pde_email_address && false !== strpos( $search, '..PDE..AUTHOR EMAIL:..PDE..' ) ) {
+			$search = $wpdb->prepare(
+				" AND (
+					{$wpdb->posts}.post_content LIKE %s
+					OR {$wpdb->posts}.post_content LIKE %s
+				)",
+				// `chr( 10 )` = `\n`, `chr( 13 )` = `\r`
+				'%' . $wpdb->esc_like( chr( 10 ) . 'AUTHOR EMAIL: ' . $this->pde_email_address . chr( 10 ) ) . '%',
+				'%' . $wpdb->esc_like( chr( 13 ) . 'AUTHOR EMAIL: ' . $this->pde_email_address . chr( 13 ) ) . '%'
+			);
+
+			if ( $this->pde_last_post_id_erased ) {
+				$search .= $wpdb->prepare( " AND {$wpdb->posts}.ID > %d", $this->pde_last_post_id_erased );
+			}
 		}
 
 		return $search;
@@ -1703,7 +1804,7 @@ class Grunion_Contact_Form extends Crunion_Contact_Form_Shortcode {
 		if ( isset( $_GET['contact-form-id'] )
 			&& $_GET['contact-form-id'] == self::$last->get_attribute( 'id' )
 			&& isset( $_GET['contact-form-sent'], $_GET['contact-form-hash'] )
-			&& hash_equals( $form->hash, $_GET['contact-form-hash'] ) ) {
+			&& hash_equals( $form->hash, $_GET['contact-form-hash'] ) ) { // phpcs:ignore PHPCompatibility -- skipping since `hash_equals` is part of WP core
 			// The contact form was submitted.  Show the success message/results
 			$feedback_id = (int) $_GET['contact-form-sent'];
 
@@ -1925,7 +2026,7 @@ class Grunion_Contact_Form extends Crunion_Contact_Form_Shortcode {
 		&&
 			isset( $_POST['contact-form-id'] ) && $form->get_attribute( 'id' ) == $_POST['contact-form-id']
 		&&
-			isset( $_POST['contact-form-hash'] ) && hash_equals( $form->hash, $_POST['contact-form-hash'] )
+			isset( $_POST['contact-form-hash'] ) && hash_equals( $form->hash, $_POST['contact-form-hash'] ) // phpcs:ignore PHPCompatibility -- skipping since `hash_equals` is part of WP core
 		) {
 			// If we're processing a POST submission for this contact form, validate the field value so we can show errors as necessary.
 			$field->validate();
@@ -2962,21 +3063,18 @@ function grunion_delete_old_spam() {
 		wp_delete_post( $post_id, true );
 	}
 
-	// Arbitrary check points for running OPTIMIZE
-	// nothing special about 5000 or 11
-	// just trying to periodically recover deleted rows
-	$random_num = mt_rand( 1, 5000 );
 	if (
 		/**
-		 * Filter how often the module run OPTIMIZE TABLE on the core WP tables.
+		 * Filter if the module run OPTIMIZE TABLE on the core WP tables.
 		 *
 		 * @module contact-form
 		 *
 		 * @since 1.3.1
+		 * @since 6.4.0 Set to false by default.
 		 *
-		 * @param int $random_num Random number.
+		 * @param bool $filter Should Jetpack optimize the table, defaults to false.
 		 */
-		apply_filters( 'grunion_optimize_table', ( $random_num == 11 ) )
+		apply_filters( 'grunion_optimize_table', false )
 	) {
 		$wpdb->query( "OPTIMIZE TABLE $wpdb->posts" );
 	}

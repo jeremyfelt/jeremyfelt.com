@@ -56,8 +56,14 @@ if ( ! class_exists( 'Jetpack_Simple_Payments_Widget' ) ) {
 				)
 			);
 
-			if ( is_customize_preview() ) {
-				add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_styles_and_scripts' ) );
+			global $pagenow;
+			if ( is_customize_preview() || 'widgets.php' === $pagenow ) {
+				add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_styles' ) );
+			}
+
+			$jetpack_simple_payments = Jetpack_Simple_Payments::getInstance();
+			if ( is_customize_preview() && $jetpack_simple_payments->is_enabled_jetpack_simple_payments() ) {
+				add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
 
 				add_filter( 'customize_refresh_nonces', array( $this, 'filter_nonces' ) );
 				add_action( 'wp_ajax_customize-jetpack-simple-payments-buttons-get', array( $this, 'ajax_get_payment_buttons' ) );
@@ -112,9 +118,11 @@ if ( ! class_exists( 'Jetpack_Simple_Payments_Widget' ) ) {
 			wp_enqueue_style( 'jetpack-simple-payments-widget-style', plugins_url( 'simple-payments/style.css', __FILE__ ), array(), '20180518' );
 		}
 
-		function admin_enqueue_styles_and_scripts(){
-				wp_enqueue_style( 'jetpack-simple-payments-widget-customizer', plugins_url( 'simple-payments/customizer.css', __FILE__ ) );
+		function admin_enqueue_styles() {
+			wp_enqueue_style( 'jetpack-simple-payments-widget-customizer', plugins_url( 'simple-payments/customizer.css', __FILE__ ) );
+		}
 
+		function admin_enqueue_scripts() {
 				wp_enqueue_media();
 				wp_enqueue_script( 'jetpack-simple-payments-widget-customizer', plugins_url( '/simple-payments/customizer.js', __FILE__ ), array( 'jquery' ), false, true );
 				wp_localize_script( 'jetpack-simple-payments-widget-customizer', 'jpSimplePaymentsStrings', array(
@@ -258,24 +266,46 @@ if ( ! class_exists( 'Jetpack_Simple_Payments_Widget' ) ) {
 			wp_send_json_success( $return );
 		}
 
+		/**
+		 * Returns the number of decimal places on string representing a price.
+		 *
+		 * @param string $number Price to check.
+		 * @return number number of decimal places.
+		 */
+		private function get_decimal_places( $number ) {
+			$parts = explode( '.', $number );
+			if ( count( $parts ) > 2 ) {
+				return null;
+			}
+
+			return isset( $parts[1] ) ? strlen( $parts[1] ) : 0;
+		}
+
 		public function validate_ajax_params( $params ) {
 			$errors = new WP_Error();
 
 			$illegal_params = array_diff( array_keys( $params ), array( 'product_post_id', 'post_title', 'post_content', 'image_id', 'currency', 'price', 'multiple', 'email' ) );
 			if ( ! empty( $illegal_params ) ) {
-				$errors.add( 'illegal_params' );
+				$errors->add( 'illegal_params', __( 'Invalid parameters.', 'jetpack' ) );
 			}
 
 			if ( empty( $params['post_title'] ) ) {
-				$errors->add( 'post_title', __( 'People need to know what they\'re paying for! Please add a brief title.' ) );
+				$errors->add( 'post_title', __( "People need to know what they're paying for! Please add a brief title.", 'jetpack' ) );
 			}
 
-			if ( empty( $params['price'] ) || floatval( $params['price'] ) <= 0 ) {
-				$errors->add( 'price', __( 'Everything comes with a price tag these days. Please add a your product price.' ) );
+			if ( empty( $params['price'] ) || ! is_numeric( $params['price'] ) || floatval( $params['price'] ) <= 0 ) {
+				$errors->add( 'price', __( 'Everything comes with a price tag these days. Please add a your product price.', 'jetpack' ) );
+			}
+
+			// Japan's Yen is the only supported currency with a zero decimal precision.
+			$precision            = strtoupper( $params['currency'] ) === 'JPY' ? 0 : 2;
+			$price_decimal_places = $this->get_decimal_places( $params['price'] );
+			if ( is_null( $price_decimal_places ) || $price_decimal_places > $precision ) {
+				$errors->add( 'price', __( 'Invalid price', 'jetpack' ) );
 			}
 
 			if ( empty( $params['email'] ) || ! is_email( $params['email'] ) ) {
-				$errors->add( 'email', __( 'We want to make sure payments reach you, so please add an email address.' ) );
+				$errors->add( 'email', __( 'We want to make sure payments reach you, so please add an email address.', 'jetpack' ) );
 			}
 
 			return $errors;
@@ -461,6 +491,12 @@ if ( ! class_exists( 'Jetpack_Simple_Payments_Widget' ) ) {
 		 * @param array $instance Previously saved values from database.
 		 */
 		function form( $instance ) {
+			$jetpack_simple_payments = Jetpack_Simple_Payments::getInstance();
+			if ( ! $jetpack_simple_payments->is_enabled_jetpack_simple_payments() ) {
+				require dirname( __FILE__ ) . '/simple-payments/admin-warning.php';
+				return;
+			}
+
 			$instance = wp_parse_args( $instance, $this->defaults() );
 
 			$product_posts = get_posts( array(
@@ -468,14 +504,18 @@ if ( ! class_exists( 'Jetpack_Simple_Payments_Widget' ) ) {
 				'orderby' => 'date',
 				'post_type' => Jetpack_Simple_Payments::$post_type_product,
 				'post_status' => 'publish',
-			 ) );
+			) );
 
-			require( dirname( __FILE__ ) . '/simple-payments/form.php' );
+			require dirname( __FILE__ ) . '/simple-payments/form.php';
 		}
 	}
 
 	// Register Jetpack_Simple_Payments_Widget widget.
 	function register_widget_jetpack_simple_payments() {
+		if ( ! class_exists( 'Jetpack_Simple_Payments' ) ) {
+			return;
+		}
+
 		$jetpack_simple_payments = Jetpack_Simple_Payments::getInstance();
 		if ( ! $jetpack_simple_payments->is_enabled_jetpack_simple_payments() ) {
 			return;
