@@ -42,7 +42,7 @@ https://github.com/thoughtbot/bourbon
   padding: 0.375rem 0;
   line-height: 1.5;
   font-size: 0.6875rem;
-  color: #2e4453;
+  color: #414141;
 }
 
 .jp-banner .notice-dismiss {
@@ -58,13 +58,14 @@ https://github.com/thoughtbot/bourbon
 }
 
 .jetpack-disconnected .jp-connect-full__container {
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   position: absolute;
   top: 0;
   left: 0;
   bottom: 1.25rem;
   right: 0;
-  z-index: 9999;
+  z-index: 999;
   background: #f1f1f1;
   text-align: center;
 }
@@ -97,11 +98,39 @@ https://github.com/thoughtbot/bourbon
   }
 }
 
+.jetpack-disconnected.toplevel_page_jetpack .jp-connect-full__container {
+  position: relative;
+  bottom: 0;
+  -webkit-box-shadow: 0 0 0 1px rgba(213, 213, 213, 0.5), 0 1px 2px #eeeeee;
+          box-shadow: 0 0 0 1px rgba(213, 213, 213, 0.5), 0 1px 2px #eeeeee;
+  display: none;
+}
+
+.jetpack-disconnected.toplevel_page_jetpack .jp-connect-full__container .jp-connect-full__container-card {
+  margin: 0;
+}
+
+@media (min-width: 782px) {
+  .jetpack-disconnected.toplevel_page_jetpack .jp-connect-full__container {
+    right: 0;
+  }
+}
+
+@media (max-width: 782px) {
+  .jetpack-disconnected.toplevel_page_jetpack .jp-connect-full__container {
+    top: 46px;
+  }
+}
+
+.jetpack-disconnected.toplevel_page_jetpack .jp-jetpack-connect__container .jp-connect-full__container {
+  display: block;
+}
+
 .jp-connect-full__svg-dismiss {
   position: absolute;
   left: 0;
   top: 0;
-  fill: #87a6bc;
+  fill: #a2a2a2;
   padding: 1rem;
   height: 1.5rem;
   width: 1.5rem;
@@ -127,7 +156,7 @@ https://github.com/thoughtbot/bourbon
 }
 
 .jp-connect-full__step-header h3 {
-  color: #537994;
+  color: #747474;
   font-size: 1rem;
   font-weight: normal;
   margin: 0.625rem 0 1.5rem;
@@ -140,7 +169,7 @@ https://github.com/thoughtbot/bourbon
 .jp-connect-full__tos-blurb {
   font-size: 0.6875rem;
   margin: 0 auto 1.5rem;
-  color: #537994;
+  color: #747474;
 }
 
 .jp-connect-full__tos-blurb a {
@@ -172,7 +201,7 @@ https://github.com/thoughtbot/bourbon
 
 .jp-connect-full__dismiss-paragraph a {
   cursor: pointer;
-  color: #537994;
+  color: #747474;
   text-decoration: none;
 }
 
@@ -183,23 +212,61 @@ https://github.com/thoughtbot/bourbon
 .jp-connect-full__slide {
   max-width: 750px;
   margin: 4em auto;
+  display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-direction: row;
-      flex-direction: row;
-  -ms-flex-pack: stretch;
-      justify-content: stretch;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: stretch;
+      -ms-flex-pack: stretch;
+          justify-content: stretch;
+}
+
+@media (max-width: 782px) {
+  .jp-connect-full__slide {
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+  }
 }
 
 .jp-connect-full__slide .jp-connect-full__slide-card {
-  -ms-flex: 1;
-      flex: 1;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
   text-align: right;
+  -webkit-box-ordinal-group: 3;
+      -ms-flex-order: 2;
+          order: 2;
+}
+
+@media (min-width: 782px) {
+  .jp-connect-full__slide .jp-connect-full__slide-card {
+    -webkit-box-ordinal-group: unset;
+        -ms-flex-order: unset;
+            order: unset;
+  }
+}
+
+.jp-connect-full__slide .illustration {
+  -webkit-box-ordinal-group: 2;
+      -ms-flex-order: 1;
+          order: 1;
+}
+
+@media (min-width: 782px) {
+  .jp-connect-full__slide .illustration {
+    -webkit-box-ordinal-group: unset;
+        -ms-flex-order: unset;
+            order: unset;
+  }
 }
 
 .jp-connect-full__slide .illustration img {
   margin: 2.5em 1em;
   display: block;
+  min-width: 200px;
 }
 
 @media (min-width: 600px) {
@@ -223,7 +290,7 @@ https://github.com/thoughtbot/bourbon
 }
 
 .jp-connect-full__step-support h3 {
-  color: #537994;
+  color: #747474;
   font-size: 1rem;
   font-weight: normal;
   margin: 0.625rem 0 1.5rem;
@@ -232,7 +299,8 @@ https://github.com/thoughtbot/bourbon
 .updated.jp-wpcom-connect__container {
   border-right: none;
   padding: 0;
-  box-shadow: 0 0 0 1px rgba(200, 215, 225, 0.5), 0 1px 2px #e9eff3;
+  -webkit-box-shadow: 0 0 0 1px rgba(200, 215, 225, 0.5), 0 1px 2px #e9eff3;
+          box-shadow: 0 0 0 1px rgba(200, 215, 225, 0.5), 0 1px 2px #e9eff3;
 }
 
 @media screen and (max-width: 782px) {
@@ -250,10 +318,39 @@ https://github.com/thoughtbot/bourbon
   text-decoration: none;
 }
 
+.updated .notice-dismiss:before {
+  color: white;
+}
+
+.jp-wpcom-connect__container-top-text {
+  padding: 15px 15px 25px 15px;
+  background-color: #00BE28;
+  color: white;
+  font-weight: 600;
+}
+
+.jp-wpcom-connect__container-top-text svg {
+  width: 24px;
+  height: 24px;
+  margin-left: 10px;
+  position: relative;
+  top: 7px;
+}
+
+.jp-wpcom-connect__container-top-text svg path {
+  fill: #fff;
+}
+
+.jp-wpcom-connect__container-top-text span {
+  display: inline-block;
+}
+
 .jp-wpcom-connect__container {
   display: block;
   position: relative;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  background-color: #00BE28;
 }
 
 .jp-wpcom-connect__inner-container > a:first-child {
@@ -261,14 +358,19 @@ https://github.com/thoughtbot/bourbon
 }
 
 .jp-wpcom-connect__inner-container {
+  display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-direction: row;
-      flex-direction: row;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
   -ms-flex-wrap: nowrap;
       flex-wrap: nowrap;
-  -ms-flex-pack: left;
-      justify-content: left;
+  -webkit-box-pack: left;
+      -ms-flex-pack: left;
+          justify-content: left;
+  background: #fff;
 }
 
 .jp-wpcom-connect__content-container {
@@ -285,7 +387,7 @@ https://github.com/thoughtbot/bourbon
 }
 
 .jp-wpcom-connect__content-container p {
-  color: #4f748e;
+  color: #6f6f6f;
   font-size: 0.875rem;
 }
 
@@ -317,6 +419,16 @@ https://github.com/thoughtbot/bourbon
   display: block;
 }
 
+.jp-wpcom-connect__slide ul {
+  list-style: disc;
+  padding: 0 0.9375rem 0 0;
+}
+
+.jp-wpcom-connect__slide ul li {
+  color: #6f6f6f;
+  font-size: 0.75rem;
+}
+
 @media (min-width: 782px) {
   .jp-wpcom-connect__content-container .jp-banner__button-container {
     position: absolute;
@@ -344,10 +456,13 @@ https://github.com/thoughtbot/bourbon
 
 @media (min-width: 600px) {
   .jp-wpcom-connect__vertical-nav {
-    -ms-flex-direction: column;
-        flex-direction: column;
-    -ms-flex-pack: start;
-        justify-content: flex-start;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
   }
 }
 
@@ -367,14 +482,18 @@ https://github.com/thoughtbot/bourbon
 
 @media (min-width: 600px) {
   .vertical-menu__feature-item {
+    display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    -ms-flex-direction: row;
-        flex-direction: row;
-    -ms-flex-align: center;
-        align-items: center;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
     border: none;
-    padding: 0.5rem;
+    padding: 0.75rem 0.5rem;
     border-bottom: 1px solid #c8d7e1;
     border-left: 1px solid #c8d7e1;
     border-right: 3px solid #F3F6F8;
@@ -387,13 +506,13 @@ https://github.com/thoughtbot/bourbon
     top: 1px;
   }
   .vertical-menu__feature-item-is-selected {
-    border-right: 3px solid #0087be;
+    border-right: 3px solid #F3F6F8;
     border-left: 1px solid #fff;
     background-color: #fff;
     color: #2e4453;
   }
   .vertical-menu__feature-item-is-selected.jp-feature-intro {
-    border-right: 3px solid #00BE28;
+    border-right: 3px solid #F3F6F8;
   }
   .vertical-menu__feature-item-icon {
     width: 1.25rem;
