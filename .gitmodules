@@ -2,7 +2,7 @@
 	path = www/wordpress
 	url = git://core.git.wordpress.org/
 [submodule "tweets"]
-	path = tweets
+	path = sub-site/tweets
 	url = git@github.com:jeremyfelt/tweets.jeremyfelt.com.git
 [submodule "loopconf"]
 	path = loopconf
