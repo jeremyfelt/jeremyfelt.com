@@ -1,7 +1,7 @@
 .idea
 remote-config.php
-content/uploads
-content/images
+wp-content/uploads
+wp-content/images
 .DS_Store
 *.pyc
 .vagrant
