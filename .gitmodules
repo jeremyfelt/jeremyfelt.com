@@ -8,5 +8,5 @@
 	path = slides/2015/loopconf
 	url = git@github.com:jeremyfelt/2015-loopconf.git
 [submodule "wceu-2016"]
-	path = wceu-2016
+	path = slides/2016/wceu
 	url = git@github.com:jeremyfelt/Multisite-Talk.git
