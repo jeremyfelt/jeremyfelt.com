@@ -133,10 +133,10 @@ if ( ! function_exists( 'twentysixteen_post_thumbnail' ) ) :
 		}
 
 		if ( is_singular() ) :
-		?>
+			?>
 
 		<div class="post-thumbnail">
-		<?php the_post_thumbnail(); ?>
+			<?php the_post_thumbnail(); ?>
 	</div><!-- .post-thumbnail -->
 
 	<?php else : ?>
@@ -145,7 +145,7 @@ if ( ! function_exists( 'twentysixteen_post_thumbnail' ) ) :
 		<?php the_post_thumbnail( 'post-thumbnail', array( 'alt' => the_title_attribute( 'echo=0' ) ) ); ?>
 	</a>
 
-	<?php
+		<?php
 	endif; // End is_singular()
 	}
 endif;
@@ -166,11 +166,11 @@ if ( ! function_exists( 'twentysixteen_excerpt' ) ) :
 		$class = esc_attr( $class );
 
 		if ( has_excerpt() || is_search() ) :
-		?>
+			?>
 			<div class="<?php echo $class; ?>">
 				<?php the_excerpt(); ?>
 			</div><!-- .<?php echo $class; ?> -->
-		<?php
+			<?php
 		endif;
 	}
 endif;

@@ -10,7 +10,7 @@
  * has tag.php for Tag archives, category.php for Category archives, and
  * author.php for Author archives.
  *
- * @link https://codex.wordpress.org/Template_Hierarchy
+ * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
  * @package WordPress
  * @subpackage Twenty_Twelve
@@ -35,7 +35,7 @@ get_header(); ?>
 					else :
 						_e( 'Archives', 'twentytwelve' );
 					endif;
-				?>
+					?>
 				</h1>
 			</header><!-- .archive-header -->
 

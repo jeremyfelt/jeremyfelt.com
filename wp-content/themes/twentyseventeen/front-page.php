@@ -4,7 +4,7 @@
  *
  * If the user has selected a static page for their homepage, this is what will
  * appear.
- * Learn more: https://codex.wordpress.org/Template_Hierarchy
+ * Learn more: https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
  * @package WordPress
  * @subpackage Twenty_Seventeen
@@ -50,7 +50,7 @@ get_header(); ?>
 			}
 
 	endif; // The if ( 0 !== twentyseventeen_panel_count() ) ends here.
-	?>
+		?>
 
 	</main><!-- #main -->
 </div><!-- #primary -->

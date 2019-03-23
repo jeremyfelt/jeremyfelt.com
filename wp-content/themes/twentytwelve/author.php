@@ -4,7 +4,7 @@
  *
  * Used to display archive-type pages for posts by an author.
  *
- * @link https://codex.wordpress.org/Template_Hierarchy
+ * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
  * @package WordPress
  * @subpackage Twenty_Twelve
@@ -45,7 +45,7 @@ get_header(); ?>
 			<?php
 			// If a user has filled out their description, show a bio on their entries.
 			if ( get_the_author_meta( 'description' ) ) :
-			?>
+				?>
 			<div class="author-info">
 				<div class="author-avatar">
 					<?php
@@ -71,7 +71,7 @@ get_header(); ?>
 			<?php
 			while ( have_posts() ) :
 				the_post();
-?>
+				?>
 				<?php get_template_part( 'content', get_post_format() ); ?>
 			<?php endwhile; ?>
 

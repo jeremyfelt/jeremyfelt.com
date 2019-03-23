@@ -2,7 +2,7 @@
 /**
  * The template for displaying Author archive pages
  *
- * @link https://codex.wordpress.org/Template_Hierarchy
+ * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
  * @package WordPress
  * @subpackage Twenty_Thirteen
@@ -48,7 +48,7 @@ get_header(); ?>
 			<?php
 			while ( have_posts() ) :
 				the_post();
-?>
+				?>
 				<?php get_template_part( 'content', get_post_format() ); ?>
 			<?php endwhile; ?>
 

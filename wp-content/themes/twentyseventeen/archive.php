@@ -2,7 +2,7 @@
 /**
  * The template for displaying archive pages
  *
- * @link https://codex.wordpress.org/Template_Hierarchy
+ * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
  * @package WordPress
  * @subpackage Twenty_Seventeen
@@ -28,7 +28,7 @@ get_header(); ?>
 
 		<?php
 		if ( have_posts() ) :
-		?>
+			?>
 			<?php
 			/* Start the Loop */
 			while ( have_posts() ) :
