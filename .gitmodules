@@ -10,3 +10,6 @@
 [submodule "wceu-2016"]
 	path = slides/2016/wceu
 	url = git@github.com:jeremyfelt/Multisite-Talk.git
+[submodule "sub-site/air"]
+	path = sub-site/air
+	url = git@github.com:jeremyfelt/air.jeremyfelt.com.git
