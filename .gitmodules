@@ -5,7 +5,7 @@
 	path = sub-site/tweets
 	url = git@github.com:jeremyfelt/tweets.jeremyfelt.com.git
 [submodule "loopconf"]
-	path = loopconf
+	path = slides/2015/loopconf
 	url = git@github.com:jeremyfelt/2015-loopconf.git
 [submodule "wceu-2016"]
 	path = wceu-2016
