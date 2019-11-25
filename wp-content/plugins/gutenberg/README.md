@@ -1,8 +1,8 @@
 # Gutenberg
 [![Build Status](https://img.shields.io/travis/com/WordPress/gutenberg/master.svg)](https://travis-ci.com/WordPress/gutenberg)
-[![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lernajs.io/)
+[![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lerna.js.org)
 
-![Screenshot of the Gutenberg Editor, editing a post in WordPress](https://cldup.com/H0oKBfpidk.png)
+![Screenshot of the Gutenberg Editor, editing a post in WordPress](https://cldup.com/R84R5fNgrI.png)
 
 This repo is the development hub for the <a href="https://make.wordpress.org/core/2017/01/04/focus-tech-and-design-leads/">editor focus in WordPress Core</a>. `Gutenberg` is the project name.
 
@@ -32,7 +32,6 @@ Here's why we're looking at the whole editing screen, as opposed to just the con
 4. **A fresh look at content creation.** Considering the whole interface lays a solid foundation for the next focus: full site customization.
 5. **Modern tooling.** Looking at the full editor screen also gives WordPress the opportunity to drastically modernize the foundation, and take steps towards a more fluid and JavaScript-powered future that fully leverages the WordPress REST API.
 
-![Writing in Gutenberg 1.6](https://make.wordpress.org/core/files/2017/10/gutenberg-typing-1_6.gif)
 
 ## Blocks
 
@@ -40,7 +39,7 @@ Blocks are the unifying evolution of what is now covered, in different ways, by 
 
 Imagine a custom `employee` block that a client can drag onto an `About` page to automatically display a picture, name, and bio of all the employees. Imagine a whole universe of plugins just as flexible, all extending WordPress in the same way. Imagine simplified menus and widgets. Users who can instantly understand and use WordPress—and 90% of plugins. This will allow you to easily compose beautiful posts like <a href="http://moc.co/sandbox/example-post/">this example</a>.
 
-Check out the <a href="https://wordpress.org/gutenberg/handbook/designers-developers/faq/">FAQ</a> for answers to the most common questions about the project.
+Check out the <a href="https://developer.wordpress.org/block-editor/contributors/faq/">FAQ</a> for answers to the most common questions about the project.
 
 ## Compatibility
 
@@ -71,9 +70,9 @@ Please see <a href="https://github.com/WordPress/gutenberg/blob/master/CONTRIBUT
 
 - <a href="http://matiasventura.com/post/gutenberg-or-the-ship-of-theseus/">Gutenberg, or the Ship of Theseus</a>, with examples of what Gutenberg might do in the future
 - <a href="https://make.wordpress.org/core/2017/01/17/editor-technical-overview/">Editor Technical Overview</a>
-- <a href="https://wordpress.org/gutenberg/handbook/contributors/design/">Design Principles and block design best practices</a>
+- <a href="https://developer.wordpress.org/block-editor/contributors/design/">Design Principles and block design best practices</a>
 - <a href="https://github.com/Automattic/wp-post-grammar">WP Post Grammar Parser</a>
 - <a href="https://make.wordpress.org/core/tag/gutenberg/">Development updates on make.wordpress.org</a>
-- <a href="https://wordpress.org/gutenberg/handbook/">Documentation: Creating Blocks, Reference, and Guidelines</a>
+- <a href="https://developer.wordpress.org/block-editor/">Documentation: Creating Blocks, Reference, and Guidelines</a>
 
 <br/><br/><p align="center"><img src="https://s.w.org/style/images/codeispoetry.png?1" alt="Code is Poetry." /></p>
