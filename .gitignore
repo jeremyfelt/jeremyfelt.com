@@ -3,6 +3,7 @@ remote-config.php
 wp-content/uploads
 wp-content/images
 wp-content/plugins/self-sustaining-spam-stopper
+wp-content/themes/writemore
 .DS_Store
 *.pyc
 .vagrant
