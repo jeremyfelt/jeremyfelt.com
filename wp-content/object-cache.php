@@ -279,6 +279,13 @@ function wp_cache_fetch_all() {
  * @return bool             Returns TRUE on success or FALSE on failure.
  */
 function wp_cache_flush( $delay = 0 ) {
+	$backtrace = debug_backtrace( DEBUG_BACKTRACE_IGNORE_ARGS, 1 );
+	$caller    = array_shift( $backtrace );
+	if ( 'cli' !== php_sapi_name() ) {
+		trigger_error( sprintf( 'wp_cache_flush() is only allowed via WP CLI. Called in %s line %d', $caller['file'], $caller['line'] ), E_USER_WARNING );
+		return false;
+	}
+	trigger_error( sprintf( 'wp_cache_flush() used, this is broadly not recommended. Called in %s line %d', $caller['file'], $caller['line'] ), E_USER_WARNING );
 	global $wp_object_cache;
 	return $wp_object_cache->flush( $delay );
 }
@@ -297,25 +304,19 @@ function wp_cache_flush( $delay = 0 ) {
  *
  * @param string        $key        The key under which to store the value.
  * @param string        $group      The group value appended to the $key.
+ * @param bool          $force      Whether or not to force a cache invalidation.
+ * @param null|bool     $found      Variable passed by reference to determine if the value was found or not.
  * @param null|string   $cache_cb   Read-through caching callback.
  * @param null|float    $cas_token  The variable to store the CAS token in.
  * @return bool|mixed               Cached object value.
  */
-function wp_cache_get( $key, $group = '', $cache_cb = null, &$cas_token = null ) {
+function wp_cache_get( $key, $group = '', $force = false, &$found = null, $cache_cb = null, &$cas_token = null ) {
 	global $wp_object_cache;
 
-	/**
-	 * Handles situations where the $force argument for the wp_cache_get function in core may be used. It is only
-	 * used once in all of WP Core and since the function does not do anything with it, it is pointless to support.
-	 * I'm catching the issue here to avoid conflicts.
-	 */
-	if ( true === $cache_cb )
-		$cache_cb = null;
-
-	if ( func_num_args() > 2 )
-		return $wp_object_cache->get( $key, $group, '', false, $cache_cb, $cas_token );
+	if ( func_num_args() > 4 )
+		return $wp_object_cache->get( $key, $group, $force, $found, '', false, $cache_cb, $cas_token );
 	else
-		return $wp_object_cache->get( $key, $group );
+		return $wp_object_cache->get( $key, $group, $force, $found );
 }
 
 /**
@@ -331,17 +332,19 @@ function wp_cache_get( $key, $group = '', $cache_cb = null, &$cas_token = null )
  * @param string        $server_key The key identifying the server to store the value on.
  * @param string        $key        The key under which to store the value.
  * @param string        $group      The group value appended to the $key.
+ * @param bool          $force      Whether or not to force a cache invalidation.
+ * @param null|bool     $found      Variable passed by reference to determine if the value was found or not.
  * @param null|string   $cache_cb   Read-through caching callback.
  * @param null|float    $cas_token  The variable to store the CAS token in.
  * @return bool|mixed               Cached object value.
  */
-function wp_cache_get_by_key( $server_key, $key, $group = '', $cache_cb = NULL, &$cas_token = NULL ) {
+function wp_cache_get_by_key( $server_key, $key, $group = '', $force = false, &$found = null, $cache_cb = NULL, &$cas_token = NULL ) {
 	global $wp_object_cache;
 
-	if ( func_num_args() > 3 )
-		return $wp_object_cache->getByKey( $server_key, $key, $group, $cache_cb, $cas_token );
+	if ( func_num_args() > 5 )
+		return $wp_object_cache->getByKey( $server_key, $key, $group, $force, $found, $cache_cb, $cas_token );
 	else
-		return $wp_object_cache->getByKey( $server_key, $key, $group );
+		return $wp_object_cache->getByKey( $server_key, $key, $group, $force, $found );
 }
 
 /**
@@ -717,6 +720,18 @@ function wp_cache_set_option( $option, $value ) {
 }
 
 /**
+ * Switch blog prefix, which changes the cache that is accessed.
+ *
+ * @param  int     $blog_id    Blog to switch to.
+ * @return void
+ */
+function wp_cache_switch_to_blog( $blog_id ) {
+	global $wp_object_cache;
+	return $wp_object_cache->switch_to_blog( $blog_id );
+}
+
+
+/**
  * Sets up Object Cache Global and assigns it.
  *
  * @global  WP_Object_Cache     $wp_object_cache    WordPress Object Cache
@@ -837,6 +852,10 @@ class WP_Object_Cache {
 			$this->global_prefix = ( is_multisite() || defined( 'CUSTOM_USER_TABLE' ) && defined( 'CUSTOM_USER_META_TABLE' ) ) ? '' : $table_prefix;
 			$this->blog_prefix = ( is_multisite() ? $blog_id : $table_prefix ) . ':';
 		}
+
+		// Setup cacheable values for handling expiration times
+		$this->thirty_days = 60 * 60 * 24 * 30;
+		$this->now         = time();
 	}
 
 	/**
@@ -856,7 +875,22 @@ class WP_Object_Cache {
 	 * @return  bool                        Returns TRUE on success or FALSE on failure.
 	 */
 	public function add( $key, $value, $group = 'default', $expiration = 0, $server_key = '', $byKey = false ) {
+		/*
+		 * Ensuring that wp_suspend_cache_addition is defined before calling, because sometimes an advanced-cache.php
+		 * file will load object-cache.php before wp-includes/functions.php is loaded. In those cases, if wp_cache_add
+		 * is called in advanced-cache.php before any more of WordPress is loaded, we get a fatal error because
+		 * wp_suspend_cache_addition will not be defined until wp-includes/functions.php is loaded.
+		 */
+		if ( function_exists( 'wp_suspend_cache_addition' ) && wp_suspend_cache_addition() ) {
+			return false;
+		}
+
+		if ( $key === 'alloptions' && $group === 'options' ) {
+			return $this->setAllOptions( $value );
+		}
+
 		$derived_key = $this->buildKey( $key, $group );
+		$expiration  = $this->sanitize_expiration( $expiration );
 
 		// If group is a non-Memcached group, save to runtime cache, not Memcached
 		if ( in_array( $group, $this->no_mc_groups ) ) {
@@ -1031,6 +1065,7 @@ class WP_Object_Cache {
 	 */
 	public function cas( $cas_token, $key, $value, $group = 'default', $expiration = 0, $server_key = '', $byKey = false ) {
 		$derived_key = $this->buildKey( $key, $group );
+		$expiration  = $this->sanitize_expiration( $expiration );
 
 		/**
 		 * If group is a non-Memcached group, save to runtime cache, not Memcached. Note
@@ -1044,9 +1079,9 @@ class WP_Object_Cache {
 
 		// Save to Memcached
 		if ( $byKey )
-			$result = $this->m->casByKey( $cas_token, $server_key, $derived_key, $value, absint( $expiration ) );
+			$result = $this->m->casByKey( $cas_token, $server_key, $derived_key, $value, $expiration );
 		else
-			$result = $this->m->cas( $cas_token, $derived_key, $value, absint( $expiration ) );
+			$result = $this->m->cas( $cas_token, $derived_key, $value, $expiration );
 
 		// Store in runtime cache if cas was successful
 		if ( Memcached::RES_SUCCESS === $this->getResultCode() )
@@ -1119,6 +1154,21 @@ class WP_Object_Cache {
 	}
 
 	/**
+	 * Decrement a numeric item's value.
+	 *
+	 * Alias for $this->decrement. Other caching backends use this abbreviated form of the function. It *may* cause
+	 * breakage somewhere, so it is nice to have. This function will also allow the core unit tests to pass.
+	 *
+	 * @param string    $key    The key under which to store the value.
+	 * @param int       $offset The amount by which to decrement the item's value.
+	 * @param string    $group  The group value appended to the $key.
+	 * @return int|bool         Returns item's new value on success or FALSE on failure.
+	 */
+	public function decr( $key, $offset = 1, $group = 'default' ) {
+		return $this->decrement( $key, $offset, $group );
+	}
+
+	/**
 	 * Remove the item from the cache.
 	 *
 	 * Remove an item from memcached with identified by $key after $time seconds. The
@@ -1136,6 +1186,10 @@ class WP_Object_Cache {
 	 * @return  bool                    Returns TRUE on success or FALSE on failure.
 	 */
 	public function delete( $key, $group = 'default', $time = 0, $server_key = '', $byKey = false ) {
+		if ( $key === 'alloptions' && $group === 'options' ) {
+			return $this->deleteAllOptions();
+		}
+
 		$derived_key = $this->buildKey( $key, $group );
 
 		// Remove from no_mc_groups array
@@ -1196,7 +1250,7 @@ class WP_Object_Cache {
 	 * @return  array|bool          Returns the results or FALSE on failure.
 	 */
 	public function fetchAll() {
-		return $this->m->fetchAll();
+	 	return $this->m->fetchAll();
 	}
 
 	/**
@@ -1233,23 +1287,33 @@ class WP_Object_Cache {
 	 *
 	 * @param   string          $key        The key under which to store the value.
 	 * @param   string          $group      The group value appended to the $key.
+	 * @param   bool            $force      Whether or not to force a cache invalidation.
+	 * @param   null|bool       $found      Variable passed by reference to determine if the value was found or not.
 	 * @param   string          $server_key The key identifying the server to store the value on.
 	 * @param   bool            $byKey      True to store in internal cache by key; false to not store by key
 	 * @param   null|callable   $cache_cb   Read-through caching callback.
 	 * @param   null|float      $cas_token  The variable to store the CAS token in.
 	 * @return  bool|mixed                  Cached object value.
 	 */
-	public function get( $key, $group = 'default', $server_key = '', $byKey = false, $cache_cb = NULL, &$cas_token = NULL ) {
+	public function get( $key, $group = 'default', $force = false, &$found = null, $server_key = '', $byKey = false, $cache_cb = NULL, &$cas_token = NULL ) {
+		if ( $key === 'alloptions' && $group === 'options' ) {
+			return $this->getAllOptions();
+		}
+
 		$derived_key = $this->buildKey( $key, $group );
 
+		// Assume object is not found
+		$found = false;
+
 		// If either $cache_db, or $cas_token is set, must hit Memcached and bypass runtime cache
-		if ( func_num_args() > 4 && ! in_array( $group, $this->no_mc_groups ) ) {
+		if ( func_num_args() > 6 && ! in_array( $group, $this->no_mc_groups ) ) {
 			if ( $byKey )
 				$value = $this->m->getByKey( $server_key, $derived_key, $cache_cb, $cas_token );
 			else
 				$value = $this->m->get( $derived_key, $cache_cb, $cas_token );
 		} else {
-			if ( isset( $this->cache[$derived_key] ) ) {
+			if ( isset( $this->cache[$derived_key] ) && ! $force ) {
+				$found = true;
 				return is_object( $this->cache[$derived_key] ) ? clone $this->cache[$derived_key] : $this->cache[$derived_key];
 			} elseif ( in_array( $group, $this->no_mc_groups ) ) {
 				return false;
@@ -1261,8 +1325,10 @@ class WP_Object_Cache {
 			}
 		}
 
-		if ( Memcached::RES_SUCCESS === $this->getResultCode() )
+		if ( Memcached::RES_SUCCESS === $this->getResultCode() ) {
 			$this->add_to_internal_cache( $derived_key, $value );
+			$found = true;
+		}
 
 		return is_object( $value ) ? clone $value : $value;
 	}
@@ -1284,19 +1350,21 @@ class WP_Object_Cache {
 	 * @param   string          $server_key The key identifying the server to store the value on.
 	 * @param   string          $key        The key under which to store the value.
 	 * @param   string          $group      The group value appended to the $key.
+	 * @param   bool            $force      Whether or not to force a cache invalidation.
+	 * @param   null|bool       $found      Variable passed by reference to determine if the value was found or not.
 	 * @param   null|string     $cache_cb   Read-through caching callback.
 	 * @param   null|float      $cas_token  The variable to store the CAS token in.
 	 * @return  bool|mixed                  Cached object value.
 	 */
-	public function getByKey( $server_key, $key, $group = 'default', $cache_cb = NULL, &$cas_token = NULL ) {
+	public function getByKey( $server_key, $key, $group = 'default', $force = false, &$found = null, $cache_cb = NULL, &$cas_token = NULL ) {
 		/**
 		 * Need to be careful how "get" is called. If you send $cache_cb, and $cas_token, it will hit memcached.
 		 * Only send those args if they were sent to this function.
 		 */
-		if ( func_num_args() > 3 )
-			return $this->get( $key, $group, $server_key, true, $cache_cb, $cas_token );
+		if ( func_num_args() > 5 )
+			return $this->get( $key, $group, $force, $found, $server_key, true, $cache_cb, $cas_token );
 		else
-			return $this->get( $key, $group, $server_key, true );
+			return $this->get( $key, $group, $force, $found, $server_key, true );
 	}
 
 	/**
@@ -1429,6 +1497,127 @@ class WP_Object_Cache {
 	}
 
 	/**
+	 * Get the "alloptions" special value.
+	 *
+	 * WordPress stores all options under a single memcached key, which can lead to
+	 * race conditions with other updates in other threads. Therefore, we override
+	 * WordPress behaviour and store each option it it's own memcached object, and use
+	 * a secondary object "alloptionskeys" to store all the different keys, this allows
+	 * us to fetch all of the options keys at once using getMulti().
+	 *
+	 * @return array
+	 */
+	public function getAllOptions() {
+		// Check our internal cache, to avoid the more expensive get-multi
+		$key = $this->buildKey( 'alloptions', 'options' );
+		if ( isset( $this->cache[ $key ] ) ) {
+			return $this->cache[ $key ];
+		}
+
+		// On a cold cache, this will be empty and throw a notice if passed to array_keys below
+		$alloptionskeys = $this->get( 'alloptionskeys', 'options' );
+		if ( ! $alloptionskeys ) {
+			return array();
+		}
+
+		$keys = array_keys( $alloptionskeys );
+		if ( empty( $keys ) ) {
+			return array();
+		}
+
+		$data = $this->getMulti( $keys, 'options' );
+
+		if ( empty( $data ) ) {
+			return array();
+		}
+
+		// getMulti returns a map of `[ cache_key => value ]` but we need to
+		// return a map of `[ option_name => value ]`
+		// Merging data from cache server and keys
+		// We cannot simply do a 'array_combine' on the returned $data with $keys since in a multi nodes environment, it might not return the data in order as the order of the keys passed in.
+		// For example: keys = array("a", "b", "c"), data returned = array("a" => "valueA", "c" => "valueC", "b" => "valueB")
+		// An array_combine would return array("a" => "valueA", "b" => "valueC", "c" => "valueB")
+		// Hence, it is important to get the correct value for a specific key.
+		$retData = array();
+		foreach ( $keys as $optionKey ) {
+			$derivedKey = $this->buildKey( $optionKey, 'options' );
+			if ( isset( $data[ $derivedKey ] ) ) {
+				$retData[ $optionKey ] = $data[ $derivedKey ];
+			}
+		}
+
+		$this->cache[ $key ] = $retData;
+
+		return $retData;
+	}
+
+	/**
+	 * Update the "alloptions" special key.
+	 *
+	 * This will cause a set on each option value as each option gets it's own
+	 * memcached object, these are then all tied together in the "alloptionskeys"
+	 * object.
+	 *
+	 * @param bool
+	 */
+	public function setAllOptions( $data ) {
+		$internal_cache_key = $this->buildKey( 'alloptions', 'options' );
+		$existing = $internal_cache = $this->getAllOptions();
+
+		$keys = $this->get( 'alloptionskeys', 'options' );
+		if ( empty( $keys ) ) {
+			$keys = array();
+		}
+		// While you could use array_diff here, it ends up being a bit more
+		// complicated than just checking
+		foreach ( $data as $key => $value ) {
+			if ( isset( $existing[ $key ] ) && $existing[ $key ] === $value ) {
+				continue;
+			}
+			if ( ! isset( $keys[ $key ] ) ) {
+				$keys[ $key ] = true;
+			}
+			if ( ! $this->set( $key, $value, 'options' ) ) {
+				return false;
+			}
+
+			$internal_cache[ $key ] = $value;
+		}
+		// Remove deleted elements
+		foreach ( $existing as $key => $value ) {
+			if ( isset( $data[ $key ] ) ) {
+				continue;
+			}
+			if ( isset( $keys[ $key ] ) ) {
+				unset( $keys[ $key ] );
+			}
+			if ( ! $this->delete( $key, 'options' ) ) {
+				return false;
+			}
+
+			unset( $internal_cache[ $key ] );
+		}
+		if ( ! $this->set( 'alloptionskeys', $keys, 'options' ) ) {
+			return false;
+		}
+
+		$this->cache[ $internal_cache_key ] = $internal_cache;
+
+		return true;
+	}
+
+	/**
+	 * Delete the "alloptions" special key.
+	 *
+	 * @return bool
+	 */
+	public function deleteAllOptions() {
+		$key = $this->buildKey( 'alloptions', 'options' );
+		$this->cache[ $key ] = array();
+		return $this->delete( 'alloptionskeys', 'options' );
+	}
+
+	/**
 	 * Retrieve a Memcached option value.
 	 *
 	 * @link http://www.php.net/manual/en/memcached.getoption.php
@@ -1448,7 +1637,7 @@ class WP_Object_Cache {
 	 * @return  int     Result code of the last Memcached operation.
 	 */
 	public function getResultCode() {
-		return $this->m->getResultCode();
+ 		return $this->m->getResultCode();
 	}
 
 	/**
@@ -1459,7 +1648,7 @@ class WP_Object_Cache {
 	 * @return  string      Message describing the result of the last Memcached operation.
 	 */
 	public function getResultMessage() {
-        return $this->m->getResultMessage();
+   		return $this->m->getResultMessage();
 	}
 
 	/**
@@ -1548,6 +1737,22 @@ class WP_Object_Cache {
 			$this->add_to_internal_cache( $derived_key, $result );
 
 		return $result;
+	}
+
+	/**
+	 * Synonymous with $this->incr.
+	 *
+	 * Certain plugins expect an "incr" method on the $wp_object_cache object (e.g., Batcache). Since the original
+	 * version of this library matched names to the memcached methods, the "incr" method was missing. Adding this
+	 * method restores compatibility with plugins expecting an "incr" method.
+	 *
+	 * @param   string      $key        The key under which to store the value.
+	 * @param   int         $offset     The amount by which to increment the item's value.
+	 * @param   string      $group      The group value appended to the $key.
+	 * @return  int|bool                Returns item's new value on success or FALSE on failure.
+	 */
+	public function incr( $key, $offset = 1, $group = 'default' ) {
+		return $this->increment( $key, $offset, $group );
 	}
 
 	/**
@@ -1642,6 +1847,7 @@ class WP_Object_Cache {
 	 */
 	public function replace( $key, $value, $group = 'default', $expiration = 0, $server_key = '', $byKey = false ) {
 		$derived_key = $this->buildKey( $key, $group );
+		$expiration  = $this->sanitize_expiration( $expiration );
 
 		// If group is a non-Memcached group, save to runtime cache, not Memcached
 		if ( in_array( $group, $this->no_mc_groups ) ) {
@@ -1656,9 +1862,9 @@ class WP_Object_Cache {
 
 		// Save to Memcached
 		if ( $byKey )
-			$result = $this->m->replaceByKey( $server_key, $derived_key, $value, absint( $expiration ) );
+			$result = $this->m->replaceByKey( $server_key, $derived_key, $value, $expiration );
 		else
-			$result = $this->m->replace( $derived_key, $value, absint( $expiration ) );
+			$result = $this->m->replace( $derived_key, $value, $expiration );
 
 		// Store in runtime cache if add was successful
 		if ( Memcached::RES_SUCCESS === $this->getResultCode() )
@@ -1703,6 +1909,7 @@ class WP_Object_Cache {
 	 */
 	public function set( $key, $value, $group = 'default', $expiration = 0, $server_key = '', $byKey = false ) {
 		$derived_key = $this->buildKey( $key, $group );
+		$expiration  = $this->sanitize_expiration( $expiration );
 
 		// If group is a non-Memcached group, save to runtime cache, not Memcached
 		if ( in_array( $group, $this->no_mc_groups ) ) {
@@ -1710,11 +1917,16 @@ class WP_Object_Cache {
 			return true;
 		}
 
+		if ( $key === 'alloptions' && $group === 'options' ) {
+			return $this->setAllOptions( $value );
+		}
+
 		// Save to Memcached
-		if ( $byKey )
-			$result = $this->m->setByKey( $server_key, $derived_key, $value, absint( $expiration ) );
-		else
-			$result = $this->m->set( $derived_key, $value, absint( $expiration ) );
+		if ( $byKey ) {
+			$result = $this->m->setByKey( $server_key, $derived_key, $value, $expiration );
+		} else {
+			$result = $this->m->set( $derived_key, $value, $expiration );
+		}
 
 		// Store in runtime cache if add was successful
 		if ( Memcached::RES_SUCCESS === $this->getResultCode() )
@@ -1761,7 +1973,8 @@ class WP_Object_Cache {
 	 */
 	public function setMulti( $items, $groups = 'default', $expiration = 0, $server_key = '', $byKey = false ) {
 		// Build final keys and replace $items keys with the new keys
-		$derived_keys = $this->buildKeys( array_keys( $items ), $groups );
+		$derived_keys  = $this->buildKeys( array_keys( $items ), $groups );
+		$expiration    = $this->sanitize_expiration( $expiration );
 		$derived_items = array_combine( $derived_keys, $items );
 
 		// Do not add to memcached if in no_mc_groups
@@ -1779,9 +1992,9 @@ class WP_Object_Cache {
 
 		// Save to memcached
 		if ( $byKey )
-			$result = $this->m->setMultiByKey( $server_key, $derived_items, absint( $expiration ) );
+			$result = $this->m->setMultiByKey( $server_key, $derived_items, $expiration );
 		else
-			$result = $this->m->setMulti( $derived_items, absint( $expiration ) );
+			$result = $this->m->setMulti( $derived_items, $expiration );
 
 		// Store in runtime cache if add was successful
 		if ( Memcached::RES_SUCCESS === $this->getResultCode() )
@@ -1894,6 +2107,24 @@ class WP_Object_Cache {
 	}
 
 	/**
+	 * Ensure that a proper expiration time is set.
+	 *
+	 * Memcached treats any value over 30 days as a timestamp. If a developer sets the expiration for greater than 30
+	 * days or less than the current timestamp, the timestamp is in the past and the value isn't cached. This function
+	 * detects values in that range and corrects them.
+	 *
+	 * @param  string|int    $expiration    The dirty expiration time.
+	 * @return string|int                   The sanitized expiration time.
+	 */
+	public function sanitize_expiration( $expiration ) {
+		if ( $expiration > $this->thirty_days && $expiration <= $this->now ) {
+			$expiration = $expiration + $this->now;
+		}
+
+		return $expiration;
+	}
+
+	/**
 	 * Concatenates two values and casts to type of the first value.
 	 *
 	 * This is used in append and prepend operations to match how these functions are handled
@@ -1927,6 +2158,10 @@ class WP_Object_Cache {
 	 * @param   mixed       $value          Object value.
 	 */
 	public function add_to_internal_cache( $derived_key, $value ) {
+		if ( is_object( $value ) ) {
+			$value = clone $value;
+		}
+
 		$this->cache[$derived_key] = $value;
 	}
 
@@ -1999,5 +2234,17 @@ class WP_Object_Cache {
 			return $this->cache[$derived_key];
 
 		return false;
+	}
+
+	/**
+	 * Switch blog prefix, which changes the cache that is accessed.
+	 *
+	 * @param  int     $blog_id    Blog to switch to.
+	 * @return void
+	 */
+	public function switch_to_blog( $blog_id ) {
+		global $table_prefix;
+		$blog_id           = (int) $blog_id;
+		$this->blog_prefix = ( is_multisite() ? $blog_id : $table_prefix ) . ':';
 	}
 }
