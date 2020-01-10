@@ -1,5 +1,5 @@
 .idea
-remote-config.php
+wp-config.php
 wp-content/uploads
 wp-content/images
 wp-content/plugins/self-sustaining-spam-stopper
