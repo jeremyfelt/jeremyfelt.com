@@ -1,6 +1,3 @@
-[submodule "www/wordpress"]
-	path = wordpress
-	url = git://core.git.wordpress.org/
 [submodule "tweets"]
 	path = sub-site/tweets
 	url = git@github.com:jeremyfelt/tweets.jeremyfelt.com.git
