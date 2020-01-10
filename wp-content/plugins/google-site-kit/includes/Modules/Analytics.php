@@ -221,6 +221,7 @@ final class Analytics extends Module implements Module_With_Screen, Module_With_
 
 		$info['settings']                     = $this->get_data( 'connection' );
 		$info['settings']['useSnippet']       = $this->get_data( 'use-snippet' );
+		$info['settings']['anonymizeIP']      = $this->get_data( 'anonymize-ip' );
 		$info['settings']['ampClientIDOptIn'] = $this->get_data( 'amp-client-id-opt-in' );
 		$info['settings']['trackingDisabled'] = $this->get_data( 'tracking-disabled' );
 
@@ -270,8 +271,7 @@ final class Analytics extends Module implements Module_With_Screen, Module_With_
 	 */
 	protected function enqueue_gtag_js() {
 		// Bail early if we are checking for the tag presence from the back end.
-		$tag_verify = ! empty( $_GET['tagverify'] ) ? true : false; // phpcs:ignore WordPress.Security.NonceVerification.NoNonceVerification
-		if ( $tag_verify ) {
+		if ( $this->context->input()->filter( INPUT_GET, 'tagverify', FILTER_VALIDATE_BOOLEAN ) ) {
 			return;
 		}
 
@@ -312,7 +312,13 @@ final class Analytics extends Module implements Module_With_Screen, Module_With_
 
 		$amp_client_id_optin = $this->get_data( 'amp-client-id-opt-in' );
 		if ( ! is_wp_error( $amp_client_id_optin ) && $amp_client_id_optin ) {
-			$gtag_opt = array( 'useAmpClientId' => true );
+			$gtag_opt['useAmpClientId'] = true;
+		}
+
+		$anonymize_ip = $this->get_data( 'anonymize-ip' );
+		if ( ! is_wp_error( $anonymize_ip ) && $anonymize_ip ) {
+			// See https://developers.google.com/analytics/devguides/collection/gtagjs/ip-anonymization.
+			$gtag_opt['anonymize_ip'] = true;
 		}
 
 		/**
@@ -348,8 +354,7 @@ final class Analytics extends Module implements Module_With_Screen, Module_With_
 	 */
 	protected function print_amp_gtag() {
 		// Bail early if we are checking for the tag presence from the back end.
-		$tag_verify = ! empty( $_GET['tagverify'] ) ? true : false; // phpcs:ignore WordPress.Security.NonceVerification.NoNonceVerification
-		if ( $tag_verify ) {
+		if ( $this->context->input()->filter( INPUT_GET, 'tagverify', FILTER_VALIDATE_BOOLEAN ) ) {
 			return;
 		}
 
@@ -489,6 +494,7 @@ final class Analytics extends Module implements Module_With_Screen, Module_With_
 			'amp-client-id-opt-in'         => '',
 			'tracking-disabled'            => '',
 			// GET.
+			'anonymize-ip'                 => '',
 			'goals'                        => 'analytics',
 			'accounts-properties-profiles' => 'analytics',
 			'properties-profiles'          => 'analytics',
@@ -627,6 +633,12 @@ final class Analytics extends Module implements Module_With_Screen, Module_With_
 							return new WP_Error( 'internal_web_property_id_not_set', __( 'Analytics internal web property ID not set.', 'google-site-kit' ), array( 'status' => 404 ) );
 						}
 						return $option['internalWebPropertyID'];
+					};
+				case 'anonymize-ip':
+					return function() {
+						$default = true;
+						$option  = (array) $this->options->get( self::OPTION );
+						return isset( $option['anonymizeIP'] ) ? (bool) $option['anonymizeIP'] : $default;
 					};
 				case 'use-snippet':
 					return function() {
@@ -1027,6 +1039,7 @@ final class Analytics extends Module implements Module_With_Screen, Module_With_
 							'internalWebPropertyID' => $internal_web_property_id,
 							'profileID'             => $profile_id,
 							'useSnippet'            => ! empty( $data['useSnippet'] ),
+							'anonymizeIP'           => (bool) $data['anonymizeIP'],
 							'ampClientIDOptIn'      => ! empty( $data['ampClientIDOptIn'] ),
 							'trackingDisabled'      => (array) $data['trackingDisabled'],
 						);
