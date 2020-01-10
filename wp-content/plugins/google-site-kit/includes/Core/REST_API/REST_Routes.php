@@ -392,12 +392,20 @@ final class REST_Routes {
 				'data',
 				array(
 					array(
-						'methods'             => WP_REST_Server::READABLE,
+						'methods'             => WP_REST_Server::CREATABLE,
 						'callback'            => function( WP_REST_Request $request ) {
-							$datasets = json_decode( $request['request'] );
-							if ( ! $datasets || empty( $datasets ) ) {
+							if ( ! $request['request'] ) {
 								return new WP_Error( 'no_data_requested', __( 'Missing request data.', 'google-site-kit' ), array( 'status' => 400 ) );
 							}
+
+							// Datasets are expected to be objects but the REST API parses the JSON into an array.
+							$datasets = array_map(
+								function ( $dataset_array ) {
+									return (object) $dataset_array;
+								},
+								$request['request']
+							);
+
 							$modules   = $this->modules->get_active_modules();
 							$responses = array();
 							foreach ( $modules as $module ) {
@@ -420,9 +428,12 @@ final class REST_Routes {
 						'permission_callback' => $can_view_insights_cron,
 						'args'                => array(
 							'request' => array(
-								'type'        => 'string',
-								'description' => __( 'JSON-encoded list of request objects.', 'google-site-kit' ),
+								'type'        => 'array',
+								'description' => __( 'List of request objects.', 'google-site-kit' ),
 								'required'    => true,
+								'items'       => array(
+									'type' => 'object',
+								),
 							),
 						),
 					),
@@ -465,49 +476,6 @@ final class REST_Routes {
 					),
 				)
 			),
-			new REST_Route(
-				'oauth/site',
-				array(
-					array(
-						'methods'  => WP_REST_Server::CREATABLE,
-						'callback' => function( WP_REST_Request $request ) {
-							$auth_client = $this->authentication->get_oauth_client();
-							if ( ! $auth_client->using_proxy() ) {
-								return new WP_Error( 'invalid_authentication_mode', __( 'Invalid authentication mode.', 'google-site-kit' ), array( 'status' => 500 ) );
-							}
-							if ( ! $auth_client->validate_proxy_nonce( $request['nonce'] ) ) {
-								return new WP_Error( 'invalid_nonce', __( 'Invalid nonce.', 'google-site-kit' ), array( 'status' => 400 ) );
-							}
-							$data = array(
-								'oauth2_client_id'     => sanitize_text_field( $request['site_id'] ),
-								'oauth2_client_secret' => sanitize_text_field( $request['site_secret'] ),
-							);
-							$credentials = $this->authentication->credentials();
-							if ( ! $credentials->set( $data ) ) {
-								return new WP_Error( 'set_credentials_failed', __( 'Failed to set credentials.', 'google-site-kit' ), array( 'status' => 500 ) );
-							}
-							return new WP_REST_Response( array( 'status' => true ), 200 );
-						},
-						'args'     => array(
-							'nonce'       => array(
-								'type'        => 'string',
-								'description' => __( 'WordPress nonce for the authentication proxy setup.', 'google-site-kit' ),
-								'required'    => true,
-							),
-							'site_id'     => array(
-								'type'        => 'string',
-								'description' => __( 'Site ID for the authentication proxy.', 'google-site-kit' ),
-								'required'    => true,
-							),
-							'site_secret' => array(
-								'type'        => 'string',
-								'description' => __( 'Site secret for the authentication proxy.', 'google-site-kit' ),
-								'required'    => true,
-							),
-						),
-					),
-				)
-			),
 			// TODO: Remove this and replace usage with calls to wp/v1/posts.
 			new REST_Route(
 				'core/search/data/post-search',
@@ -524,7 +492,12 @@ final class REST_Routes {
 									home_url(),
 									$query
 								);
-								$post_id = url_to_postid( $query_url );
+								if ( function_exists( 'wpcom_vip_url_to_postid' ) ) {
+									$post_id = wpcom_vip_url_to_postid( $query_url );
+								} else {
+									// phpcs:ignore WordPressVIPMinimum.VIP.RestrictedFunctions
+									$post_id = url_to_postid( $query_url );
+								}
 								$posts   = array_filter( array( WP_Post::get_instance( $post_id ) ) );
 							} else {
 								$args = array(

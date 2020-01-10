@@ -3,7 +3,7 @@
  * Plugin Name:  Syntax-highlighting Code Block (with Server-side Rendering)
  * Plugin URI:   https://github.com/westonruter/syntax-highlighting-code-block
  * Description:  Extending the Code block with syntax highlighting rendered on the server, thus being AMP-compatible and having faster frontend performance.
- * Version:      1.1.2
+ * Version:      1.1.3
  * Author:       Weston Ruter
  * Author URI:   https://weston.ruter.net/
  * License:      GPL2
@@ -16,7 +16,7 @@
 
 namespace Syntax_Highlighting_Code_Block;
 
-const PLUGIN_VERSION = '1.1.2';
+const PLUGIN_VERSION = '1.1.3';
 
 const DEVELOPMENT_MODE = false;
 
@@ -205,7 +205,7 @@ function render_block( $attributes, $content ) {
 		if ( false === strpos( $after_styles, '.hljs.line-numbers' ) ) {
 			wp_add_inline_style(
 				FRONTEND_STYLE_HANDLE,
-				file_get_contents( plugins_url( 'line-numbers.css', __FILE__ ) ) // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
+				file_get_contents( __DIR__ . '/line-numbers.css' ) // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
 			);
 		}
 	}

@@ -203,8 +203,7 @@ final class AdSense extends Module implements Module_With_Screen, Module_With_Sc
 	protected function output_adsense_script() {
 
 		// Bail early if we are checking for the tag presence from the back end.
-		$tag_verify = ! empty( $_GET['tagverify'] ) ? true : false; // phpcs:ignore WordPress.Security.NonceVerification.NoNonceVerification
-		if ( $tag_verify ) {
+		if ( $this->context->input()->filter( INPUT_GET, 'tagverify', FILTER_VALIDATE_BOOLEAN ) ) {
 			return;
 		}
 
@@ -641,7 +640,14 @@ tag_partner: "site_kit"
 						$option                  = (array) $this->options->get( self::OPTION );
 						$option['setupComplete'] = true;
 						$option['clientID']      = $data['clientID'];
-						$option['useSnippet']    = ! empty( $data['useSnippet'] );
+						$option['useSnippet']    = isset( $option['useSnippet'] ) ? true : $data['useSnippet'];
+
+						// Set useSnippet explicitly using $data param, otherwise default to true if not set in option.
+						if ( isset( $data['useSnippet'] ) ) {
+							$option['useSnippet'] = $data['useSnippet'];
+						} elseif ( ! isset( $option['useSnippet'] ) ) {
+							$option['useSnippet'] = true;
+						}
 
 						$this->options->set( self::OPTION, $option );
 
