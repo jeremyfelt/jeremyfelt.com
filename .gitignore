@@ -1,12 +1,20 @@
-.idea
-wp-config.php
-wp-content/uploads
-wp-content/images
-wp-content/plugins/self-sustaining-spam-stopper
-wp-content/themes/writemore
-.DS_Store
-*.pyc
-.vagrant
-*.sublime*
+# Root WordPress files.
+/index.php
+/license.txt
+/readme.html
+/wp-*.php
+/xmlrpc.php
+
+# Root WordPress directories.
+/wp-admin/
+/wp-includes/
+
+# Specific pieces of wp-content directory.
+/wp-content/uploads
+/wp-content/images
+/wp-content/plugins/self-sustaining-spam-stopper
+/wp-content/themes/writemore
+
+# Backups that may frequently appear locally.
 *.sql
 *.sql.gz
