@@ -2,8 +2,8 @@
 Contributors: automattic, andy, orensol, markjaquith, vnsavage, batmoo, yoavf
 Tags: cache, memcache, memcached, speed, performance, load, server
 Requires at least: 3.2
-Tested up to: 3.5
-Stable tag: 1.2
+Tested up to: 5.3.2
+Stable tag: 1.5
 
 Batcache uses Memcached to store and serve rendered pages.
 
@@ -58,11 +58,27 @@ Actually all of WordPress.com stays up during Apple events because of Batcache. 
 
 = What does it have to do with bats? =
 
-Batcache was named "supercache" when it was written. (It's still called that on WordPress.com.) A few months later, while "supercache" was still private, Donncha released the WP-Super-Cache plugin. It wouldn't be fun to dispute the name or create confusion for users so a name change seemed best. The move from "Super" to "Bat" was inspired by comic book heroes. It has nothing to do with the fact that the author's city is home to the [world's largest urban bat colony](http://www.batcon.org/home/index.asp?idPage=122).
+Batcache was named "supercache" when it was written. (It's still called that on WordPress.com.) A few months later, while "supercache" was still private, Donncha released the WP-Super-Cache plugin. It wouldn't be fun to dispute the name or create confusion for users so a name change seemed best. The move from "Super" to "Bat" was inspired by comic book heroes. It has nothing to do with the fact that the author's city is home to the [world's largest urban bat colony](http://www.batcon.org/our-work/regions/usa-canada/protect-mega-populations/cab-intro).
 
 == Changelog ==
 
-= trunk =
+= 1.5 =
+
+* Add stats for cache hits
+* PHP 4 constructors are deprecated in PHP7
+* Removed "HTTP_RAW_POST_DATA" variable replaced with input stream check
+* Use Plugins API rather than the global variable
+* Set page gen time to request start if possible
+* Don't use get_post() when cleaning post cache, use already passed $post object
+* Only cache GET or HEAD
+* Add Opt-in CORS GET request cache.
+= 1.4 =
+* Misc updates
+
+= 1.3 =
+* Code cleanup, multi-dc support improvements
+
+= 1.2 =
 * Add REQUEST_METHOD to the cache keys. Prevents GET requests receiving bodyless HEAD responses. This change invalidates the entire cache at upgrade time.
 
 = 1.1 =
