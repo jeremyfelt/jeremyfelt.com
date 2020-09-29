@@ -6,5 +6,5 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'b6ec61354e97f32c0ae683041c78392a' => $vendorDir . '/scrivo/highlight.php/HighlightUtilities/functions.php',
+    'b6ec61354e97f32c0ae683041c78392a' => $vendorDir . '/scrivo/highlight-php/HighlightUtilities/functions.php',
 );

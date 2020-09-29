@@ -7,7 +7,7 @@ namespace Composer\Autoload;
 class ComposerStaticInitf8c964aabb28630065894a26e503fa5c
 {
     public static $files = array (
-        'b6ec61354e97f32c0ae683041c78392a' => __DIR__ . '/..' . '/scrivo/highlight.php/HighlightUtilities/functions.php',
+        'b6ec61354e97f32c0ae683041c78392a' => __DIR__ . '/..' . '/scrivo/highlight-php/HighlightUtilities/functions.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -29,11 +29,11 @@ class ComposerStaticInitf8c964aabb28630065894a26e503fa5c
         array (
             'Highlight\\' => 
             array (
-                0 => __DIR__ . '/..' . '/scrivo/highlight.php',
+                0 => __DIR__ . '/..' . '/scrivo/highlight-php',
             ),
             'HighlightUtilities\\' => 
             array (
-                0 => __DIR__ . '/..' . '/scrivo/highlight.php',
+                0 => __DIR__ . '/..' . '/scrivo/highlight-php',
             ),
         ),
     );
