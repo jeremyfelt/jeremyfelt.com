@@ -33,7 +33,7 @@ class Webmention_Receiver {
 		add_filter( 'webmention_comment_data', array( 'Webmention_Receiver', 'default_title_filter' ), 21, 1 );
 		add_filter( 'webmention_comment_data', array( 'Webmention_Receiver', 'default_content_filter' ), 22, 1 );
 
-		add_filter( 'webmention_comment_data', array( 'Webmention_Receiver', 'auto_approve' ), 13, 1 );
+		add_filter( 'pre_comment_approved', array( 'Webmention_Receiver', 'auto_approve' ), 11, 2 );
 
 		// Allow for avatars on webmention comment types
 		if ( 0 !== (int) get_option( 'webmention_avatars', 1 ) ) {
@@ -147,12 +147,15 @@ class Webmention_Receiver {
 			'/endpoint',
 			array(
 				array(
-					'methods'  => WP_REST_Server::CREATABLE,
-					'callback' => array( 'Webmention_Receiver', 'post' ),
+					'methods'             => WP_REST_Server::CREATABLE,
+					'callback'            => array( 'Webmention_Receiver', 'post' ),
+					'args'                => self::request_parameters(),
+					'permission_callback' => '__return_true',
 				),
 				array(
-					'methods'  => WP_REST_Server::READABLE,
-					'callback' => array( 'Webmention_Receiver', 'get' ),
+					'methods'             => WP_REST_Server::READABLE,
+					'callback'            => array( 'Webmention_Receiver', 'get' ),
+					'permission_callback' => '__return_true',
 				),
 			)
 		);
@@ -232,19 +235,9 @@ class Webmention_Receiver {
 	 * @uses apply_filters calls "webmention_success_message" on the success message
 	 */
 	public static function post( $request ) {
-		$params = array_filter( $request->get_params() );
-
-		if ( ! isset( $params['source'] ) ) {
-			return new WP_Error( 'source_missing', esc_html__( 'Source is missing', 'webmention' ), array( 'status' => 400 ) );
-		}
-
-		$source = urldecode( $params['source'] );
-
-		if ( ! isset( $params['target'] ) ) {
-			return new WP_Error( 'target_missing', esc_html__( 'Target is missing', 'webmention' ), array( 'status' => 400 ) );
-		}
-
-		$target = urldecode( $params['target'] );
+		$source = $request->get_param( 'source' );
+		$target = $request->get_param( 'target' );
+		$vouch  = $request->get_param( 'vouch' );
 
 		if ( ! stristr( $target, preg_replace( '/^https?:\/\//i', '', home_url() ) ) ) {
 			return new WP_Error( 'target_mismatching_domain', esc_html__( 'Target is not on this domain', 'webmention' ), array( 'status' => 400 ) );
@@ -280,7 +273,7 @@ class Webmention_Receiver {
 		$comment_meta['webmention_created_at'] = $comment_date_gmt;
 		$comment_meta['protocol']              = 'webmention';
 
-		if ( isset( $params['vouch'] ) ) {
+		if ( $vouch ) {
 			// If there is a vouch pass it along
 			$vouch = urldecode( $params['vouch'] );
 			// Safely store a version of the data
@@ -290,10 +283,7 @@ class Webmention_Receiver {
 		// change this if your theme can't handle the Webmentions comment type
 		$comment_type = WEBMENTION_COMMENT_TYPE;
 
-		// change this if you want to auto approve your Webmentions
-		$comment_approved = WEBMENTION_COMMENT_APPROVE;
-
-		$commentdata = compact( 'comment_type', 'comment_approved', 'comment_agent', 'comment_date', 'comment_date_gmt', 'comment_meta', 'source', 'target', 'vouch' );
+		$commentdata = compact( 'comment_type', 'comment_agent', 'comment_date', 'comment_date_gmt', 'comment_meta', 'source', 'target', 'vouch' );
 
 		$commentdata['comment_post_ID']   = $comment_post_id;
 		$commentdata['comment_author_IP'] = $comment_author_ip;
@@ -413,6 +403,26 @@ class Webmention_Receiver {
 		return new WP_REST_Response( $return, 200 );
 	}
 
+	public static function request_parameters() {
+		$params = array();
+
+		$params['source'] = array(
+			'required'          => true,
+			'type'              => 'string',
+			'validate_callback' => 'wp_http_validate_url',
+			'sanitize_callback' => 'esc_url_raw',
+		);
+
+		$params['target'] = array(
+			'required'          => true,
+			'type'              => 'string',
+			'validate_callback' => 'wp_http_validate_url',
+			'sanitize_callback' => 'esc_url_raw',
+		);
+
+		return $params;
+	}
+
 	/**
 	 * Verify a webmention and either return an error if not verified or return the array with retrieved
 	 * data.
@@ -441,90 +451,16 @@ class Webmention_Receiver {
 			return new WP_Error( 'invalid_data', esc_html__( 'Invalid data passed', 'webmention' ), array( 'status' => 500 ) );
 		}
 
-		$wp_version = get_bloginfo( 'version' );
+		$request = new Webmention_Request();
+		$return  = $request->fetch( $data['source'] );
 
-		$user_agent = apply_filters( 'http_headers_useragent', 'WordPress/' . $wp_version . '; ' . get_bloginfo( 'url' ) );
-		$args       = array(
-			'timeout'             => 100,
-			'limit_response_size' => 153600,
-			'redirection'         => 20,
-			'user-agent'          => "$user_agent; verifying Webmention from " . $data['comment_author_IP'],
-		);
-
-		$response = wp_safe_remote_get( $data['source'], $args );
-
-		// check if source is accessible
-		if ( is_wp_error( $response ) ) {
-			return new WP_Error(
-				'source_not_found',
-				esc_html__( 'Source URL not found', 'webmention' ),
-				array(
-					'status' => 400,
-					'data'   => $data,
-				)
-			);
+		if ( is_wp_error( $return ) ) {
+			return $return;
 		}
-
-		// A valid response code from the other server would not be considered an error.
-		$response_code = wp_remote_retrieve_response_code( $response );
-		// not an (x)html, sgml, or xml page, no use going further
-		if ( preg_match( '#(image|audio|video|model)/#is', wp_remote_retrieve_header( $response, 'content-type' ) ) ) {
-			return new WP_Error(
-				'unsupported_content_type',
-				esc_html__( 'Content Type is not supported', 'webmention' ),
-				array(
-					'status' => 400,
-					'data'   => $data,
-				)
-			);
-		}
-
-		switch ( $response_code ) {
-			case 200:
-				$response = wp_safe_remote_get( $data['source'], $args );
-				break;
-			case 404:
-				return new WP_Error(
-					'resource_not_found',
-					esc_html__( 'Resource not found', 'webmention' ),
-					array(
-						'status' => 400,
-						'data'   => $data,
-					)
-				);
-			case 410:
-				return new WP_Error(
-					'resource_deleted',
-					esc_html__( 'Resource has been deleted', 'webmention' ),
-					array(
-						'status' => 400,
-						'data'   => $data,
-					)
-				);
-			case 452:
-				return new WP_Error(
-					'resource_removed',
-					esc_html__( 'Resource removed for legal reasons', 'webmention' ),
-					array(
-						'status' => 400,
-						'data'   => $data,
-					)
-				);
-			default:
-				return new WP_Error(
-					'source_error',
-					wp_remote_retrieve_response_message( $response ),
-					array(
-						'status' => 400,
-						'data'   => $data,
-					)
-				);
-		}
-		$remote_source_original = wp_remote_retrieve_body( $response );
 
 		// check if source really links to target
 		if ( ! strpos(
-			htmlspecialchars_decode( $remote_source_original ),
+			htmlspecialchars_decode( $request->get_body() ),
 			str_replace(
 				array(
 					'http://www.',
@@ -550,9 +486,11 @@ class Webmention_Receiver {
 			include_once ABSPATH . 'wp-includes/kses.php';
 		}
 
-		$remote_source = wp_kses_post( $remote_source_original );
-		$content_type  = wp_remote_retrieve_header( $response, 'Content-Type' );
-		$commentdata   = compact( 'remote_source', 'remote_source_original', 'content_type' );
+		$commentdata = array(
+			'content_type'           => $request->get_content_type(),
+			'remote_source_original' => $request->get_body(),
+			'remote_source'          => webmention_sanitize_html( $request->get_body() ),
+		);
 
 		return array_merge( $commentdata, $data );
 	}
@@ -773,37 +711,49 @@ class Webmention_Receiver {
 	}
 
 	/**
-	 * Use the whitelist check function to approve a comment if the source domain is on the whitelist.
+	 * Use the approved check function to approve a comment if the source domain is on the approve list.
 	 *
+	 * @param int|string/WP_Error $approved The approval status. Accepts 1, 0, spam, or WP_Error.
 	 * @param array $commentdata
 	 *
 	 * @return array $commentdata
 	 */
-	public static function auto_approve( $commentdata ) {
-		if ( ! $commentdata || is_wp_error( $commentdata ) ) {
-			return $commentdata;
+	public static function auto_approve( $approved, $commentdata ) {
+		if ( is_wp_error( $approved ) ) {
+			return $approved;
 		}
-		if ( self::is_source_whitelisted( $commentdata['source'] ) ) {
-			$commentdata['comment_approved'] = 1;
+		// Exit if there is no source to investigate
+		if ( ! array_key_exists( 'source', $commentdata ) ) {
+			return $approved;
 		}
-		return $commentdata;
+		if ( array_key_exists( 'comment_meta', $commentdata ) ) {
+			if ( ! array_key_exists( 'protocol', $commentdata['comment_meta'] ) || 'webmention' !== $commentdata['comment_meta']['protocol'] ) {
+				return $approved;
+			}
+		}
+		// If this is set auto approve all webmentions
+		if ( 1 === WEBMENTION_COMMENT_APPROVE ) {
+			return 1;
+		}
+
+		return self::is_source_allowed( $commentdata['source'] ) ? 1 : 0;
 	}
 
 	/**
-	 * Check the source $url to see if it is on the domain whitelist.
+	 * Check the source $url to see if it is on the domain approve list.
 	 *
 	 * @param array $author_url
 	 *
 	 * @return boolean
 	 */
-	public static function is_source_whitelisted( $url ) {
-		$whitelist = get_webmention_approve_domains();
-		$host      = webmention_extract_domain( $url );
-		if ( empty( $whitelist ) ) {
+	public static function is_source_allowed( $url ) {
+		$approvelist = get_webmention_approve_domains();
+		$host        = webmention_extract_domain( $url );
+		if ( empty( $approvelist ) ) {
 			return false;
 		}
 
-		foreach ( (array) $whitelist as $domain ) {
+		foreach ( (array) $approvelist as $domain ) {
 			$domain = trim( $domain );
 			if ( empty( $domain ) ) {
 				continue;

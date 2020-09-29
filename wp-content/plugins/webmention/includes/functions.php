@@ -1,10 +1,47 @@
 <?php
+
 /**
- * A wrapper for Webmention_Sender::send_webmention
+ * Registers a webmention comment type.
  *
- * @param string $source source url
- * @param string $target target url
  *
+ * @param string $comment_type Key for comment type.
+ * @param array $args Arguments.
+ *
+ * @return Webmention_Comment_Type The registered webmention comment type.
+ */
+function register_webmention_comment_type( $comment_type, $args = array() ) {
+	global $webmention_comment_types;
+
+	if ( ! is_array( $webmention_comment_types ) ) {
+		$webmention_comment_types = array();
+	}
+
+	// Sanitize comment type name.
+	$comment_type = sanitize_key( $comment_type );
+
+	$comment_type_object = new Webmention_Comment_Type( $comment_type, $args );
+
+	$webmention_comment_types[ $comment_type ] = $comment_type_object;
+
+	/**
+	 * Fires after a webmention comment type is registered.
+	 *
+	 *
+	 * @param string       $comment_type        Comment type.
+	 * @param Webmention_Comment_Type $comment_type_object Arguments used to register the comment type.
+	 */
+	do_action( 'registered_webmention_comment_type', $comment_type, $comment_type_object );
+
+	return $comment_type_object;
+}
+
+/**
+ * A wrapper for Webmention_Sender::send_webmention.
+ *
+ * @since 2.4.0
+ *
+ * @param string $source source url.
+ * @param string $target target url.
  * @return array of results including HTTP headers
  */
 function send_webmention( $source, $target ) {
@@ -12,10 +49,10 @@ function send_webmention( $source, $target ) {
 }
 
 /**
- * Return the text for a webmention form allowing customization by post_id
+ * Return the text for a webmention form allowing customization by post_id.
  *
- * @param int $post_id Post ID
- *
+ * @param int $post_id Post ID.
+ * @return string
  */
 function get_webmention_form_text( $post_id ) {
 	$text = get_option( 'webmention_comment_form_text', '' );
@@ -26,37 +63,34 @@ function get_webmention_form_text( $post_id ) {
 }
 
 /**
- * Return the default text for a webmention form
+ * Return the default text for a webmention form.
  *
- * @param int $post_id Post ID
- *
+ * @return string
  */
 function get_default_webmention_form_text() {
 	return __( 'To respond on your own website, enter the URL of your response which should contain a link to this post\'s permalink URL. Your response will then appear (possibly after moderation) on this page. Want to update or remove your response? Update or delete your post and re-enter your post\'s URL again. (<a href="http://indieweb.org/webmention">Learn More</a>)', 'webmention' );
 }
 
 /**
- * Check the $url to see if it is on the domain whitelist.
+ * Check the $url to see if it is on the domain allowlist.
  *
- * @param array $author_url
- *
+ * @param string $url URL to check.
  * @return boolean
  */
-function is_webmention_source_whitelisted( $url ) {
-	return Webmention_Receiver::is_source_whitelisted( $url );
+function is_webmention_source_allowed( $url ) {
+	return Webmention_Receiver::is_source_allowed( $url );
 }
 
 /**
- * Return the Number of Webmentions
+ * Return the Number of Webmentions.
  *
- * @param int $post_id The post ID (optional)
- *
+ * @param int $post_id The post ID (optional).
  * @return int the number of Webmentions for one Post
  */
 function get_webmentions_number( $post_id = 0 ) {
 	$post = get_post( $post_id );
 
-	// change this if your theme can't handle the Webmentions comment type
+	// change this if your theme can't handle the Webmentions comment type.
 	$comment_type = apply_filters( 'webmention_comment_type', WEBMENTION_COMMENT_TYPE );
 
 	$args = array(
@@ -72,22 +106,22 @@ function get_webmentions_number( $post_id = 0 ) {
 }
 
 /**
- * Return Webmention Endpoint
+ * Return Webmention Endpoint.
  *
  * @see https://www.w3.org/TR/webmention/#sender-discovers-receiver-webmention-endpoint
  *
- * @return string the Webmention endpoint
+ * @return string The Webmention endpoint.
  */
 function get_webmention_endpoint() {
 	return apply_filters( 'webmention_endpoint', get_rest_url( null, '/webmention/1.0/endpoint' ) );
 }
 
 /**
- * Return Webmention process type
+ * Return Webmention process type.
  *
  * @see https://www.w3.org/TR/webmention/#receiving-webmentions
  *
- * @return string the Webmention process type
+ * @return string The Webmention process type.
  */
 function get_webmention_process_type() {
 	return apply_filters( 'webmention_process_type', WEBMENTION_PROCESS_TYPE );
@@ -95,13 +129,16 @@ function get_webmention_process_type() {
 
 /**
  * Return the post_id for a URL filtered for webmentions.
+ *
  * Allows redirecting to another id to add linkbacks to the home page or archive
  * page or taxonomy page.
  *
- * @param string $url URL
- * @param int Return 0 if no post ID found or a post ID
+ * @since 3.1.0
  *
  * @uses apply_filters calls "webmention_post_id" on the post_ID
+ *
+ * @param string $url URL.
+ * @return int $id Return 0 if no post ID found or a post ID.
  */
 function webmention_url_to_postid( $url ) {
 	$id = wp_cache_get( base64_encode( $url ), 'webmention_url_to_postid' );
@@ -129,22 +166,35 @@ function webmention_url_to_postid( $url ) {
 	return apply_filters( 'webmention_post_id', $id, $url );
 }
 
+/**
+ * Extract the domain for a url, sans www.
+ *
+ * @since 3.8.9
+ *
+ * @param string $url URL to extract domain from.
+ * @return string|string[]|null
+ */
 function webmention_extract_domain( $url ) {
 	$host = wp_parse_url( $url, PHP_URL_HOST );
-	// strip leading www, if any
+	// strip leading www, if any.
 	return preg_replace( '/^www\./', '', $host );
 }
 
+/**
+ * Retrieve list of approved domains.
+ *
+ * @return array|mixed|string|void
+ */
 function get_webmention_approve_domains() {
-	$whitelist = get_option( 'webmention_approve_domains' );
-	$whitelist = trim( $whitelist );
-	$whitelist = explode( "\n", $whitelist );
+	$allowlist = get_option( 'webmention_approve_domains' );
+	$allowlist = trim( $allowlist );
+	$allowlist = explode( "\n", $allowlist );
 
-	return $whitelist;
+	return $allowlist;
 }
 
 /**
- * Finds a Webmention server URI based on the given URL
+ * Finds a Webmention server URI based on the given URL.
  *
  * Checks the HTML for the rel="webmention" link and webmention headers. It does
  * a check for the webmention headers first and returns that, if available. The
@@ -153,7 +203,7 @@ function get_webmention_approve_domains() {
  *
  * @see https://www.w3.org/TR/webmention/#sender-discovers-receiver-webmention-endpoint
  *
- * @param string $url URL to ping
+ * @param string $url URL to ping.
  *
  * @return bool|string False on failure, string containing URI on success
  */
@@ -238,12 +288,13 @@ function webmention_discover_endpoint( $url ) {
 
 if ( ! function_exists( 'wp_get_meta_tags' ) ) :
 	/**
-	 * Parse meta tags from source content
-	 * Based on the Press This Meta Parsing Code
+	 * Parse meta tags from source content.
 	 *
-	 * @param string $source_content Source Content
+	 * Based on the Press This Meta Parsing Code.
 	 *
-	 * @return array meta tags
+	 * @param string $source_content Source Content.
+	 *
+	 * @return array meta tags.
 	 */
 	function wp_get_meta_tags( $source_content ) {
 		$meta_tags = array();
@@ -298,7 +349,7 @@ if ( ! function_exists( 'get_self_link' ) ) :
 	 * @return string Correct link for the atom:self element.
 	 */
 	function get_self_link() {
-		$host = @parse_url( home_url() );
+		$host = wp_parse_url( home_url() );
 		return set_url_scheme( 'http://' . $host['host'] . wp_unslash( $_SERVER['REQUEST_URI'] ) );
 	}
 endif;
@@ -327,6 +378,12 @@ endif;
  * @return array URLs found in passed string.
  */
 function webmention_extract_urls( $content, $support_media_urls = false ) {
+
+	// If no content is provided, do not attempt to parse it for URLs.
+	if ( '' === $content ) {
+		return array();
+	}
+
 	$doc   = webmention_load_domdocument( $content );
 	$xpath = new DOMXPath( $doc );
 
@@ -356,4 +413,135 @@ function webmention_extract_urls( $content, $support_media_urls = false ) {
 	}
 
 	return array_filter( $urls );
+}
+
+
+/**
+ * Returns whether this is a webmention comment type
+ * @param int|WP_Comment $comment
+ * @return array
+ */
+function is_webmention_comment_type( $comment ) {
+	$comment = get_comment( $comment );
+	if ( ! $comment ) {
+		return false;
+	}
+	$types = array( apply_filters( 'webmention_comment_type', WEBMENTION_COMMENT_TYPE ) );
+	return in_array( $comment->comment_type, $types, true );
+
+}
+
+/**
+ * Returns a string indicating the comment type
+ * @param int|WP_Comment $comment
+ * @return string
+ */
+function get_webmention_comment_type_string( $comment ) {
+	global $webmention_comment_types;
+	$comment = get_comment( $comment );
+	if ( ! $comment ) {
+		return false;
+	}
+	$type = get_comment_type( $comment );
+
+	$name = null;
+
+	if ( is_array( $webmention_comment_types ) && array_key_exists( $type, $webmention_comment_types ) ) {
+		$name = $webmention_comment_types[ $type ]->singular;
+	}
+	if ( ! $name ) {
+		switch ( $type ) {
+			case 'comment':
+				$name = _x( 'Comment', 'noun', 'default' );
+				break;
+			case 'pingback':
+				$name = __( 'Pingback', 'default' );
+				break;
+			case 'trackback':
+				$name = __( 'Trackback', 'default' );
+				break;
+			case 'webmention':
+				$name = __( 'Webmention', 'webmention' );
+				break;
+			default:
+				$name = __( 'Response', 'webmention' );
+		}
+	}
+
+	/**
+	 * Filters the returned comment type string.
+	 *
+	 * @param string     $name The name of the comment type
+	 * @param string     $type      The comment type.
+	 */
+	return apply_filters( 'webmention_comment_string', $name, $type );
+}
+
+/**
+ *  Sanitize HTML. To be used on content elements after parsing.
+ *
+ * @param string $content The HTML to Sanitize.
+ *
+ * @return string Sanitized HTML.
+ */
+function webmention_sanitize_html( $content ) {
+	if ( ! is_string( $content ) ) {
+		return $content;
+	}
+
+	// Strip HTML Comments.
+	$content = preg_replace( '/<!--(.|\s)*?-->/', '', $content );
+
+	// Only allow approved HTML elements
+	$allowed = array(
+		'a'          => array(
+			'href'     => array(),
+			'name'     => array(),
+			'hreflang' => array(),
+			'rel'      => array(),
+		),
+		'abbr'       => array(),
+		'b'          => array(),
+		'br'         => array(),
+		'code'       => array(),
+		'ins'        => array(),
+		'del'        => array(),
+		'em'         => array(),
+		'i'          => array(),
+		'q'          => array(),
+		'strike'     => array(),
+		'strong'     => array(),
+		'time'       => array(),
+		'blockquote' => array(),
+		'pre'        => array(),
+		'p'          => array(),
+		'h1'         => array(),
+		'h2'         => array(),
+		'h3'         => array(),
+		'h4'         => array(),
+		'h5'         => array(),
+		'h6'         => array(),
+		'ul'         => array(),
+		'li'         => array(),
+		'ol'         => array(),
+		'span'       => array(),
+		'img'        => array(
+			'src'    => array(),
+			'alt'    => array(),
+			'title'  => array(),
+			'srcset' => array(),
+		),
+		'video'      => array(
+			'src'      => array(),
+			'duration' => array(),
+			'poster'   => array(),
+		),
+		'audio'      => array(
+			'duration' => array(),
+			'src'      => array(),
+		),
+		'track'      => array(),
+		'source'     => array(),
+	);
+	return trim( wp_kses( $content, $allowed ) );
 }
