@@ -1,5 +1,127 @@
 # Changelog
 
+#### 1.0.19 - Sep 2, 2020
+
+- Create buffer file directory if it does not exist yet, eg on a fresh WP install. 
+- Update preact and date-fns to their latest versions.
+- Update built-in referrer blocklist.
+
+
+#### 1.0.18 - Aug 25, 2020
+
+- Fix issue with tracking not working on AMP powered pages or issuing a request to a non-existing file on cdn.ampproject.org.
+
+
+#### 1.0.17 - Aug 19, 2020
+
+- Fix issue when using Modern color scheme introduced in WordPress 5.5.
+- Improve test for custom endpoint file by checking for exact response body.
+- Prevent horizontal scrollbar from showing when hovering chart near edge of screen.
+
+
+#### 1.0.16 - Jul 21, 2020
+
+- Fix blank screen on WordPress versions lower than 5.0.
+- Fix settings link showing despite user lacking required capability.
+- Fix code for custom referrer blocklist using filter `koko_analytics_referrer_blocklist`.
+- Do not use custom endpoint file when site URL differs from WordPress URL.
+- Improve test for custom endpoint file.
+
+
+#### 1.0.15 - Jun 22, 2020
+
+- Fix weird date for "this week" preset.
+- Fix weeknames in datepicker.
+- Fix translation files not being loaded. Hopefully...
+
+
+#### 1.0.14 - Jun 22, 2020
+
+- Do not use custom tracking endpoint on Multisite installations because it ignores the site-specifix database prefix.
+- Show errors in aggegration process if `WP_DEBUG` is enabled.
+- Update referrer blocklist.
+- Use `wp.i18n` for managing translations in JavaScript files.
+- Bump table row count up to 25 per page.
+- Add filter hook: `koko_analytics_referrer_blocklist` ([example](https://github.com/ibericode/koko-analytics/blob/master/code-snippets/add-domains-to-referrer-blocklist.php))
+- Add filter hook: `koko_analytics_ignore_referrer_url` ([example](https://github.com/ibericode/koko-analytics/blob/master/code-snippets/ignore-some-referrer-urls.php))
+
+
+#### 1.0.13 - May 28, 2020
+
+- Update referrer blocklist.
+- Improve date parsing from URL parameters to account for negative UTC offsets. Fixes an issue with the date jumping back one day.
+- Don't attempt to install custom endpoint if it was manually installed (using the `KOKO_ANALYTICS_USE_CUSTOM_ENDPOINT` constant).
+- Revert to using `home_url()` for the tracker endpoint URL.
+
+
+#### 1.0.12 - May 14, 2020
+
+- Add filter `koko_analytics_honor_dnt` to allow ignoring DoNotTrack.
+- Huge performance improvement for the tracking request if you're on a standard WordPress installation with the root directory writable.
+- Limit scope of tracking script to prevent variable naming collisions.
+
+
+#### 1.0.11 - Apr 17, 2020
+
+- Add setting for specifying default date period when opening analytics dashboard.
+- Add Chrome-Lighthouse to list of ignored HTTP user agents.
+- Show notice on analytics dashboard page when buffer file is not writable.
+- Derive cookie path from home URL to work properly with WordPress installations not living at the root of a domain.
+- Track pageview on `window.load` instead of `window.DOMContentLoaded`, to make it easier to overwrite the configuration object.
+- Minor optimizations to tracking script.
+
+
+#### 1.0.10 - Mar 23, 2020
+
+- Print configuration object early on in page HTML so it is easier to override it using a cookie consent plugin.
+- Add help text explaining the use of a multi-select element.
+
+
+#### 1.0.9 - Mar 9, 2020
+
+- Use arrow keys (without Ctrl-key) for quickly cycling through date ranges.
+- Group chart by month if showing more than 2 (full) months of data.
+- Replace React by Preact to cut JS bundle size in half.
+- Normalize referrer URL's without protocol.
+- Improve total comparision with previous period.
+
+
+#### 1.0.8 - Feb 14, 2020
+
+- Add date preset for last 28 days
+- Add keyboard navigation support for quickly cycling through date periods (Ctrl + Arrow key)
+- Expand referrer aggregation logic. If you have any URL's you would like to see combined into a single domain, please [post them here](https://github.com/ibericode/koko-analytics/issues/43).
+- Fix referrer URL's table missing the AUTO_INCREMENT statement.
+- Change dropdown to number input in most viewed posts widget.
+- Show notice on dashboard page if an issue with WP Cron is detected.
+- Improved y-axes in chart when maximum value is lower than 10.
+- Use colors from admin scheme in chart tooltip.
+
+
+#### 1.0.7 - Jan 30, 2020
+
+- Aggregate certain referrers, e.g. google.com/search becomes google.com.
+- Use WordPress color scheme (from user profile) for colors in chart.
+- Show more labels on the chart's x-axes (wide screens only).
+- Show number of pageviews in the last hour.
+- Show day of week to chart tooltip.
+- Use Paul Heckbert's loose labels (nice numbers) algorithm for labels on y-axes.
+- All colors now have a contrast ratio that is (at least) WCAAG AA compliant.
+- Revert multiple bar chart change (because of user feedback), use inner bar instead.
+- Minor performance optimisations for viewing dashboard page.
+- Fixes "Invalid time" error when re-opening the dashboard in Safari.
+
+
+#### 1.0.6 - Jan 20, 2020
+
+- Remember view period when navigating away from analytics dashboard.
+- Add filter hook to prevent loading the tracking script: `koko_analytics_load_tracking_script`
+- Ignore all user agents containing the word `seo`
+- Ignore requests if page is loaded inside an iframe.
+- Only read `document.cookie` if cookie use is actually enabled.
+- In chart, use separate bars instead of stacked bars.
+
+
 #### 1.0.5 - Dec 30, 2019
 
 - Add "today" option to date periods preset menu.

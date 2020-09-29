@@ -59,26 +59,29 @@ function collect_request() {
 	exit;
 }
 
-function collect_in_file( $post_id, $is_new_visitor, $is_unique_pageview, $referrer = '' ) {
+function get_buffer_filename() {
 	if ( defined( 'KOKO_ANALYTICS_BUFFER_FILE' ) ) {
-		$filename = KOKO_ANALYTICS_BUFFER_FILE;
-	} else {
-		$uploads = wp_get_upload_dir();
-		$filename = $uploads['basedir'] . '/pageviews.php';
+		return KOKO_ANALYTICS_BUFFER_FILE;
 	}
 
-	$content = '';
+	$uploads = wp_upload_dir( null, false );
+	return rtrim( $uploads['basedir'], '/' ) . '/pageviews.php';
+}
+
+function collect_in_file( $post_id, $is_new_visitor, $is_unique_pageview, $referrer = '' ) {
+	$filename = get_buffer_filename();
 
 	// if file does not yet exist, add PHP header to prevent direct file access
 	if ( ! file_exists( $filename ) ) {
 		$content = '<?php exit; ?>' . PHP_EOL;
+	} else {
+		$content = '';
 	}
 
 	// append data to file
 	$line = join( ',', array( $post_id, $is_new_visitor, $is_unique_pageview, $referrer ) );
 	$content .= $line . PHP_EOL;
-	$bytes_written = file_put_contents( $filename, $content, FILE_APPEND );
-	return $bytes_written;
+	return file_put_contents( $filename, $content, FILE_APPEND );
 }
 
 function get_settings() {
@@ -86,6 +89,7 @@ function get_settings() {
 		'use_cookie' => 1,
 		'exclude_user_roles' => array(),
 		'prune_data_after_months' => 5 * 12, // 5 years
+		'default_view' => 'last_28_days',
 	);
 	$settings = (array) get_option( 'koko_analytics_settings', array() );
 	$settings = array_merge( $default_settings, $settings );
@@ -147,4 +151,16 @@ function admin_bar_menu( $wp_admin_bar ) {
 function widgets_init() {
 	require __DIR__ . '/class-widget-most-viewed-posts.php';
 	register_widget( 'KokoAnalytics\Widget_Most_Viewed_Posts' );
+}
+
+function get_realtime_pageview_count( $since = null ) {
+	$since = $since !== null ? $since : strtotime( '-5 minutes' );
+	$counts = (array) get_option( 'koko_analytics_realtime_pageview_count', array() );
+	$sum = 0;
+	foreach ( $counts as $timestamp => $pageviews ) {
+		if ( $timestamp > $since ) {
+			$sum += $pageviews;
+		}
+	}
+	return $sum;
 }

@@ -6,6 +6,8 @@
  */
 namespace KokoAnalytics;
 
+use Exception;
+
 class Aggregator {
 
 	public function init() {
@@ -36,28 +38,36 @@ class Aggregator {
 		$this->setup_scheduled_event();
 	}
 
+	/**
+	 * Reads the buffer file into memory and moves data into the MySQL database (in bulk)
+	 *
+	 * @throws Exception
+	 */
 	public function aggregate() {
 		global $wpdb;
 
 		// read pageviews buffer file into array
-		$wp_upload_dir = wp_get_upload_dir();
-		$filename      = $wp_upload_dir['basedir'] . '/pageviews.php';
+		$filename = get_buffer_filename();
 		if ( ! file_exists( $filename ) ) {
 			return;
 		}
 
 		// rename file to temporary location so nothing new is written to it while we process it
-		$tmp_filename = $wp_upload_dir['basedir'] . '/pageviews-busy.php';
+		$tmp_filename = dirname( $filename ) . '/pageviews-busy.php';
 		$renamed = rename( $filename, $tmp_filename );
 		if ( $renamed !== true ) {
-			// TODO: Write to some kind of log
+			if ( WP_DEBUG ) {
+				throw new Exception( 'Error renaming buffer file.' );
+			}
 			return;
 		}
 
 		// open file for reading
 		$file_handle = fopen( $tmp_filename, 'rb' );
 		if ( ! is_resource( $file_handle ) ) {
-			// TODO: Write to some kind of log
+			if ( WP_DEBUG ) {
+				throw new Exception( 'Error opening buffer file for reading.' );
+			}
 			return;
 		}
 
@@ -71,9 +81,6 @@ class Aggregator {
 		);
 		$post_stats     = array();
 		$referrer_stats = array();
-
-		// read blacklist into array
-		$blacklist = file( KOKO_ANALYTICS_PLUGIN_DIR . '/data/referrer-blacklist', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES );
 
 		while ( ( $line = fgets( $file_handle, 1024 ) ) !== false ) {
 			$line            = rtrim( $line );
@@ -106,9 +113,9 @@ class Aggregator {
 			}
 
 			// increment referrals
-			if ( $referrer_url !== '' && ! $this->in_blacklist( $referrer_url, $blacklist ) ) {
-
-				$referrer_url = $this->sanitize_url( $referrer_url );
+			if ( $referrer_url !== '' && ! $this->ignore_referrer_url( $referrer_url ) ) {
+				$referrer_url = $this->clean_url( $referrer_url );
+				$referrer_url = $this->normalize_url( $referrer_url );
 
 				if ( ! isset( $referrer_stats[ $referrer_url ] ) ) {
 					$referrer_stats[ $referrer_url ] = array(
@@ -190,25 +197,55 @@ class Aggregator {
 			$sql          = $wpdb->prepare( "INSERT INTO {$wpdb->prefix}koko_analytics_referrer_stats(date, id, visitors, pageviews) VALUES {$placeholders} ON DUPLICATE KEY UPDATE visitors = visitors + VALUES(visitors), pageviews = pageviews + VALUES(pageviews)", $values );
 			$wpdb->query( $sql );
 		}
+
+		$this->update_realtime_pageview_count( $site_stats['pageviews'] );
 	}
 
-	private function in_blacklist( $url, array $blacklist ) {
-		foreach ( $blacklist as $blacklisted_domain ) {
-			if ( false !== stripos( $url, $blacklisted_domain ) ) {
+	private function update_realtime_pageview_count( $pageviews ) {
+		$counts = (array) get_option( 'koko_analytics_realtime_pageview_count', array() );
+		$one_hour_ago = strtotime( '-60 minutes' );
+
+		foreach ( $counts as $timestamp => $count ) {
+			// delete all data older than one hour
+			if ( $timestamp < $one_hour_ago ) {
+				unset( $counts[ $timestamp ] );
+			}
+		}
+
+		// add pageviews for this minute
+		$counts[ (string) time() ] = $pageviews;
+		update_option( 'koko_analytics_realtime_pageview_count', $counts, false );
+	}
+
+	private function ignore_referrer_url( $url ) {
+		// read blocklist into array
+		static $blocklist = null;
+		if ( $blocklist === null ) {
+			$blocklist = file( KOKO_ANALYTICS_PLUGIN_DIR . '/data/referrer-blocklist', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES );
+
+			// add result of filter hook to blocklist so user can provide custom domains to block through simple array
+			$custom_blocklist = apply_filters( 'koko_analytics_referrer_blocklist', array() );
+			$blocklist = array_merge( $blocklist, $custom_blocklist );
+		}
+
+		foreach ( $blocklist as $blocklisted_domain ) {
+			if ( false !== stripos( $url, $blocklisted_domain ) ) {
 				return true;
 			}
 		}
 
-		return false;
+		// run return value through filter so user can apply more advanced logic to determine whether to ignore referrer  url
+		return apply_filters( 'koko_analytics_ignore_referrer_url', false, $url );
 	}
 
-	public function sanitize_url( $url ) {
-		$whitelisted_params = array( 'page_id', 'p', 'cat', 'product' );
-
+	public function clean_url( $url ) {
 		// remove # from URL
-		$url = preg_replace( '/#.*$/', '', $url );
+		$pos = strpos( $url, '#' );
+		if ( $pos !== false ) {
+			$url = substr( $url, 0, $pos );
+		}
 
-		// if URL contains query string, strip it
+		// if URL contains query string, parse it and only keep certain parameters
 		$pos = strpos( $url, '?' );
 		if ( $pos !== false ) {
 			$query_str = substr( $url, $pos + 1 );
@@ -216,7 +253,9 @@ class Aggregator {
 			$params = array();
 			parse_str( $query_str, $params );
 
-			$new_params    = array_intersect_key( $params, array_flip( $whitelisted_params ) );
+			// strip all non-allowed params from url
+			$allowed_params = array( 'page_id', 'p', 'cat', 'product' );
+			$new_params    = array_intersect_key( $params, array_flip( $allowed_params ) );
 			$new_query_str = http_build_query( $new_params );
 			$new_url       = substr( $url, 0, $pos + 1 ) . $new_query_str;
 
@@ -228,6 +267,28 @@ class Aggregator {
 		$url = rtrim( $url, '/' );
 
 		return $url;
+	}
+
+	public function normalize_url( $url ) {
+		// if URL has no protocol, assume HTTP
+		// we change this to HTTPS for sites that are known to support it (hopefully, all)
+		if ( strpos( $url, '://' ) === false ) {
+			$url = 'http://' . $url;
+		}
+
+		$aggregations = array(
+			'/^android-app:\/\/com\.(www\.)?google\.android\.googlequicksearchbox(\/.+)?$/' => 'https://www.google.com',
+			'/^android-app:\/\/com\.www\.google\.android\.gm$/' => 'https://www.google.com',
+			'/^https?:\/\/(?:www\.)?(google|bing|ecosia)\.([a-z]{2,3}(?:\.[a-z]{2,3})?)(?:\/search|\/url)?/' => 'https://www.$1.$2',
+			'/^android-app:\/\/com\.facebook\.(.+)/' => 'https://facebook.com',
+			'/^https?:\/\/(?:[a-z-]+)?\.?l?facebook\.com(?:\/l\.php)?/' => 'https://facebook.com',
+			'/^https?:\/\/(?:[a-z-]+)?\.?l?instagram\.com(?:\/l\.php)?/' => 'https://www.instagram.com',
+			'/^https?:\/\/(?:www\.)?linkedin\.com\/feed.*/' => 'https://www.linkedin.com',
+			'/(?:www|m)\.baidu\.com.*/' => 'www.baidu.com',
+			'/yandex\.ru\/clck.*/' => 'yandex.ru',
+		);
+
+		return preg_replace( array_keys( $aggregations ), array_values( $aggregations ), $url, 1 );
 	}
 
 }

@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit94155b407815f6037b15a1dad2f5a9f7
+class ComposerStaticInit269746670a872e225a32c8e788516fc4
 {
     public static $classMap = array (
         'KokoAnalytics\\Admin' => __DIR__ . '/../..' . '/src/class-admin.php',
@@ -21,7 +21,7 @@ class ComposerStaticInit94155b407815f6037b15a1dad2f5a9f7
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->classMap = ComposerStaticInit94155b407815f6037b15a1dad2f5a9f7::$classMap;
+            $loader->classMap = ComposerStaticInit269746670a872e225a32c8e788516fc4::$classMap;
 
         }, null, ClassLoader::class);
     }
