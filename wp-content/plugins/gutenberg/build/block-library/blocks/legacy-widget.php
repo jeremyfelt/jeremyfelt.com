@@ -12,7 +12,7 @@
  *
  * @return string Returns the rendered widget as a string.
  */
-function gutenberg_render_widget_by_id( $id ) {
+function gutenberg_block_core_legacy_widget_render_widget_by_id( $id ) {
 	// Code extracted from src/wp-includes/widgets.php dynamic_sidebar function.
 	// Todo: When merging to core extract this part of dynamic_sidebar into its own function.
 	global $wp_registered_widgets;
@@ -71,18 +71,18 @@ function gutenberg_render_widget_by_id( $id ) {
  *
  * @return string Returns the post content with the legacy widget added.
  */
-function gutenberg_render_block_legacy_widget( $attributes ) {
+function gutenberg_render_block_core_legacy_widget( $attributes ) {
 	$id           = null;
 	$widget_class = null;
-	if ( isset( $attributes['id'] ) ) {
-		$id = $attributes['id'];
+	if ( isset( $attributes['widgetId'] ) ) {
+		$id = $attributes['widgetId'];
 	}
 	if ( isset( $attributes['widgetClass'] ) ) {
 		$widget_class = $attributes['widgetClass'];
 	}
 
 	if ( $id ) {
-		return gutenberg_render_widget_by_id( $id );
+		return gutenberg_block_core_legacy_widget_render_widget_by_id( $id );
 	}
 	if ( ! $widget_class ) {
 		return '';
@@ -101,27 +101,10 @@ function gutenberg_render_block_legacy_widget( $attributes ) {
  * Register legacy widget block.
  */
 function gutenberg_register_block_core_legacy_widget() {
-	register_block_type(
-		'core/legacy-widget',
+	register_block_type_from_metadata(
+		__DIR__ . '/legacy-widget',
 		array(
-			'attributes'      => array(
-				'widgetClass' => array(
-					'type' => 'string',
-				),
-				'id'          => array(
-					'type' => 'string',
-				),
-				'idBase'      => array(
-					'type' => 'string',
-				),
-				'number'      => array(
-					'type' => 'number',
-				),
-				'instance'    => array(
-					'type' => 'object',
-				),
-			),
-			'render_callback' => 'gutenberg_render_block_legacy_widget',
+			'render_callback' => 'gutenberg_render_block_core_legacy_widget',
 		)
 	);
 }

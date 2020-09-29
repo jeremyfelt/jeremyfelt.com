@@ -3,7 +3,9 @@
  * Plugin Name: Gutenberg
  * Plugin URI: https://github.com/WordPress/gutenberg
  * Description: Printing since 1440. This is the development plugin for the new block editor in core.
- * Version: 7.2.0
+ * Requires at least: 5.3
+ * Requires PHP: 5.6
+ * Version: 9.0.0
  * Author: Gutenberg Team
  * Text Domain: gutenberg
  *
@@ -11,8 +13,8 @@
  */
 
 ### BEGIN AUTO-GENERATED DEFINES
-define( 'GUTENBERG_VERSION', '7.2.0' );
-define( 'GUTENBERG_GIT_COMMIT', '60ff7a78550a4eb93179bbcf1ec06478df9495e0' );
+define( 'GUTENBERG_VERSION', '9.0.0' );
+define( 'GUTENBERG_GIT_COMMIT', '79e5ba995216e6b8f398adf0de13d7b3fee36a5c' );
 ### END AUTO-GENERATED DEFINES
 
 gutenberg_pre_init();
@@ -25,8 +27,6 @@ gutenberg_pre_init();
  * @since 0.1.0
  */
 function gutenberg_menu() {
-	global $submenu;
-
 	add_menu_page(
 		'Gutenberg',
 		'Gutenberg',
@@ -44,40 +44,54 @@ function gutenberg_menu() {
 		'gutenberg'
 	);
 
+	if ( gutenberg_use_widgets_block_editor() ) {
+		add_theme_page(
+			__( 'Widgets', 'gutenberg' ),
+			__( 'Widgets', 'gutenberg' ),
+			'edit_theme_options',
+			'gutenberg-widgets',
+			'the_gutenberg_widgets'
+		);
+		remove_submenu_page( 'themes.php', 'widgets.php' );
+	}
+
 	if ( get_option( 'gutenberg-experiments' ) ) {
-		if ( array_key_exists( 'gutenberg-widget-experiments', get_option( 'gutenberg-experiments' ) ) ) {
+		if ( array_key_exists( 'gutenberg-navigation', get_option( 'gutenberg-experiments' ) ) ) {
 			add_submenu_page(
 				'gutenberg',
-				__( 'Widgets (beta)', 'gutenberg' ),
-				__( 'Widgets (beta)', 'gutenberg' ),
+				__( 'Navigation (beta)', 'gutenberg' ),
+				__( 'Navigation (beta)', 'gutenberg' ),
 				'edit_theme_options',
-				'gutenberg-widgets',
-				'the_gutenberg_widgets'
+				'gutenberg-navigation',
+				'gutenberg_navigation_page'
 			);
 		}
 		if ( array_key_exists( 'gutenberg-full-site-editing', get_option( 'gutenberg-experiments' ) ) ) {
-			add_submenu_page(
-				'gutenberg',
+			add_menu_page(
 				__( 'Site Editor (beta)', 'gutenberg' ),
 				__( 'Site Editor (beta)', 'gutenberg' ),
 				'edit_theme_options',
 				'gutenberg-edit-site',
-				'gutenberg_edit_site_page'
+				'gutenberg_edit_site_page',
+				'dashicons-layout'
 			);
 		}
 	}
 
 	if ( current_user_can( 'edit_posts' ) ) {
-		$submenu['gutenberg'][] = array(
+		add_submenu_page(
+			'gutenberg',
+			__( 'Support', 'gutenberg' ),
 			__( 'Support', 'gutenberg' ),
 			'edit_posts',
-			__( 'https://wordpress.org/support/plugin/gutenberg', 'gutenberg' ),
+			__( 'https://wordpress.org/support/plugin/gutenberg/', 'gutenberg' )
 		);
-
-		$submenu['gutenberg'][] = array(
+		add_submenu_page(
+			'gutenberg',
+			__( 'Documentation', 'gutenberg' ),
 			__( 'Documentation', 'gutenberg' ),
 			'edit_posts',
-			'https://developer.wordpress.org/block-editor/',
+			'https://developer.wordpress.org/block-editor/'
 		);
 	}
 
@@ -90,7 +104,7 @@ function gutenberg_menu() {
 		'the_gutenberg_experiments'
 	);
 }
-add_action( 'admin_menu', 'gutenberg_menu' );
+add_action( 'admin_menu', 'gutenberg_menu', 9 );
 
 /**
  * Display a version notice and deactivate the Gutenberg plugin.
@@ -100,7 +114,7 @@ add_action( 'admin_menu', 'gutenberg_menu' );
 function gutenberg_wordpress_version_notice() {
 	echo '<div class="error"><p>';
 	/* translators: %s: Minimum required version */
-	printf( __( 'Gutenberg requires WordPress %s or later to function properly. Please upgrade WordPress before activating Gutenberg.', 'gutenberg' ), '5.2.0' );
+	printf( __( 'Gutenberg requires WordPress %s or later to function properly. Please upgrade WordPress before activating Gutenberg.', 'gutenberg' ), '5.3.0' );
 	echo '</p></div>';
 
 	deactivate_plugins( array( 'gutenberg/gutenberg.php' ) );
@@ -135,7 +149,7 @@ function gutenberg_pre_init() {
 	// Strip '-src' from the version string. Messes up version_compare().
 	$version = str_replace( '-src', '', $wp_version );
 
-	if ( version_compare( $version, '5.2.0', '<' ) ) {
+	if ( version_compare( $version, '5.3.0', '<' ) ) {
 		add_action( 'admin_notices', 'gutenberg_wordpress_version_notice' );
 		return;
 	}
@@ -150,3 +164,25 @@ function gutenberg_rest_nonce() {
 	exit( wp_create_nonce( 'wp_rest' ) );
 }
 add_action( 'wp_ajax_gutenberg_rest_nonce', 'gutenberg_rest_nonce' );
+
+
+/**
+ * Exposes the site icon url to the Gutenberg editor through the WordPress REST
+ * API. The site icon url should instead be fetched from the wp/v2/settings
+ * endpoint when https://github.com/WordPress/gutenberg/pull/19967 is complete.
+ *
+ * @since 8.2.1
+ *
+ * @param WP_REST_Response $response Response data served by the WordPress REST index endpoint.
+ * @return WP_REST_Response
+ */
+function register_site_icon_url( $response ) {
+	$data                  = $response->data;
+	$data['site_icon_url'] = get_site_icon_url();
+	$response->set_data( $data );
+	return $response;
+}
+
+add_filter( 'rest_index', 'register_site_icon_url' );
+
+add_theme_support( 'widgets-block-editor' );
