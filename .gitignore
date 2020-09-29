@@ -15,6 +15,9 @@
 /wp-content/uploads
 /wp-content/images
 
+# Ignore local must use changes.
+/wp-content/mu-plugins/jf-local.php
+
 # Plugins under local development
 /wp-content/plugins/alternate-editor
 /wp-content/plugins/block-use-dashboard
