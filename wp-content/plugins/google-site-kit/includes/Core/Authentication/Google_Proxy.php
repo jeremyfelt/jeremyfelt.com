@@ -75,6 +75,76 @@ class Google_Proxy {
 	}
 
 	/**
+	 * Gets site fields.
+	 *
+	 * @since 1.5.0
+	 *
+	 * @return array Associative array of $query_arg => $value pairs.
+	 */
+	public function get_site_fields() {
+		return array(
+			'name'                   => wp_specialchars_decode( get_bloginfo( 'name' ) ),
+			'url'                    => home_url(),
+			'redirect_uri'           => add_query_arg( 'oauth2callback', 1, admin_url( 'index.php' ) ),
+			'action_uri'             => admin_url( 'index.php' ),
+			'return_uri'             => $this->context->admin_url( 'splash' ),
+			'analytics_redirect_uri' => add_query_arg( 'gatoscallback', 1, admin_url( 'index.php' ) ),
+		);
+	}
+
+	/**
+	 * Gets user fields.
+	 *
+	 * @since 1.10.0
+	 *
+	 * @return array Associative array of $query_arg => $value pairs.
+	 */
+	public function get_user_fields() {
+		$user_roles = wp_get_current_user()->roles;
+		// If multisite, also consider network administrators.
+		if ( is_multisite() && current_user_can( 'manage_network' ) ) {
+			$user_roles[] = 'network_administrator';
+		}
+		$user_roles = array_unique( $user_roles );
+
+		return array(
+			'user_roles' => implode( ',', $user_roles ),
+		);
+	}
+
+	/**
+	 * Synchronizes site fields with the proxy.
+	 *
+	 * @since 1.5.0
+	 *
+	 * @param Credentials $credentials Credentials instance.
+	 */
+	public function sync_site_fields( Credentials $credentials ) {
+		if ( ! $credentials->has() ) {
+			return;
+		}
+
+		$creds = $credentials->get();
+
+		wp_remote_post(
+			$this->url( self::OAUTH2_SITE_URI ),
+			array(
+				'body'     => array_merge(
+					$this->get_site_fields(),
+					array(
+						'nonce'       => wp_create_nonce( self::ACTION_SETUP ),
+						'site_id'     => $creds['oauth2_client_id'],
+						'site_secret' => $creds['oauth2_client_secret'],
+					)
+				),
+				/** Don't block the process from finishing waiting for a response. @see \spawn_cron(). */
+				'timeout'  => 0.01,
+				'blocking' => false,
+			)
+		);
+	}
+
+	/**
 	 * Exchanges a site code for client credentials from the proxy.
 	 *
 	 * @since 1.1.2
