@@ -19,12 +19,13 @@
 /wp-content/mu-plugins/jf-local.php
 
 # Plugins under local development
-/wp-content/plugins/alternate-editor
 /wp-content/plugins/block-use-dashboard
 /wp-content/plugins/comments-project
 /wp-content/plugins/jeremyfelt-indieweb-custom
 /wp-content/plugins/jeremyfelt-wp-custom
+/wp-content/plugins/dalarna
 /wp-content/plugins/self-sustaining-spam-stopper
+/wp-content/plugins/varmland
 
 # Themes under local development
 /wp-content/themes/writemore

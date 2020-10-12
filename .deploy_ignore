@@ -2,9 +2,10 @@
 *.git*
 
 # Locally managed plugins.
-alternate-editor
 block-use-dashboard
 comments-project
 jeremyfelt-indieweb-custom
 jeremyfelt-wp-custom
+dalarna
 self-sustaining-spam-stopper
+varmland
