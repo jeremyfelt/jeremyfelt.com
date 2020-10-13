@@ -44,8 +44,8 @@ function gutenberg_render_block_core_site_logo( $attributes ) {
  */
 function gutenberg_register_block_core_site_logo() {
 	if ( gutenberg_is_experiment_enabled( 'gutenberg-full-site-editing' ) ) {
-		register_block_type(
-			'core/site-logo',
+		register_block_type_from_metadata(
+			__DIR__ . '/site-logo',
 			array(
 				'render_callback' => 'gutenberg_render_block_core_site_logo',
 			)
