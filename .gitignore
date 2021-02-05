@@ -41,3 +41,6 @@
 # Backups that may frequently appear locally.
 *.sql
 *.sql.gz
+
+# I rename things to .old when I'm messing around locally.
+*.old
