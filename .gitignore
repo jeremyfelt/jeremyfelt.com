@@ -18,6 +18,13 @@
 # Ignore local must use changes.
 /wp-content/mu-plugins/jf-local.php
 
+# Plugins from plugin repository
+/wp-content/plugins/content-visibility
+/wp-content/plugins/latest-custom-posts
+/wp-content/plugins/simple-location
+/wp-content/plugins/semantic-linkbacks
+/wp-content/plugins/syntax-highlighting-code-block
+
 # Plugins under local development
 /wp-content/plugins/block-use-dashboard
 /wp-content/plugins/comments-project
@@ -26,9 +33,10 @@
 /wp-content/plugins/dalarna
 /wp-content/plugins/self-sustaining-spam-stopper
 /wp-content/plugins/varmland
+/wp-content/plugins/microformat-blocks
 
-# Themes under local development
-/wp-content/themes/writemore
+# Ignore all themes
+/wp-content/themes
 
 # Backups that may frequently appear locally.
 *.sql
