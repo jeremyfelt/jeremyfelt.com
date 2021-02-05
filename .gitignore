@@ -18,14 +18,18 @@
 # Ignore local must use changes.
 /wp-content/mu-plugins/jf-local.php
 
-# Plugins from plugin repository
+# Do not version control any plugins.
 /wp-content/plugins
 
+# But! Version control these plugins.
 !/wp-content/plugins/WSUWP-Content-Syndicate-0.8.3
-!/wp-content/index.php
+!/wp-content/plugins/index.php
 
-# Ignore all themes
+# Do not version control any themes.
 /wp-content/themes
+
+# But! Version control these themes.
+/wp-content/themes/index.php
 
 # Backups that may frequently appear locally.
 *.sql
