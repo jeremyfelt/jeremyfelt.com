@@ -1,18 +1,6 @@
 .deploy_ignore
 *.git*
 
-# WordPress.org managed plugins.
-batcache
-koko-analytics
-query-monitor
-public-post-preview
-safe-redirect-manager
-rewrite-rules-inspector
-gutenberg
-indieweb
-simple-location
-syntax-highlighting-code-block
-
 # Locally managed plugins.
 block-use-dashboard
 comments-project
