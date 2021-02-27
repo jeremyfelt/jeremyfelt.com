@@ -1,36 +1,3 @@
-.vscode/
-
-# Root WordPress files.
-/index.php
-/license.txt
-/readme.html
-/wp-*.php
-/xmlrpc.php
-
-# Root WordPress directories.
-/wp-admin/
-/wp-includes/
-
-# Specific pieces of wp-content directory.
-/wp-content/uploads
-/wp-content/images
-
-# Ignore local must use changes.
-/wp-content/mu-plugins/jf-local.php
-
-# Do not version control any plugins.
-/wp-content/plugins
-
-# But! Version control these plugins.
-!/wp-content/plugins/WSUWP-Content-Syndicate-0.8.3
-!/wp-content/plugins/index.php
-
-# Do not version control any themes.
-/wp-content/themes
-
-# But! Version control these themes.
-/wp-content/themes/index.php
-
 # Backups that may frequently appear locally.
 *.sql
 *.sql.gz
