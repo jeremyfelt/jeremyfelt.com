@@ -1,0 +1,6 @@
+<?php
+/**
+ * Silence.
+ *
+ * @package jeremyfelt
+ */

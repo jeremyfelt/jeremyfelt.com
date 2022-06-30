@@ -1,0 +1,108 @@
+{
+	"name": "jeremyfelt/jeremyfelt.com",
+	"type": "project",
+	"minimum-stability": "stable",
+	"repositories": [
+		{
+			"type": "composer",
+			"url": "https://wpackagist.org"
+		},
+		{
+			"type": "package",
+			"package": {
+				"name": "happyprime/shadow-terms",
+				"version": "1.0.1",
+				"type": "wordpress-plugin",
+				"source": {
+					"url": "https://github.com/happyprime/shadow-terms.git",
+					"type": "git",
+					"reference": "trunk"
+				}
+			}
+		},
+		{
+			"type": "package",
+			"package": {
+				"name": "happyprime/content-aggregator-block",
+				"version": "1.0.1",
+				"type": "wordpress-plugin",
+				"source": {
+					"url": "https://github.com/happyprime/content-aggregator-block.git",
+					"type": "git",
+					"reference": "release"
+				}
+			}
+		},
+		{
+			"type":"package",
+			"package": {
+				"name": "jeremyfelt/jeremyfelt-wp-custom",
+				"version": "1.0.0",
+				"type": "wordpress-plugin",
+				"source": {
+					"url": "git@github.com:jeremyfelt/jeremyfelt-wp-custom.git",
+					"type": "git",
+					"reference": "develop"
+				}
+			}
+		},
+		{
+			"type":"package",
+			"package": {
+				"name": "jeremyfelt/jeremyfelt-indieweb-custom",
+				"version": "1.0.0",
+				"type": "wordpress-plugin",
+				"source": {
+					"url": "git@github.com:jeremyfelt/jeremyfelt-indieweb-custom.git",
+					"type": "git",
+					"reference": "develop"
+				}
+			}
+		}
+	],
+	"extra": {
+		"installer-paths": {
+			"plugins/{$name}/": [
+				"type:wordpress-plugin"
+			]
+		}
+	},
+	"require": {
+		"happyprime/content-aggregator-block": "1.0.1",
+		"wpackagist-plugin/content-visibility": "^0.2.7",
+		"wpackagist-plugin/content-visibility-rss-feed": "^0.1.2",
+		"wpackagist-plugin/custom-posts-per-page": "^1.7",
+		"wpackagist-plugin/gutenberg": "^13.5",
+		"wpackagist-plugin/indieauth": "^4.2",
+		"wpackagist-plugin/indieweb": "^3.4",
+		"jeremyfelt/jeremyfelt-wp-custom": "^1.0",
+		"jeremyfelt/jeremyfelt-indieweb-custom": "^1.0",
+		"wpackagist-plugin/local-wordpress-plugin-repo": "^0.9.0",
+		"wpackagist-plugin/micropub": "^2.3",
+		"wpackagist-plugin/public-post-preview": "^2.9",
+		"wpackagist-plugin/query-monitor": "^3.9",
+		"wpackagist-plugin/safe-redirect-manager": "^1.10",
+		"wpackagist-plugin/self-sustaining-spam-stopper": "^1.1",
+		"wpackagist-plugin/semantic-linkbacks": "^4.7",
+		"happyprime/shadow-terms": "1.0.1",
+		"wpackagist-plugin/shortnotes": "^1.3",
+		"wpackagist-plugin/webmention": "^4.0",
+		"wpackagist-plugin/syntax-highlighting-code-block": "^1.3"
+	},
+	"require-dev": {
+		"wp-coding-standards/wpcs": "^2.0",
+		"dealerdirect/phpcodesniffer-composer-installer": "^0.7.0",
+		"phpcompatibility/php-compatibility": "^9.3",
+		"phpcompatibility/phpcompatibility-wp": "*"
+	},
+	"scripts": {
+		"phpcs": "vendor/bin/phpcs",
+		"phpcbf": "vendor/bin/phpcbf"
+	},
+	"config": {
+		"allow-plugins": {
+			"composer/installers": true,
+			"dealerdirect/phpcodesniffer-composer-installer": true
+		}
+	}
+}

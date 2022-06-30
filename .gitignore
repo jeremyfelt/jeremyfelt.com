@@ -4,3 +4,15 @@
 
 # I rename things to .old when I'm messing around locally.
 *.old
+
+# Composer installs things.
+vendor/
+
+# Plugins are managed through composer.json.
+plugins/
+
+# The theme is probably managed in its own repo.
+themes/
+
+# Uploads are... uploads.
+uploads/
