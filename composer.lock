@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "baaa1f8844395a3052c0339b91789a04",
+    "content-hash": "6f6fcc9be24694030a6ace03906ec9f5",
     "packages": [
         {
             "name": "composer/installers",
@@ -167,6 +167,16 @@
                 "type": "git",
                 "url": "https://github.com/happyprime/shadow-terms.git",
                 "reference": "trunk"
+            },
+            "type": "wordpress-plugin"
+        },
+        {
+            "name": "jeremyfelt/dangit-capital-p",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jeremyfelt/dangit-capital-p.git",
+                "reference": "develop"
             },
             "type": "wordpress-plugin"
         },

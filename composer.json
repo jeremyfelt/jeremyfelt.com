@@ -34,6 +34,19 @@
 			}
 		},
 		{
+			"type": "package",
+			"package": {
+				"name": "jeremyfelt/dangit-capital-p",
+				"version": "1.0.0",
+				"type": "wordpress-plugin",
+				"source": {
+					"url": "https://github.com/jeremyfelt/dangit-capital-p.git",
+					"type": "git",
+					"reference": "develop"
+				}
+			}
+		},
+		{
 			"type":"package",
 			"package": {
 				"name": "jeremyfelt/jeremyfelt-wp-custom",
@@ -72,6 +85,7 @@
 		"wpackagist-plugin/content-visibility": "^0.2.7",
 		"wpackagist-plugin/content-visibility-rss-feed": "^0.1.2",
 		"wpackagist-plugin/custom-posts-per-page": "^1.7",
+		"jeremyfelt/dangit-capital-p": "^1.0",
 		"wpackagist-plugin/gutenberg": "^13.5",
 		"wpackagist-plugin/indieauth": "^4.2",
 		"wpackagist-plugin/indieweb": "^3.4",
@@ -86,8 +100,8 @@
 		"wpackagist-plugin/semantic-linkbacks": "^4.7",
 		"happyprime/shadow-terms": "1.0.1",
 		"wpackagist-plugin/shortnotes": "^1.3",
-		"wpackagist-plugin/webmention": "^4.0",
-		"wpackagist-plugin/syntax-highlighting-code-block": "^1.3"
+		"wpackagist-plugin/syntax-highlighting-code-block": "^1.3",
+		"wpackagist-plugin/webmention": "^4.0"
 	},
 	"require-dev": {
 		"wp-coding-standards/wpcs": "^2.0",
