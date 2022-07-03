@@ -4,6 +4,7 @@
 .github/
 .gitignore
 .gitmodules
+.well-known/
 bin/
 config/
 composer.json
@@ -14,4 +15,5 @@ slides/
 sub-site/
 themes/
 uploads/
+upgrade/
 vendor/
