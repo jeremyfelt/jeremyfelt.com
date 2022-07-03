@@ -1,3 +1,3 @@
-# jeremyfelt.com meta
+# jeremyfelt.com
 
-Clone this in the root of the site directory.
+This is the wp-content directory.
