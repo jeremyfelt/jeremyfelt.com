@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fdfc947649e37ab292c3361fa135f99f",
+    "content-hash": "3d52f5ea1df19ecf3c99e4c67db26db6",
     "packages": [
         {
             "name": "composer/installers",
@@ -185,7 +185,7 @@
             "version": "1.0.0",
             "source": {
                 "type": "git",
-                "url": "git@github.com:jeremyfelt/jeremyfelt-indieweb-custom.git",
+                "url": "https://github.com/jeremyfelt/jeremyfelt-indieweb-custom.git",
                 "reference": "develop"
             },
             "type": "wordpress-plugin"
@@ -195,7 +195,7 @@
             "version": "1.0.0",
             "source": {
                 "type": "git",
-                "url": "git@github.com:jeremyfelt/jeremyfelt-wp-custom.git",
+                "url": "https://github.com/jeremyfelt/jeremyfelt-wp-custom.git",
                 "reference": "develop"
             },
             "type": "wordpress-plugin"
