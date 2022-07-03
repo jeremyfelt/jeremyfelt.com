@@ -39,6 +39,9 @@ jobs:
       if: success()
       uses: easingthemes/ssh-deploy@v2.2.11
       env:
+          # Remember this needs to be in PEM format, so make sure you aren't
+          # using one of your old keys, Jeremy.
+          # If you need a new key, use: ssh-keygen -m PEM -t rsa -b 4096
           SSH_PRIVATE_KEY: ${{ secrets.FOGGY_SSH_KEY }}
           ARGS: "-rltgoDzvO --exclude-from=.deploy_ignore --delete"
           SOURCE: "./"
