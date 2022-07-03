@@ -53,7 +53,7 @@
 				"version": "1.0.0",
 				"type": "wordpress-plugin",
 				"source": {
-					"url": "git@github.com:jeremyfelt/jeremyfelt-wp-custom.git",
+					"url": "https://github.com/jeremyfelt/jeremyfelt-wp-custom.git",
 					"type": "git",
 					"reference": "develop"
 				}
@@ -66,7 +66,7 @@
 				"version": "1.0.0",
 				"type": "wordpress-plugin",
 				"source": {
-					"url": "git@github.com:jeremyfelt/jeremyfelt-indieweb-custom.git",
+					"url": "https://github.com/jeremyfelt/jeremyfelt-indieweb-custom.git",
 					"type": "git",
 					"reference": "develop"
 				}
