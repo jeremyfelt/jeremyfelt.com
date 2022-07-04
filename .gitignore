@@ -9,7 +9,7 @@
 vendor/
 
 # Plugins are managed through composer.json.
-plugins/
+/plugins/
 
 # The theme is probably managed in its own repo.
 themes/
