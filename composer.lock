@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3d52f5ea1df19ecf3c99e4c67db26db6",
+    "content-hash": "a1ac4bc3d5e4ee9d16b612ea531ef4a7",
     "packages": [
         {
             "name": "composer/installers",
@@ -191,16 +191,6 @@
             "type": "wordpress-plugin"
         },
         {
-            "name": "jeremyfelt/jeremyfelt-wp-custom",
-            "version": "1.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/jeremyfelt/jeremyfelt-wp-custom.git",
-                "reference": "develop"
-            },
-            "type": "wordpress-plugin"
-        },
-        {
             "name": "wpackagist-plugin/content-visibility",
             "version": "0.2.7",
             "source": {
@@ -256,15 +246,15 @@
         },
         {
             "name": "wpackagist-plugin/gutenberg",
-            "version": "13.5.2",
+            "version": "13.6.0",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/gutenberg/",
-                "reference": "tags/13.5.2"
+                "reference": "tags/13.6.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/gutenberg.13.5.2.zip"
+                "url": "https://downloads.wordpress.org/plugin/gutenberg.13.6.0.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
