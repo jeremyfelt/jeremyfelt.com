@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a1ac4bc3d5e4ee9d16b612ea531ef4a7",
+    "content-hash": "505c37ed5eff5b30ae59a8dd97f2b489",
     "packages": [
         {
             "name": "composer/installers",
@@ -176,16 +176,6 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jeremyfelt/dangit-capital-p.git",
-                "reference": "develop"
-            },
-            "type": "wordpress-plugin"
-        },
-        {
-            "name": "jeremyfelt/jeremyfelt-indieweb-custom",
-            "version": "1.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/jeremyfelt/jeremyfelt-indieweb-custom.git",
                 "reference": "develop"
             },
             "type": "wordpress-plugin"

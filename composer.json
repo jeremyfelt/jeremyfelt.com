@@ -45,19 +45,6 @@
 					"reference": "develop"
 				}
 			}
-		},
-		{
-			"type":"package",
-			"package": {
-				"name": "jeremyfelt/jeremyfelt-indieweb-custom",
-				"version": "1.0.0",
-				"type": "wordpress-plugin",
-				"source": {
-					"url": "https://github.com/jeremyfelt/jeremyfelt-indieweb-custom.git",
-					"type": "git",
-					"reference": "develop"
-				}
-			}
 		}
 	],
 	"extra": {
@@ -76,7 +63,6 @@
 		"wpackagist-plugin/gutenberg": "^13.5",
 		"wpackagist-plugin/indieauth": "^4.2",
 		"wpackagist-plugin/indieweb": "^3.4",
-		"jeremyfelt/jeremyfelt-indieweb-custom": "^1.0",
 		"wpackagist-plugin/local-wordpress-plugin-repo": "^0.9.0",
 		"wpackagist-plugin/micropub": "^2.3",
 		"wpackagist-plugin/public-post-preview": "^2.9",
