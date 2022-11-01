@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "505c37ed5eff5b30ae59a8dd97f2b489",
+    "content-hash": "c8b9a45eb9c12a6ed6244a3356fd9c26",
     "packages": [
         {
             "name": "composer/installers",
@@ -413,6 +413,24 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/semantic-linkbacks/"
+        },
+        {
+            "name": "wpackagist-plugin/share-on-mastodon",
+            "version": "0.6.4",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/share-on-mastodon/",
+                "reference": "tags/0.6.4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/share-on-mastodon.0.6.4.zip"
+            },
+            "require": {
+                "composer/installers": "^1.0 || ^2.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/share-on-mastodon/"
         },
         {
             "name": "wpackagist-plugin/shortnotes",
