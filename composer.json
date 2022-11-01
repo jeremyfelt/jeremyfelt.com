@@ -60,7 +60,7 @@
 		"wpackagist-plugin/content-visibility-rss-feed": "^0.1.2",
 		"wpackagist-plugin/custom-posts-per-page": "^1.7",
 		"jeremyfelt/dangit-capital-p": "^1.0",
-		"wpackagist-plugin/gutenberg": "^13.5",
+		"wpackagist-plugin/gutenberg": "14.2.0",
 		"wpackagist-plugin/indieauth": "^4.2",
 		"wpackagist-plugin/indieweb": "^3.4",
 		"wpackagist-plugin/local-wordpress-plugin-repo": "^0.9.0",
