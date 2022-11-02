@@ -23,4 +23,8 @@ function remove_global_styles() {
 	remove_action( 'wp_enqueue_scripts', 'wp_common_block_scripts_and_styles' );
 
 	remove_action( 'wp_footer', 'gutenberg_enqueue_global_styles', 1 );
+
+	// WordPress 6.1 injects a new stylesheet for classic themes.
+	remove_action( 'wp_enqueue_scripts', 'wp_enqueue_classic_theme_styles' );
+	remove_action( 'admin_enqueue_scripts', 'wp_enqueue_classic_theme_styles' );
 }
