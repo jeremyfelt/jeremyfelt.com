@@ -19,8 +19,5 @@ function filter_status_text( $status, $post ) {
 		html_entity_decode( $status, ENT_QUOTES | ENT_HTML5, get_bloginfo( 'charset' ) ) // Avoid double-encoded HTML entities.
 	);
 
-	// Append the URL, for now.
-	$status .= ' ' . esc_url_raw( get_permalink( $post->ID ) );
-
 	return $status;
 }
