@@ -30,6 +30,11 @@ function filter_status_text( $status, $post ) {
  * @return string Modified post content.
  */
 function convert_anchors( string $html ) : string {
+	// DomDocument may not parse "special" characters right, so convert anything not
+	// known in ASCII to its HTML entity.
+	// @see https://stackoverflow.com/questions/39148170/utf-8-with-php-domdocument-loadhtml/39148511#39148511
+	$html = mb_convert_encoding( $html, 'HTML-ENTITIES', 'UTF-8' );
+
 	$document = new \DOMDocument();
 	@$document->loadHTML( $html, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD ); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged
 
