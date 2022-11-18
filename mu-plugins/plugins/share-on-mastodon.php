@@ -50,12 +50,20 @@ function filter_args( array $args, \WP_Post $post ) : array {
  */
 function filter_status_text( $status, $post ) {
 	$status = apply_filters( 'the_content', $post->post_content );
+	$status = trim( $status );
 	$status = convert_anchors( $status );
+
+	$status = str_replace( '<p>', '', $status );
+	$status = substr_replace( $status, ' ', strrpos( $status, '</p>' ), 4 );
+	$status = str_replace( '</p>', "\n\n", $status );
 
 	// Do what the plugin does to the title, but to the rendered content.
 	$status = wp_strip_all_tags(
 		html_entity_decode( $status, ENT_QUOTES | ENT_HTML5, get_bloginfo( 'charset' ) ) // Avoid double-encoded HTML entities.
 	);
+
+	// Remove more than two contiguous line breaks. Thanks, wpautop!
+	$status = preg_replace( "/\n\n+/", "\n\n", $status );
 
 	add_filter(
 		'share_on_mastodon_toot_args',
@@ -74,33 +82,11 @@ function filter_status_text( $status, $post ) {
  * @return string Modified post content.
  */
 function convert_anchors( string $html ) : string {
-	// DomDocument may not parse "special" characters right, so convert anything not
-	// known in ASCII to its HTML entity.
-	// @see https://stackoverflow.com/questions/39148170/utf-8-with-php-domdocument-loadhtml/39148511#39148511
-	$html = mb_convert_encoding( $html, 'HTML-ENTITIES', 'UTF-8' );
+	preg_match_all('/<a\s+(?:[^>]*?\s+)?href=(["\'])(.*?)\1/', $html, $matches );
 
-	$document = new \DOMDocument();
-	@$document->loadHTML( $html, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD ); // phpcs:ignore WordPress.PHP.NoSilencedErrors.Discouraged
+	$links = array_filter( $matches[2], function( $link ) {
+		return wp_parse_url( $link, PHP_URL_HOST );
+	} );
 
-	$anchors = $document->getElementsByTagName( 'a' );
-	$count   = $anchors->length - 1;
-
-	// Track links in content.
-	$link_hrefs = [];
-
-	for ( $count; $count > -1; $count-- ) {
-		$node = $anchors->item( $count );
-
-		$link_text = $node->nodeValue; // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
-		$link_href = $node->getAttribute( 'href' );
-
-		if ( '' !== $link_href ) {
-			$text_node    = $document->createTextNode( $link_text );
-			$link_hrefs[] = $link_href;
-
-			$node->parentNode->replaceChild( $text_node, $node ); // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
-		}
-	}
-
-	return $document->saveHTML() . ' ' . implode( ' ', $link_hrefs );
+	return $html . implode( ' ', $links );
 }
