@@ -5,6 +5,9 @@
 # I rename things to .old when I'm messing around locally.
 *.old
 
+# Hi, Query Monitor.
+db.php
+
 # Composer installs things.
 vendor/
 
