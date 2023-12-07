@@ -24,7 +24,7 @@ function batcache_cancel() {
 //  X_X  DO NOT use any WordPress functions except is_admin() and is_multisite(). Fatal error.
 //  X_X  DO NOT include or require files from anywhere without consulting expensive professionals first. Fatal error.
 //  X_X  DO NOT use $wpdb, $blog_id, $current_user, etc. These have not been initialized.
-//  ^_^  DO understand how create_function works. This is how your code is used: create_function('', $function);
+//  ^_^  DO understand how anonymous functions and eval work. This is how your code is used: eval( '$fun = function() { ' . $function . '; };' );
 //  ^_^  DO remember to return something. The return value determines the cache variant.
 function vary_cache_on_function($function) {
 	global $batcache;
@@ -51,10 +51,11 @@ class batcache {
 
 	var $unique  = array(); // If you conditionally serve different content, put the variable values here.
 
-	var $vary    = array(); // Array of functions for create_function. The return value is added to $unique above.
+	var $vary    = array(); // Array of functions for anonymous function eval. The return value is added to $unique above.
 
 	var $headers = array(); // Add headers here as name=>value or name=>array(values). These will be sent with every response from the cache.
 
+	var $status_header   = false;
 	var $cache_redirects = false; // Set true to enable redirect caching.
 	var $redirect_status = false; // This is set to the response code during a redirect.
 	var $redirect_location = false; // This is set to the redirect location.
@@ -69,8 +70,11 @@ class batcache {
 	var $cancel = false; // Change this to cancel the output buffer. Use batcache_cancel();
 
 	var $noskip_cookies = array( 'wordpress_test_cookie' ); // Names of cookies - if they exist and the cache would normally be bypassed, don't bypass it
+	var $cacheable_origin_hostnames = array(); // A whitelist of HTTP origin `<host>:<port>` (or just `<host>`) names that are allowed as cache variations.
 
-	var $query = '';
+	var $origin = null; // Current Origin header.
+	var $query = array();
+	var $ignored_query_args = array();
 	var $genlock = false;
 	var $do = false;
 
@@ -89,6 +93,47 @@ class batcache {
 			return true;
 		}
 		return false;
+	}
+
+	function client_accepts_only_json() {
+		if ( ! isset( $_SERVER['HTTP_ACCEPT'] ) )
+			return false;
+
+		$is_json_only = false;
+
+		foreach ( explode( ',', $_SERVER['HTTP_ACCEPT'] ) as $mime_type ) {
+			if ( false !== $pos = strpos( $mime_type, ';' ) )
+				$mime_type = substr( $mime_type, 0, $pos );
+
+			$mime_type = trim( $mime_type );
+
+			if ( '/json' === substr( $mime_type, -5 ) || '+json' === substr( $mime_type, -5 ) ) {
+				$is_json_only = true;
+				continue;
+			}
+
+			return false;
+		}
+
+		return $is_json_only;
+	}
+
+	function is_cacheable_origin( $origin ) {
+		$parsed_origin = parse_url( $origin );
+
+		if ( false === $parsed_origin ) {
+			return false;
+		}
+
+		$origin_host = ! empty( $parsed_origin['host'] ) ? strtolower( $parsed_origin['host'] ) : null;
+		$origin_scheme = ! empty( $parsed_origin['scheme'] ) ? strtolower( $parsed_origin['scheme'] ) : null;
+		$origin_port = ! empty( $parsed_origin['port'] ) ? $parsed_origin['port'] : null;
+
+		return $origin
+			&& $origin_host
+			&& ( 'http' === $origin_scheme || 'https' === $origin_scheme )
+			&& ( null === $origin_port || 80 === $origin_port || 443 === $origin_port )
+			&& in_array( $origin_host, $this->cacheable_origin_hostnames, true );
 	}
 
 	function status_header( $status_header, $status_code ) {
@@ -258,8 +303,8 @@ class batcache {
 		if ( is_array($dimensions) ) {
 			ksort($dimensions);
 			foreach ( $dimensions as $key => $function ) {
-				$fun = create_function('', $function);
-				$value = $fun();
+				eval( '$fun = function() { ' . $function . '; };' );
+				$value = call_user_func( $fun );
 				$this->keys[$key] = $value;
 			}
 		}
@@ -314,6 +359,17 @@ HTML;
 		}
 		$this->cache['output'] .= "\n$debug_html";
 	}
+
+	function set_query( $query_string ) {
+		parse_str( $query_string, $this->query );
+
+		foreach ( $this->ignored_query_args as $arg ) {
+			unset( $this->query[ $arg ] );
+		}
+
+		// Normalize query parameters for better cache hits.
+		ksort( $this->query );
+	}
 }
 
 global $batcache;
@@ -342,6 +398,12 @@ if ((isset($_SERVER['REQUEST_METHOD']) && !in_array($_SERVER['REQUEST_METHOD'], 
 	return;
 }
 
+// Never batcache a request with X-WP-Nonce header.
+if ( ! empty( $_SERVER['HTTP_X_WP_NONCE'] ) ) {
+	batcache_stats( 'batcache', 'x_wp_nonce_skip' );
+	return;
+}
+
 // Never batcache when cookies indicate a cache-exempt visitor.
 if ( is_array( $_COOKIE) && ! empty( $_COOKIE ) ) {
 	foreach ( array_keys( $_COOKIE ) as $batcache->cookie ) {
@@ -352,13 +414,25 @@ if ( is_array( $_COOKIE) && ! empty( $_COOKIE ) ) {
 	}
 }
 
+// Never batcache a response for a request with an Origin request header.
+// *Unless* that Origin header is in the configured whitelist of allowed origins with restricted schemes and ports.
+if ( isset( $_SERVER['HTTP_ORIGIN'] ) ) {
+	if ( ! $batcache->is_cacheable_origin( $_SERVER['HTTP_ORIGIN'] ) ) {
+		batcache_stats( 'batcache', 'origin_skip' );
+		return;
+	}
+
+	$batcache->origin = $_SERVER['HTTP_ORIGIN'];
+}
+
 if ( ! include_once( WP_CONTENT_DIR . '/object-cache.php' ) )
 	return;
 
 wp_cache_init(); // Note: wp-settings.php calls wp_cache_init() which clobbers the object made here.
 
-if ( ! is_object( $wp_object_cache ) )
+if ( empty( $wp_object_cache ) || ! is_object( $wp_object_cache ) ) {
 	return;
+}
 
 // Now that the defaults are set, you might want to use different settings under certain conditions.
 
@@ -394,10 +468,7 @@ header('Vary: Cookie', false);
 
 // Things that define a unique page.
 if ( isset( $_SERVER['QUERY_STRING'] ) ) {
-	parse_str($_SERVER['QUERY_STRING'], $batcache->query);
-
-	// Normalize query paramaters for better cache hits.
-	ksort( $batcache->query );
+	$batcache->set_query( $_SERVER['QUERY_STRING'] );
 }
 
 $batcache->keys = array(
@@ -407,9 +478,16 @@ $batcache->keys = array(
 	'query' => $batcache->query,
 	'extra' => $batcache->unique
 );
+if ( isset( $batcache->origin ) ) {
+	$batcache->keys['origin'] = $batcache->origin;
+}
 
 if ( $batcache->is_ssl() )
 	$batcache->keys['ssl'] = true;
+
+# Some plugins return html or json based on the Accept value for the same URL.
+if ( $batcache->client_accepts_only_json() )
+	$batcache->keys['json'] = true;
 
 // Recreate the permalink from the URL
 $batcache->permalink = 'http://' . $batcache->keys['host'] . $batcache->keys['path'] . ( isset($batcache->keys['query']['p']) ? "?p=" . $batcache->keys['query']['p'] : '' );
@@ -421,21 +499,27 @@ $batcache->generate_keys();
 
 // Get the batcache
 $batcache->cache = wp_cache_get($batcache->key, $batcache->group);
+$is_cached = is_array( $batcache->cache ) && isset( $batcache->cache['time'] );
+$has_expired = $is_cached && time() > $batcache->cache['time'] + $batcache->cache['max_age'];
 
 if ( isset( $batcache->cache['version'] ) && $batcache->cache['version'] != $batcache->url_version ) {
 	// Always refresh the cache if a newer version is available.
 	$batcache->do = true;
 } else if ( $batcache->seconds < 1 || $batcache->times < 2 ) {
-	// Are we only caching frequently-requested pages?
-	$batcache->do = true;
+	// Cache is empty or has expired and we're caching all requests.
+	$batcache->do = ! $is_cached || $has_expired;
 } else {
 	// No batcache item found, or ready to sample traffic again at the end of the batcache life?
-	if ( !is_array($batcache->cache) || time() >= $batcache->cache['time'] + $batcache->max_age - $batcache->seconds ) {
+	if ( ! $is_cached || time() >= $batcache->cache['time'] + $batcache->max_age - $batcache->seconds ) {
 		wp_cache_add($batcache->req_key, 0, $batcache->group);
 		$batcache->requests = wp_cache_incr($batcache->req_key, 1, $batcache->group);
 
-		if ( $batcache->requests >= $batcache->times &&
-			time() >= $batcache->cache['time'] + $batcache->cache['max_age']
+		if (
+			$batcache->requests >= $batcache->times && // visited enough times
+			(
+				! $is_cached || // no cache
+				time() >= $batcache->cache['time'] + $batcache->cache['max_age'] // or cache expired
+			)
 		) {
 			wp_cache_delete( $batcache->req_key, $batcache->group );
 			$batcache->do = true;
@@ -449,11 +533,12 @@ if ( isset( $batcache->cache['version'] ) && $batcache->cache['version'] != $bat
 if ( $batcache->do )
 	$batcache->genlock = wp_cache_add("{$batcache->url_key}_genlock", 1, $batcache->group, 10);
 
-if ( isset( $batcache->cache['time'] ) && // We have cache
-	! $batcache->genlock &&            // We have not obtained cache regeneration lock
+if (
+	$is_cached && // We have cache
+	! $batcache->genlock && // We have not obtained cache regeneration lock
 	(
-		time() < $batcache->cache['time'] + $batcache->cache['max_age'] || // Batcached page that hasn't expired ||
-		( $batcache->do && $batcache->use_stale )                          // Regenerating it in another request and can use stale cache
+		! $has_expired || // Batcached page that hasn't expired
+		( $batcache->do && $batcache->use_stale ) // Regenerating it in another request and can use stale cache
 	)
 ) {
 	// Issue redirect if cached and enabled
