@@ -3,9 +3,9 @@
 	"type": "project",
 	"minimum-stability": "stable",
 	"require-dev": {
-		"wp-coding-standards/wpcs": "^2.0",
-		"dealerdirect/phpcodesniffer-composer-installer": "^0.7.0",
-		"phpcompatibility/php-compatibility": "^9.3",
+		"wp-coding-standards/wpcs": "*",
+		"dealerdirect/phpcodesniffer-composer-installer": "*",
+		"phpcompatibility/php-compatibility": "dev-develop as 9.99.99",
 		"phpcompatibility/phpcompatibility-wp": "*"
 	},
 	"scripts": {
