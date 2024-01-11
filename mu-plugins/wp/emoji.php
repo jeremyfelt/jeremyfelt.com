@@ -36,7 +36,7 @@ function remove_extra_emoji_handling() {
 /**
  * Remove unnecessary DNS prefetch for s.w.org.
  *
- * @param array A list of URLs.
+ * @param array $urls A list of URLs.
  * @return array A modified list of URLs.
  */
 function remove_wp_org_cdn_prefetch( array $urls ): array {
