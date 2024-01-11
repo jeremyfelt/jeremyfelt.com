@@ -82,7 +82,7 @@ function filter_micropub_post_content( $content, $input ) {
 
 	// Remove content filtering if this is a reply.
 	if ( isset( $props['in-reply-to'] ) ) {
-		remove_filter( 'micropub_post_content', array( 'Micropub_Render', 'generate_post_content' ), 1, 2 );
+		remove_filter( 'micropub_post_content', array( 'Micropub_Render', 'generate_post_content' ), 1 );
 	}
 
 	return $content;
@@ -96,7 +96,7 @@ function filter_micropub_post_content( $content, $input ) {
  * @param int    $post_id  The post ID.
  * @param string $meta_key The meta key.
  * @param bool   $single   Whether a single value was requested.
- * @return string The reply-to URL.
+ * @return null|string The reply-to URL.
  */
 function filter_reply_to_metadata( $value, $post_id, $meta_key, $single ) {
 	if ( 'shortnotes_reply_to_url' !== $meta_key ) {

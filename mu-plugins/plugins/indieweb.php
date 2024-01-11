@@ -12,12 +12,15 @@ add_filter( 'webmention_comment_form', __NAMESPACE__ . '\filter_webmention_comme
  *
  * In these cases, the site/theme has taken care of the display layer.
  */
-function remove_indieweb_styles() {
+function remove_indieweb_styles(): void {
 	remove_action( 'wp_enqueue_scripts', array( 'IndieWeb_Plugin', 'enqueue_style' ) );
 	remove_action( 'wp_enqueue_scripts', array( 'Semantic_Linkbacks_Plugin', 'enqueue_scripts' ) );
 }
 
-function remove_indieweb_added_on_init() {
+/**
+ * Remove unneeded filters added by the IndieWeb plugin(s).
+ */
+function remove_indieweb_added_on_init(): void {
 
 	// Remove the injection of the Semantic_Linkbacks_Walker_Comment walker when displaying
 	// comments. This is added on the init action by the Semantic Linkbacks plugin.

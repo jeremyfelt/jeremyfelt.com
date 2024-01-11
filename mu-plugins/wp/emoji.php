@@ -15,7 +15,7 @@ add_filter( 'wp_resource_hints', __NAMESPACE__ . '\remove_wp_org_cdn_prefetch' )
  * current support for emoji on devices that will actually be reading this
  * content is high. ❤️
  */
-function remove_extra_emoji_handling() {
+function remove_extra_emoji_handling(): void {
 
 	// Don't output the inline JavaScript used to convert emoji characters
 	// into Twemoji images.
@@ -36,10 +36,10 @@ function remove_extra_emoji_handling() {
 /**
  * Remove unnecessary DNS prefetch for s.w.org.
  *
- * @param array A list of URLs.
+ * @param array $urls A list of URLs.
  * @return array A modified list of URLs.
  */
-function remove_wp_org_cdn_prefetch( array $urls ) : array {
+function remove_wp_org_cdn_prefetch( array $urls ): array {
 
 	foreach ( $urls as $key => $url ) {
 
