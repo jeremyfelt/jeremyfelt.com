@@ -39,7 +39,7 @@ function remove_extra_emoji_handling() {
  * @param array A list of URLs.
  * @return array A modified list of URLs.
  */
-function remove_wp_org_cdn_prefetch( array $urls ) : array {
+function remove_wp_org_cdn_prefetch( array $urls ): array {
 
 	foreach ( $urls as $key => $url ) {
 
