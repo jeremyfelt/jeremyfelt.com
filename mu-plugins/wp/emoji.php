@@ -15,7 +15,7 @@ add_filter( 'wp_resource_hints', __NAMESPACE__ . '\remove_wp_org_cdn_prefetch' )
  * current support for emoji on devices that will actually be reading this
  * content is high. ❤️
  */
-function remove_extra_emoji_handling() {
+function remove_extra_emoji_handling(): void {
 
 	// Don't output the inline JavaScript used to convert emoji characters
 	// into Twemoji images.
