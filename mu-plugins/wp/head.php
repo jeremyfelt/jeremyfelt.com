@@ -24,8 +24,8 @@ function remove_default_actions() {
 
 	// I can't ever imagine wanting a shortlink in today's internet, but that may
 	// just be me.
-	remove_action( 'wp_head', 'wp_shortlink_wp_head', 10, 0 );
-	remove_action( 'template_redirect', 'wp_shortlink_header', 11, 0 );
+	remove_action( 'wp_head', 'wp_shortlink_wp_head', 10 );
+	remove_action( 'template_redirect', 'wp_shortlink_header', 11 );
 
 	// No need to advertise the REST API, it's still there.
 	remove_action( 'wp_head', 'rest_output_link_wp_head' );
