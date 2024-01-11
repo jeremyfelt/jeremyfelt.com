@@ -16,9 +16,6 @@ add_action( 'plugins_loaded', __NAMESPACE__ . '\remove_default_actions' );
  */
 function remove_default_actions() {
 
-	// There is a very close to zero chance I will ever use Windows Live Writer.
-	remove_action( 'wp_head', 'wlwmanifest_link' );
-
 	// Remove EditURI link for XML-RPC hinting.
 	remove_action( 'wp_head', 'rsd_link' );
 
