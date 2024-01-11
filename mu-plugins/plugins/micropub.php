@@ -82,7 +82,7 @@ function filter_micropub_post_content( $content, $input ) {
 
 	// Remove content filtering if this is a reply.
 	if ( isset( $props['in-reply-to'] ) ) {
-		remove_filter( 'micropub_post_content', array( 'Micropub_Render', 'generate_post_content' ), 1, 2 );
+		remove_filter( 'micropub_post_content', array( 'Micropub_Render', 'generate_post_content' ), 1 );
 	}
 
 	return $content;
