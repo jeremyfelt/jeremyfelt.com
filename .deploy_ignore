@@ -14,7 +14,7 @@ images/
 plugins/
 slides/
 sub-site/
-themes/
+/themes/
 uploads/
 upgrade/
 vendor/
