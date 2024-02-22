@@ -15,7 +15,7 @@ vendor/
 /plugins/
 
 # The theme is probably managed in its own repo.
-themes/
+/themes/
 
 # Uploads are... uploads.
 uploads/
