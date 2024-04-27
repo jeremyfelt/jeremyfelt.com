@@ -10,11 +10,11 @@ jobs:
 
     steps:
     - name: Checkout project
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
 
     - name: Deploy to server
       if: success()
-      uses: easingthemes/ssh-deploy@v2.2.11
+      uses: easingthemes/ssh-deploy@v5.0.3
       env:
           # Remember this needs to be in PEM format, so make sure you aren't
           # using one of your old keys, Jeremy.
