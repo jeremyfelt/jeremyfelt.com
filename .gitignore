@@ -5,13 +5,13 @@
 # I rename things to .old when I'm messing around locally.
 *.old
 
-# Hi, Query Monitor.
+# Hi, local Query Monitor, ❤️.
 db.php
 
-# Composer installs things.
+# Composer installs things that I use for development.
 vendor/
 
-# Plugins are managed through composer.json.
+# Plugins are managed in WordPress.
 /plugins/
 
 # The theme is probably managed in its own repo.
@@ -20,4 +20,5 @@ vendor/
 # Uploads are... uploads.
 uploads/
 
+# A hack's hackity hacks for hacking hacks.
 mu-plugins/local/
