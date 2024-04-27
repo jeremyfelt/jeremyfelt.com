@@ -9,6 +9,8 @@ bin/
 config/
 composer.json
 composer.lock
+phpcs.xml
+phpstan.neon.dist
 README.md
 images/
 plugins/
