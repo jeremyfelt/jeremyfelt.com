@@ -9,6 +9,7 @@
 namespace JeremyFelt\WP\Head;
 
 add_action( 'plugins_loaded', __NAMESPACE__ . '\remove_default_actions' );
+add_filter( 'site_icon_meta_tags', __NAMESPACE__ . '\filter_site_icon_meta_tags' );
 
 /**
  * Remove other default actions that output unnecessary elements or do
@@ -32,4 +33,22 @@ function remove_default_actions(): void {
 
 	// Remove embed information on single views.
 	remove_action( 'wp_head', 'wp_oembed_add_discovery_links' );
+}
+
+/**
+ * Filter out unnecessary meta tags for the site icon.
+ *
+ * @param string[] $meta_tags Array of meta tags.
+ * @return string[] Modified list of meta tags.
+ */
+function filter_site_icon_meta_tags( array $meta_tags ): array {
+
+	$meta_tags = array_filter(
+		$meta_tags,
+		function ( $tag ) {
+			return ! mb_strpos( $tag, 'msapplication-TileImage' );
+		}
+	);
+
+	return $meta_tags;
 }
