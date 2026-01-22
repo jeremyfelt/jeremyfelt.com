@@ -1,0 +1,23 @@
+{
+	"name": "jeremyfelt-wp-content",
+	"version": "1.0.0",
+	"description": "WordPress wp-content for jeremyfelt.com",
+	"scripts": {
+		"build": "wp-scripts build --webpack-src-dir=mu-plugins/plugins/block-quote-mentions/src --output-path=mu-plugins/plugins/block-quote-mentions/build",
+		"start": "wp-scripts start --webpack-src-dir=mu-plugins/plugins/block-quote-mentions/src --output-path=mu-plugins/plugins/block-quote-mentions/build",
+		"packages-update": "wp-scripts packages-update"
+	},
+	"devDependencies": {
+		"@wordpress/scripts": "^27.0.0"
+	},
+	"dependencies": {
+		"@wordpress/block-editor": "^12.0.0",
+		"@wordpress/blocks": "^12.0.0",
+		"@wordpress/components": "^25.0.0",
+		"@wordpress/compose": "^6.0.0",
+		"@wordpress/data": "^9.0.0",
+		"@wordpress/element": "^5.0.0",
+		"@wordpress/i18n": "^4.0.0",
+		"@wordpress/api-fetch": "^6.0.0"
+	}
+}

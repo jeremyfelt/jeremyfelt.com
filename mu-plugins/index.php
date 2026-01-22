@@ -8,6 +8,7 @@ require_once __DIR__ . '/wp/head.php';
 require_once __DIR__ . '/wp/styles.php';
 require_once __DIR__ . '/wp/urls.php';
 
+require_once __DIR__ . '/plugins/block-quote-mentions.php';
 require_once __DIR__ . '/plugins/content-visibility.php';
 require_once __DIR__ . '/plugins/indieweb.php';
 require_once __DIR__ . '/plugins/micropub.php';

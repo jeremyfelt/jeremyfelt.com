@@ -22,3 +22,7 @@ uploads/
 
 # A hack's hackity hacks for hacking hacks.
 mu-plugins/local/
+
+# NPM dependencies for block builds.
+node_modules/
+package-lock.json

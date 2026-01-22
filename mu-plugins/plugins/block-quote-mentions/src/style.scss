@@ -1,0 +1,168 @@
+/**
+ * Frontend styles for the Quote Mention block.
+ */
+
+.wp-block-quote-mention {
+	margin: 2em 0;
+	padding: 1.5em;
+	border-left: 4px solid currentColor;
+	background: rgba(0, 0, 0, 0.03);
+
+	&__quote {
+		margin: 0;
+		padding: 0;
+
+		// Reset nested block styles for quoted content.
+		> * {
+			margin-top: 0;
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+
+		p {
+			margin: 0 0 1em;
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+
+		// Nested quotes should be styled differently.
+		blockquote {
+			margin: 1em 0;
+			padding-left: 1em;
+			border-left: 2px solid currentColor;
+			opacity: 0.8;
+		}
+
+		// Code blocks.
+		pre,
+		code {
+			background: rgba(0, 0, 0, 0.05);
+		}
+
+		// Lists.
+		ul,
+		ol {
+			margin: 0 0 1em;
+			padding-left: 1.5em;
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+
+		// Images should fit.
+		img {
+			max-width: 100%;
+			height: auto;
+		}
+	}
+
+	&__citation {
+		margin-top: 1em;
+		font-size: 0.875em;
+		opacity: 0.75;
+
+		cite {
+			font-style: normal;
+		}
+	}
+
+	&__source-link {
+		color: inherit;
+		text-decoration: underline;
+		text-decoration-style: dotted;
+		text-underline-offset: 0.2em;
+
+		&:hover,
+		&:focus {
+			text-decoration-style: solid;
+			opacity: 1;
+		}
+	}
+}
+
+/**
+ * "Referenced by" section that appears on quoted posts.
+ */
+.quote-mentions-referenced-by {
+	margin: 3em 0 2em;
+	padding: 1.5em;
+	background: rgba(0, 0, 0, 0.03);
+	border-radius: 4px;
+
+	&__title {
+		margin: 0 0 1em;
+		font-size: 0.875em;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		opacity: 0.75;
+	}
+
+	&__list {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+
+		li {
+			margin: 0.5em 0;
+			padding: 0;
+
+			a {
+				color: inherit;
+				text-decoration: underline;
+
+				&:hover,
+				&:focus {
+					opacity: 0.75;
+				}
+			}
+		}
+	}
+
+	.quote-mentions-date {
+		font-size: 0.875em;
+		opacity: 0.6;
+	}
+}
+
+/**
+ * Alignment support.
+ */
+.wp-block-quote-mention {
+	&.alignwide {
+		max-width: var(--wp--style--global--wide-size, 1200px);
+	}
+
+	&.alignfull {
+		max-width: none;
+		margin-left: calc(-50vw + 50%);
+		margin-right: calc(-50vw + 50%);
+		padding-left: 2em;
+		padding-right: 2em;
+	}
+}
+
+/**
+ * Dark mode / color scheme support.
+ */
+@media (prefers-color-scheme: dark) {
+	.wp-block-quote-mention {
+		background: rgba(255, 255, 255, 0.05);
+
+		&__quote {
+			pre,
+			code {
+				background: rgba(255, 255, 255, 0.1);
+			}
+		}
+	}
+
+	.quote-mentions-referenced-by {
+		background: rgba(255, 255, 255, 0.05);
+	}
+}

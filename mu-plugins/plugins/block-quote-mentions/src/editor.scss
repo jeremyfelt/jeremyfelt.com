@@ -1,0 +1,178 @@
+/**
+ * Editor styles for the Quote Mention block.
+ */
+
+.wp-block-jeremyfelt-block-quote-mention {
+	// Search step styles.
+	.quote-mention-search {
+		width: 100%;
+		max-width: 400px;
+
+		&__results {
+			list-style: none;
+			margin: 1em 0 0;
+			padding: 0;
+			max-height: 300px;
+			overflow-y: auto;
+			border: 1px solid #ddd;
+			border-radius: 4px;
+		}
+
+		&__result {
+			margin: 0;
+			padding: 0;
+			border-bottom: 1px solid #eee;
+
+			&:last-child {
+				border-bottom: none;
+			}
+		}
+
+		&__result-button {
+			width: 100%;
+			display: flex;
+			flex-direction: column;
+			align-items: flex-start;
+			padding: 12px;
+			text-align: left;
+			border: none;
+			border-radius: 0;
+			height: auto;
+
+			&:hover {
+				background: #f0f0f0;
+			}
+		}
+
+		&__result-title {
+			font-weight: 600;
+			margin-bottom: 4px;
+		}
+
+		&__result-meta {
+			font-size: 12px;
+			color: #666;
+		}
+
+		&__no-results {
+			color: #666;
+			font-style: italic;
+			margin-top: 1em;
+		}
+	}
+
+	// Block selection step styles.
+	.quote-mention-blocks {
+		width: 100%;
+		max-width: 600px;
+
+		&__list {
+			list-style: none;
+			margin: 1em 0;
+			padding: 0;
+			max-height: 400px;
+			overflow-y: auto;
+			border: 1px solid #ddd;
+			border-radius: 4px;
+		}
+
+		&__item {
+			margin: 0;
+			padding: 8px 12px;
+			border-bottom: 1px solid #eee;
+
+			&:last-child {
+				border-bottom: none;
+			}
+
+			&:hover {
+				background: #f9f9f9;
+			}
+
+			.components-checkbox-control__label {
+				display: block;
+			}
+		}
+
+		&__item-label {
+			display: block;
+			line-height: 1.5;
+
+			strong {
+				color: #1e1e1e;
+				font-size: 11px;
+				text-transform: uppercase;
+				letter-spacing: 0.5px;
+			}
+		}
+
+		&__actions {
+			display: flex;
+			gap: 8px;
+			justify-content: flex-end;
+		}
+	}
+
+	// Preview step styles (editor).
+	.wp-block-quote-mention {
+		margin: 0;
+		padding: 1.5em;
+		border-left: 4px solid #000;
+		background: #f9f9f9;
+
+		&__quote {
+			margin: 0;
+			padding: 0;
+		}
+
+		&__content {
+			// Reset nested block styles.
+			> * {
+				margin-top: 0;
+
+				&:last-child {
+					margin-bottom: 0;
+				}
+			}
+
+			p {
+				margin: 0 0 1em;
+
+				&:last-child {
+					margin-bottom: 0;
+				}
+			}
+		}
+
+		&__citation {
+			margin-top: 1em;
+			font-size: 0.875em;
+			color: #666;
+
+			cite {
+				font-style: normal;
+			}
+
+			a {
+				color: inherit;
+				text-decoration: underline;
+
+				&:hover {
+					color: #000;
+				}
+			}
+		}
+	}
+}
+
+// Placeholder component overrides.
+.wp-block-jeremyfelt-block-quote-mention {
+	.components-placeholder {
+		min-height: 200px;
+
+		.components-placeholder__fieldset {
+			flex-direction: column;
+			align-items: stretch;
+		}
+	}
+}
