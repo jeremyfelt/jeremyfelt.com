@@ -233,6 +233,23 @@ function shortnotes( string $name, ...$args ) {
 }
 
 /**
+ * Call a function from the Likes plugin, which also lives in a sibling checkout.
+ *
+ * @param string $name    A function name relative to the `Likes` namespace.
+ * @param mixed  ...$args Arguments.
+ * @return mixed The function's return value.
+ */
+function likes( string $name, ...$args ) {
+	$function = '\\Likes\\' . $name;
+
+	if ( ! function_exists( $function ) ) {
+		fail( "Likes function $function is not available. Is the plugin active?" );
+	}
+
+	return call_user_func_array( $function, $args );
+}
+
+/**
  * Read the generated test credentials.
  *
  * @param string $role `admin`, `editor`, `author`, `contributor` or `subscriber`.

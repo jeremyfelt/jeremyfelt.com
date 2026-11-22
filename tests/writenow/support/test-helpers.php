@@ -13,6 +13,16 @@
 namespace JeremyFelt\Apps\WriteNow\Tests\Helpers;
 
 add_filter( 'pre_http_request', __NAMESPACE__ . '\answer_locally', 1, 3 );
+add_action( 'admin_init', __NAMESPACE__ . '\skip_update_checks', 0 );
+
+/**
+ * Skip wp-admin's update checks, which would only fail offline and log warnings.
+ */
+function skip_update_checks(): void {
+	remove_action( 'admin_init', '_maybe_update_core' );
+	remove_action( 'admin_init', '_maybe_update_plugins' );
+	remove_action( 'admin_init', '_maybe_update_themes' );
+}
 
 /**
  * Answer an outbound HTTP request without the network.
@@ -34,12 +44,13 @@ function answer_locally( $response, $args, $url ) {
 
 	if ( 'titles.test' === $host ) {
 		$pages = [
-			'/og'       => '<html><head><title>The HTML title</title><meta content="An &amp; OG title" property="og:title"></head><body></body></html>',
-			'/title'    => "<html><head><title>\n  Just a   <b>title</b> &mdash; here\n</title></head></html>",
-			'/notitle'  => '<html><head></head><body>Nothing</body></html>',
-			'/long'     => '<html><head><title>' . str_repeat( 'Long title ', 40 ) . '</title></head></html>',
-			'/latin1'   => '<html><head><meta charset="iso-8859-1"><title>Caf' . "\xE9" . '</title></head></html>',
-			'/notfound' => '',
+			'/og'        => '<html><head><title>The HTML title</title><meta content="An &amp; OG title" property="og:title"></head><body></body></html>',
+			'/title'     => "<html><head><title>\n  Just a   <b>title</b> &mdash; here\n</title></head></html>",
+			'/notitle'   => '<html><head></head><body>Nothing</body></html>',
+			'/long'      => '<html><head><title>' . str_repeat( 'Long title ', 40 ) . '</title></head></html>',
+			'/latin1'    => '<html><head><meta charset="iso-8859-1"><title>Caf' . "\xE9" . '</title></head></html>',
+			'/nocharset' => '<html><head><title>Na' . "\xEF" . 've</title></head></html>',
+			'/notfound'  => '',
 		];
 
 		if ( '/notfound' === $path || ! isset( $pages[ $path ] ) ) {
@@ -56,7 +67,7 @@ function answer_locally( $response, $args, $url ) {
 		}
 
 		return [
-			'headers'  => [ 'content-type' => 'text/html; charset=utf-8' ],
+			'headers'  => [ 'content-type' => '/latin1' === $path ? 'text/html' : 'text/html; charset=utf-8' ],
 			'body'     => $pages[ $path ],
 			'response' => [
 				'code'    => 200,

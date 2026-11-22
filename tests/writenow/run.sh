@@ -3,11 +3,14 @@
 # Run the WriteNow server tests against a real, local WordPress.
 #
 #   tests/writenow/run.sh [filter]
+#   tests/writenow/run.sh --serve
 #
 # Builds a fresh WordPress site on SQLite outside the repository, with the
 # real shortnotes and likes plugins from their sibling checkouts, serves it
 # with PHP's built-in server, and runs every server test. An optional filter
-# runs only the tests whose names contain it. See README.md for details.
+# runs only the tests whose names contain it. --serve builds the same site
+# and keeps it running in the foreground for using the app by hand.
+# See README.md for details.
 
 set -euo pipefail
 
@@ -35,6 +38,15 @@ if [ ! -f "$SQLITE/packages/plugin-sqlite-database-integration/db.copy" ]; then
 fi
 
 php "$HERE/bin/setup-site.php" "$SITE" "$CORE" "$SQLITE" "$PORT"
+
+if [ "${1:-}" = "--serve" ]; then
+	echo
+	echo "WriteNow:  http://127.0.0.1:$PORT/writenow/"
+	echo "wp-admin:  http://127.0.0.1:$PORT/wp-admin/  (admin / password)"
+	echo "Application Passwords for each test user: $SITE/credentials.json"
+	echo "Press Ctrl-C to stop."
+	exec env PHP_CLI_SERVER_WORKERS=4 php -S "127.0.0.1:$PORT" -t "$SITE/wordpress" "$HERE/bin/router.php"
+fi
 
 # Several workers, so that concurrent requests are really concurrent.
 PHP_CLI_SERVER_WORKERS=4 php -S "127.0.0.1:$PORT" -t "$SITE/wordpress" "$HERE/bin/router.php" > "$SITE/server.log" 2>&1 &
