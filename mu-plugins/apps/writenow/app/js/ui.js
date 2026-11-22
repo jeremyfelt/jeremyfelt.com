@@ -78,7 +78,9 @@ export function busy( button, label ) {
 }
 
 // A destructive button that asks for a second tap instead of a modal.
-export function confirmTap( button, { confirmLabel, onConfirm, timeout = 4000 } ) {
+// `armedFor` starts it already waiting for the second tap, for that many
+// milliseconds, so a button that is rebuilt keeps a first tap.
+export function confirmTap( button, { confirmLabel, onConfirm, onArm = () => {}, timeout = 4000, armedFor = 0 } ) {
 	const label = button.textContent;
 	let armed = false;
 	let timer = null;
@@ -88,12 +90,19 @@ export function confirmTap( button, { confirmLabel, onConfirm, timeout = 4000 } 
 		button.textContent = label;
 		button.classList.remove( 'is-armed' );
 	};
+	const arm = ( duration ) => {
+		armed = true;
+		button.textContent = confirmLabel;
+		button.classList.add( 'is-armed' );
+		timer = setTimeout( disarm, duration );
+	};
+	if ( armedFor > 0 ) {
+		arm( armedFor );
+	}
 	button.addEventListener( 'click', () => {
 		if ( ! armed ) {
-			armed = true;
-			button.textContent = confirmLabel;
-			button.classList.add( 'is-armed' );
-			timer = setTimeout( disarm, timeout );
+			arm( timeout );
+			onArm( timeout );
 			return;
 		}
 		disarm();

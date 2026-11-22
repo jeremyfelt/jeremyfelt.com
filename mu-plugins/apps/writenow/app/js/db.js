@@ -38,6 +38,14 @@ function memoryDb() {
 		async all( store ) {
 			return [ ...stores[ store ].values() ];
 		},
+		async putIfPresent( store, value ) {
+			const key = value.id || value.key;
+			if ( ! stores[ store ].has( key ) ) {
+				return false;
+			}
+			stores[ store ].set( key, value );
+			return true;
+		},
 	};
 }
 
@@ -56,6 +64,24 @@ function indexedDb( db ) {
 		put: ( store, value ) => run( store, 'readwrite', ( s ) => s.put( value ) ),
 		delete: ( store, key ) => run( store, 'readwrite', ( s ) => s.delete( key ) ),
 		all: ( store ) => run( store, 'readonly', ( s ) => s.getAll() ),
+		// Replace a record only if it still exists, in one transaction, so
+		// nothing can delete it between the check and the write.
+		putIfPresent: ( store, value ) =>
+			new Promise( ( resolve, reject ) => {
+				const tx = db.transaction( store, 'readwrite' );
+				const objects = tx.objectStore( store );
+				let written = false;
+				const key = objects.keyPath ? value[ objects.keyPath ] : undefined;
+				objects.count( key ).onsuccess = ( event ) => {
+					if ( event.target.result > 0 ) {
+						objects.put( value );
+						written = true;
+					}
+				};
+				tx.oncomplete = () => resolve( written );
+				tx.onerror = () => reject( tx.error );
+				tx.onabort = () => reject( tx.error || new Error( 'Transaction aborted' ) );
+			} ),
 	};
 }
 
@@ -101,6 +127,11 @@ export async function remove( store, key ) {
 
 export async function all( store ) {
 	return ( await open() ).all( store );
+}
+
+// Resolves to true if the record existed and was replaced.
+export async function putIfPresent( store, value ) {
+	return ( await open() ).putIfPresent( store, value );
 }
 
 export async function putBlob( key, blob, name ) {

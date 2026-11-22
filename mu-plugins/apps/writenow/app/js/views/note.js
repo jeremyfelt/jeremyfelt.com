@@ -499,8 +499,11 @@ function handleResult( result, status, sent ) {
 	const since = 'What you typed since is still here.';
 
 	switch ( result.outcome ) {
-		case 'sent':
-		case 'gone': {
+		case 'gone':
+			// Removed from the waiting list in Recent before it could be sent.
+			setStatus( statusNode, { tone: 'info', text: 'It was removed from the waiting list, so it wasn’t sent. Your note is still here.' } );
+			break;
+		case 'sent': {
 			const data = result.data || {};
 			const message = data.message || ( publishing ? 'Posted.' : 'Saved as a draft.' );
 			const kept = clearSent( sent );

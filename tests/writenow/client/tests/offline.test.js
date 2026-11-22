@@ -114,11 +114,31 @@ test( 'Remove takes a second tap and deletes the queued item', async () => {
 	await page.click( '#like-submit' );
 	await page.waitForFunction( () => document.querySelector( '#like-status' ).textContent.includes( 'saved on this phone' ) );
 	await page.click( '.tab[data-view="recent"]' );
-	const remove = page.locator( '#queue li button:has-text("Remove")' );
+	// text-is, not has-text: "Tap again to remove" contains "remove" too.
+	const remove = page.locator( '#queue li button:text-is("Remove")' );
 	await remove.click();
 	assert.equal( await page.locator( '#queue li' ).count(), 1 );
-	await page.click( '#queue li button:has-text("Tap again to remove")' );
+	await page.click( '#queue li button:text-is("Tap again to remove")' );
 	await page.waitForFunction( () => document.querySelector( '#queue' ).hidden );
+	await app.context.close();
+} );
+
+test( 'an item removed while it is being sent stays removed', async () => {
+	const app = await openApp( env );
+	const { page, wp } = app;
+	// The site will take a moment and then fail with a retryable error.
+	wp.delay[ 'POST /writenow/v1/likes' ] = 800;
+	wp.fail[ 'POST /writenow/v1/likes' ] = { status: 503, code: 'busy', message: 'Busy.' };
+	const outcome = await page.evaluate( async () => {
+		const outbox = await import( new URL( 'outbox.js', document.querySelector( 'script[type=module]' ).src ).href );
+		await outbox.enqueue( 'like', 'removed-mid-send', { url: 'https://example.com/removed', title: '' } );
+		const sending = outbox.send( 'removed-mid-send' );
+		await new Promise( ( resolve ) => setTimeout( resolve, 200 ) );
+		await outbox.discard( 'removed-mid-send' );
+		const result = await sending;
+		return { outcome: result.outcome, left: await outbox.count() };
+	} );
+	assert.deepEqual( outcome, { outcome: 'gone', left: 0 }, 'the failed send did not write the item back' );
 	await app.context.close();
 } );
 

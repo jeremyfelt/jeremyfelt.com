@@ -65,6 +65,8 @@ export function clearCache() {
 // unrelated change.
 let queueRender = 0;
 const queueRows = new Map();
+// Remove buttons waiting for their second tap: item id -> until (ms).
+const armedRemovals = new Map();
 
 function rowSignature( item ) {
 	return JSON.stringify( [ item.state, item.error, item.offline, item.summary, item.payload.status ] );
@@ -91,6 +93,7 @@ async function renderQueue( { force = false } = {} ) {
 	for ( const id of queueRows.keys() ) {
 		if ( ! ids.has( id ) ) {
 			queueRows.delete( id );
+			armedRemovals.delete( id );
 		}
 	}
 	const list = $( 'queue-list' );
@@ -127,9 +130,18 @@ function queueRow( item ) {
 		},
 	} );
 	const remove = el( 'button', { type: 'button', class: 'button text small danger', text: 'Remove' } );
+	if ( item.state === 'sending' ) {
+		// Mid-send it may already be on the site; wait for the outcome.
+		retry.disabled = true;
+		remove.disabled = true;
+	}
 	confirmTap( remove, {
 		confirmLabel: 'Tap again to remove',
 		onConfirm: () => outbox.discard( item.id ),
+		// A background send attempt can rebuild this row between the two
+		// taps; the rebuilt button keeps the first one.
+		onArm: ( timeout ) => armedRemovals.set( item.id, Date.now() + timeout ),
+		armedFor: item.state === 'sending' ? 0 : Math.max( 0, ( armedRemovals.get( item.id ) || 0 ) - Date.now() ),
 	} );
 
 	return el(

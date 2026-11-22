@@ -109,9 +109,22 @@ async function uploadImages( item ) {
 		const uploaded = await api.uploadMedia( blob, image.name || 'writenow.jpg' );
 		image.mediaId = uploaded.id;
 		image.thumbnail = uploaded.thumbnail;
-		// Remember each upload at once so a retry never uploads it twice.
-		await db.put( 'outbox', item );
+		// Remember each upload at once so a retry never uploads it twice,
+		// unless the item was removed meanwhile.
+		if ( ! ( await putIfQueued( item ) ) ) {
+			throw new Removed();
+		}
 	}
+}
+
+// Thrown when an item is removed from the outbox while it is being sent.
+class Removed extends Error {}
+
+// Write an item back only if it is still in the outbox. Remove (in Recent)
+// can run while a send is in flight; writing the item back afterwards
+// would bring it back, and the next flush would send what Jeremy removed.
+function putIfQueued( item ) {
+	return db.putIfPresent( 'outbox', item );
 }
 
 function noteBody( item ) {
@@ -138,7 +151,9 @@ export async function send( id, { background = false } = {} ) {
 		}
 		item.state = 'sending';
 		item.attempts += 1;
-		await db.put( 'outbox', item );
+		if ( ! ( await putIfQueued( item ) ) ) {
+			return { outcome: 'gone' };
+		}
 		emit( { type: 'change' } );
 
 		try {
@@ -157,6 +172,10 @@ export async function send( id, { background = false } = {} ) {
 			emit( { type: 'change' } );
 			return { outcome: 'sent', data, item };
 		} catch ( error ) {
+			if ( error instanceof Removed ) {
+				emit( { type: 'change' } );
+				return { outcome: 'gone', item };
+			}
 			const err = error instanceof api.ApiError ? error : new api.ApiError( 'Something went wrong while sending.', {} );
 			let outcome = 'failed';
 			if ( err.retryable ) {
@@ -167,7 +186,10 @@ export async function send( id, { background = false } = {} ) {
 			item.state = outcome === 'failed' ? 'failed' : 'waiting';
 			item.error = err.message;
 			item.offline = err.offline;
-			await db.put( 'outbox', item );
+			if ( ! ( await putIfQueued( item ) ) ) {
+				emit( { type: 'change' } );
+				return { outcome: 'gone', item };
+			}
 			emit( { type: 'change' } );
 			return { outcome, error: err, item };
 		}
@@ -207,7 +229,7 @@ export async function retry( id ) {
 	const item = await db.get( 'outbox', id );
 	if ( item ) {
 		item.state = 'waiting';
-		await db.put( 'outbox', item );
+		await putIfQueued( item );
 	}
 	return send( id );
 }

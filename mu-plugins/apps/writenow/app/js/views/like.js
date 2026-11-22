@@ -85,7 +85,10 @@ async function submit() {
 		const id = uuid();
 		await outbox.enqueue( 'like', id, { url, title } );
 		const result = await outbox.send( id );
-		if ( result.outcome === 'sent' || result.outcome === 'gone' ) {
+		if ( result.outcome === 'gone' ) {
+			// Removed from the waiting list in Recent before it could be sent.
+			setStatus( status, { tone: 'info', text: 'It was removed from the waiting list, so it wasn’t sent. The address is still here.' } );
+		} else if ( result.outcome === 'sent' ) {
 			const data = result.data || {};
 			clearForm( typed );
 			setStatus( status, {
