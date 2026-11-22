@@ -5,6 +5,8 @@
 
 const { test, before, after } = require( 'node:test' );
 const assert = require( 'node:assert/strict' );
+const fs = require( 'node:fs' );
+const path = require( 'node:path' );
 const { BASE, inspect, launch, openApp, typeNote, settled, drain, unique } = require( './helpers' );
 
 let browser;
@@ -26,7 +28,16 @@ test( 'Settings creates a Shortcut password whose header works for the Like and 
 	await page.click( '#shortcut-details summary' );
 	assert.equal( await page.inputValue( '#shortcut-like-url' ), `${ BASE }/wp-json/writenow/v1/likes` );
 	assert.equal( await page.inputValue( '#shortcut-note-url' ), `${ BASE }/wp-json/writenow/v1/notes` );
-	assert.match( await page.textContent( '#shortcut-details' ), /have not been checked on a device/ );
+	const panel = await page.textContent( '#shortcut-details' );
+	assert.match( panel, /have not been checked on a device/ );
+
+	// The panel and docs/writenow/shortcuts.md describe the same recipes.
+	const doc = fs.readFileSync( path.join( __dirname, '../../../docs/writenow/shortcuts.md' ), 'utf8' );
+	assert.match( doc, /have not been checked on a device/ );
+	for ( const words of [ 'Show in Share Sheet', 'Get Clipboard', 'Get URLs from Input', 'Get Item from List', 'First Item', 'Get Contents of URL', 'POST', 'Authorization', 'JSON', 'Get Dictionary Value', 'message', 'Show Notification', 'Dictate Text', 'Ask for Input', 'content', 'status', 'draft', 'publish', 'Action Button' ] ) {
+		assert.ok( panel.includes( words ), `Settings mentions ${ words }` );
+		assert.ok( doc.includes( words ), `shortcuts.md mentions ${ words }` );
+	}
 
 	await page.click( '#shortcut-create' );
 	await page.waitForSelector( '#shortcut-header-field:not([hidden])' );

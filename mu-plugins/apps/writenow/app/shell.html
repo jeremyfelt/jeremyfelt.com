@@ -196,31 +196,36 @@ below, so a matching response header is optional but welcome):
 
 							<h3>2. Build the Like shortcut</h3>
 							<ol class="steps">
-								<li>In Shortcuts, create a shortcut named “Like”. In its details, turn on <strong>Show in Share Sheet</strong> and accept <strong>URLs</strong> and <strong>Safari web pages</strong>. Set “If there’s no input” to <strong>Get Clipboard</strong>.</li>
+								<li>In Shortcuts, create a shortcut named “Like”. In its details (ⓘ), turn on <strong>Show in Share Sheet</strong>. Set it to receive only <strong>URLs</strong> and <strong>Safari web pages</strong>, and set “If there’s no input” to <strong>Get Clipboard</strong>.</li>
 								<li>Add <strong>Get URLs from Input</strong> with the Shortcut Input.</li>
+								<li>Add <strong>Get Item from List</strong> set to <strong>First Item</strong>, because the site expects one URL.</li>
 								<li>Add <strong>Get Contents of URL</strong> with this URL:
 									<div class="input-row">
 										<input id="shortcut-like-url" readonly aria-label="Like endpoint URL" spellcheck="false">
 										<button type="button" class="button secondary" data-copy="shortcut-like-url">Copy</button>
 									</div>
-									Set Method to <strong>POST</strong>. Under Headers add <strong>Authorization</strong> with the header value from step 1. Set Request Body to <strong>JSON</strong> with one text field, <strong>url</strong>, set to the URLs. Leave out the title; the site looks it up.
+									Under Show More, set Method to <strong>POST</strong>. Add the header <strong>Authorization</strong> with the value from step 1. Set Request Body to <strong>JSON</strong> with one text field, <strong>url</strong>, set to the Item from List. Leave out the title; the site looks it up.
 								</li>
-								<li>Add <strong>Get Dictionary Value</strong> for the key <strong>message</strong>.</li>
+								<li>Add <strong>Get Dictionary Value</strong> for the key <strong>message</strong> in the Contents of URL.</li>
 								<li>Add <strong>Show Notification</strong> with the Dictionary Value.</li>
 							</ol>
+							<p class="hint">Share a page to Like: it should say “Liked: …”, and “Already liked: …” the second time. With no connection, Shortcuts shows an error and nothing is sent; there is no outbox.</p>
 
 							<h3>3. Optional: a Note shortcut</h3>
+							<p>Two variants: one saves a draft, one publishes. The draft one is recommended for dictation, so you can fix it in Recent before it goes out.</p>
 							<ol class="steps">
-								<li>Add <strong>Dictate Text</strong> (or <strong>Ask for Input</strong> for typing).</li>
+								<li>Create a shortcut named “Note”. Add <strong>Dictate Text</strong> (or <strong>Ask for Input</strong> to type).</li>
 								<li>Add <strong>Get Contents of URL</strong> with this URL:
 									<div class="input-row">
 										<input id="shortcut-note-url" readonly aria-label="Note endpoint URL" spellcheck="false">
 										<button type="button" class="button secondary" data-copy="shortcut-note-url">Copy</button>
 									</div>
-									Method <strong>POST</strong>, the same Authorization header, and a JSON body with <strong>content</strong> set to the dictated text and <strong>status</strong> set to <strong>draft</strong>. Use <strong>publish</strong> instead to post right away; draft is safer for dictation.
+									Method <strong>POST</strong>, the same Authorization header, and a JSON body with two text fields: <strong>content</strong> set to the Dictated Text, and <strong>status</strong> set to <strong>draft</strong> (or <strong>publish</strong> to post right away).
 								</li>
 								<li>Add <strong>Get Dictionary Value</strong> for <strong>message</strong>, then <strong>Show Notification</strong>.</li>
+								<li>To use the Action Button: Settings → Action Button → Shortcut → Note.</li>
 							</ol>
+							<p class="hint">The full recipe, with commands to check the endpoints from a laptop, is in docs/writenow/shortcuts.md in the site’s repository.</p>
 							<p class="status" id="shortcut-copy-status" role="status"></p>
 						</div>
 					</details>
