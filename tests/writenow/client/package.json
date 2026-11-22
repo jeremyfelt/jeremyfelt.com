@@ -1,0 +1,14 @@
+{
+	"name": "writenow-client-tests",
+	"private": true,
+	"description": "Dev-only browser tests for the WriteNow web app. Uses the Playwright and Chromium already installed on the machine.",
+	"scripts": {
+		"test": "node --test --test-concurrency=1 --test-reporter=spec \"tests/*.test.js\"",
+		"serve": "node server.js",
+		"screenshots": "node screenshots.js",
+		"icons": "node tools/render-icons.js"
+	},
+	"devDependencies": {
+		"axe-core": "4.10.3"
+	}
+}

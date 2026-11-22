@@ -393,11 +393,11 @@ async function removeImage( key ) {
 		objectUrls.delete( key );
 	}
 	renderAttachments();
-	await db.removeBlob( image.key );
 	const next = nodes.attachments.querySelectorAll( '.attachment-remove' )[ Math.min( index, draft.images.length - 1 ) ];
 	( next || nodes[ 'image-button' ] ).focus();
-	setStatus( nodes[ 'note-status' ], `Image removed.` );
+	setStatus( nodes[ 'note-status' ], 'Image removed.' );
 	nodes[ 'note-status' ].dataset.transient = '1';
+	await db.removeBlob( image.key );
 }
 
 // ---- Posting ----
