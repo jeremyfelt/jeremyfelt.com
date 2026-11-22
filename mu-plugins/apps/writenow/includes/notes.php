@@ -496,6 +496,9 @@ function find_note_by_client_id( string $client_id ): ?WP_Post {
 			'order'            => 'ASC',
 			'no_found_rows'    => true,
 			'suppress_filters' => true,
+			// Read the database every time. A cached result from before another request
+			// created the post would let a duplicate through.
+			'cache_results'    => false,
 		]
 	);
 

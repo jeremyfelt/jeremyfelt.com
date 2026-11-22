@@ -243,6 +243,9 @@ function find_like( array $urls ): ?WP_Post {
 			'order'            => 'ASC',
 			'no_found_rows'    => true,
 			'suppress_filters' => true,
+			// Read the database every time. A cached result from before another request
+			// created the post would let a duplicate through.
+			'cache_results'    => false,
 		]
 	);
 
@@ -337,6 +340,15 @@ function convert_to_utf8( string $html, string $content_type ): string {
 		$converted = @mb_convert_encoding( $html, 'UTF-8', $charset ); // phpcs:ignore WordPress.PHP.NoSilencedErrors -- An unknown charset is expected and handled.
 
 		if ( is_string( $converted ) && '' !== $converted ) {
+			return $converted;
+		}
+	}
+
+	// Pages that are not valid UTF-8 and do not say otherwise are most often Windows-1252.
+	if ( 1 !== preg_match( '//u', $html ) && function_exists( 'mb_convert_encoding' ) ) {
+		$converted = @mb_convert_encoding( $html, 'UTF-8', 'Windows-1252' ); // phpcs:ignore WordPress.PHP.NoSilencedErrors
+
+		if ( is_string( $converted ) ) {
 			return $converted;
 		}
 	}

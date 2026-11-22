@@ -188,11 +188,10 @@ function register_routes(): void {
 			'callback'            => 'JeremyFelt\Apps\WriteNow\Recent\get_recent',
 			'permission_callback' => __NAMESPACE__ . '\can_use_app',
 			'args'                => [
+				// Out-of-range values are clamped to 1 to 50 rather than refused.
 				'per_page' => [
 					'type'    => 'integer',
 					'default' => 20,
-					'minimum' => 1,
-					'maximum' => 50,
 				],
 			],
 		]
