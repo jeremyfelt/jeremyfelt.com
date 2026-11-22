@@ -356,6 +356,8 @@ function test_client_id_of_trashed_note_is_not_recreated(): void {
 	assert_status( 200, $retry );
 	assert_same( $note['id'], data( $retry )['id'] );
 	assert_same( 1, count_notes_with_client_id( $client_id ) );
+	assert_same( 'trash', data( $retry )['status'] );
+	assert_contains( 'moved to the trash', data( $retry )['message'], 'The message does not claim it was saved' );
 }
 
 /**
@@ -738,4 +740,60 @@ function test_update_and_publish_a_draft(): void {
 	);
 	assert_status( 409, rest( 'POST', '/notes/' . $editor_draft, [ 'content' => 'x' ] ), 'writenow_not_editable' );
 	assert_status( 400, rest( 'POST', '/notes/' . $draft['id'], [ 'content' => '' ] ), 'writenow_empty_note' );
+}
+
+/**
+ * The title repair is hooked only while WriteNow saves a note, and is
+ * removed afterwards even when something during the save throws.
+ */
+function test_title_repair_hook_is_always_removed(): void {
+	$hook   = 'JeremyFelt\Apps\WriteNow\Notes\repair_formatted_title';
+	$during = null;
+	$spy    = function ( $title ) use ( $hook, &$during ) {
+		$during = has_filter( 'shortnotes_formatted_title', $hook );
+		return $title;
+	};
+
+	add_filter( 'shortnotes_formatted_title', $spy, 10 );
+	assert_status(
+		201,
+		rest(
+			'POST',
+			'/notes',
+			[
+				'content' => 'Watching the hook',
+				'status'  => 'publish',
+			]
+		)
+	);
+	remove_filter( 'shortnotes_formatted_title', $spy, 10 );
+
+	assert_same( 99, $during, 'Hooked while WriteNow saves' );
+	assert_same( false, has_filter( 'shortnotes_formatted_title', $hook ), 'Removed afterwards' );
+
+	$throw = function ( $data ) {
+		if ( is_array( $data ) ) {
+			throw new \RuntimeException( 'A plugin failed' );
+		}
+
+		return $data;
+	};
+	add_filter( 'wp_insert_post_data', $throw );
+
+	try {
+		\JeremyFelt\Apps\WriteNow\Notes\insert_or_update(
+			[
+				'post_type'    => 'shortnote',
+				'post_status'  => 'draft',
+				'post_content' => 'x',
+			]
+		);
+		fail( 'The exception was expected to reach the caller' );
+	} catch ( \RuntimeException $e ) {
+		assert_same( 'A plugin failed', $e->getMessage() );
+	} finally {
+		remove_filter( 'wp_insert_post_data', $throw );
+	}
+
+	assert_same( false, has_filter( 'shortnotes_formatted_title', $hook ), 'Removed even after an exception' );
 }

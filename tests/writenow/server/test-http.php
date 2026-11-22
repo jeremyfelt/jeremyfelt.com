@@ -247,6 +247,77 @@ function test_http_concurrent_duplicates_create_one_post(): void {
 }
 
 /**
+ * A request that ends part way through, without its finally block running,
+ * still releases its lock, so a retry is not made to wait.
+ */
+function test_http_lock_is_released_when_a_request_ends_early(): void {
+	global $wpdb;
+
+	$client_id = wp_generate_uuid4();
+	$row       = '_writenow_lock_' . md5( 'note:' . $client_id );
+
+	api(
+		'POST',
+		'/notes',
+		'admin',
+		[
+			'content'   => 'WRITENOW-TEST-EXIT',
+			'status'    => 'publish',
+			'client_id' => $client_id,
+		]
+	);
+
+	assert_same( null, $wpdb->get_var( $wpdb->prepare( "SELECT option_value FROM {$wpdb->options} WHERE option_name = %s", $row ) ), 'No lock row is left behind' );
+
+	$started  = microtime( true );
+	$response = api(
+		'POST',
+		'/notes',
+		'admin',
+		[
+			'content'   => 'Sent again after the first attempt died',
+			'status'    => 'publish',
+			'client_id' => $client_id,
+		]
+	);
+
+	assert_same( 201, $response['status'], 'The retry goes through: ' . $response['body'] );
+	assert_true( microtime( true ) - $started < 4, 'The retry did not wait for a lock' );
+	assert_same( 1, count_notes_with_client_id( $client_id ) );
+}
+
+/**
+ * A lock left by a process that was killed outright is taken over once it
+ * is older than the timeout, and only blocks its own key until then.
+ */
+function test_http_stale_lock_is_taken_over(): void {
+	global $wpdb;
+
+	$client_id = wp_generate_uuid4();
+	$wpdb->insert(
+		$wpdb->options,
+		[
+			'option_name'  => '_writenow_lock_' . md5( 'note:' . $client_id ),
+			'option_value' => (string) ( time() - 60 ),
+			'autoload'     => 'no',
+		]
+	);
+
+	$response = api(
+		'POST',
+		'/notes',
+		'admin',
+		[
+			'content'   => 'After a stale lock',
+			'client_id' => $client_id,
+		]
+	);
+
+	assert_same( 201, $response['status'], 'A stale lock does not block posting: ' . $response['body'] );
+	assert_same( 1, count_notes_with_client_id( $client_id ) );
+}
+
+/**
  * The shell, manifest and service worker are served with their tokens filled.
  */
 function test_http_front_end_routes(): void {

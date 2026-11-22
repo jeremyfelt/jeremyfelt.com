@@ -10,6 +10,13 @@
  * which the table's unique key makes atomic, so it works with or without a
  * persistent object cache.
  *
+ * A lock is released when the work finishes, and also from a shutdown
+ * function, so a request that ends early (a fatal error, an exhausted time
+ * or memory limit, or a plugin calling exit) does not leave it behind. Only
+ * a process killed outright skips both; its lock is treated as abandoned
+ * after LOCK_TIMEOUT seconds, and until then requests for the same key wait
+ * and then get a retryable 503. Other keys are never affected.
+ *
  * @package jeremyfelt
  */
 
@@ -47,6 +54,7 @@ function acquire( string $key ): bool {
 	$inserted = $wpdb->query( $wpdb->prepare( "INSERT IGNORE INTO {$wpdb->options} (option_name, option_value, autoload) VALUES (%s, %s, 'no')", $name, (string) $now ) );
 
 	if ( 1 === $inserted ) {
+		hold( $key );
 		return true;
 	}
 
@@ -61,7 +69,50 @@ function acquire( string $key ): bool {
 	// phpcs:ignore WordPress.DB.DirectDatabaseQuery
 	$updated = $wpdb->query( $wpdb->prepare( "UPDATE {$wpdb->options} SET option_value = %s WHERE option_name = %s AND option_value = %s", (string) $now, $name, (string) $held_since ) );
 
-	return 1 === $updated;
+	if ( 1 === $updated ) {
+		hold( $key );
+		return true;
+	}
+
+	return false;
+}
+
+/**
+ * Remember a lock this request holds, and make sure it is released when the
+ * request ends, however it ends.
+ *
+ * @param string $key What was locked.
+ */
+function hold( string $key ): void {
+	static $registered = false;
+
+	$held         = &held();
+	$held[ $key ] = true;
+
+	if ( ! $registered ) {
+		register_shutdown_function( __NAMESPACE__ . '\release_all' );
+		$registered = true;
+	}
+}
+
+/**
+ * Provide the locks this request holds.
+ *
+ * @return array<string, true> Held keys.
+ */
+function &held(): array {
+	static $held = [];
+
+	return $held;
+}
+
+/**
+ * Release every lock this request still holds. Runs at shutdown.
+ */
+function release_all(): void {
+	foreach ( array_keys( held() ) as $key ) {
+		release( (string) $key );
+	}
 }
 
 /**
@@ -71,6 +122,9 @@ function acquire( string $key ): bool {
  */
 function release( string $key ): void {
 	global $wpdb;
+
+	$held = &held();
+	unset( $held[ $key ] );
 
 	// phpcs:ignore WordPress.DB.DirectDatabaseQuery
 	$wpdb->query( $wpdb->prepare( "DELETE FROM {$wpdb->options} WHERE option_name = %s", get_option_name( $key ) ) );

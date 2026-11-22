@@ -325,10 +325,13 @@ function save_note( WP_Post $post, array $input ) {
 function insert_or_update( array $postarr ) {
 	add_filter( 'shortnotes_formatted_title', __NAMESPACE__ . '\repair_formatted_title', 99 );
 
-	// Both functions expect slashed data and unslash it before saving.
-	$result = isset( $postarr['ID'] ) ? wp_update_post( wp_slash( $postarr ), true ) : wp_insert_post( wp_slash( $postarr ), true );
-
-	remove_filter( 'shortnotes_formatted_title', __NAMESPACE__ . '\repair_formatted_title', 99 );
+	try {
+		// Both functions expect slashed data and unslash it before saving.
+		$result = isset( $postarr['ID'] ) ? wp_update_post( wp_slash( $postarr ), true ) : wp_insert_post( wp_slash( $postarr ), true );
+	} finally {
+		// Only WriteNow's own saves are repaired, even if a hook throws.
+		remove_filter( 'shortnotes_formatted_title', __NAMESPACE__ . '\repair_formatted_title', 99 );
+	}
 
 	if ( is_wp_error( $result ) ) {
 		return error( 'writenow_save_failed', 'The note could not be saved: ' . rtrim( $result->get_error_message(), '.' ) . '.', 500 );
@@ -613,6 +616,9 @@ function note_response( WP_Post $post, int $status ): WP_REST_Response {
 		$data['message'] = 'Posted.';
 	} elseif ( 'future' === $post->post_status ) {
 		$data['message'] = 'Scheduled.';
+	} elseif ( 'trash' === $post->post_status ) {
+		// A retry of a note that was sent before and has since been deleted.
+		$data['message'] = 'This note was already sent, and has since been moved to the trash on your site.';
 	} else {
 		$data['message'] = 'Saved as a draft.';
 	}

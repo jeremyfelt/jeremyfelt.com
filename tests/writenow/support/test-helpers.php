@@ -16,6 +16,23 @@ add_filter( 'pre_http_request', __NAMESPACE__ . '\answer_locally', 1, 3 );
 add_action( 'admin_init', __NAMESPACE__ . '\skip_update_checks', 0 );
 add_action( 'transition_post_status', __NAMESPACE__ . '\record_transition', 10, 3 );
 add_action( 'publish_shortnote', __NAMESPACE__ . '\record_publish_hook' );
+add_filter( 'wp_insert_post_data', __NAMESPACE__ . '\end_request_on_marker', 999 );
+
+/**
+ * End the request part way through saving a note whose content carries a
+ * marker, the way a fatal error, a time limit or a plugin calling exit
+ * would. `finally` blocks do not run; shutdown functions do.
+ *
+ * @param array $data Post data about to be saved.
+ * @return array The unchanged data.
+ */
+function end_request_on_marker( $data ) {
+	if ( is_array( $data ) && false !== strpos( (string) ( $data['post_content'] ?? '' ), 'WRITENOW-TEST-EXIT' ) ) {
+		exit;
+	}
+
+	return $data;
+}
 
 /**
  * Record every status change of a note or like, so the end-to-end tests can
