@@ -3,14 +3,16 @@
 # Run the WriteNow server tests against a real, local WordPress.
 #
 #   tests/writenow/run.sh [filter]
+#   tests/writenow/run.sh e2e
 #   tests/writenow/run.sh --serve
 #
 # Builds a fresh WordPress site on SQLite outside the repository, with the
 # real shortnotes and likes plugins from their sibling checkouts, serves it
-# with PHP's built-in server, and runs every server test. An optional filter
-# runs only the tests whose names contain it. --serve builds the same site
-# and keeps it running in the foreground for using the app by hand.
-# See README.md for details.
+# with PHP's built-in server, and runs every server test, the block editor
+# check and the end-to-end tests of the app in Chromium. An optional filter
+# runs only the PHP tests whose names contain it; `e2e` runs only the
+# end-to-end tests. --serve builds the same site and keeps it running in
+# the foreground for using the app by hand. See README.md for details.
 
 set -euo pipefail
 
@@ -63,16 +65,38 @@ done
 export WRITENOW_TEST_SITE="$SITE"
 export WRITENOW_TEST_URL="http://127.0.0.1:$PORT"
 
+FILTER="${1:-}"
 status=0
-php "$HERE/bin/run-tests.php" "${1:-}" || status=$?
 
-if [ -z "${1:-}" ] || [[ "editor" == *"${1:-}"* ]]; then
+if [ "$FILTER" != "e2e" ]; then
+	php "$HERE/bin/run-tests.php" "$FILTER" || status=$?
+fi
+
+has_playwright() {
+	command -v node > /dev/null && NODE_PATH="$(npm root -g)" node -e "require('playwright')" 2> /dev/null
+}
+
+if [ -z "$FILTER" ] || [[ "editor" == *"$FILTER"* ]]; then
 	if [ -n "${WRITENOW_SKIP_EDITOR:-}" ]; then
 		echo "Skipping the block editor check (WRITENOW_SKIP_EDITOR is set)."
-	elif command -v node > /dev/null && NODE_PATH="$(npm root -g)" node -e "require('playwright')" 2> /dev/null; then
+	elif has_playwright; then
 		NODE_PATH="$(npm root -g)" node "$HERE/editor/validate-blocks.cjs" || status=$?
 	else
 		echo "Skipping the block editor check: Node with Playwright is not available."
+	fi
+fi
+
+# The app in Chromium against this site, nothing mocked.
+if [ -z "$FILTER" ] || [ "$FILTER" = "e2e" ]; then
+	if [ -n "${WRITENOW_SKIP_E2E:-}" ]; then
+		echo "Skipping the end-to-end tests (WRITENOW_SKIP_E2E is set)."
+	elif has_playwright; then
+		echo
+		echo "End-to-end tests (the app in Chromium against this site):"
+		NODE_PATH="$(npm root -g)" node --test --test-concurrency=1 --test-reporter=spec "$HERE"/e2e/*.e2e.test.js || status=$?
+	else
+		echo "Skipping the end-to-end tests: Node with Playwright is not available."
+		[ "$FILTER" = "e2e" ] && status=1
 	fi
 fi
 

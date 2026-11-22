@@ -14,6 +14,38 @@ namespace JeremyFelt\Apps\WriteNow\Tests\Helpers;
 
 add_filter( 'pre_http_request', __NAMESPACE__ . '\answer_locally', 1, 3 );
 add_action( 'admin_init', __NAMESPACE__ . '\skip_update_checks', 0 );
+add_action( 'transition_post_status', __NAMESPACE__ . '\record_transition', 10, 3 );
+add_action( 'publish_shortnote', __NAMESPACE__ . '\record_publish_hook' );
+
+/**
+ * Record every status change of a note or like, so the end-to-end tests can
+ * check that publishing fired once, from draft, as it does in wp-admin.
+ *
+ * @param string   $new_status The new status.
+ * @param string   $old_status The old status.
+ * @param \WP_Post $post       The post.
+ */
+function record_transition( $new_status, $old_status, $post ): void {
+	if ( ! $post instanceof \WP_Post || ! in_array( $post->post_type, [ 'shortnote', 'like' ], true ) ) {
+		return;
+	}
+
+	$all                = (array) get_option( 'writenow_test_transitions', [] );
+	$all[ $post->ID ][] = $old_status . '>' . $new_status;
+	update_option( 'writenow_test_transitions', $all, false );
+}
+
+/**
+ * Record each run of the `publish_shortnote` hook, which is what Shortnotes
+ * uses to schedule webmentions.
+ *
+ * @param int $post_id The note.
+ */
+function record_publish_hook( $post_id ): void {
+	$all                     = (array) get_option( 'writenow_test_transitions', [] );
+	$all[ (int) $post_id ][] = 'publish_shortnote';
+	update_option( 'writenow_test_transitions', $all, false );
+}
 
 /**
  * Skip wp-admin's update checks, which would only fail offline and log warnings.
