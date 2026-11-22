@@ -14,6 +14,8 @@ require_once __DIR__ . '/plugins/micropub.php';
 
 require_once __DIR__ . '/themes/writemore.php';
 
+require_once __DIR__ . '/apps/writenow/writenow.php';
+
 if ( file_exists( __DIR__ . '/local/hacks.php' ) ) {
 	require_once __DIR__ . '/local/hacks.php';
 }
