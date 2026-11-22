@@ -325,10 +325,10 @@ A bottom tab bar with Note, Like and Recent, and a gear for Settings. The tab ba
 
 - A text area that fills the screen and grows with the text. Placeholder: "What's on your mind?" Request focus on open, and make the whole empty area tappable since iOS may refuse programmatic focus.
 - Action bar: add image, reply, a character count, Save draft, Post.
-- **Local draft**: text, reply fields and attached image references are saved to the device on every change (debounced) and restored on next launch, including after iOS discards the app. Text is cleared only after the server confirms.
+- **Local draft**: text, reply fields and attached image references are saved to the device on every change (debounced) and restored on next launch, including after iOS discards the app. Text is cleared only after the server confirms, or once a post that cannot reach the server is stored in the outbox (6.4), which then holds it.
 - **Count**: appears past 400 characters and changes colour past the `note_soft_limit` from `/status` (500, the usual Mastodon limit, since notes are shared there). It never blocks posting.
 - **Reply**: reveals a URL field and an optional name field.
-- **Images**: one file input accepting images, multiple allowed, which gives the iOS photo library and camera choices. Before upload, re-encode each through a canvas to JPEG with the long edge capped at 2400px. That respects orientation, keeps uploads small on mobile data, and removes location metadata. Show a thumbnail with per-image progress, an alt text field, and a remove button. Posting waits for uploads to finish.
+- **Images**: one file input accepting images, multiple allowed, which gives the iOS photo library and camera choices. Before upload, re-encode each through a canvas to JPEG with the long edge capped at 2400px. That respects orientation, keeps uploads small on mobile data, and removes location metadata. Show a thumbnail with per-image progress (a state: preparing, uploading, uploaded, waiting; `fetch` with `credentials: 'omit'` cannot report upload bytes, and `XMLHttpRequest` would send the login cookie), an alt text field, and a remove button. Posting waits for uploads to finish.
 - **Post / Save draft**: the bar shows progress, then the composer clears and a quiet confirmation appears with a View link (published) or an "in Recent" pointer (draft). On failure nothing is lost and the reason is shown with a Retry.
 - Opening a draft from Recent loads it here with a banner naming it and a Discard changes option; saving updates that note.
 

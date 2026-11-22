@@ -419,7 +419,7 @@ input[readonly] {
 	display: flex;
 	flex-wrap: wrap;
 	align-items: center;
-	column-gap: 0.25rem;
+	column-gap: 0.5rem;
 	font-size: 0.9375rem;
 	line-height: 1.4;
 	color: var(--color-faded);
@@ -441,7 +441,7 @@ input[readonly] {
 	display: inline-flex;
 	align-items: center;
 	min-height: 2.75rem;
-	padding: 0 0.375rem;
+	padding: 0;
 	margin: -0.5rem 0;
 	border: 0;
 	background: none;
@@ -486,16 +486,22 @@ input[readonly] {
 }
 
 .banner-text {
+	display: flex;
+	flex-direction: column;
 	font-size: 0.9375rem;
 	line-height: 1.35;
 	min-width: 0;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
 }
 
 .banner-label {
 	font-weight: 600;
+}
+
+.banner-name {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	color: var(--color-faded);
 }
 
 .banner .button {
@@ -673,7 +679,8 @@ input[readonly] {
 
 .action-bar .button {
 	min-width: 4.25rem;
-	padding: 0 0.875rem;
+	padding: 0 0.75rem;
+	white-space: nowrap;
 }
 
 .action-bar .button.secondary {
@@ -682,7 +689,7 @@ input[readonly] {
 
 .count {
 	padding: 0 0.25rem;
-	font-size: 0.875rem;
+	font-size: 0.8125rem;
 	font-variant-numeric: tabular-nums;
 	color: var(--color-faded);
 }
@@ -909,6 +916,12 @@ button.row-main:active,
 	margin-top: 1rem;
 	font-size: 1rem;
 	font-weight: 700;
+}
+
+.group > p > a {
+	display: inline-flex;
+	align-items: center;
+	min-height: 2.75rem;
 }
 
 .group > p,

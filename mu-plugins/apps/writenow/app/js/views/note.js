@@ -153,7 +153,6 @@ function renderBanner() {
 	if ( editing ) {
 		nodes[ 'note-banner-text' ].replaceChildren(
 			el( 'span', { class: 'banner-label', text: 'Editing a draft' } ),
-			' ',
 			el( 'span', { class: 'banner-name', text: draft.noteLabel ? `“${ draft.noteLabel }”` : '' } )
 		);
 	}
@@ -445,9 +444,12 @@ async function submit( status ) {
 	setStatus( statusNode, publishing ? 'Posting…' : 'Saving the draft…' );
 
 	try {
-		if ( imageWork.size ) {
+		// Wait only for images still attached; a removed one may still be
+		// finishing its upload in the background.
+		const pending = draft.images.filter( ( image ) => imageWork.has( image.key ) ).map( ( image ) => imageWork.get( image.key ) );
+		if ( pending.length ) {
 			setStatus( statusNode, 'Finishing the images first…' );
-			await Promise.allSettled( [ ...imageWork.values() ] );
+			await Promise.allSettled( pending );
 			setStatus( statusNode, publishing ? 'Posting…' : 'Saving the draft…' );
 		}
 		const unreadable = draft.images.findIndex( ( image ) => imageState( image ).state === 'error' );

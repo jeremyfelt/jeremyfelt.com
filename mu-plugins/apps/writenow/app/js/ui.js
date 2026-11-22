@@ -53,7 +53,6 @@ export function setStatus( node, message ) {
 	node.classList.add( `is-${ tone }`, 'is-shown' );
 	node.append( el( 'span', { class: 'status-text', text } ) );
 	for ( const action of actions ) {
-		node.append( ' ' );
 		if ( action.href ) {
 			node.append( el( 'a', { href: action.href, target: '_blank', rel: 'noopener', class: 'status-action', text: action.label } ) );
 		} else {

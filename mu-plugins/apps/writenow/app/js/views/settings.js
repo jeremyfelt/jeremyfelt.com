@@ -47,7 +47,8 @@ export function shown() {
 	const status = credentials.getStatus();
 	const who = $( 'settings-who' );
 	const name = status && status.user ? status.user.name : '';
-	const site = status && status.site ? status.site.name || hostOf( status.site.url ) : siteHost;
+	// The site's address reads better than its name, which is often the person's.
+	const site = ( status && status.site && ( hostOf( status.site.url ) || status.site.name ) ) || siteHost;
 	const cred = credentials.getCredential();
 	who.replaceChildren(
 		'Connected',

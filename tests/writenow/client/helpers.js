@@ -29,7 +29,7 @@ async function setup() {
 }
 
 // Opens the app. `connected` stores a working credential first.
-async function openApp( env, { colorScheme = 'light', connected = true, loggedIn = false, serviceWorkers = 'block', query = '', reducedMotion = 'no-preference', wp: existing = null } = {} ) {
+async function openApp( env, { colorScheme = 'light', connected = true, loggedIn = false, serviceWorkers = 'block', query = '', reducedMotion = 'no-preference', initScript = null, wp: existing = null } = {} ) {
 	const context = await env.browser.newContext( {
 		...IPHONE,
 		colorScheme,
@@ -37,6 +37,9 @@ async function openApp( env, { colorScheme = 'light', connected = true, loggedIn
 		serviceWorkers,
 		permissions: [ 'clipboard-read', 'clipboard-write' ],
 	} );
+	if ( initScript ) {
+		await context.addInitScript( initScript );
+	}
 	const wp = existing || new FakeWP( { origin: env.server.origin } );
 	await wp.install( context );
 	if ( loggedIn ) {
