@@ -20,7 +20,7 @@ Read these before writing code. Paths are relative to the directory that holds t
 
 Facts the design depends on:
 
-- **Notes.** `shortnote` is REST-enabled and uses the block editor. Shortnotes filters `wp_insert_post_data`: when a note reaches `publish` or `future` it generates the title from the first paragraph ("Note: …"). It only assigns its slug format (`substr( wp_generate_uuid4(), 0, 4 ) . time()`, giving URLs like `/notes/cde61764040689/`) when the incoming title is `Auto Draft`, which only the block editor produces. Replies use the registered meta `shortnotes_note_type`, `shortnotes_reply_to_url` and `shortnotes_reply_to_name`. On publish Shortnotes schedules webmentions, and `ShortNotes\PostType\Note\transform_content()` turns block markup into plain text for Share on Mastodon.
+- **Notes.** `shortnote` is REST-enabled and uses the block editor. Shortnotes filters `wp_insert_post_data`: when a note reaches `publish` or `future` it generates the title from the first paragraph ("Note: …"). It only assigns its slug format (`substr( wp_generate_uuid4(), 0, 4 ) . time()`, giving URLs like `/notes/cde61764040689/`) when the incoming title is `Auto Draft`, which only the block editor produced. Since WordPress 7.0, `get_default_post_to_edit()` gives auto-drafts of post types without `title` support an empty title, so notes written in the block editor on 7.x get a slug from their generated title (`/notes/note-first-words/`) instead. Confirmed in core (`wp-admin/includes/post.php`) and in the real block editor on 7.1.5 and 6.8.3. WriteNow sets the slug itself, so its notes keep the Shortnotes format either way. Replies use the registered meta `shortnotes_note_type`, `shortnotes_reply_to_url` and `shortnotes_reply_to_name`. On publish Shortnotes schedules webmentions, and `ShortNotes\PostType\Note\transform_content()` turns block markup into plain text for Share on Mastodon.
 - **Likes.** `like` is REST-enabled but registered with `'supports' => false`, so the core REST controller can set neither a title nor the liked URL. The URL lives in post meta `like_of_url` (the Micropub path writes `mf2_like-of` instead; `get_like_url()` reads both). The Likes plugin renders the content and adds the URL to `webmention_links`.
 - **Page cache.** Batcache caches GET responses for requests that carry no WordPress cookie, no `X-WP-Nonce` and no `Origin` header. It does not look at the `Authorization` header.
 - **Deploy.** `jeremyfelt.com` rsyncs the repo to the server exactly as committed, minus `.deploy_ignore`. Anything a browser loads must be committed in its final form.
@@ -271,6 +271,7 @@ In `tests/writenow/`, runnable with one documented command.
 - **Converter unit tests**: a table of markdown fixtures and expected block markup, covering every row above plus edge cases (empty input, only whitespace, emoji, unbalanced markers, a URL with parentheses, HTML in the input, a hashtag at line start). Each expected output must also pass through `parse_blocks()` and re-serialize unchanged.
 - **Integration tests against real WordPress** with the `shortnotes` and `likes` plugins from the sibling checkouts active: each route's happy path; unauthenticated and under-privileged requests; like dedupe; tracking-parameter stripping; title fallback when the fetch fails (mock HTTP with `pre_http_request`); note idempotency on `client_id`; slug format; title generation on publish; reply meta; media attached and parented; `editable` rules; the result of `transform_content()` on each converter fixture.
 - `composer phpcs` and `composer phpstan` pass for the new code under the repo's existing configs.
+- **End-to-end tests**: the real app in Chromium against the same local WordPress, nothing intercepted, run by the same command (`run.sh e2e` alone). They cover every flow in section 6.3 and check the results inside WordPress (slug, title, `parse_blocks()`, meta, attachments, rendered content, status transitions and publish hooks) and the cache headers of every authenticated response.
 
 ## 5. Authentication
 
@@ -357,7 +358,7 @@ A bottom tab bar with Note, Like and Recent, and a gear for Settings. The tab ba
 - The shell also carries the iOS specifics: a 180px `apple-touch-icon`, the mobile-web-app-capable metas, a status bar style, and `theme-color` metas for light and dark.
 - Icon: simple and legible at small sizes, drawn as SVG and exported to the PNG sizes. Committed, not generated at deploy.
 - **Service worker**: precaches the shell and static assets. The shell is network-first with a 2 second timeout that falls back to cache; versioned static assets are cache-first. A new version activates on the next launch, never mid-session.
-- **Outbox**: when a post, draft save or like cannot reach the server, it is stored in IndexedDB with its `client_id` and shown in Recent as waiting. The outbox flushes on launch, when the app returns to the foreground, and on the `online` event, oldest first. iOS has no Background Sync, so say "will send when you next open WriteNow" rather than promising background delivery. A `4xx` response other than `401` and `429` marks the item failed with the server's message; it is not retried automatically.
+- **Outbox**: when a post, draft save or like cannot reach the server, it is stored in IndexedDB with its `client_id` and shown in Recent as waiting. An item removed from Recent stays removed, even if a send of it was in flight. The outbox flushes on launch, when the app returns to the foreground, and on the `online` event, oldest first. iOS has no Background Sync, so say "will send when you next open WriteNow" rather than promising background delivery. A `4xx` response other than `401` and `429` marks the item failed with the server's message; it is not retried automatically.
 - Images added offline are kept as blobs in IndexedDB with the queued note and uploaded when the outbox flushes.
 
 ### 6.5 Client tests
@@ -377,7 +378,7 @@ Agents cannot build or run iOS Shortcuts. The deliverable is a recipe Jeremy fol
 **Like** (appears in the share sheet)
 
 1. Accept URLs and Safari web pages from the share sheet. If there is no input, use the clipboard.
-2. Get the URL from the input.
+2. Get the URL from the input, and take the first one (a share can carry several; the API takes one string).
 3. Get Contents of URL: `POST https://jeremyfelt.com/wp-json/writenow/v1/likes`, header `Authorization: Basic …` (copied from Settings), JSON body with `url`. Leave `title` out and let the server look it up.
 4. Read `message` from the response and show it as a notification.
 
@@ -414,6 +415,8 @@ Nothing in sections 4 to 7 can be proven on iOS by an agent. The final handoff i
 7. Like from inside the app, then from the share sheet in Safari and in one other app.
 8. Airplane mode: write a note, post, reopen with a connection, and see exactly one note published.
 9. Dark mode, and Dynamic Type at a large size.
+10. Before building the Shortcuts, run the `GET /status` `curl` in `shortcuts.md` from a laptop: a 401 with a correct header means the server is not passing `Authorization` to PHP.
+11. Keep typing after tapping Post: what you typed after the tap stays in the composer.
 
 ## 10. Open questions for Jeremy
 
@@ -424,3 +427,4 @@ Each has a default that the build follows unless he says otherwise.
 3. **Tracking parameters.** Default: strip them from liked URLs.
 4. **`_markdown_content`.** No code in these repos registers this meta key, so WriteWell's copies may never have been saved by the REST API. WriteNow writes it directly and does not depend on registration. Worth knowing if WriteWell's stored markdown was ever relied on.
 5. **Webmentions for likes.** The standalone Likes plugin registers the post type with no `webmentions` support, so it is unclear whether publishing a like sends one today. WriteNow preserves current behaviour either way.
+6. **Share on Mastodon and REST.** WriteNow publishes with `wp_insert_post()` inside its own REST route, so core's `rest_after_insert_shortnote` never fires. If the Share on Mastodon plugin in production only shares REST-made posts from that hook (some versions defer to it during REST requests so that editor meta is saved first), notes from WriteNow will not be shared at all. Its source is not in these repos, so this is unverified; the first published note will show it.

@@ -20,9 +20,10 @@ That one command:
 3. Serves the site with PHP's built-in server on `127.0.0.1:8881`, using four workers so concurrent requests really are concurrent.
 4. Runs every `server/test-*.php`. Some tests run in-process with `rest_do_request()`. Others make real HTTP requests to the local server with Basic auth.
 5. Opens the real block editor in Chromium (Playwright), and checks that every converter fixture, and a note created through the API, load as valid blocks.
-6. Fails if the site logged any PHP notice, warning or error. The one exception is the known PHP 8.2+ deprecations from the existing `advanced-cache.php`, which are counted and listed instead.
+6. Runs the end-to-end tests in `e2e/`: the real app in Chromium against this site, with nothing intercepted (see below).
+7. Fails if the site logged any PHP notice, warning or error. The one exception is the known PHP 8.2+ deprecations from the existing `advanced-cache.php`, which are counted and listed instead.
 
-It exits non-zero if anything fails. Pass a filter to run only the PHP tests whose names contain it: `tests/writenow/run.sh like`.
+It exits non-zero if anything fails. Pass a filter to run only the PHP tests whose names contain it: `tests/writenow/run.sh like`. `tests/writenow/run.sh e2e` runs only the end-to-end tests. Set `WRITENOW_SKIP_E2E=1` to skip them.
 
 ### Requirements
 
@@ -61,11 +62,15 @@ Application Passwords for the `admin`, `editor`, `author`, `contributor` and `su
 - `test-recent.php`: contents, order, statuses, `per_page`, and text lines.
 - `test-http.php`: Basic auth end to end, including the note and like pages as the theme renders them. Also: no-cache headers, the real Batcache never storing or serving a private response (with a control showing Batcache does cache public pages here), concurrent duplicate requests creating one post, and the shell, manifest and service worker with their tokens filled.
 
+- `e2e/*.e2e.test.js`: the app in an iPhone-sized Chromium against the local site. Connect through `wp-login.php` (logged out and already logged in), manual Connect, a revoked password, Disconnect; posting a note; a draft reopened from Recent and published; a reply; images (re-encoded, no Exif, parented, alt text); a double tap; text typed while posting; likes and duplicates; offline notes, drafts, likes and images flushing once; a lost response retried; the service worker opening offline and caching no API response; the Settings Shortcut password used for the Shortcut requests; and the cache headers on every authenticated response. Results are checked inside WordPress with `bin/inspect.php`, and the test helper plugin records each note's status transitions and `publish_shortnote` runs so the tests can check publishing fired once, from draft.
+
 ## Files
 
 - `run.sh`: the one command.
 - `bin/setup-site.php`, `bin/install-site.php`: build and install the local site.
 - `bin/router.php`: the router for PHP's built-in server.
+- `bin/inspect.php`: reads a post, its meta, blocks, attachments and rendered content, Application Passwords and lock rows from the local site, as JSON, for the end-to-end tests.
+- `e2e/`: the end-to-end tests and their helpers.
 - `bin/run-tests.php`: loads the site and runs the PHP tests.
 - `lib/`: a deliberately small harness of assertions, an in-process REST client and an HTTP client.
 - `support/test-helpers.php`: a test-site plugin. It answers outbound HTTP locally, so nothing leaves the machine, and gives the title lookup tests canned pages.
