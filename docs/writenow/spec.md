@@ -104,6 +104,8 @@ Served by PHP by matching the request path early (for example on `parse_request`
 
 Static files (CSS, JS, icons) are served by the web server straight from the `app/` directory URL, with a version query string from `filemtime()`.
 
+The shell (`app/shell.html`), manifest (`app/manifest.webmanifest`) and service worker (`app/sw.js`) are plain files with `{{NAME}}` tokens. The full list, and how each must be escaped, is in the comment at the top of `app/shell.html` and `app/sw.js`. One `ASSET_VERSION` value covers everything in `app/` and must be identical in all three files: the service worker compares the shell's version to its own.
+
 The shell may reference the theme's font files through `get_theme_file_uri()` when the active theme has them, and must fall back to the system font stack when it does not.
 
 ### 4.3 REST API
@@ -200,7 +202,7 @@ Response, `201` when created:
 
 #### `GET /notes/<id>`
 
-Returns what the composer needs to reopen a note: `id`, `status`, `content` (the stored markdown), `reply_to_url`, `reply_to_name`, `media` (id, alt, a thumbnail URL), `link`, `edit_link`, `modified`, and `editable`. `editable` is true only when the note is a draft and has `_markdown_content`.
+Returns what the composer needs to reopen a note: `id`, `status`, `content` (the stored markdown), `reply_to_url`, `reply_to_name`, `media` (`[ { "id": 456, "alt": "…", "thumbnail": "https://…" } ]`), `link`, `edit_link`, `modified`, and `editable`. `editable` is true only when the note is a draft and has `_markdown_content`.
 
 #### `POST /notes/<id>`
 
@@ -277,7 +279,7 @@ In `tests/writenow/`, runnable with one documented command.
 1. On launch the app looks for a stored credential and checks it with `GET /status`.
 2. With none stored, it shows a single Connect button. Tapping it asks `admin-ajax.php?action=rest-nonce` (with cookies) for a nonce.
 3. If that shows Jeremy is not logged in, the app navigates to `wp-login.php` with `redirect_to` set to `/writenow/?connect=1`, and resumes when it returns.
-4. With a nonce, the app calls `POST /wp/v2/users/me/application-passwords` (cookies plus `X-WP-Nonce`) with the name `WriteNow` and a date, and stores the returned username and password in `localStorage`.
+4. With a nonce, the app reads its username from `GET /wp/v2/users/me?context=edit` (the application-passwords response does not include it), then calls `POST /wp/v2/users/me/application-passwords` (cookies plus `X-WP-Nonce`) with the name `WriteNow` and a date, and stores the username and returned password in `localStorage`.
 5. From then on every API request sends `Authorization: Basic …` and is made with `credentials: 'omit'`.
 
 `credentials: 'omit'` is required, not a nicety. A request that carries both the login cookie and a Basic header is rejected by WordPress (section 1).

@@ -1,0 +1,246 @@
+<!doctype html>
+<!--
+WriteNow app shell.
+
+PHP serves this file at /writenow/ after replacing a few placeholder tokens.
+Each token is the NAME below wrapped in double curly braces. Every token in
+this file sits inside a double-quoted HTML attribute, so fill URLs with
+esc_url() and everything else with esc_attr(). The same file is sent to every
+visitor: it must never contain user data, a nonce or a secret.
+
+  ASSET_URL      URL of this app/ directory, with a trailing slash.
+                 Example: https://jeremyfelt.com/wp-content/mu-plugins/apps/writenow/app/
+  ASSET_VERSION  One version string for everything in app/, derived from file
+                 modification times. Must be the same value that is put into
+                 sw.js and manifest.webmanifest; the service worker compares it.
+  APP_VERSION    The WriteNow version constant, shown in Settings.
+  REST_URL       rest_url(), with a trailing slash. Example: https://jeremyfelt.com/wp-json/
+  ADMIN_URL      admin_url(), with a trailing slash. admin-ajax.php and
+                 profile.php are resolved against it.
+  LOGIN_URL      wp_login_url() with no redirect_to; the app adds its own.
+  FONT_SANS_URL  URL of the theme's Inter woff2, or an empty string.
+  FONT_MONO_URL  URL of the theme's Monaspace woff, or an empty string.
+
+An empty font URL means "use the system font stack". A token left unfilled is
+treated as empty by the app, never as a URL.
+
+manifest.webmanifest uses ASSET_URL and ASSET_VERSION, inside JSON strings.
+sw.js uses ASSET_URL, ASSET_VERSION, FONT_SANS_URL and FONT_MONO_URL, inside
+JavaScript strings; its own header says how to escape them. No other file in
+app/ has tokens: everything else is served as committed.
+
+The shell needs this Content-Security-Policy (it also carries it as a meta tag
+below, so a matching response header is optional but welcome):
+  default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob: https:;
+  font-src 'self'; connect-src 'self'; manifest-src 'self'; worker-src 'self';
+  object-src 'none'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'
+(frame-ancestors only works as a header.)
+-->
+<html lang="en" data-asset-version="{{ASSET_VERSION}}" data-app-version="{{APP_VERSION}}" data-rest-url="{{REST_URL}}" data-admin-url="{{ADMIN_URL}}" data-login-url="{{LOGIN_URL}}" data-font-sans="{{FONT_SANS_URL}}" data-font-mono="{{FONT_MONO_URL}}">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+	<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob: https:; font-src 'self'; connect-src 'self'; manifest-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'">
+	<meta name="robots" content="noindex">
+	<meta name="referrer" content="strict-origin-when-cross-origin">
+	<title>WriteNow</title>
+	<meta name="color-scheme" content="light dark">
+	<meta name="theme-color" content="#fbfbfb" media="(prefers-color-scheme: light)">
+	<meta name="theme-color" content="#222222" media="(prefers-color-scheme: dark)">
+	<meta name="mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-title" content="WriteNow">
+	<meta name="apple-mobile-web-app-status-bar-style" content="default">
+	<meta name="format-detection" content="telephone=no">
+	<link rel="manifest" href="./manifest.webmanifest">
+	<link rel="icon" href="{{ASSET_URL}}icons/icon.svg?ver={{ASSET_VERSION}}" type="image/svg+xml">
+	<link rel="apple-touch-icon" href="{{ASSET_URL}}icons/apple-touch-icon.png?ver={{ASSET_VERSION}}">
+	<link rel="stylesheet" href="{{ASSET_URL}}app.css?ver={{ASSET_VERSION}}">
+	<script type="module" src="{{ASSET_URL}}js/main.js?ver={{ASSET_VERSION}}"></script>
+</head>
+<body>
+<svg class="sprite" aria-hidden="true" focusable="false">
+	<symbol id="i-note" viewBox="0 0 24 24"><path d="M4 20h4L19 9a2.83 2.83 0 0 0-4-4L4 16v4Z"/><path d="m13.5 6.5 4 4"/></symbol>
+	<symbol id="i-like" viewBox="0 0 24 24"><path d="M12 20s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7a4.3 4.3 0 0 1 7.5 2.8C19.5 15.4 12 20 12 20Z"/></symbol>
+	<symbol id="i-recent" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol>
+	<symbol id="i-settings" viewBox="0 0 24 24"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2Z"/><circle cx="12" cy="12" r="3"/></symbol>
+	<symbol id="i-image" viewBox="0 0 24 24"><rect x="3.5" y="4.5" width="17" height="15" rx="2.5"/><circle cx="9" cy="10" r="1.75"/><path d="m20.5 16-4.5-4.5-9 8"/></symbol>
+	<symbol id="i-reply" viewBox="0 0 24 24"><path d="M9.5 14.5 4.5 9.5l5-5"/><path d="M4.5 9.5H14a5.5 5.5 0 0 1 0 11h-2"/></symbol>
+	<symbol id="i-refresh" viewBox="0 0 24 24"><path d="M19.5 12a7.5 7.5 0 1 1-2.2-5.3"/><path d="M19.5 4.5v4h-4"/></symbol>
+	<symbol id="i-edit" viewBox="0 0 24 24"><path d="M13 5.5H6.5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V11"/><path d="M17.5 3.5a2.12 2.12 0 0 1 3 3L12 15l-4 1 1-4Z"/></symbol>
+	<symbol id="i-close" viewBox="0 0 24 24"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11"/></symbol>
+</svg>
+
+<div class="app" id="app">
+
+	<section class="connect" id="view-connect" aria-labelledby="connect-heading" hidden>
+		<div class="connect-inner">
+			<img class="connect-mark" src="{{ASSET_URL}}icons/icon.svg?ver={{ASSET_VERSION}}" alt="" width="72" height="72">
+			<h1 id="connect-heading" tabindex="-1">WriteNow</h1>
+			<p class="lede" id="connect-lede">Post notes and likes to your site.</p>
+			<p class="connect-safe" id="connect-safe" hidden></p>
+			<button type="button" class="button primary wide" id="connect-button">Connect</button>
+			<p class="status" id="connect-status" role="status"></p>
+			<details class="manual" id="connect-manual">
+				<summary>Use an Application Password instead</summary>
+				<form class="stack" id="connect-manual-form" novalidate>
+					<p class="hint">Create one under Application Passwords in your WordPress profile, then enter it here.</p>
+					<label for="manual-username">Username</label>
+					<input id="manual-username" name="username" autocomplete="username" autocapitalize="none" spellcheck="false" required>
+					<label for="manual-password">Application Password</label>
+					<input id="manual-password" name="password" type="password" autocomplete="off" autocapitalize="none" spellcheck="false" required>
+					<button type="submit" class="button secondary wide" id="manual-submit">Connect with this password</button>
+					<p class="status" id="manual-status" role="status"></p>
+				</form>
+			</details>
+		</div>
+	</section>
+
+	<main class="views" id="views" hidden>
+
+		<section class="view view-note" id="view-note" aria-labelledby="note-heading">
+			<h1 class="visually-hidden" id="note-heading" tabindex="-1">Note</h1>
+			<div class="banner" id="note-banner" hidden>
+				<p class="banner-text" id="note-banner-text"></p>
+				<button type="button" class="button text" id="note-discard">Discard changes</button>
+			</div>
+			<div class="reply-fields" id="reply-fields" hidden>
+				<div class="field">
+					<label for="reply-url">Replying to</label>
+					<input id="reply-url" type="url" inputmode="url" placeholder="https://" autocomplete="off" autocapitalize="none" spellcheck="false">
+				</div>
+				<div class="field">
+					<label for="reply-name">Their name <span class="optional">(optional)</span></label>
+					<input id="reply-name" autocomplete="off">
+				</div>
+			</div>
+			<div class="composer" id="composer">
+				<label class="visually-hidden" for="note-text">Note text</label>
+				<textarea id="note-text" placeholder="What's on your mind?" autocapitalize="sentences" spellcheck="true"></textarea>
+			</div>
+			<ul class="attachments" id="attachments" aria-label="Attached images" hidden></ul>
+			<input class="visually-hidden" type="file" id="image-input" accept="image/*" multiple tabindex="-1" aria-hidden="true">
+			<p class="status" id="note-status" role="status"></p>
+			<div class="action-bar" id="note-actions">
+				<button type="button" class="icon-button" id="image-button" aria-label="Add images"><svg aria-hidden="true"><use href="#i-image"/></svg></button>
+				<button type="button" class="icon-button" id="reply-toggle" aria-label="Reply to a URL" aria-pressed="false"><svg aria-hidden="true"><use href="#i-reply"/></svg></button>
+				<span class="count" id="note-count" hidden></span>
+				<span class="spacer"></span>
+				<button type="button" class="button secondary" id="note-save">Save draft</button>
+				<button type="button" class="button primary" id="note-post">Post</button>
+			</div>
+		</section>
+
+		<section class="view view-like" id="view-like" aria-labelledby="like-heading" hidden>
+			<header class="view-header"><h1 id="like-heading" tabindex="-1">Like</h1></header>
+			<form class="stack scroll" id="like-form" novalidate>
+				<label for="like-url">URL</label>
+				<div class="input-row">
+					<input id="like-url" type="url" inputmode="url" placeholder="https://" autocomplete="off" autocapitalize="none" spellcheck="false">
+					<button type="button" class="button secondary" id="like-paste">Paste</button>
+				</div>
+				<label for="like-title">Title <span class="optional">(optional)</span></label>
+				<input id="like-title" autocomplete="off">
+				<p class="hint" id="like-title-hint">Leave it blank and the site looks it up.</p>
+				<button type="submit" class="button primary wide" id="like-submit">Like</button>
+				<p class="status" id="like-status" role="status"></p>
+			</form>
+		</section>
+
+		<section class="view view-recent" id="view-recent" aria-labelledby="recent-heading" hidden>
+			<header class="view-header">
+				<h1 id="recent-heading" tabindex="-1">Recent</h1>
+				<button type="button" class="icon-button" id="recent-refresh" aria-label="Refresh"><svg aria-hidden="true"><use href="#i-refresh"/></svg></button>
+			</header>
+			<div class="scroll" id="recent-scroll">
+				<p class="pull" id="recent-pull" aria-hidden="true"></p>
+				<p class="status" id="recent-status" role="status"></p>
+				<section class="queue" id="queue" aria-labelledby="queue-heading" hidden>
+					<h2 id="queue-heading">Waiting to send</h2>
+					<ul class="list" id="queue-list"></ul>
+				</section>
+				<ul class="list" id="recent-list" aria-label="Recent notes and likes"></ul>
+			</div>
+		</section>
+
+		<section class="view view-settings" id="view-settings" aria-labelledby="settings-heading" hidden>
+			<header class="view-header"><h1 id="settings-heading" tabindex="-1">Settings</h1></header>
+			<div class="scroll stack">
+				<section class="group" aria-labelledby="settings-connection-heading">
+					<h2 id="settings-connection-heading">Connection</h2>
+					<p id="settings-who"></p>
+					<button type="button" class="button secondary" id="settings-disconnect">Disconnect</button>
+					<p class="status" id="settings-status" role="status"></p>
+				</section>
+
+				<section class="group" aria-labelledby="settings-shortcut-heading">
+					<h2 id="settings-shortcut-heading">Shortcuts</h2>
+					<details class="disclosure" id="shortcut-details">
+						<summary>Set up the Like shortcut</summary>
+						<div class="stack">
+							<p>The Like shortcut sends a URL from the share sheet straight to your site, without opening WriteNow. A Note shortcut works the same way for dictation or the Action Button.</p>
+							<p class="hint">These steps name the Shortcuts actions as they appear in current iOS. They have not been checked on a device, so the names may differ slightly.</p>
+
+							<h3>1. Create a password for Shortcuts</h3>
+							<p>Shortcuts get their own Application Password, named “WriteNow Shortcut”, so you can revoke it separately.</p>
+							<button type="button" class="button secondary" id="shortcut-create">Create Shortcut password</button>
+							<p class="status" id="shortcut-status" role="status"></p>
+							<div class="copy-field" id="shortcut-header-field" hidden>
+								<label for="shortcut-header">Authorization header value</label>
+								<div class="input-row">
+									<input id="shortcut-header" readonly autocomplete="off" spellcheck="false">
+									<button type="button" class="button secondary" data-copy="shortcut-header">Copy</button>
+								</div>
+								<p class="hint">Shown once. Copy it into the shortcut now. If you lose it, create another and revoke the old one in your profile.</p>
+							</div>
+
+							<h3>2. Build the Like shortcut</h3>
+							<ol class="steps">
+								<li>In Shortcuts, create a shortcut named “Like”. In its details, turn on <strong>Show in Share Sheet</strong> and accept <strong>URLs</strong> and <strong>Safari web pages</strong>. Set “If there’s no input” to <strong>Get Clipboard</strong>.</li>
+								<li>Add <strong>Get URLs from Input</strong> with the Shortcut Input.</li>
+								<li>Add <strong>Get Contents of URL</strong> with this URL:
+									<div class="input-row">
+										<input id="shortcut-like-url" readonly aria-label="Like endpoint URL" spellcheck="false">
+										<button type="button" class="button secondary" data-copy="shortcut-like-url">Copy</button>
+									</div>
+									Set Method to <strong>POST</strong>. Under Headers add <strong>Authorization</strong> with the header value from step 1. Set Request Body to <strong>JSON</strong> with one text field, <strong>url</strong>, set to the URLs. Leave out the title; the site looks it up.
+								</li>
+								<li>Add <strong>Get Dictionary Value</strong> for the key <strong>message</strong>.</li>
+								<li>Add <strong>Show Notification</strong> with the Dictionary Value.</li>
+							</ol>
+
+							<h3>3. Optional: a Note shortcut</h3>
+							<ol class="steps">
+								<li>Add <strong>Dictate Text</strong> (or <strong>Ask for Input</strong> for typing).</li>
+								<li>Add <strong>Get Contents of URL</strong> with this URL:
+									<div class="input-row">
+										<input id="shortcut-note-url" readonly aria-label="Note endpoint URL" spellcheck="false">
+										<button type="button" class="button secondary" data-copy="shortcut-note-url">Copy</button>
+									</div>
+									Method <strong>POST</strong>, the same Authorization header, and a JSON body with <strong>content</strong> set to the dictated text and <strong>status</strong> set to <strong>draft</strong>. Use <strong>publish</strong> instead to post right away; draft is safer for dictation.
+								</li>
+								<li>Add <strong>Get Dictionary Value</strong> for <strong>message</strong>, then <strong>Show Notification</strong>.</li>
+							</ol>
+							<p class="status" id="shortcut-copy-status" role="status"></p>
+						</div>
+					</details>
+				</section>
+
+				<section class="group" aria-labelledby="settings-about-heading">
+					<h2 id="settings-about-heading">About</h2>
+					<p id="settings-version"></p>
+					<p><a id="settings-admin" href="#" target="_blank" rel="noopener">Open WordPress admin</a></p>
+				</section>
+			</div>
+		</section>
+	</main>
+
+	<nav class="tabbar" id="tabbar" aria-label="WriteNow" hidden>
+		<button type="button" class="tab" data-view="note" aria-current="page"><svg aria-hidden="true"><use href="#i-note"/></svg><span>Note</span></button>
+		<button type="button" class="tab" data-view="like"><svg aria-hidden="true"><use href="#i-like"/></svg><span>Like</span></button>
+		<button type="button" class="tab" data-view="recent"><svg aria-hidden="true"><use href="#i-recent"/></svg><span>Recent</span><span class="tab-badge" id="tab-badge" hidden></span></button>
+		<button type="button" class="tab" data-view="settings"><svg aria-hidden="true"><use href="#i-settings"/></svg><span>Settings</span></button>
+	</nav>
+</div>
+</body>
+</html>

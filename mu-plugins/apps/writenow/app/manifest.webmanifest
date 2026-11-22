@@ -1,0 +1,33 @@
+{
+	"name": "WriteNow",
+	"short_name": "WriteNow",
+	"description": "Post notes and likes to your site.",
+	"id": "./",
+	"start_url": "./",
+	"scope": "./",
+	"display": "standalone",
+	"orientation": "any",
+	"background_color": "#fbfbfb",
+	"theme_color": "#fbfbfb",
+	"lang": "en",
+	"icons": [
+		{
+			"src": "{{ASSET_URL}}icons/icon-192.png?ver={{ASSET_VERSION}}",
+			"sizes": "192x192",
+			"type": "image/png",
+			"purpose": "any"
+		},
+		{
+			"src": "{{ASSET_URL}}icons/icon-512.png?ver={{ASSET_VERSION}}",
+			"sizes": "512x512",
+			"type": "image/png",
+			"purpose": "any"
+		},
+		{
+			"src": "{{ASSET_URL}}icons/icon-maskable-512.png?ver={{ASSET_VERSION}}",
+			"sizes": "512x512",
+			"type": "image/png",
+			"purpose": "maskable"
+		}
+	]
+}
