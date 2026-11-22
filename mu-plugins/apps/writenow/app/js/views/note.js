@@ -474,9 +474,13 @@ async function submit( status ) {
 			} ) ),
 		};
 
+		// What leaves the composer if this works. Anything typed or attached
+		// while the request is in flight stays behind.
+		const sent = { text: draft.text, keys: new Set( draft.images.map( ( image ) => image.key ) ) };
+
 		await outbox.enqueue( 'note', clientId, payload );
 		const result = await outbox.send( clientId );
-		handleResult( result, status );
+		handleResult( result, status, sent );
 	} catch {
 		setStatus( statusNode, {
 			tone: 'error',
@@ -489,26 +493,27 @@ async function submit( status ) {
 	}
 }
 
-function handleResult( result, status ) {
+function handleResult( result, status, sent ) {
 	const statusNode = nodes[ 'note-status' ];
 	const publishing = status === 'publish';
+	const since = 'What you typed since is still here.';
 
 	switch ( result.outcome ) {
 		case 'sent':
 		case 'gone': {
 			const data = result.data || {};
 			const message = data.message || ( publishing ? 'Posted.' : 'Saved as a draft.' );
-			clearComposer( { keepBlobs: true } );
+			const kept = clearSent( sent );
 			if ( data.status === 'publish' || ( publishing && data.status !== 'draft' && data.status !== 'future' ) ) {
 				setStatus( statusNode, {
 					tone: 'success',
-					text: message,
+					text: kept ? `${ message } ${ since }` : message,
 					actions: data.link ? [ { label: 'View', href: data.link } ] : [],
 				} );
 			} else {
 				setStatus( statusNode, {
 					tone: 'success',
-					text: `${ message } It’s in Recent.`,
+					text: `${ message } It’s in Recent.${ kept ? ` ${ since }` : '' }`,
 					actions: [ { label: 'Open Recent', onClick: () => nav.show( 'recent' ) } ],
 				} );
 			}
@@ -516,14 +521,15 @@ function handleResult( result, status ) {
 			break;
 		}
 		case 'queued':
-		case 'busy':
-			clearComposer( { keepBlobs: true } );
+		case 'busy': {
+			const kept = clearSent( sent );
 			setStatus( statusNode, {
 				tone: 'info',
-				text: `${ result.error ? result.error.message + ' ' : '' }Your ${ publishing ? 'note' : 'draft' } is saved on this phone and will send when you’re back online or next open WriteNow.`,
+				text: `${ result.error ? result.error.message + ' ' : '' }Your ${ publishing ? 'note' : 'draft' } is saved on this phone and will send when you’re back online or next open WriteNow.${ kept ? ` ${ since }` : '' }`,
 				actions: [ { label: 'See Recent', onClick: () => nav.show( 'recent' ) } ],
 			} );
 			break;
+		}
 		case 'unauthorized':
 			keepAfterFailure( result );
 			setStatus( statusNode, { tone: 'error', text: 'WriteNow needs to connect again. Your note is still here.' } );
@@ -562,6 +568,32 @@ function keepAfterFailure( result ) {
 	}
 	drafts.saveNote( draft );
 	renderAttachments();
+}
+
+// The site (or the outbox) now holds what was sent. Clear it from the
+// composer, but keep anything typed or attached after Post was tapped, as
+// the start of a new note. Returns true when something was kept.
+function clearSent( sent ) {
+	const current = draft;
+	const added = current.images.filter( ( image ) => ! sent.keys.has( image.key ) );
+	if ( current.text === sent.text && ! added.length ) {
+		clearComposer( { keepBlobs: true } );
+		return false;
+	}
+	for ( const key of sent.keys ) {
+		if ( objectUrls.has( key ) ) {
+			URL.revokeObjectURL( objectUrls.get( key ) );
+			objectUrls.delete( key );
+		}
+		imageStates.delete( key );
+	}
+	const next = drafts.emptyNote();
+	next.text = current.text.startsWith( sent.text ) ? current.text.slice( sent.text.length ).replace( /^\s+/, '' ) : current.text;
+	next.images = added;
+	draft = next;
+	drafts.saveNote( draft );
+	renderAll();
+	return Boolean( next.text.trim() || next.images.length );
 }
 
 function clearComposer( { keepBlobs } ) {

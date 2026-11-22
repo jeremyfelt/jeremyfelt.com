@@ -59,12 +59,44 @@ export function clearCache() {
 
 // ---- The outbox ----
 
-async function renderQueue() {
+// Renders can overlap (every outbox change asks for one), so only the
+// latest one applies. A row is rebuilt only when what it shows has changed,
+// so a Remove button waiting for its second tap is not swapped out by an
+// unrelated change.
+let queueRender = 0;
+const queueRows = new Map();
+
+function rowSignature( item ) {
+	return JSON.stringify( [ item.state, item.error, item.offline, item.summary, item.payload.status ] );
+}
+
+async function renderQueue( { force = false } = {} ) {
+	const ticket = ++queueRender;
 	const items = await outbox.list();
-	const section = $( 'queue' );
+	if ( ticket !== queueRender ) {
+		return;
+	}
+	$( 'queue' ).hidden = items.length === 0;
+	const rows = items.map( ( item ) => {
+		const signature = rowSignature( item );
+		const existing = queueRows.get( item.id );
+		if ( existing && existing.signature === signature && ! force ) {
+			return existing.node;
+		}
+		const node = queueRow( item );
+		queueRows.set( item.id, { signature, node } );
+		return node;
+	} );
+	const ids = new Set( items.map( ( item ) => item.id ) );
+	for ( const id of queueRows.keys() ) {
+		if ( ! ids.has( id ) ) {
+			queueRows.delete( id );
+		}
+	}
 	const list = $( 'queue-list' );
-	section.hidden = items.length === 0;
-	list.replaceChildren( ...items.map( queueRow ) );
+	if ( rows.length !== list.children.length || rows.some( ( row, index ) => list.children[ index ] !== row ) ) {
+		list.replaceChildren( ...rows );
+	}
 }
 
 function queueRow( item ) {
@@ -90,7 +122,7 @@ function queueRow( item ) {
 			retry.textContent = 'Sending…';
 			const result = await outbox.retry( item.id );
 			if ( result.outcome !== 'sent' ) {
-				renderQueue();
+				renderQueue( { force: true } );
 			}
 		},
 	} );

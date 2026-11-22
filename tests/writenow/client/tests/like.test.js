@@ -70,3 +70,15 @@ test( 'the Like form is kept on the device as it is typed', async () => {
 	assert.equal( await page.inputValue( '#like-url' ), 'https://example.com/later' );
 	await context.close();
 } );
+
+test( 'an address typed while a like is sending is kept', async () => {
+	const { page, context, wp } = await openApp( env );
+	wp.delay[ 'POST /writenow/v1/likes' ] = 600;
+	await page.click( '.tab[data-view="like"]' );
+	await page.fill( '#like-url', 'https://example.com/first' );
+	await page.click( '#like-submit' );
+	await page.fill( '#like-url', 'https://example.com/second' );
+	await page.waitForSelector( '#like-status.is-success' );
+	assert.equal( await page.inputValue( '#like-url' ), 'https://example.com/second' );
+	await context.close();
+} );

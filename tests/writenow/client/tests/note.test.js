@@ -208,3 +208,18 @@ test( 'Discard changes needs a second tap and leaves the site draft alone', asyn
 	assert.equal( wp.notes.get( draft.id ).content, 'Server draft' );
 	await context.close();
 } );
+
+test( 'text typed while a note is sending stays in the composer', async () => {
+	const { page, context, wp } = await openApp( env );
+	wp.delay[ 'POST /writenow/v1/notes' ] = 600;
+	await typeNote( page, 'First thought.' );
+	await page.click( '#note-post' );
+	await page.locator( '#note-text' ).click();
+	await page.keyboard.press( 'End' );
+	await page.keyboard.type( ' Second thought.' );
+	await page.waitForSelector( '#note-status.is-success' );
+	assert.equal( wp.requests( 'POST', '/writenow/v1/notes' )[ 0 ].body.content, 'First thought.' );
+	assert.equal( await page.inputValue( '#note-text' ), 'Second thought.' );
+	assert.match( await page.textContent( '#note-status' ), /What you typed since is still here/ );
+	await context.close();
+} );

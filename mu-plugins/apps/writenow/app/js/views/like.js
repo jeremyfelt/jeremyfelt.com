@@ -76,6 +76,7 @@ async function submit() {
 		return;
 	}
 	const title = $( 'like-title' ).value.trim();
+	const typed = { url: $( 'like-url' ).value, title: $( 'like-title' ).value };
 
 	sending = true;
 	const restore = busy( $( 'like-submit' ), 'Liking…' );
@@ -86,14 +87,14 @@ async function submit() {
 		const result = await outbox.send( id );
 		if ( result.outcome === 'sent' || result.outcome === 'gone' ) {
 			const data = result.data || {};
-			clearForm();
+			clearForm( typed );
 			setStatus( status, {
 				tone: 'success',
 				text: data.message || ( data.duplicate ? `Already liked: ${ data.title || url }` : `Liked: ${ data.title || url }` ),
 				actions: data.link ? [ { label: 'View', href: data.link } ] : [],
 			} );
 		} else if ( result.outcome === 'queued' || result.outcome === 'busy' ) {
-			clearForm();
+			clearForm( typed );
 			setStatus( status, {
 				tone: 'info',
 				text: `${ result.error ? result.error.message + ' ' : '' }The like is saved on this phone and will send when you’re back online or next open WriteNow.`,
@@ -115,7 +116,12 @@ async function submit() {
 	}
 }
 
-function clearForm() {
+// Clear the form once the like is sent or queued, unless something new was
+// typed into it while it was sending.
+function clearForm( typed ) {
+	if ( $( 'like-url' ).value !== typed.url || $( 'like-title' ).value !== typed.title ) {
+		return;
+	}
 	$( 'like-url' ).value = '';
 	$( 'like-title' ).value = '';
 	drafts.saveLike( { url: '', title: '' } );
