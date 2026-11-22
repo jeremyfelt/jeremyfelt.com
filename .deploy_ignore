@@ -21,3 +21,7 @@ sub-site/
 uploads/
 upgrade/
 vendor/
+tests/
+node_modules/
+package.json
+package-lock.json

@@ -22,3 +22,6 @@ uploads/
 
 # A hack's hackity hacks for hacking hacks.
 mu-plugins/local/
+
+# Dev-only installs for tests.
+node_modules/
